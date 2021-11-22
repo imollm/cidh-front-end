@@ -74,10 +74,42 @@
                         padding: .5em
                         color: $richBlack
 
-ul
-    padding: 0
-    margin: 0
-    li
-        list-style: none
-        display: inline-block
-        padding: 1em 1.2em
+            @include max-xl()
+                display: none
+
+    .mobile-menu
+            display: none
+            position: absolute
+            top: 0
+            right: 0
+            height: 100%
+            width: 100%
+            background-color: $turqoiseAlpha
+
+            &-links
+                text-align: center
+                margin-top: 170px
+
+                &-link
+                    display: block
+                    font-size: 2em
+                    color: $richBlack
+                    padding: 1em
+                    font-weight: 900
+                    list-style: none
+
+                    a
+                        color: $white
+                        text-decoration: none
+                        padding: .5em
+                        &:hover
+                            background-color: $white
+                            border-radius: 50px
+                            padding: .5em
+                            color: $richBlack
+
+            &-close
+                float: right
+                padding: 1.5em
+                color: $white
+                font-size: 2.2em
