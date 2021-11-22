@@ -27,12 +27,20 @@
                     letter-spacing: .2em
                     &:nth-child(2)
                         padding-left: 20px
+
                     .highlight-letter
                         font-weight: 900
 
             .nav-links
                 ul
+                    padding: 0
+                    margin: 0
+
                     li
+                        list-style: none
+                        display: inline-block
+                        padding: 1em 1.2em
+
                         a
                             color: $white
                             text-decoration: none
@@ -50,12 +58,21 @@
             align-items: center
             padding-right: 1.5em
 
-            a
-                background-color: $turqoise
-                border-radius: 50px
-                text-decoration: none
-                padding: .5em
-                color: $richBlack
+            ul
+                padding: 0
+                margin: 0
+
+                li
+                    list-style: none
+                    display: inline-block
+                    padding: 1em 1.2em
+
+                    a
+                        background-color: $turqoise
+                        border-radius: 50px
+                        text-decoration: none
+                        padding: .5em
+                        color: $richBlack
 
 ul
     padding: 0
