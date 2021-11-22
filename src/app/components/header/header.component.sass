@@ -80,6 +80,21 @@
             @include max-xl()
                 display: none
 
+        .mobile-menu-toggler
+            display: none
+            @include max-xl()
+                display: flex
+                justify-content: center
+                align-items: center
+                color: $white
+                margin-right: 2em
+                font-size: 1.8em
+
+                fa-icon
+                    padding: .2em .4em
+                    border: 1px solid $white
+                    border-radius: 5px
+
     .mobile-menu
             display: none
             position: absolute
