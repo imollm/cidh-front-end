@@ -1,0 +1,70 @@
+<header id="main-header">
+    <nav>
+        <div class="logo-wrapper">
+            <div class="logo-wrapper-title">
+                <div>
+                    <span class="highlight-letter">D</span>asz
+                </div>
+                <div>
+                    <span class="highlight-letter">Ev</span>ents
+                </div>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li>
+                        <a href="#">
+                            Categories
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Etiquetes
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="auth-wrapper">
+            <ul>
+                <li>
+                    <a href="#">
+                        Registra't
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Inicia sessió
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile-menu-toggler" (click)="openMobileMenu()">
+            <fa-icon [icon]="faMobileMenuIcon"></fa-icon>
+        </div>
+    </nav>
+    <div class="mobile-menu" #MobileMenu>
+        <div class="mobile-menu-close" (click)="closeMobileMenu()">x</div>
+        <ul class="mobile-menu-links">
+            <li class="mobile-menu-links-link">
+                <a href="#">
+                    Categories
+                </a>
+            </li>
+            <li class="mobile-menu-links-link">
+                <a href="#">
+                    Etiquetes
+                </a>
+            </li>
+            <li class="mobile-menu-links-link">
+                <a href="#">
+                    Inicia sessió
+                </a>
+            </li>
+            <li class="mobile-menu-links-link">
+                <a href="#">
+                    Registra't
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
