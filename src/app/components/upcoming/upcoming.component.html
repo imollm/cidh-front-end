@@ -4,6 +4,11 @@
             <div class="col-12">
                 <h2 class="upcoming-events-title">Pròxims events</h2>
             </div>
+            <div *ngFor="let event of upcomingEvents" class="col-sm-6">
+                <app-card
+                    [event]="event"
+                ></app-card>
+            </div>
         </div>
     </div>
 </section>
