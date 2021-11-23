@@ -9,6 +9,9 @@ import { SearcherComponent } from './components/searcher/searcher.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SearcherComponent,
   ]
 })
 export class SharedModule { }
