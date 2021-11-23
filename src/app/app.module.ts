@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
+import { BannerComponent } from './components/banner/banner.component';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -14,7 +15,8 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,
