@@ -1,0 +1,150 @@
+@import "../../../assets/css/_variables.sass"
+@import "../../../assets/css/_breakpoints"
+
+#main-header
+    background-color: $richBlack
+    padding: 1em
+    font-size: 1.25em
+    width: 100%
+
+    nav
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+        .logo-wrapper
+            display: flex
+            flex-direction: row
+            justify-content: space-around
+            align-items: center
+            color: $white
+
+            &-title
+                padding: 1em 1.2em
+
+                div
+                    font-size: 1.5em
+                    letter-spacing: .2em
+                    &:nth-child(2)
+                        padding-left: 20px
+
+                    .highlight-letter
+                        font-weight: 900
+
+            .nav-links
+                ul
+                    padding: 0
+                    margin: 0
+
+                    li
+                        list-style: none
+                        display: inline-block
+                        padding: 1em 1.2em
+
+                        a
+                            color: $white
+                            text-decoration: none
+                            padding: .5em
+                            &:hover
+                                background-color: $white
+                                border-radius: 50px
+                                padding: .5em
+                                color: $richBlack
+
+                @include max-xl()
+                    display: none
+
+        .auth-wrapper
+            display: flex
+            flex-direction: row
+            justify-content: space-around
+            align-items: center
+            padding-right: 1.5em
+
+            ul
+                padding: 0
+                margin: 0
+
+                li
+                    list-style: none
+                    display: inline-block
+                    padding: 1em 1.2em
+
+                    a
+                        background-color: $turquoise
+                        border-radius: 50px
+                        text-decoration: none
+                        padding: .5em
+                        color: $richBlack
+
+            @include max-xl()
+                display: none
+
+        .mobile-menu-toggler
+            display: none
+            color: $white
+            font-size: 1.8em
+
+            fa-icon
+                border: 1px solid $white
+                border-radius: 5px
+
+            @include max-xl()
+                display: flex
+                justify-content: center
+                align-items: center
+                margin-right: 2em
+
+                fa-icon
+                    padding: .2em .4em
+
+            @include max-md()
+                display: flex
+                justify-content: center
+                align-items: center
+                margin-right: 1.2em
+
+                fa-icon
+                    padding: .1em .2em
+
+    .mobile-menu
+        display: none
+        position: absolute
+        top: 0
+        right: 0
+        min-height: 1000px
+        width: 100%
+        background-color: $richBlack
+
+        &-links
+            text-align: center
+            margin-top: 170px
+
+            &-link
+                display: flex
+                justify-content: center
+                color: $richBlack
+                padding: 1em
+                font-weight: 900
+                list-style: none
+                width: 100%
+
+                a
+                    color: $white
+                    text-decoration: none
+                    padding: .5em
+                    font-size: 2em
+                    &:hover
+                        background-color: $white
+                        border-radius: 50px
+                        padding: .5em
+                        color: $richBlack
+
+                    @include max-md()
+                        font-size: 1.3em
+
+        &-close
+            float: right
+            padding: 1.5em
+            color: $white
+            font-size: 2.2em
