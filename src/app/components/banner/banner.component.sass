@@ -1,4 +1,5 @@
 @import "../../../assets/css/_variables"
+@import "../../../assets/css/_breakpoints"
 
 #home-banner
   position: relative
@@ -15,8 +16,25 @@
     font-weight: 900
     text-align: center
 
-  svg
+    @include btw-md-sm()
+      font-size: 3em
+
+    @include max-md()
+      bottom: -180px
+      font-size: 2em
+
+    @include sm()
+      bottom: -150px
+      font-size: 1.5em
+
+  .banner-image
     position: absolute
     top: -250px
     left: 0
     width: 100%
+
+    @include btw-md-sm()
+      top: -330px
+
+    @include xs()
+      top: -350px
