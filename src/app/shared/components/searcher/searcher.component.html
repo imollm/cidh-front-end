@@ -1,14 +1,14 @@
 <section class="searcher">
   <div class="container">
-    <form class="searcher-form">
+    <form class="searcher-form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="row pt-4 pb-5">
         <div class="col-sm-4 offset-sm-1 px-sm-0 px-5">
-          <label class="mb-2 mt-2 mt-sm-0">Nom</label>
-          <input type="text" class="form-control" placeholder="Nom">
+          <label for="inputName" class="mb-2 mt-2 mt-sm-0">Nom</label>
+          <input id="inputName" type="text" class="form-control" placeholder="Nom" formControlName="name" />
         </div>
         <div class="col-sm-4 px-sm-2 px-5">
-          <label class="mb-2 mt-2 mt-sm-0">Etiqueta</label>
-          <select id="" class="form-control">
+          <label for="selectLabel" class="mb-2 mt-2 mt-sm-0">Etiqueta</label>
+          <select id="selectLabel" class="form-control">
             <option value="-">Selecciona etiqueta</option>
             <option value="1">1</option>
             <option value="2">2</option>
