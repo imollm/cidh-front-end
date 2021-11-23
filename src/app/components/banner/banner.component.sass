@@ -3,11 +3,13 @@
 
 #home-banner
   position: relative
+  display: flex
+  justify-content: center
+  align-items: center
   z-index: -3
 
   .banner-title
     position: absolute
-    bottom: -200px
     width: 100%
     color: $white
     z-index: 1
@@ -20,21 +22,12 @@
       font-size: 3em
 
     @include max-md()
-      bottom: -180px
       font-size: 2em
 
     @include sm()
-      bottom: -150px
       font-size: 1.5em
 
-  .banner-image
-    position: absolute
-    top: -250px
-    left: 0
-    width: 100%
-
-    @include btw-md-sm()
-      top: -330px
-
-    @include xs()
-      top: -350px
+  figure
+    display: flex
+    justify-content: center
+    align-items: center
