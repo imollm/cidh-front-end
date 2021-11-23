@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
 
+  bannerTitle = 'CULTURE IN DA HOUSE';
+
   constructor() { }
 
   ngOnInit(): void {
