@@ -9,11 +9,9 @@
             Darreres preguntes
           </h2>
           <div class="forum-header-add-btn">
-            <button
-            [swal]="{ title: 'Crea una nova pregunta', input: 'text', showDenyButton: true, denyButtonText: 'Cancel·la', showCancelButton: true }"
-            class="forum-header-add btn btn-primary">
-            Fer pregunta
-          </button>
+            <button class="forum-header-add btn btn-primary" (click)="addQuestion()">
+              Fer pregunta
+            </button>
           </div>
         </div>
       </div>
