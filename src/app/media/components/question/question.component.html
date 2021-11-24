@@ -1,1 +1,16 @@
-<p>question works!</p>
+<div class="question">
+  <div class="question-header">
+    <fa-icon [icon]="faUser" class="question-header-icon"></fa-icon>
+    <span class="text-muted">User #1234</span>
+  </div>
+  <div class="question-body">
+    <h5>{{ question.title }}</h5>
+    <p>{{ question.message }}</p>
+  </div>
+  <div class="question-answer">
+    <app-answer></app-answer>
+  </div>
+  <div class="question-when">
+    <span class="text-muted">About 3 min</span>
+  </div>
+</div>
