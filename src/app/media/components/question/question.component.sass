@@ -2,6 +2,10 @@
 @import "../../../../assets/css/_breakpoints"
 
 .question
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-around
   background-color: $white
   color: $richBlack
   border-radius: 25px
@@ -11,9 +15,11 @@
 
   &-header
     display: flex
+    flex-direction: row
     justify-content: space-between
-    align-items: center
+    align-items: baseline
     padding: 1.3em
+    width: 100%
 
     &-icon
       border: 1px solid $richBlack
@@ -24,9 +30,15 @@
   &-body
     padding: 1.3em
 
-  &-when
+  &-answer
     display: flex
-    justify-content: end
-    align-items: center
-    padding: 1.3em 1.3em .8em 0
+    flex-direction: column
+    align-items: end
+    padding: 1.3em
+
+    .question-when
+      display: flex
+      justify-content: end
+      align-items: center
+      padding: 1.3em 1.3em .8em 0
 
