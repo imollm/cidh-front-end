@@ -1,21 +1,30 @@
 @import "../../../../assets/css/_variables"
 @import "../../../../assets/css/_breakpoints"
 
-#forum
+.forum
   background-color: $richBlack
+    
+  &-header
+    display: flex
+    justify-content: space-between
+    align-items: baseline
+    padding-right: 7em
 
-  #forum-container
+    &-add
+      background-color: $turquoise
+
+  &-container
     background-color: $turquoise
     border-radius: 25px
     padding: 3em 1.2em 1.2em 1.2em
 
-    .paginator
-      display: flex
-      justify-content: center
-      margin-top: 16px
+  .paginator
+    display: flex
+    justify-content: center
+    margin-top: 16px
 
-      &::ng-deep
-        .ngx-pagination
-          padding: 0
-          background-color: $white
-          border-radius: 5px
+    &::ng-deep
+      .ngx-pagination
+        padding: 0
+        background-color: $white
+        border-radius: 5px
