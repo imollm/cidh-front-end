@@ -17,7 +17,7 @@ export class ForumService implements IForumService {
   answerQuestion(questionId: string, answer: Answer): void { }
 
   listAllQuestions(eventId: string): Question[] {
-    return [];
+    return this.makeFakeQuestions();
   }
   getAnswer(questionId: string): Answer {
     const answer = {} as Answer;
@@ -28,4 +28,15 @@ export class ForumService implements IForumService {
     return question;
   }
 
+  private makeFakeQuestions(): Question[] {
+    const questions: Question[] = [];
+    for (let i = 0; i < 10; i++) {
+      const question = {} as Question;
+      question.id = i;
+      question.title = `Question ${i}`;
+      question.message = `Message ${i}`;
+      questions.push(question);
+    }
+    return questions;
+  }
 }
