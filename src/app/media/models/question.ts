@@ -5,4 +5,5 @@ export interface Question {
   title: string;
   message: string;
   answer?: Answer;
+  eventId: string;
 }
