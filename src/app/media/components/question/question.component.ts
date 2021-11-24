@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-question',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./question.component.sass']
 })
 export class QuestionComponent implements OnInit {
+
+  faUser = faUser;
 
   constructor() { }
 
