@@ -7,12 +7,14 @@ import { ForumComponent } from './components/forum/forum.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { QuestionComponent } from './components/question/question.component';
+import { AnswerComponent } from './components/answer/answer.component';
 
 @NgModule({
   declarations: [
     MediaComponent,
     ForumComponent,
-    QuestionComponent
+    QuestionComponent,
+    AnswerComponent
   ],
   imports: [
     CommonModule,
