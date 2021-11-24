@@ -17,6 +17,7 @@ import { BannerComponent } from './components/banner/banner.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SweetAlert2Module.forRoot(),
   ],
   exports: [
     SearcherComponent,
