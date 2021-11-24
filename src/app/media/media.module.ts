@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { MediaRoutingModule } from './media-routing.module';
 import { MediaComponent } from './media.component';
+import { ForumComponent } from './components/forum/forum.component';
 
 
 @NgModule({
   declarations: [
-    MediaComponent
+    MediaComponent,
+    ForumComponent
   ],
   imports: [
     CommonModule,
