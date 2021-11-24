@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-answer',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./answer.component.sass']
 })
 export class AnswerComponent implements OnInit {
+
+  faUser = faUser;
 
   constructor() { }
 
