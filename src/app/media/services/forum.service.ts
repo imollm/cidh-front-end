@@ -13,7 +13,9 @@ export class ForumService implements IForumService {
 
   constructor() { }
 
-  askQuestion(eventId: string, title: string, message: string, userId: string): void { }
+  askQuestion(question: Question): void {
+    
+  }
 
   answerQuestion(questionId: string, answer: Answer): void { }
 
