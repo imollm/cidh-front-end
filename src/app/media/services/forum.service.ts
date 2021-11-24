@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 import { IForumService } from './IForumService';
+import * as faker from 'faker';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +33,9 @@ export class ForumService implements IForumService {
     const questions: Question[] = [];
     for (let i = 0; i < 10; i++) {
       const question = {} as Question;
-      question.id = i;
-      question.title = `Question ${i}`;
-      question.message = `Message ${i}`;
+      question.id = faker.datatype.uuid();
+      question.title = faker.name.title();
+      question.message = faker.lorem.sentence();
       questions.push(question);
     }
     return questions;
