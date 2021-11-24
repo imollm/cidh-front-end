@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Question } from '../../models/question';
 
 @Component({
   selector: 'app-question',
@@ -7,6 +8,8 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./question.component.sass']
 })
 export class QuestionComponent implements OnInit {
+
+  @Input() question = {} as Question;
 
   faUser = faUser;
 
