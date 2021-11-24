@@ -56,6 +56,11 @@
         <div class="mobile-menu-close" (click)="closeMobileMenu()">x</div>
         <ul class="mobile-menu-links">
             <li class="mobile-menu-links-link">
+                <a [routerLink]="['/home']">
+                    Home
+                </a>
+            </li>
+            <li class="mobile-menu-links-link">
                 <a href="#">
                     Categories
                 </a>
@@ -63,6 +68,11 @@
             <li class="mobile-menu-links-link">
                 <a href="#">
                     Etiquetes
+                </a>
+            </li>
+            <li class="mobile-menu-links-link">
+                <a [routerLink]="['/media/forum']">
+                    Forum
                 </a>
             </li>
             <li class="mobile-menu-links-link">
