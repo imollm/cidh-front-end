@@ -31,6 +31,8 @@ export class ForumComponent implements OnInit {
       },
       inputPlaceholder: 'Selecciona un event',
       showCancelButton: true,
+      confirmButtonColor: '#00adb5',
+      cancelButtonColor: '#8ea8c3',
       inputValidator: (eventId) => {
         return new Promise((resolve) => {
           this.newQuestion.eventId = eventId;
@@ -43,6 +45,8 @@ export class ForumComponent implements OnInit {
         input: 'textarea',
         inputPlaceholder: 'Quina pregunta tens...',
         showCancelButton: true,
+        confirmButtonColor: '#00adb5',
+        cancelButtonColor: '#8ea8c3',
         inputValidator: (message) => {
           return new Promise((resolve) => {
             this.newQuestion.message = message;
