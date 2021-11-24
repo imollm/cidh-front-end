@@ -6,11 +6,13 @@ import { MediaComponent } from './media.component';
 import { ForumComponent } from './components/forum/forum.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { QuestionComponent } from './components/question/question.component';
 
 @NgModule({
   declarations: [
     MediaComponent,
-    ForumComponent
+    ForumComponent,
+    QuestionComponent
   ],
   imports: [
     CommonModule,
