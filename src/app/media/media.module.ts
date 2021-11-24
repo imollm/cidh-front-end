@@ -5,6 +5,7 @@ import { MediaRoutingModule } from './media-routing.module';
 import { MediaComponent } from './media.component';
 import { ForumComponent } from './components/forum/forum.component';
 
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ForumComponent } from './components/forum/forum.component';
   ],
   imports: [
     CommonModule,
-    MediaRoutingModule
+    MediaRoutingModule,
+    SharedModule,
   ]
 })
 export class MediaModule { }
