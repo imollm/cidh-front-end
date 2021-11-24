@@ -10,6 +10,7 @@ import { ForumService } from '../../services/forum.service';
 export class ForumComponent implements OnInit {
 
   lastQuestions: Question[] = [];
+  actualPage: number = 1;
 
   constructor(private forumService: ForumService) { }
 

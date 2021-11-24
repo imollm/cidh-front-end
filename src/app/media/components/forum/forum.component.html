@@ -10,11 +10,18 @@
       </div>
       <div id="forum-container" class="col-12">
         <div class="row">
-          <div *ngFor="let question of lastQuestions" class="col-md-6 col-lg-4 mb-3">
+          <div *ngFor="let question of lastQuestions | paginate: { itemsPerPage: 6, currentPage: actualPage }" class="col-md-6 col-lg-4 mb-3">
             <app-question
               [question]="question"
             ></app-question>
           </div>
+        </div>
+        <div class="paginator">
+          <pagination-controls
+            (pageChange)="actualPage = $event"
+            [autoHide]="true"
+            [responsive]="true"
+          ></pagination-controls>
         </div>
       </div>
     </div>
