@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent as DashboardAdminHomeComponent } from './components/dashboard/admin/home/home.component';
 import { HomeComponent as DashboardSuperAdminHomeComponent } from './components/dashboard/super-admin/home/home.component';
 import { HomeComponent as DashboardUserHomeComponent } from './components/dashboard/user/home/home.component';
+import { HeaderComponent as DashboardHeaderComponent } from './dashboard/layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HomeComponent as DashboardUserHomeComponent } from './components/dashbo
     DashboardAdminHomeComponent,
     DashboardSuperAdminHomeComponent,
     DashboardUserHomeComponent,
+    DashboardHeaderComponent,
   ],
   imports: [
     CommonModule,
