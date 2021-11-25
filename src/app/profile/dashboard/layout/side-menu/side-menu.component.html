@@ -1,7 +1,6 @@
 <aside #sidebarMenu class="sidebar-menu open">
   <h2 class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
-    <!-- <fa-icon [icon]="faArrowOpen"></fa-icon> -->
     <ul class="sidebar-menu-content-items">
       <li class="sidebar-menu-content-items-item">
         <a href="#">Item 1</a>
@@ -19,7 +18,12 @@
         <a href="#">Item 5</a>
       </li>
       <li class="sidebar-menu-content-items-item">
-        <fa-icon #closeSideMenuArrow [icon]="faArrowClose" (click)="closeSideMenu()"></fa-icon>
+        <div #closeSideMenuArrow class="show">
+          <fa-icon [icon]="faArrowClose" (click)="closeSideMenu()"></fa-icon>
+        </div> 
+        <div #openSideMenuArrow class="hide">
+          <fa-icon [icon]="faArrowOpen" (click)="openSideMenu()"></fa-icon>
+        </div>
       </li>
     </ul>
   </div>

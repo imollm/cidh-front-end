@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,20 +11,38 @@ export class SideMenuComponent implements OnInit {
   faArrowClose = faArrowLeft;
   faArrowOpen = faArrowRight;
 
-  @ViewChild('sidebarMenu') sidebarMenu: any;
-  @ViewChild('closeSideMenuArrow') closeSideMenuArrow: any;
+  @ViewChild('sidebarMenu') sidebarMenu: ElementRef;
+  @ViewChild('closeSideMenuArrow') closeSideMenuArrow: ElementRef;
+  @ViewChild('openSideMenuArrow') openSideMenuArrow: ElementRef;
 
-  constructor() {
+  constructor(private er: ElementRef) {
+    this.sidebarMenu = this.er;
+    this.closeSideMenuArrow = this.er;
+    this.openSideMenuArrow = this.er;
   }
 
   ngOnInit(): void {
   }
 
-  closeSideMenu() {
+  closeSideMenu(): void {
     if (this.sidebarMenu.nativeElement.classList.contains('open')) {
       this.sidebarMenu.nativeElement.classList.remove('open');
       this.sidebarMenu.nativeElement.classList.add('close');
+      this.closeSideMenuArrow.nativeElement.classList.remove('show');
+      this.closeSideMenuArrow.nativeElement.classList.add('hide');
+      this.openSideMenuArrow.nativeElement.classList.remove('hide');
+      this.openSideMenuArrow.nativeElement.classList.remove('show');
     }
   }
 
+  openSideMenu(): void {
+    if (this.sidebarMenu.nativeElement.classList.contains('close')) {
+      this.sidebarMenu.nativeElement.classList.remove('close');
+      this.sidebarMenu.nativeElement.classList.add('open');
+      this.openSideMenuArrow.nativeElement.classList.remove('show');
+      this.openSideMenuArrow.nativeElement.classList.add('hide');
+      this.closeSideMenuArrow.nativeElement.classList.remove('show');
+      this.closeSideMenuArrow.nativeElement.classList.remove('hide');
+    }
+  }
 }
