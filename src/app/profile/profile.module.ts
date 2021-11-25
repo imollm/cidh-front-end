@@ -11,6 +11,7 @@ import { HomeComponent as DashboardAdminHomeComponent } from './components/dashb
 import { HomeComponent as DashboardSuperAdminHomeComponent } from './components/dashboard/super-admin/home/home.component';
 import { HomeComponent as DashboardUserHomeComponent } from './components/dashboard/user/home/home.component';
 import { HeaderComponent as DashboardHeaderComponent } from './dashboard/layout/header/header.component';
+import { SideMenuComponent as DashboardSideMenuComponent } from './dashboard/layout/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HeaderComponent as DashboardHeaderComponent } from './dashboard/layout/
     DashboardSuperAdminHomeComponent,
     DashboardUserHomeComponent,
     DashboardHeaderComponent,
+    DashboardSideMenuComponent,
   ],
   imports: [
     CommonModule,
