@@ -10,10 +10,13 @@ export class AuthService implements IAuthService {
   private token: string | null | undefined;
 
   constructor() { }
+
   login(email: string, pwd: string): void {
   }
+
   logout(): void {
   }
+
   registerUser(user: Registration): void {
   }
 
