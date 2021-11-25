@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard-side-menu',
@@ -8,8 +8,8 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class SideMenuComponent implements OnInit {
 
-  faArrowClose = faArrowLeft;
-  faArrowOpen = faArrowRight;
+  faArrowClose = faAngleLeft;
+  faArrowOpen = faAngleRight;
 
   @ViewChild('sidebarMenu') sidebarMenu: ElementRef;
   @ViewChild('closeSideMenuArrow') closeSideMenuArrow: ElementRef;
