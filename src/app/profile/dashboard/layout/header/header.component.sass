@@ -23,6 +23,14 @@
 
     &-profile
       position: relative
+      display: flex
+      align-items: center
+
+      span
+        margin-right: 1em
+
+        @include sm()
+          display: none
 
       fa-icon
         color: $white
