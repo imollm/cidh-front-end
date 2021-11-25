@@ -9,6 +9,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent as DashboardAdminHomeComponent } from './components/dashboard/admin/home/home.component';
 import { HomeComponent as DashboardSuperAdminHomeComponent } from './components/dashboard/super-admin/home/home.component';
+import { HomeComponent as DashboardUserHomeComponent } from './components/dashboard/user/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent as DashboardSuperAdminHomeComponent } from './components/
     DashboardComponent,
     DashboardAdminHomeComponent,
     DashboardSuperAdminHomeComponent,
+    DashboardUserHomeComponent,
   ],
   imports: [
     CommonModule,
