@@ -1,0 +1,63 @@
+@import "../../../../../assets/css/_variables.sass"
+@import "../../../../../assets/css/_breakpoints"
+
+.dashboard-header
+  position: sticky
+  top: 0
+  background-color: $richBlack
+  color: $white
+  padding: 1.2em 5em 1.2em 2em
+  border-bottom: 3px solid $turquoise
+
+  &-navbar
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    &-title
+      h1
+        margin: 0
+
+    &-profile
+      position: relative
+
+      fa-icon
+        color: $white
+        font-size: 1.5em
+        cursor: pointer
+
+      &-menu
+        position: absolute
+        top: 50px
+        left: -67px
+        background-color: $white
+        border-radius: 5px
+        border: 2px solid $richBlack
+
+        &::after
+          content: ""
+          position: absolute
+          top: -20px
+          left: 57px
+          width: 0
+          height: 0
+          border-width: 0 20px 20px
+          border-style: solid
+          border-color: transparent transparent $white
+
+        &-content
+          padding: 1.6em
+          margin: 0
+
+          &-item
+            list-style: none
+            padding-bottom: .5em
+
+            a
+              color: $richBlack
+              text-decoration: none
+              &:actived,
+              &:hover,
+              &:link,
+              &:visited
+                color: $richBlack

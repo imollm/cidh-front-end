@@ -1,1 +1,27 @@
-<p>header works!</p>
+<header class="dashboard-header">
+  <nav class="dashboard-header-navbar">
+    <div class="dashboard-header-navbar-title">
+      <h1 class="h4">Dasz Events Panel</h1>
+    </div>
+    <div class="dashboard-header-navbar-profile">
+      <fa-icon [icon]="faUserCircle" (click)="toggleProfileMenu()"></fa-icon>
+      <button
+        class="dashboard-header-navbar-profile-menu"
+        #profileMenu
+        style="display:none"
+      >
+        <ul class="dashboard-header-navbar-profile-menu-content">
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a href="#">Perfil</a>
+          </li>
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a href="#">Preferencies</a>
+          </li>
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a href="#">Logout</a>
+          </li>
+        </ul>
+      </button>
+    </div>
+  </nav>
+</header>
