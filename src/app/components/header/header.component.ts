@@ -26,4 +26,8 @@ export class HeaderComponent implements OnInit {
     this.mobileMenu.nativeElement.style.display = 'block';
   }
 
+  isDashboard(): boolean {
+    return window.location.href.indexOf('dashboard') > -1;
+  }
+
 }
