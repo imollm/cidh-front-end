@@ -83,4 +83,22 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
+  showSubMenu(event: Event): void {
+    const item = (event.target as HTMLElement);
+    const subMenu = item.querySelector('ul');
+    if (subMenu?.classList.contains('hide')) {
+      subMenu.classList.remove('hide');
+    }
+    subMenu?.classList.add('show');
+  }
+
+  hideSubMenu(event: Event): void {
+    const item = (event.target as HTMLElement);
+    const subMenu = item.querySelector('ul');
+    if (subMenu?.classList.contains('show')) {
+      subMenu.classList.remove('show');
+    }
+    subMenu?.classList.add('hide');
+  }
 }
