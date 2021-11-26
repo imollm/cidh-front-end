@@ -1,5 +1,5 @@
-<aside #sidebarMenu class="sidebar-menu open">
-  <h2 #sidebarMenuTitle class="h4 show">Dasz Menu</h2>
+<aside #sidebarMenu class="sidebar-menu">
+  <h2 #sidebarMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
       <li class="sidebar-menu-content-items-item">
@@ -18,10 +18,10 @@
         <a href="#">Item 5</a>
       </li>
       <li class="sidebar-menu-content-items-item">
-        <div #closeSideMenuArrow class="show">
+        <div #closeSideMenuButton class="">
           <fa-icon [icon]="faArrowClose" (click)="closeSideMenu()"></fa-icon>
-        </div> 
-        <div #openSideMenuArrow class="hide">
+        </div>
+        <div #openSideMenuButton class="">
           <fa-icon [icon]="faArrowOpen" (click)="openSideMenu()"></fa-icon>
         </div>
       </li>
