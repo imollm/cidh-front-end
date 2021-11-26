@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,7 +6,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.sass']
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit, AfterViewInit {
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;
@@ -26,37 +26,59 @@ export class SideMenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeSideMenu(): void {
-    if (this.sidebarMenu.nativeElement.classList.contains('open')) {
-      // Toggle sidebar menu
-      this.sidebarMenu.nativeElement.classList.remove('open');
-      this.sidebarMenu.nativeElement.classList.add('close');
-      // Hide close button
-      this.closeSideMenuButton.nativeElement.classList.remove('show');
+  ngAfterViewInit(): void {
+    if (window.innerWidth <= 768) {
+      this.sidebarMenu.nativeElement.classList.add('closed');
       this.closeSideMenuButton.nativeElement.classList.add('hide');
-      // Show open button
-      this.openSideMenuButton.nativeElement.classList.remove('hide');
       this.openSideMenuButton.nativeElement.classList.add('show');
-      // Show title
-      this.sidebarMenuTitle.nativeElement.classList.remove('show');
-      this.sidebarMenuTitle.nativeElement.classList.add('hide');
+    } else {
+      this.sidebarMenu.nativeElement.classList.add('opened');
+      this.closeSideMenuButton.nativeElement.classList.add('show');
+      this.openSideMenuButton.nativeElement.classList.add('hide');
+    }
+  }
+
+  closeSideMenu(): void {
+    if (this.sidebarMenu.nativeElement.classList.contains('opened')) {
+      if (
+        this.closeSideMenuButton.nativeElement.classList.contains('show') &&
+        this.openSideMenuButton.nativeElement.classList.contains('hide')
+        ) {
+        // Toggle sidebar menu
+        this.sidebarMenu.nativeElement.classList.remove('opened');
+        this.sidebarMenu.nativeElement.classList.add('closed');
+        // Hide close button
+        this.closeSideMenuButton.nativeElement.classList.remove('show');
+        this.closeSideMenuButton.nativeElement.classList.add('hide');
+        // Show open button
+        this.openSideMenuButton.nativeElement.classList.remove('hide');
+        this.openSideMenuButton.nativeElement.classList.add('show');
+        // Show title
+        this.sidebarMenuTitle.nativeElement.classList.remove('show');
+        this.sidebarMenuTitle.nativeElement.classList.add('hide');
+      }
     }
   }
 
   openSideMenu(): void {
-    if (this.sidebarMenu.nativeElement.classList.contains('close')) {
-      // Toggle sidebar menu
-      this.sidebarMenu.nativeElement.classList.remove('close');
-      this.sidebarMenu.nativeElement.classList.add('open');
-      // Show close button
-      this.closeSideMenuButton.nativeElement.classList.remove('hide');
-      this.closeSideMenuButton.nativeElement.classList.add('show');
-      // Hide open button
-      this.openSideMenuButton.nativeElement.classList.remove('show');
-      this.openSideMenuButton.nativeElement.classList.add('hide');
-      // Hide title
-      this.sidebarMenuTitle.nativeElement.classList.remove('hide');
-      this.sidebarMenuTitle.nativeElement.classList.add('show');
+    if (this.sidebarMenu.nativeElement.classList.contains('closed')) {
+      if (
+        this.openSideMenuButton.nativeElement.classList.contains('show') &&
+        this.closeSideMenuButton.nativeElement.classList.contains('hide')
+        ) {
+        // Toggle sidebar menu
+        this.sidebarMenu.nativeElement.classList.remove('closed');
+        this.sidebarMenu.nativeElement.classList.add('opened');
+        // Hide open button
+        this.openSideMenuButton.nativeElement.classList.remove('show');
+        this.openSideMenuButton.nativeElement.classList.add('hide');
+        // Show close button
+        this.closeSideMenuButton.nativeElement.classList.remove('hide');
+        this.closeSideMenuButton.nativeElement.classList.add('show');
+        // Hide title
+        this.sidebarMenuTitle.nativeElement.classList.remove('hide');
+        this.sidebarMenuTitle.nativeElement.classList.add('show');
+      }
     }
   }
 }
