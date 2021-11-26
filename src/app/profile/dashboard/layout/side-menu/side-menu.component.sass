@@ -6,8 +6,18 @@
   border-right: 2px solid $richBlack
   height: 100%
 
+  @include max-lg()
+    padding: 0.5em 0
+    min-width: 100px
+  @include min-lg()
+    padding: 1.5em 0
+    min-width: 250px
+
   h2
     text-align: center
+
+    @include max-lg()
+      display: none
 
   &-content
     position: relative
@@ -63,15 +73,25 @@
           margin-top: 1.5em
 
           div
-            &:nth-child(1)
+            &:nth-child(1) // Close button
               fa-icon
                 font-size: 24px
-                padding: .2em .6em .2em .5em
+                padding: .1em .7em .1em .5em
 
-            &:nth-child(2)
+                @include max-lg()
+                  display: none
+                @include min-lg()
+                  display: block
+
+            &:nth-child(2) // Open button
               fa-icon
                 font-size: 18px
-                padding: .2em .5em .2em .6em
+                padding: .1em .6em .1em .6em
+
+                @include min-lg()
+                  display: none
+                @include max-lg()
+                  display: block
 
 
 .open
