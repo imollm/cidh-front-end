@@ -1,7 +1,9 @@
 <app-dashboard-header></app-dashboard-header>
 
 <div class="dashboard-container">
-  <app-dashboard-side-menu></app-dashboard-side-menu>
+  <app-dashboard-side-menu
+    [userRole]="userRole"
+  ></app-dashboard-side-menu>
   <div class="dashboard-container-router-outlet">
     <router-outlet></router-outlet>
   </div>

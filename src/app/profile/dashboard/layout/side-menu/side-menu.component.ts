@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -7,6 +7,8 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./side-menu.component.sass']
 })
 export class SideMenuComponent implements OnInit, AfterViewInit {
+
+  @Input() userRole: string | undefined;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;

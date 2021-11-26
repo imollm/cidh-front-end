@@ -2,20 +2,23 @@
   <h2 #sidebarMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
-      <li class="sidebar-menu-content-items-item">
-        <a href="#">Item 1</a>
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a href="#">Categories</a>
       </li>
-      <li class="sidebar-menu-content-items-item">
-        <a href="#">Item 2</a>
+      <li *ngIf="userRole==='superadmin'"  class="sidebar-menu-content-items-item">
+        <a href="#">Empreses</a>
       </li>
-      <li class="sidebar-menu-content-items-item">
-        <a href="#">Item 3</a>
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a href="#">Administradors</a>
       </li>
-      <li class="sidebar-menu-content-items-item">
-        <a href="#">Item 4</a>
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a href="#">Etiquetes</a>
       </li>
-      <li class="sidebar-menu-content-items-item">
-        <a href="#">Item 5</a>
+      <li *ngIf="userRole==='admin' || 'user'" class="sidebar-menu-content-items-item">
+        <a href="#">Actes</a>
+      </li>
+      <li *ngIf="userRole==='admin' || 'superadmin'" class="sidebar-menu-content-items-item">
+        <a href="#">Preguntes</a>
       </li>
       <li class="sidebar-menu-content-items-item">
         <div #closeSideMenuButton>
