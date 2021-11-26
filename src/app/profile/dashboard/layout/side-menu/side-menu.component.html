@@ -2,23 +2,45 @@
   <h2 #sidebarMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
-      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
-        <a href="#">Categories</a>
+      <li #sidebarMenuItem *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a class="sidebar-menu-content-items-item-link" href="#">
+          <span class="sidebar-menu-content-items-item-link-title">Categories</span>
+          <ul class="sidebar-menu-content-items-item-link-submenu"></ul>
+        </a>
       </li>
-      <li *ngIf="userRole==='superadmin'"  class="sidebar-menu-content-items-item">
-        <a href="#">Empreses</a>
+      <li #sidebarMenuItem *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a class="sidebar-menu-content-items-item-link" href="#">
+          <span class="sidebar-menu-content-items-item-link-title">Empreses</span>
+          <ul class="sidebar-menu-content-items-item-link-submenu"></ul>
+        </a>
       </li>
-      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
-        <a href="#">Administradors</a>
+      <li #sidebarMenuItem *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a class="sidebar-menu-content-items-item-link" href="#">
+          <span class="sidebar-menu-content-items-item-link-title">Administradors</span>
+          <ul class="sidebar-menu-content-items-item-link-submenu"></ul>
+        </a>
       </li>
-      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
-        <a href="#">Etiquetes</a>
+      <li #sidebarMenuItem *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
+        <a class="sidebar-menu-content-items-item-link" href="#">
+          <span class="sidebar-menu-content-items-item-link-title">Etiquetes</span>
+          <ul class="sidebar-menu-content-items-item-link-submenu"></ul>
+        </a>
       </li>
-      <li *ngIf="userRole==='admin' || 'user'" class="sidebar-menu-content-items-item">
-        <a href="#">Actes</a>
+      <li #sidebarMenuItem *ngIf="userRole==='admin' || 'user'" class="sidebar-menu-content-items-item">
+        <a class="sidebar-menu-content-items-item-link" href="#">
+          <span class="sidebar-menu-content-items-item-link-title">Actes</span>
+          <ul class="sidebar-menu-content-items-item-link-submenu">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+          </ul>
+        </a>
       </li>
-      <li *ngIf="userRole==='admin' || 'superadmin'" class="sidebar-menu-content-items-item">
-        <a href="#">Preguntes</a>
+      <li #sidebarMenuItem *ngIf="userRole==='admin' || 'superadmin'" class="sidebar-menu-content-items-item">
+        <a class="sidebar-menu-content-items-item-link" href="#">
+          <span class="sidebar-menu-content-items-item-link-title">Preguntes</span>
+          <!-- <ul class="sidebar-menu-content-items-item-link-submenu"></ul> -->
+        </a>
       </li>
       <li class="sidebar-menu-content-items-item">
         <div #closeSideMenuButton>

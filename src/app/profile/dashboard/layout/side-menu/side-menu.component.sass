@@ -37,11 +37,13 @@
       margin: 1.6em 0 0 0
 
       &-item
+        position: relative
         list-style: none
         padding-bottom: 2em
         text-align: center
 
-        a
+        &-link
+          position: relative
           color: $richBlack
           text-decoration: none
           &:actived,
@@ -55,15 +57,34 @@
             padding: .5em 1em
             border-radius: 5px
 
-        fa-icon
-          background: $richBlack
-          border: 2px solid $white
-          color: $white
-          border-radius: 50%
-          cursor: pointer
+          &-title
+            font-weight: bold
 
-          &:hover
-            box-shadow: 0 0 30px $richBlack
+          &-submenu
+            display: none
+            position: absolute
+            top: -10px
+            left: 167px
+            min-width: 150px
+            background-color: $white
+            border-radius: 5px
+            border: 2px solid $richBlack
+            padding: 1em 0 0 0
+
+            li
+              list-style: none
+              padding: 0 1em 1em 1em
+              width: 100%
+
+            &::after
+              content: ""
+              position: absolute
+              top: 6px
+              left: -24px
+              border-width: 0 13px 20px
+              transform: rotate(-90deg)
+              border-style: solid
+              border-color: transparent transparent $richBlack
 
         &:nth-last-child(-n+1)
           display: flex
@@ -73,6 +94,16 @@
           margin-top: 1.5em
 
           div
+            fa-icon
+              background: $richBlack
+              border: 2px solid $white
+              color: $white
+              border-radius: 50%
+              cursor: pointer
+
+              &:hover
+                box-shadow: 0 0 30px $richBlack
+
             &:nth-child(1) // Close button
               fa-icon
                 font-size: 24px
