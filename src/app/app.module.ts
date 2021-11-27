@@ -9,13 +9,15 @@ import { HomeComponent } from './components/home/home.component';
 
 import { SharedModule } from './shared/shared.module';
 import { UpcomingComponent } from './components/upcoming/upcoming.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    UpcomingComponent
+    UpcomingComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
