@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/profile/models/user';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -8,6 +9,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() user: User | undefined;
   faUserCircle = faUserCircle;
   @ViewChild('profileMenu') profileMenu: ElementRef;
 
@@ -19,9 +21,13 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleProfileMenu(): void {
-    this.profileMenu.nativeElement.style.display
-      = this.profileMenu.nativeElement.style.display
-        === 'none' ? 'block' : 'none';
+    if (this.profileMenu.nativeElement.classList.contains('hide')) {
+      this.profileMenu.nativeElement.classList.remove('hide');
+      this.profileMenu.nativeElement.classList.add('show');
+    } else if (this.profileMenu.nativeElement.classList.contains('show')) {
+      this.profileMenu.nativeElement.classList.remove('show');
+      this.profileMenu.nativeElement.classList.add('hide');
+    }
   }
 
 }

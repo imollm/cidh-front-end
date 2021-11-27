@@ -6,13 +6,9 @@
     <div class="dashboard-header-navbar-profile">
       <span>Hola, Ivan!</span>
       <fa-icon [icon]="faUserCircle" (click)="toggleProfileMenu()"></fa-icon>
-      <button
-        class="dashboard-header-navbar-profile-menu"
-        #profileMenu
-        style="display:none"
-      >
+      <button #profileMenu class="dashboard-header-navbar-profile-menu hide">
         <ul class="dashboard-header-navbar-profile-menu-content">
-          <li class="dashboard-header-navbar-profile-menu-content-item">
+          <li *ngIf="user && user.permissions.profile.modifyPersonalData" class="dashboard-header-navbar-profile-menu-content-item">
             <a href="#">Perfil</a>
           </li>
           <li class="dashboard-header-navbar-profile-menu-content-item">
