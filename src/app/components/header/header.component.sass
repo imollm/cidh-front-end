@@ -87,8 +87,8 @@
             font-size: 1.8em
 
             fa-icon
-                border: 1px solid $white
-                border-radius: 5px
+            border: 1px solid $white
+            border-radius: 5px
 
             @include max-xl()
                 display: flex
@@ -97,7 +97,7 @@
                 margin-right: 2em
 
                 fa-icon
-                    padding: .2em .4em
+                padding: .2em .4em
 
             @include max-md()
                 display: flex
@@ -106,21 +106,21 @@
                 margin-right: 1.2em
 
                 fa-icon
-                    padding: .1em .2em
+                padding: .1em .2em
 
     .mobile-menu
         display: none
         position: absolute
         top: 0
         right: 0
-        min-height: 1000px
         width: 100%
+        z-index: 999
         background-color: $richBlack
+        padding-bottom: 100%
 
         &-links
             text-align: center
             margin-top: 170px
-
             &-link
                 display: flex
                 justify-content: center
