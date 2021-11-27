@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  userRole: string = 'admin';
+  user: User = {
+    role: "admin",
+    permissions: {
+      administration: {
+        manageCategories: true,
+        manageEventOrganizers: true,
+        manageAdministrators: true,
+        associateAdminToEventOrganizer: true,
+        manageLabels: true
+    },
+    profile: {
+        manageEvents: false,
+        modifyPersonalData: false
+    },
+    event: {
+        getEventSubscription: false,
+        listEventsByCategory: false,
+        searchEventByLabel: false,
+        searchEventByName: false,
+        consultEventData: false,
+        subscriptionsHistory: false,
+        accessToEvent: false
+    },
+    media: {
+        sendACommentAboutEvent: false,
+        makeRatingAboutEvent: false,
+        recommendEventToAFriend: false,
+        addEventToHisFavourites: false,
+        consultHisFavouritesEvents: false,
+        answerForumQuestion: true,
+        viewForumQuestions: true,
+        makeForumQuestion: false
+    }
+    }
+  };
 
   constructor() { }
 

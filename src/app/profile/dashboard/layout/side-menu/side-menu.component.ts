@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/profile/models/user';
 
 @Component({
   selector: 'app-dashboard-side-menu',
@@ -8,7 +9,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class SideMenuComponent implements OnInit, AfterViewInit {
 
-  @Input() userRole: string | undefined;
+  @Input() user: User | undefined;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;

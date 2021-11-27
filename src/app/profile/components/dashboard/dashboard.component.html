@@ -1,8 +1,10 @@
-<app-dashboard-header></app-dashboard-header>
+<app-dashboard-header
+  [user]="user"  
+></app-dashboard-header>
 
 <div class="dashboard-container">
   <app-dashboard-side-menu
-    [userRole]="userRole"
+    [user]="user"
   ></app-dashboard-side-menu>
   <div class="dashboard-container-router-outlet">
     <router-outlet></router-outlet>
