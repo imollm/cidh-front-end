@@ -2,65 +2,20 @@
   <h2 #sidebarMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
-      <li
-        *ngIf="userRole==='superadmin'"
-        class="sidebar-menu-content-items-item"
-        (mouseover)="showSubMenu($event)"
-        (mouseleave)="hideSubMenu($event)">
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
           Categories
-          <ul class="sidebar-menu-content-items-item-submenu">
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 1</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 2</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 3</li>
-          </ul>
       </li>
-      <li
-        *ngIf="userRole==='superadmin'"
-        class="sidebar-menu-content-items-item"
-        (mouseover)="showSubMenu($event)"
-        (mouseleave)="hideSubMenu($event)">
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
           Empreses
-          <ul class="sidebar-menu-content-items-item-submenu">
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 1</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 2</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 3</li>
-          </ul>
       </li>
-      <li
-        *ngIf="userRole==='superadmin'"
-        class="sidebar-menu-content-items-item"
-        (mouseover)="showSubMenu($event)"
-        (mouseleave)="hideSubMenu($event)">
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
           Administradors
-          <ul class="sidebar-menu-content-items-item-submenu">
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 1</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 2</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 3</li>
-          </ul>
       </li>
-      <li
-        *ngIf="userRole==='superadmin'"
-        class="sidebar-menu-content-items-item"
-        (mouseover)="showSubMenu($event)"
-        (mouseleave)="hideSubMenu($event)">
+      <li *ngIf="userRole==='superadmin'" class="sidebar-menu-content-items-item">
           Etiquetes
-          <ul class="sidebar-menu-content-items-item-submenu">
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 1</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 2</li>
-            <li class="sidebar-menu-content-items-item-submenu-item">Item 3</li>
-          </ul>
       </li>
-      <li
-        *ngIf="userRole==='admin' || 'user'"
-        class="sidebar-menu-content-items-item"
-        (mouseover)="showSubMenu($event)"
-        (mouseleave)="hideSubMenu($event)">
-        <span>Actes</span>
-        <ul class="sidebar-menu-content-items-item-submenu">
-          <li class="sidebar-menu-content-items-item-submenu-item">Item 1</li>
-          <li class="sidebar-menu-content-items-item-submenu-item">Item 2</li>
-          <li class="sidebar-menu-content-items-item-submenu-item">Item 3</li>
-        </ul>
+      <li *ngIf="userRole==='admin' || 'user'" class="sidebar-menu-content-items-item">
+        Actes
       </li>
       <li
         *ngIf="userRole==='admin' || 'superadmin'"
