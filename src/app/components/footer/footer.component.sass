@@ -1,4 +1,5 @@
 @import "../../../assets/css/_variables.sass"
+@import "../../../assets/css/_breakpoints"
 
 #main-footer
     width: 100%
@@ -19,3 +20,14 @@
                 color: $richBlack
                 &:hover
                     color: $white
+
+    @include lg()
+        flex-direction: column-reverse
+        gap: 1.5rem
+        ul
+            margin: 0
+            padding: 0
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 1rem
