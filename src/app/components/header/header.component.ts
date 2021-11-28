@@ -20,10 +20,20 @@ export class HeaderComponent implements OnInit {
 
   closeMobileMenu(): void {
     this.mobileMenu.nativeElement.style.display = 'none';
+    this.element.nativeElement.parentNode.childNodes.forEach( (el:HTMLElement) => {
+      if (el.localName !== 'app-header' && el.localName !== 'app-router'){
+        el.style ? el.style.display = 'block' : null
+      }
+    })
   }
 
   openMobileMenu(): void {
     this.mobileMenu.nativeElement.style.display = 'block';
+    this.element.nativeElement.parentNode.childNodes.forEach( (el:HTMLElement) => {
+      if (el.localName !== 'app-header' && el.localName !== 'router-outlet'){
+        el.style ? el.style.display = 'none' : null
+      }
+    })
   }
 
 }
