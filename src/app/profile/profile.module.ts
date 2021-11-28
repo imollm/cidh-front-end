@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent as DashboardHeaderComponent } from './dashboard/layout/header/header.component';
 import { SideMenuComponent as DashboardSideMenuComponent } from './dashboard/layout/side-menu/side-menu.component';
 import { SharedModule } from '../shared/shared.module';
+import { HomeComponent } from './components/dashboard/home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent,
     DashboardHeaderComponent,
     DashboardSideMenuComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
