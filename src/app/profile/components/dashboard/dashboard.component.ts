@@ -17,12 +17,12 @@ export class DashboardComponent implements OnInit {
         manageAdministrators: true,
         associateAdminToEventOrganizer: true,
         manageLabels: true
-    },
-    profile: {
+      },
+      profile: {
         manageEvents: false,
         modifyPersonalData: false
-    },
-    event: {
+      },
+      event: {
         getEventSubscription: false,
         listEventsByCategory: false,
         searchEventByLabel: false,
@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
         consultEventData: false,
         subscriptionsHistory: false,
         accessToEvent: false
-    },
-    media: {
+      },
+      media: {
         sendACommentAboutEvent: false,
         makeRatingAboutEvent: false,
         recommendEventToAFriend: false,
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
         answerForumQuestion: true,
         viewForumQuestions: true,
         makeForumQuestion: false
-    }
+      }
     }
   };
 
