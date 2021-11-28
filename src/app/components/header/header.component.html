@@ -53,7 +53,9 @@
         </div>
     </nav>
     <div class="mobile-menu" #MobileMenu>
-        <div class="mobile-menu-close" (click)="closeMobileMenu()">x</div>
+        <div class="mobile-menu-close" (click)="closeMobileMenu()">
+          <span>x</span>
+        </div>
         <ul class="mobile-menu-links">
             <li class="mobile-menu-links-link">
                 <a [routerLink]="['/home']" (click)="closeMobileMenu()">
