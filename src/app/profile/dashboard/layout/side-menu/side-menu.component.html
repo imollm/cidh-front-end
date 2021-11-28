@@ -1,35 +1,36 @@
-<aside #sidebarMenu class="sidebar-menu">
-  <h2 #sidebarMenuTitle class="h4">Dasz Menu</h2>
+<aside #sideMenu class="sidebar-menu">
+  <h2 #sideMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
       <li *ngIf="user && user.permissions.administration.manageCategories" class="sidebar-menu-content-items-item">
-        Categories
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faCategories"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Categories</span>
       </li>
       <li *ngIf="user && user.permissions.administration.manageEventOrganizers" class="sidebar-menu-content-items-item">
-        Empreses
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventOrganizers"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Empreses</span>
       </li>
       <li *ngIf="user && user.permissions.administration.manageAdministrators" class="sidebar-menu-content-items-item">
-        Administradors
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faUserAdmin"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Administradors</span>
       </li>
       <li *ngIf="user && user.permissions.administration.associateAdminToEventOrganizer"
         class="sidebar-menu-content-items-item">
-        Associar administradors
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAssociateAdminToEvent"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Associar admin.</span>
       </li>
       <li *ngIf="user && user.permissions.administration.manageLabels" class="sidebar-menu-content-items-item">
-        Etiquetes
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faLabels"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Etiquetes</span>
       </li>
       <li *ngIf="user && user.permissions.profile.manageEvents"
         class="sidebar-menu-content-items-item">
-        Actes
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEvents"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Actes</span>
       </li>
-      <li *ngIf="user && user.role==='admin' || 'superadmin'" class="sidebar-menu-content-items-item"
-        (mouseover)="showSubMenu($event)" (mouseleave)="hideSubMenu($event)">
-        Preguntes
-        <ul class="sidebar-menu-content-items-item-submenu">
-          <li class="sidebar-menu-content-items-item-submenu-item">Item 1</li>
-          <li class="sidebar-menu-content-items-item-submenu-item">Item 2</li>
-          <li class="sidebar-menu-content-items-item-submenu-item">Item 3</li>
-        </ul>
+      <li *ngIf="user && user.role==='admin' || 'superadmin'" class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faQuestion"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Preguntes</span>
       </li>
       <li class="sidebar-menu-content-items-item">
         <div #closeSideMenuButton>
