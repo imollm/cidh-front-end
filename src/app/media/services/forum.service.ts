@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
-import { IForumService } from './IForumService';
+import { IForumService } from './forum.interface';
 import * as faker from 'faker';
 
 @Injectable({

@@ -1,0 +1,24 @@
+<header class="dashboard-header">
+  <nav class="dashboard-header-navbar">
+    <div class="dashboard-header-navbar-title">
+      <h1 class="h4">Dasz Events Panel</h1>
+    </div>
+    <div class="dashboard-header-navbar-profile">
+      <span>Hola, Ivan!</span>
+      <fa-icon [icon]="faUserCircle" (click)="toggleProfileMenu()"></fa-icon>
+      <button #profileMenu class="dashboard-header-navbar-profile-menu hide">
+        <ul class="dashboard-header-navbar-profile-menu-content">
+          <li *ngIf="user && user.permissions.profile.modifyPersonalData" class="dashboard-header-navbar-profile-menu-content-item">
+            <a [routerLink]="['/profile/dashboard/']">Perfil</a>
+          </li>
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a href="#">Preferencies</a>
+          </li>
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a href="#">Logout</a>
+          </li>
+        </ul>
+      </button>
+    </div>
+  </nav>
+</header>

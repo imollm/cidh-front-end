@@ -10,8 +10,12 @@
   @media (min-width: $breakpoint-xl)
     @content
 
-@mixin lg()
+@mixin max-lg()
   @media (max-width: $breakpoint-lg)
+    @content
+
+@mixin min-lg()
+  @media (min-width: $breakpoint-lg)
     @content
 
 @mixin min-md()

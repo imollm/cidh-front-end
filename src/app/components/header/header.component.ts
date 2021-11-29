@@ -38,4 +38,8 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  isDashboard(): boolean {
+    return window.location.href.indexOf('dashboard') > -1;
+  }
+
 }
