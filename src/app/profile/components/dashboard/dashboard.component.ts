@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
       },
       profile: {
         manageEvents: false,
-        modifyPersonalData: false
+        modifyPersonalData: true
       },
       event: {
         getEventSubscription: false,

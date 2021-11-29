@@ -7,10 +7,10 @@ import { ProfileComponent } from './profile.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HeaderComponent as DashboardHeaderComponent } from './dashboard/layout/header/header.component';
-import { SideMenuComponent as DashboardSideMenuComponent } from './dashboard/layout/side-menu/side-menu.component';
+import { HeaderComponent as DashboardHeaderComponent } from './components/dashboard/layout/header/header.component';
+import { SideMenuComponent as DashboardSideMenuComponent } from './components/dashboard/layout/side-menu/side-menu.component';
+import { HomeComponent as DashboardHomeComponent} from './components/dashboard/components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
-import { HomeComponent } from './components/dashboard/home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { HomeComponent } from './components/dashboard/home/home.component';
     DashboardComponent,
     DashboardHeaderComponent,
     DashboardSideMenuComponent,
-    HomeComponent,
+    DashboardHomeComponent,
   ],
   imports: [
     CommonModule,
