@@ -1,4 +1,4 @@
-export interface Permissions {
+export interface IPermissions {
     "administration": {
         "manageCategories": boolean,
         "manageEventOrganizers": boolean,

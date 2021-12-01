@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
+import { IUser } from '../../models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +8,14 @@ import { User } from '../../models/user';
 })
 export class DashboardComponent implements OnInit {
 
-  user: User = {
+  user: IUser = {
+    name: "",
+    surname: "",
+    fiscalId: "",
+    address: "",
+    language: "",
+    email: "",
+    password: "",
     role: "admin",
     permissions: {
       administration: {

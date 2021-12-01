@@ -37,12 +37,12 @@
         <div class="auth-wrapper">
             <ul>
                 <li>
-                    <a href="#">
+                    <a [routerLink]="['/profile/signup']">
                         Registra't
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a [routerLink]="['/profile/login']">
                         Inicia sessió
                     </a>
                 </li>
@@ -78,12 +78,12 @@
                 </a>
             </li>
             <li class="mobile-menu-links-link">
-                <a href="#" (click)="closeMobileMenu()">
+                <a [routerLink]="['/profile/login']" (click)="closeMobileMenu()">
                     Inicia sessió
                 </a>
             </li>
             <li class="mobile-menu-links-link">
-                <a href="#" (click)="closeMobileMenu()">
+                <a [routerLink]="['/profile/signup']" (click)="closeMobileMenu()">
                     Registra't
                 </a>
             </li>

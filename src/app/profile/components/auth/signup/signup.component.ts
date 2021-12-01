@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Registration } from 'src/app/profile/models/registration';
+import { IRegistration } from 'src/app/profile/models/registration.model';
 import { SignupService } from 'src/app/profile/services/auth/signup.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      let data: Registration = this.form.value;
+      let data: IRegistration = this.form.value;
       this.signUpService.send(data).then(res => {
 
       });

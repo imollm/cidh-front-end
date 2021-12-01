@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Registration } from '../../models/registration';
+import { IRegistration } from '../../models/registration.model';
 import { IAuthService } from './auth.interface';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthService implements IAuthService {
   logout(): void {
   }
 
-  registerUser(user: Registration): void {
+  registerUser(user: IRegistration): void {
   }
 
   private removeToken(): Promise<boolean> {
