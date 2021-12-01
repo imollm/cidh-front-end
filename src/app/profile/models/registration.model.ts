@@ -1,4 +1,4 @@
-export interface Registration {
+export interface IRegistration {
     name: string;
     surname: string;
     fiscalId: string;
