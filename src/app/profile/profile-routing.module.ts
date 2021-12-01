@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './profile.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { HomeComponent as DashboardHomeComponent } from './components/dashboard/components/home/home.component';
+import { LinkAdminToEventComponent } from '../administration/components/link-admin-to-event/link-admin-to-event.component';
 
 const routes: Routes = [
   { path: '', component: ProfileComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent,
     // canActivate: [AuthGuard],
     children: [
-      { path: 'home', component: DashboardHomeComponent }
+      { path: 'home', component: DashboardHomeComponent },
+      { path: 'linkAdminToEvent', component: LinkAdminToEventComponent, /* canActivate: [AuthGuard] */ },
     ]
   },
 ];
