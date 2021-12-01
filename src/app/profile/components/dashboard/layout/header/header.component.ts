@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { User } from 'src/app/profile/models/user';
+import { IUser } from 'src/app/profile/models/user.model';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -9,7 +9,7 @@ import { User } from 'src/app/profile/models/user';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() user: User | undefined;
+  @Input() user: IUser | undefined;
   faUserCircle = faUserCircle;
   @ViewChild('profileMenu') profileMenu: ElementRef;
 
