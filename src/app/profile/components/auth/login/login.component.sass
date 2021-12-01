@@ -3,28 +3,39 @@
 
 #login-page
   background-color: $richBlack
-  position: absolute
   width: 100%
+  height: calc( 100vh - 319px )
+  display: flex
+  justify-content: center
+  align-items: center
 
-  .form-content-wrapper
-    display: flex
-    flex-direction: column
-    align-items: center
+  .content
+    width: 65%
 
-    .form-title
-      color: $white
-      text-align: center
+    @include min-xl()
+      width: 40%
 
-    .form-wrapper
+    .form-content-wrapper
       display: flex
       flex-direction: column
       align-items: center
-      justify-content: center
-      width: 80%
-      padding: 2rem
-      background-color: $turquoise
-      border-radius: 0.5rem
-      margin-bottom: 1em
 
-      label
-        color: $richBlack
+      .form-title
+        color: $white
+        text-align: center
+
+      .form-wrapper
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        width: 80%
+        padding: 3em 1.5em 2em 0
+        background-color: $turquoise
+        border-radius: 0.5rem
+
+        @include max-md()
+          padding: .5em
+
+        label
+          color: $richBlack
