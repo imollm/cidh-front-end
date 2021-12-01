@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Userprofile } from 'src/app/profile/models/userprofile';
+import * as faker from "faker";
 
 @Component({
   selector: 'app-profile-show',
@@ -10,6 +12,8 @@ export class ProfileShowComponent implements OnInit {
 
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
+  user: Userprofile;
+
   
   constructor(
     private fb: FormBuilder,
@@ -24,6 +28,10 @@ export class ProfileShowComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
+    
+    this.user = this.initUser();
+
+
   }
 
   ngOnInit(): void {
@@ -38,4 +46,15 @@ export class ProfileShowComponent implements OnInit {
     }
   }
 
+  private initUser():Userprofile {
+    let user = {} as Userprofile;
+    user.name=faker.name.firstName();
+    user.surname=faker.name.lastName();
+    user.address=faker.address.direction();
+    user.fiscalId=faker.datatype.uuid();
+    user.language="español";
+    user.email=faker.internet.email();
+    user.password=faker.internet.password();
+    return user;
+  }
 }
