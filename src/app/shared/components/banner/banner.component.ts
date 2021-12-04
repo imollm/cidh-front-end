@@ -17,8 +17,11 @@ export class BannerComponent implements OnInit {
   }
 
   private setTitle(): void {
-    if (this.router.url.indexOf('/forum') > -1) {
+    let url = this.router.url;
+    if (url.indexOf('/forum') > -1) {
       this.bannerTitle = 'FORUM';
+    } else if (url.indexOf('/categories') > -1) {
+      this.bannerTitle = 'CATEGORIES';
     }
   }
 }
