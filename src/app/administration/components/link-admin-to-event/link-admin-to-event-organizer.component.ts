@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-link-admin-to-event',
-  templateUrl: './link-admin-to-event.component.html',
-  styleUrls: ['./link-admin-to-event.component.sass']
+  selector: 'app-link-admin-to-event-organizer',
+  templateUrl: './link-admin-to-event-organizer.component.html',
+  styleUrls: ['./link-admin-to-event-organizer.component.sass']
 })
-export class LinkAdminToEventComponent implements OnInit {
+export class LinkAdminToEventOrganizerComponent implements OnInit {
 
-  formTitle: string = 'Associa un admin. a un acte';
+  formTitle: string = 'Associa un admin. a una empresa';
 
   constructor() { }
 

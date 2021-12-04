@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
-import { LinkAdminToEventComponent } from './components/link-admin-to-event/link-admin-to-event.component';
+import { LinkAdminToEventOrganizerComponent } from './components/link-admin-to-event/link-admin-to-event-organizer.component';
 
 
 @NgModule({
   declarations: [
     AdministrationComponent,
-    LinkAdminToEventComponent
+    LinkAdminToEventOrganizerComponent
   ],
   imports: [
     CommonModule,
