@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinkAdminToEventComponent implements OnInit {
 
+  formTitle: string = 'Associa un admin a un event';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeColor(event : Event): void {
+    let select = (event.target as HTMLSelectElement);
+    if (select.getAttribute('data-selected') === 'false') {
+      select.style.color = '#161925';
+      select.style.fontStyle = 'normal';
+      select.style.fontWeight = 'normal';
+      select.setAttribute('data-selected', 'true');
+    }
   }
 
 }

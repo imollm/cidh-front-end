@@ -1,1 +1,38 @@
-<p>link-admin-to-event works!</p>
+<div id="link-admin-to-event-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="form-title h3 mb-5">
+          {{ formTitle }}
+        </h1>
+        <form id="form-wrapper">
+          <div class="form-group">
+            <label for="selectAdministrators" class="mb-3">Administradors</label>
+            <select class="form-control" id="selectAdministrators" (change)="changeColor($event)" data-selected="false">
+              <option value="" disabled selected>Selecciona</option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+            </select>
+          </div>
+          <div class="form-group mt-4">
+            <label for="selectEvents" class="mb-3">Actes</label>
+            <select class="form-control" id="selectEvents" (change)="changeColor($event)" data-selected="false">
+              <option value="" disabled selected>Selecciona</option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+            </select>
+          </div>
+          <div class="form-group d-flex justify-content-center">
+            <button type="submit" class="btn btn-dark mt-4">Associa</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
