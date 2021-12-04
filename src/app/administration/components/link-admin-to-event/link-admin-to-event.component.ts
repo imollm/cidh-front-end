@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinkAdminToEventComponent implements OnInit {
 
-  formTitle: string = 'Associa un admin a un event';
+  formTitle: string = 'Associa un admin. a un acte';
 
   constructor() { }
 
