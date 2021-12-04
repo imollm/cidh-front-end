@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAdministratorService } from './administrator.interface';
 
@@ -5,6 +6,9 @@ import { IAdministratorService } from './administrator.interface';
   providedIn: 'root'
 })
 export class AdministratorService implements IAdministratorService {
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   addAdministrator(email: string, password: string, name: string, surname: string): void {
     throw new Error('Method not implemented.');
