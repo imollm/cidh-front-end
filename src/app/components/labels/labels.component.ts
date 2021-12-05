@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Label } from 'src/app/administration/models/label.model';
+import { LabelService } from 'src/app/administration/services/label.service';
 
 @Component({
   selector: 'app-labels',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LabelsComponent implements OnInit {
 
-  constructor() { }
+  labels: Label[] = [];
+  actualPage: number = 1;
+
+  constructor(private labelService: LabelService) { }
 
   ngOnInit(): void {
+    this.getAllLabels();
+  }
+
+  getAllLabels() {
+    this.labels = this.labelService.listAllLabels();
   }
 
 }

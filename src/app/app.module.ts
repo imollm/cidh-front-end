@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CatCardComponent } from './components/categories/components/cat-card/cat-card.component';
 import { LabelsComponent } from './components/labels/labels.component';
+import { LabCardComponent } from './components/labels/components/lab-card/lab-card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LabelsComponent } from './components/labels/labels.component';
     FooterComponent,
     CategoriesComponent,
     CatCardComponent,
-    LabelsComponent
+    LabelsComponent,
+    LabCardComponent
   ],
   imports: [
     BrowserModule,
