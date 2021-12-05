@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IEventService } from './event';
+import { IEventService } from './event.interface';
 
 @Injectable({
   providedIn: 'root'
