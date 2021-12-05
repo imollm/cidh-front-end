@@ -5,9 +5,9 @@
                 <h2 class="upcoming-events-title">Pròxims events</h2>
             </div>
             <div *ngFor="let event of upcomingEvents" class="col-sm-6 mb-5">
-                <app-card
+                <app-event-card
                     [event]="event"
-                ></app-card>
+                ></app-event-card>
             </div>
         </div>
     </div>
