@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EventSearcher as EventSearcherModel} from '../../models/event-searcher.model';
+import { EventSearcherService } from '../../services/event-searcher.service';
 
 @Component({
   selector: 'app-event-results',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventResultsComponent implements OnInit {
 
-  constructor() { }
+  searchParams: EventSearcherModel;
+
+  constructor(
+    private messageService: EventSearcherService,
+  ) { }
 
   ngOnInit(): void {
+    this.messageService.currentMessage.subscribe(params => {
+      this.searchParams = params;
+    });
   }
-
 }
