@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EventSearcherService } from '../../services/event-searcher.service';
+import { EventSearcher as EventSearcherModel } from '../../models/event-searcher.model';
 
 @Component({
   selector: 'app-event-searcher',
@@ -19,7 +20,7 @@ export class EventSearcherComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       name: new FormControl(''),
-      label: new FormControl('')
+      labelId: new FormControl('')
     });
   }
 
@@ -29,7 +30,12 @@ export class EventSearcherComponent implements OnInit {
   onSubmit(): void {
     // When user click on submit button, this component uses the EventSearcherService
     // to send the search params to EventResultsComponent
-    this.messageService.changeMessage(this.form.value);
+    let searchParams: EventSearcherModel = {} as EventSearcherModel;
+    searchParams.name = this.form.get('name').value;
+    searchParams.labelId = this.form.get('labelId').value;
+    TODO: "Get label name from option"
+    searchParams.labelName = 'Label Name';
+    this.messageService.changeMessage(searchParams);
     this.router.navigate(['/search']);
   }
 }

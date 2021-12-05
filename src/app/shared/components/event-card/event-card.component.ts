@@ -8,7 +8,7 @@ import { Event } from 'src/app/event/models/event.model';
 })
 export class EventCardComponent implements OnInit {
 
-  @Input() event = {} as Event;
+  @Input() event: Event;
 
   constructor() { }
 
