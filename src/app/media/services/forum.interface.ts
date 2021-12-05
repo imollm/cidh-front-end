@@ -1,5 +1,5 @@
-import { Question } from "../models/question";
-import { Answer } from "../models/answer";
+import { Question } from "../models/question.model";
+import { Answer } from "../models/answer.model";
 
 export interface IForumService {
   askQuestion(question: Question): void;

@@ -1,0 +1,58 @@
+<app-banner></app-banner>
+
+<section class="results">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <app-event-searcher></app-event-searcher>
+      </div>
+    </div>
+    <div *ngIf="searchModel && searchModel.name && searchModel.labelName" class="row">
+      <div class="col-12">
+        <div class="results-container-search-params">
+          <h5>Resultats de la cerca amb els parametre/s:</h5>
+          <div class="results-container-search-params-param">
+            <span class="results-container-search-params-param-title">
+              Nom:
+            </span>
+            <span class="results-container-search-params-param-value">
+              {{ searchModel.name }}
+            </span>
+          </div>
+          <div class="results-container-search-params-param">
+            <span class="results-container-search-params-param-title">
+              Etiqueta:
+            </span>
+            <span class="results-container-search-params-param-value">
+              {{ searchModel.labelName }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="results-container col-12">
+        <div *ngIf="searchModel && searchModel.events && searchModel.events.length > 0; then withResults else withOutResults"></div>
+        <ng-template #withResults>
+          <div class="results-container-wrapper">
+            <div class="row">
+              <div *ngFor="let event of searchModel.events | paginate: { itemsPerPage: 6, currentPage: actualPage }"
+                class="results-container-wrapper-result-wrapper col-md-6">
+                <app-event-card [event]="event"></app-event-card>
+              </div>
+            </div>
+            <div class="paginator">
+              <pagination-controls (pageChange)="actualPage = $event" [autoHide]="true" [responsive]="true">
+              </pagination-controls>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #withOutResults>
+          <div class="results-container-wrapper">
+            <h4>No s'han trobat resultats amb els parametres donats.</h4>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>

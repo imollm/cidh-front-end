@@ -1,0 +1,62 @@
+@import "../../../../assets/css/_variables.sass"
+@import "../../../../assets/css/_breakpoints"
+
+.results
+  background-color: $richBlack
+
+  &-container
+    padding: 3em 0
+
+    &-search-params
+      h5
+        color: $white
+        font-style: italic
+        margin-bottom: 1.5em
+
+      &-param
+        color: $turquoise
+        font-size: 1.2em
+
+        &:nth-child(2)
+          margin-bottom: 1em
+
+        &-title
+          font-weight: bold
+
+        &-value
+          font-style: italic
+          margin-left: .5em
+
+    &-wrapper
+      background-color: $turquoise
+      width: 100%
+      border-radius: 15px
+      padding: 3em
+
+      h4
+        color: $richBlack
+        text-align: center
+        font-size: 2em
+        font-style: bolder
+
+        @include max-lg()
+          font-size: 1.5em
+
+      &-result-wrapper
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-bottom: 2em
+        padding: .5em 1.2em
+        cursor: pointer
+
+      .paginator
+        display: flex
+        justify-content: center
+        margin-top: 16px
+
+        &::ng-deep
+          .ngx-pagination
+            padding: 0
+            background-color: $white
+            border-radius: 5px
