@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoriesComponent } from './components/categories/categories.component';
 
+// Custom imports
 import { HomeComponent } from './components/home/home.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 import { LabelsComponent } from './components/labels/labels.component';
 
 const routes: Routes = [
