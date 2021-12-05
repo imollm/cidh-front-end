@@ -1,4 +1,4 @@
-import { Category } from "../models/category";
+import { Category } from "../models/category.model";
 
 export interface ICategoryService {
   addCategory(name: string, description: string): void;

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Answer } from '../../models/answer';
+import { Answer } from '../../models/answer.model';
 
 @Component({
   selector: 'app-answer',

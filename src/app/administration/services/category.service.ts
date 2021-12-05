@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category } from '../models/category';
+import { Category } from '../models/category.model';
 import { ICategoryService } from './category.interface';
 import * as faker from 'faker';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Answer } from '../models/answer';
-import { Question } from '../models/question';
+import { Answer } from '../models/answer.model';
+import { Question } from '../models/question.model';
 import { IForumService } from './forum.interface';
 import * as faker from 'faker';
 
@@ -14,7 +14,7 @@ export class ForumService implements IForumService {
   constructor() { }
 
   askQuestion(question: Question): void {
-    
+
   }
 
   answerQuestion(questionId: string, answer: Answer): void { }

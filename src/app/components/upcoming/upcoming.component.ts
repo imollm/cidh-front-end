@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../../event/models/event';
+import { Event } from '../../event/models/event.model';
 import * as faker from 'faker';
 
 @Component({
