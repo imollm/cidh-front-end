@@ -1,2 +1,19 @@
+@import "../../../../assets/css/_variables.sass"
+
 .card
     height: 100%
+
+    &:hover
+      transform: scale(1.1)
+      transition: all 0.3s linear
+      color: $turquoise
+      background-color: $richBlack
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75)
+
+      .card-footer
+          transition: all 0.3s linear
+          background-color: $cadetGray
+
+    &:not(&:hover)
+      transform: scale(1)
+      transition: all 0.3s linear
