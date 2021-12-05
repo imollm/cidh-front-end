@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { UpcomingComponent } from './components/upcoming/upcoming.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { CatCardComponent } from './components/categories/components/cat-card/cat-card.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     HomeComponent,
     UpcomingComponent,
-    FooterComponent
+    FooterComponent,
+    CategoriesComponent,
+    CatCardComponent
   ],
   imports: [
     BrowserModule,
