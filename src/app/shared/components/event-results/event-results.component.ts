@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from 'src/app/event/models/event.model';
-import { EventService } from 'src/app/event/services/event.service';
 import { EventSearcher as EventSearcherModel} from '../../models/event-searcher.model';
 import { EventSearcherService } from '../../services/event-searcher.service';
 
@@ -11,19 +10,17 @@ import { EventSearcherService } from '../../services/event-searcher.service';
 })
 export class EventResultsComponent implements OnInit {
 
-  searchParams: EventSearcherModel;
+  searchModel: EventSearcherModel;
   events: Event[] = [];
   actualPage: number = 1;
 
   constructor(
     private messageService: EventSearcherService,
-    private eventService: EventService
   ) { }
 
   ngOnInit(): void {
-    this.messageService.currentMessage.subscribe(params => {
-      this.searchParams = params;
+    this.messageService.currentMessage.subscribe(data => {
+      this.searchModel = data;
     });
-    this.events = this.eventService.findEvents(this.searchParams);
   }
 }

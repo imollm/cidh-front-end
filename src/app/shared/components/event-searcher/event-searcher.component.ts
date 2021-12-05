@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EventSearcherService } from '../../services/event-searcher.service';
 import { EventSearcher as EventSearcherModel } from '../../models/event-searcher.model';
+import { EventService } from 'src/app/event/services/event.service';
 
 @Component({
   selector: 'app-event-searcher',
@@ -16,7 +17,8 @@ export class EventSearcherComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: EventSearcherService, //Service to send search params to EventResultsComponent
-    private router: Router
+    private router: Router,
+    private eventService: EventService
   ) {
     this.form = this.fb.group({
       name: new FormControl(''),
@@ -30,12 +32,14 @@ export class EventSearcherComponent implements OnInit {
   onSubmit(): void {
     // When user click on submit button, this component uses the EventSearcherService
     // to send the search params to EventResultsComponent
-    let searchParams: EventSearcherModel = {} as EventSearcherModel;
-    searchParams.name = this.form.get('name').value;
-    searchParams.labelId = this.form.get('labelId').value;
+    let searchModel: EventSearcherModel = {} as EventSearcherModel;
+    searchModel.name = this.form.get('name').value;
+    searchModel.labelId = this.form.get('labelId').value;
     TODO: "Get label name from option"
-    searchParams.labelName = 'Label Name';
-    this.messageService.changeMessage(searchParams);
-    this.router.navigate(['/search']);
+    searchModel.labelName = 'Label Name';
+    this.router.navigate(['/search']).then(() => {
+      searchModel.events = this.eventService.findEvents(searchModel);
+      this.messageService.changeMessage(searchModel);
+    });
   }
 }
