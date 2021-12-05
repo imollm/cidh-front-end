@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-searcher',
-  templateUrl: './searcher.component.html',
-  styleUrls: ['./searcher.component.sass']
+  selector: 'app-event-searcher',
+  templateUrl: './event-searcher.component.html',
+  styleUrls: ['./event-searcher.component.sass']
 })
-export class SearcherComponent implements OnInit {
+export class EventSearcherComponent implements OnInit {
 
   form: FormGroup;
 

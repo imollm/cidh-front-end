@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Custom components
-import { SearcherComponent } from './components/searcher/searcher.component';
+import { EventSearcherComponent } from './components/event-searcher/event-searcher.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { BannerComponent } from './components/banner/banner.component';
 
@@ -15,7 +15,7 @@ import { EventResultsComponent } from './components/event-results/event-results.
 
 @NgModule({
   declarations: [
-    SearcherComponent,
+    EventSearcherComponent,
     EventCardComponent,
     BannerComponent,
     EventResultsComponent,
@@ -27,7 +27,7 @@ import { EventResultsComponent } from './components/event-results/event-results.
     NgxPaginationModule,
   ],
   exports: [
-    SearcherComponent,
+    EventSearcherComponent,
     EventCardComponent,
     BannerComponent,
     FontAwesomeModule,
