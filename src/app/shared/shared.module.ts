@@ -11,12 +11,14 @@ import { BannerComponent } from './components/banner/banner.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EventResultsComponent } from './components/event-results/event-results.component';
 
 @NgModule({
   declarations: [
     SearcherComponent,
     EventCardComponent,
     BannerComponent,
+    EventResultsComponent,
   ],
   imports: [
     CommonModule,
