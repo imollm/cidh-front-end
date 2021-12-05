@@ -29,6 +29,8 @@ export class EventService implements IEventService {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
   }
+  findEvents(name: string, label: string): void {
+  }
   showEvent(eventId: string): void {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');

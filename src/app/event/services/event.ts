@@ -4,6 +4,7 @@ export interface IEventService {
   findEventsByCategory(categoryId: string): void;
   findEventsByName(name: string): void;
   findEventsByLabel(label: string): void;
+  findEvents(name: string, label: string): void;
   showEvent(eventId: string): void;
   findOrdersByUser(email: string): void;
   findAllOrders(): void;
