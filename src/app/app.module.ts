@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { UpcomingComponent } from './components/upcoming/upcoming.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { CatCardComponent } from './components/categories/components/cat-card/cat-card.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
     HomeComponent,
     UpcomingComponent,
     FooterComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CatCardComponent
   ],
   imports: [
     BrowserModule,
