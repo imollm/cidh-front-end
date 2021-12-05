@@ -24,6 +24,8 @@ export class BannerComponent implements OnInit {
       this.bannerTitle = 'CATEGORIES';
     } else if (url.indexOf('/labels') > -1) {
       this.bannerTitle = 'ETIQUETES';
+    } else if (url.indexOf('/search') > -1) {
+      this.bannerTitle = 'RESULTATS CERCA';
     }
   }
 }
