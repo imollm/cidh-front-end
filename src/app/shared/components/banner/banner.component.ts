@@ -22,6 +22,8 @@ export class BannerComponent implements OnInit {
       this.bannerTitle = 'FORUM';
     } else if (url.indexOf('/categories') > -1) {
       this.bannerTitle = 'CATEGORIES';
+    } else if (url.indexOf('/labels') > -1) {
+      this.bannerTitle = 'ETIQUETES';
     }
   }
 }
