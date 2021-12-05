@@ -8,6 +8,8 @@ import { SearcherComponent } from './components/searcher/searcher.component';
 import { CardComponent } from './components/card/card.component';
 import { BannerComponent } from './components/banner/banner.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     SearcherComponent,
@@ -18,6 +20,7 @@ import { BannerComponent } from './components/banner/banner.component';
     CommonModule,
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),
+    NgxPaginationModule,
   ],
   exports: [
     SearcherComponent,
@@ -25,6 +28,7 @@ import { BannerComponent } from './components/banner/banner.component';
     BannerComponent,
     FontAwesomeModule,
     SweetAlert2Module,
+    NgxPaginationModule,
   ]
 })
 export class SharedModule { }
