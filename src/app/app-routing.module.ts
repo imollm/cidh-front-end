@@ -12,7 +12,7 @@ const routes: Routes = [
   { path:'home', component: HomeComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'labels', component: LabelsComponent },
-  { path: 'search', component: EventResultsComponent },
+  { path: 'results', component: EventResultsComponent },
   { path: 'administration', loadChildren: () => import('./administration/administration.module').then(m => m .AdministrationModule) },
   { path: 'event', loadChildren: () => import('./event/event.module').then(m => m.EventModule) },
   { path: 'media', loadChildren: () => import('./media/media.module').then(m => m.MediaModule) },

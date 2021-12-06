@@ -29,6 +29,7 @@ export class LabelService implements ILabelService {
     let labels: Label[] = [];
     for (let i = 0; i < 10; i++) {
       labels.push({
+        id: faker.datatype.uuid(),
         name: faker.lorem.word(),
         description: faker.lorem.words()
       });

@@ -20,9 +20,21 @@ export class EventService implements IEventService {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
   }
-  findEventsByCategory(categoryId: string): void {
+  findEventsByCategory(categoryId: string): Event[] {
     TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+    let events: Event[] = [];
+    for (let i = 0; i < 10; i++) {
+      events.push({
+        name: faker.lorem.word(),
+        description: faker.lorem.word(),
+        picture: faker.image.imageUrl(),
+        rating: faker.datatype.number(),
+        location: faker.address.streetAddress(),
+        initDate: faker.date.soon(),
+        endDate: faker.date.future()
+      });
+    }
+    return events;
   }
   findEventsByName(name: string): void {
     TODO: 'Method not implemented.'
@@ -33,6 +45,7 @@ export class EventService implements IEventService {
     throw new Error('Method not implemented.');
   }
   findEvents(searchParams: EventSearcherModel): Event[] {
+    TODO: 'Method not implemented.'
     let events: Event[] = [];
     for (let i = 0; i < 10; i++) {
       events.push({

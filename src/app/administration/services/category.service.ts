@@ -25,6 +25,7 @@ export class CategoryService implements ICategoryService {
     let categories: Category[] = [];
     for (let i = 0; i < 10; i++) {
       categories.push({
+        id: faker.datatype.uuid(),
         name: faker.commerce.productName(),
         description: faker.commerce.productAdjective()
       });
