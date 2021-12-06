@@ -7,11 +7,11 @@
         <app-event-searcher></app-event-searcher>
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="searchModel && (searchModel.name || searchModel.label || searchModel.category) && searchModel.events && searchModel.events.length > 0" class="row">
       <div class="col-12">
         <div class="results-container-search-params">
           <h5>Resultats de la cerca amb els parametre/s:</h5>
-          <div *ngIf="searchModel && searchModel.name" class="results-container-search-params-param">
+          <div *ngIf="searchModel.name" class="results-container-search-params-param">
             <span class="results-container-search-params-param-title">
               Nom:
             </span>
@@ -19,7 +19,7 @@
               {{ searchModel.name }}
             </span>
           </div>
-          <div *ngIf="searchModel && searchModel.label"class="results-container-search-params-param">
+          <div *ngIf="searchModel.label" class="results-container-search-params-param">
             <span class="results-container-search-params-param-title">
               Etiqueta:
             </span>
@@ -27,7 +27,7 @@
               {{ searchModel.label.name }}
             </span>
           </div>
-          <div *ngIf="searchModel && searchModel.category" class="results-container-search-params-param">
+          <div *ngIf="searchModel.category" class="results-container-search-params-param">
             <span class="results-container-search-params-param-title">
               Categoria:
             </span>

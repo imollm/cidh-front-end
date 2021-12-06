@@ -10,7 +10,7 @@ import { EventSearcherService } from '../../services/event-searcher.service';
 })
 export class EventResultsComponent implements OnInit {
 
-  searchModel: EventSearcherModel;
+  searchModel: EventSearcherModel | undefined;
   events: Event[] = [];
   actualPage: number = 1;
 
