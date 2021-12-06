@@ -8,11 +8,11 @@
         </div>
         <div class="col-sm-4 px-sm-2 px-5">
           <label for="selectLabel" class="mb-2 mt-2 mt-sm-0">Etiqueta</label>
-          <select id="selectLabel" class="form-control" formControlName="labelId">
-            <option value="-">Selecciona etiqueta</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <select id="selectLabel" class="form-control" formControlName="label">
+            <option [ngValue]="" disabled selected>Selecciona etiqueta</option>
+            <option *ngFor="let label of labels" [ngValue]="label">
+              {{ label.name }}
+            </option>
           </select>
         </div>
         <div class="col-sm-3 mt-sm-0 mt-5 d-flex align-items-end justify-content-center">
