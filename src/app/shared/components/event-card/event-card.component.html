@@ -11,8 +11,15 @@
     </p>
   </div>
   <div class="card-footer text-center">
-    <small class="text-muted">
-      Inici {{ event.initDate }} | Fi {{ event.endDate }}
-    </small>
+    <div>
+      <small class="text-muted">
+        <strong><i>Inici</i></strong> {{ event.initDate | date:'medium':'+0200' }}
+      </small>
+    </div>
+    <div>
+      <small class="text-muted">
+        <strong><i>Fi</i></strong> {{ event.endDate | date:'medium':'+0200' }}
+      </small>
+    </div>
   </div>
 </div>
