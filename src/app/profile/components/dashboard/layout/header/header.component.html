@@ -9,7 +9,7 @@
       <button #profileMenu class="dashboard-header-navbar-profile-menu hide">
         <ul class="dashboard-header-navbar-profile-menu-content">
           <li *ngIf="user && user.permissions.profile.modifyPersonalData" class="dashboard-header-navbar-profile-menu-content-item">
-            <a [routerLink]="['/profile/dashboard/']">Perfil</a>
+            <a [routerLink]="['/profile/dashboard/userprofile']">Perfil</a>
           </li>
           <li class="dashboard-header-navbar-profile-menu-content-item">
             <a href="#">Preferencies</a>

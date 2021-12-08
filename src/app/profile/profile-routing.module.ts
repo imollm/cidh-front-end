@@ -7,6 +7,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './profile.component';
 import { HomeComponent as DashboardHomeComponent } from './components/dashboard/components/home/home.component';
+import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
@@ -19,6 +20,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       { path: 'home', component: DashboardHomeComponent },
+      { path: 'userprofile', component: ProfileShowComponent}
     ]
   },
 ];

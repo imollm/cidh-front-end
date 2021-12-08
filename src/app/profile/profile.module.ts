@@ -12,6 +12,7 @@ import { HeaderComponent as DashboardHeaderComponent } from './components/dashbo
 import { SideMenuComponent as DashboardSideMenuComponent } from './components/dashboard/layout/side-menu/side-menu.component';
 import { HomeComponent as DashboardHomeComponent} from './components/dashboard/components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
+import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     DashboardHeaderComponent,
     DashboardSideMenuComponent,
     DashboardHomeComponent,
+    ProfileShowComponent,
   ],
   imports: [
     CommonModule,
