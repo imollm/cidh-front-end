@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Question } from '../../models/question';
+import { Question } from '../../models/question.model';
 import { ForumService } from '../../services/forum.service';
 
 @Component({

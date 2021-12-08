@@ -19,21 +19,23 @@ export class HeaderComponent implements OnInit {
   }
 
   closeMobileMenu(): void {
-    let nodeTargetToHide = 'app-home';
     this.mobileMenu.nativeElement.style.display = 'none';
     this.element.nativeElement.parentNode.childNodes.forEach( (el:HTMLElement) => {
-      if (el.localName === nodeTargetToHide){
-        el.style.display = 'block';
+      if (el.localName !== 'app-header' && el.localName !== 'router-outlet'){
+        if(el.style){
+          el.style.display = 'block'
+        }
       }
     })
   }
 
   openMobileMenu(): void {
-    let nodeTargetToShow = 'app-home';
     this.mobileMenu.nativeElement.style.display = 'block';
     this.element.nativeElement.parentNode.childNodes.forEach( (el:HTMLElement) => {
-      if (el.localName === nodeTargetToShow){
-        el.style.display = 'none';
+      if (el.localName !== 'app-header' && el.localName !== 'router-outlet'){
+        if(el.style){
+          el.style.display = 'none'
+        }
       }
     })
   }

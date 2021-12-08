@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Registration } from '../../models/registration';
+import { IRegistration } from '../../models/registration.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class SignupService {
 
   constructor(private httpClient: HttpClient) { }
 
-  send(data: Registration): Promise<any> {
+  send(data: IRegistration): Promise<any> {
     return this.httpClient.post(this.endpoint, data).toPromise();
   }
 }

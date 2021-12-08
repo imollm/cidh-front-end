@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList } from '@angular/core';
 import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { User } from 'src/app/profile/models/user';
+import { IUser } from 'src/app/profile/models/user.model';
 
 @Component({
   selector: 'app-dashboard-side-menu',
@@ -9,7 +9,7 @@ import { User } from 'src/app/profile/models/user';
 })
 export class SideMenuComponent implements OnInit {
 
-  @Input() user: User | undefined;
+  @Input() user: IUser | undefined;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;
