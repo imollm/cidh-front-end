@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CatCardComponent } from './components/categories/components/cat-card/cat-card.component';
 import { LabelsComponent } from './components/labels/labels.component';
 import { LabCardComponent } from './components/labels/components/lab-card/lab-card.component';
+import { AuthInterceptorService } from "./api/auth-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,14 @@ import { LabCardComponent } from './components/labels/components/lab-card/lab-ca
     SharedModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    // AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
