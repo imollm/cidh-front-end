@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Userprofile } from 'src/app/profile/models/userprofile';
 import * as faker from "faker";
+import { ProfileService } from '../../../../services/profile-service.service'
 
 @Component({
   selector: 'app-profile-show',
@@ -15,6 +16,7 @@ export class ProfileShowComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
+    private profileService: ProfileService
     //private signUpService: SignupService
     ) {
     this.form = this.fb.group({
@@ -29,6 +31,7 @@ export class ProfileShowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUser();
   }
 
   onSubmit(): void {
@@ -38,6 +41,12 @@ export class ProfileShowComponent implements OnInit {
       //}
       //);
     }
+  }
+
+  getUser(): void {
+    this.profileService.showUser().then( response => {
+      console.log(response)
+    })
   }
 
 
