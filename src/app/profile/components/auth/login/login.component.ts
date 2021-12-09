@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +14,13 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.form = this.fb.group({
-      email: new FormControl(''),
-      password: new FormControl('')
+      email: new FormControl('anyuseremail1@anyserver.com', Validators.required),
+      password: new FormControl('Secure8DigitUpperCaseLowerCasePasswordWithNumbers', Validators.required)
     });
   }
 
@@ -24,6 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if(this.form.valid){
+      this.authService.login(this.form.value).subscribe(res => {
+        this.router.navigate(['profile/dashboard'])
+      });
+    }
   }
 
 }
