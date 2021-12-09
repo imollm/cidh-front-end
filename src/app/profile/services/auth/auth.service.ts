@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { IRegistration } from '../../models/registration.model';
 import { IAuthService } from './auth.interface';
+import { Observable } from 'rxjs';
+import { IAuth } from 'src/app/api/auth.model';
+import { HttpClient } from '@angular/common/http';
+import {tap} from 'rxjs/operators';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +15,21 @@ export class AuthService implements IAuthService {
 
   private token: string | null | undefined;
 
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+    ) { }
 
-  login(email: string, pwd: string): void {
+  login(user: any): Observable<IAuth> {
+    return this.httpClient.post<IAuth>('http://localhost:8080/users/login',
+      user).pipe(tap(
+      (res: IAuth) => {
+        if (res) {
+          this.saveToken(res.jwt);
+          this.router.navigate(['profile/dashboard']);
+        }
+      }
+    ));
   }
 
   logout(): void {
