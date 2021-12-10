@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Userprofile } from 'src/app/profile/models/userprofile';
 import { ProfileService } from '../../../../services/profile-service.service'
 
 @Component({
@@ -11,10 +12,19 @@ export class ProfileShowComponent implements OnInit {
 
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
+  user: Userprofile = {
+    name: '',
+    surname: '',
+    fiscalId: '',
+    address: '',
+    language: '',
+    email: '',
+    password: ''
+  }
 
   constructor(
     private fb: FormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileService,
     //private signUpService: SignupService
     ) {
     this.form = this.fb.group({
@@ -43,7 +53,20 @@ export class ProfileShowComponent implements OnInit {
 
   getUser(): void {
     this.profileService.showUser().then(res => {
-      console.log(res)
+      this.user.name = res.firstName
+      this.user.surname = res.lastName
+      this.user.fiscalId = res.fiscalId
+      this.user.address = res.address
+      this.user.language = res.preferredLanguage
+      this.user.email = res.email
+      this.setValues(this.user)
+
+    })
+  }
+
+  setValues(user: Userprofile): void {
+    Object.keys(user).forEach(key => {
+      this.form.get(key).setValue(user[key])
     })
   }
 
