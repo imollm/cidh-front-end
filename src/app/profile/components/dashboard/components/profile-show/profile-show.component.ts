@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Userprofile } from 'src/app/profile/models/userprofile';
-import * as faker from "faker";
 
 @Component({
   selector: 'app-profile-show',
@@ -12,7 +10,7 @@ export class ProfileShowComponent implements OnInit {
 
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
-  
+
   constructor(
     private fb: FormBuilder,
     //private signUpService: SignupService

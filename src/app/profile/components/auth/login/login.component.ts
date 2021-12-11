@@ -15,8 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       email: new FormControl('anyuseremail1@anyserver.com', Validators.required),
@@ -28,10 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if(this.form.valid){
-      this.authService.login(this.form.value).subscribe(res => {
-        this.router.navigate(['profile/dashboard'])
-      });
+    if (this.form.valid) {
+      this.authService.login(this.form.value);
     }
   }
 

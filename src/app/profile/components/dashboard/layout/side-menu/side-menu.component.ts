@@ -9,7 +9,7 @@ import { IUser } from 'src/app/profile/models/user.model';
 })
 export class SideMenuComponent implements OnInit {
 
-  @Input() user: IUser | undefined;
+  @Input() user: IUser;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;

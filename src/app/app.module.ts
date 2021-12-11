@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { CatCardComponent } from './components/categories/components/cat-card/ca
 import { LabelsComponent } from './components/labels/labels.component';
 import { LabCardComponent } from './components/labels/components/lab-card/lab-card.component';
 import { EndPointMapper } from './helpers/endpoint-mapper.helper.service';
+import { AuthInterceptorService } from './api/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,13 @@ import { EndPointMapper } from './helpers/endpoint-mapper.helper.service';
     LabCardComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
-  providers: [EndPointMapper],
+  providers: [EndPointMapper, AuthInterceptorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IPermissions } from '../../models/permissions.model';
 import { IUser } from '../../models/user.model';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,52 +10,17 @@ import { IUser } from '../../models/user.model';
 })
 export class DashboardComponent implements OnInit {
 
-  user: IUser = {
-    name: "",
-    surname: "",
-    fiscalId: "",
-    address: "",
-    language: "",
-    email: "",
-    password: "",
-    role: "admin",
-    permissions: {
-      administration: {
-        manageCategories: true,
-        manageEventOrganizers: true,
-        manageAdministrators: true,
-        associateAdminToEventOrganizer: true,
-        manageLabels: true
-      },
-      profile: {
-        manageEvents: false,
-        modifyPersonalData: true
-      },
-      event: {
-        getEventSubscription: false,
-        listEventsByCategory: false,
-        searchEventByLabel: false,
-        searchEventByName: false,
-        consultEventData: false,
-        subscriptionsHistory: false,
-        accessToEvent: false
-      },
-      media: {
-        sendACommentAboutEvent: false,
-        makeRatingAboutEvent: false,
-        recommendEventToAFriend: false,
-        addEventToHisFavourites: false,
-        consultHisFavouritesEvents: false,
-        answerForumQuestion: true,
-        viewForumQuestions: true,
-        makeForumQuestion: false
-      }
-    }
-  };
+  user: IUser;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.authService.getUser().then(user => {
+      this.user = user;
+    }).then(() => {
+      console.log(this.user);
+    });
   }
-
 }
