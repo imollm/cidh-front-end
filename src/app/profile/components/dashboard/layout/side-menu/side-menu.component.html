@@ -40,6 +40,31 @@
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faQuestion"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Preguntes</span>
       </li>
+      <li
+        *ngIf="permissions && permissions.event && permissions.event.getEventSubscription"
+        class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faNewSubscription"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Subscriu-te</span>
+      </li>
+      <li
+        *ngIf="permissions && permissions.event && permissions.event.subscriptionsHistory"
+        class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventHistory"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Historic subs.</span>
+      </li>
+      <li
+        *ngIf="permissions && permissions.event && permissions.event.accessToEvent"
+        class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAccessToEvent"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Accedir</span>
+      </li>
+      <li
+        *ngIf="permissions && permissions.event && permissions.event.listEventsByCategory && permissions.event.searchEventByLabel && permissions.event.searchEventByName"
+        class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventSearcher"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Cercador</span>
+      </li>
+      <!-- OPEN & CLOSE BUTTONS -->
       <li class="sidebar-menu-content-items-item">
         <div #closeSideMenuButton>
           <fa-icon [icon]="faArrowClose" (click)="closeSideMenu()"></fa-icon>
