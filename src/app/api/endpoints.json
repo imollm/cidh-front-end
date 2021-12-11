@@ -21,30 +21,30 @@
       }
     },
     "user": {
-        "create": {
-          "uri": "/users",
-          "method": "POST"
-        },
-        "getAll": {
-          "uri": "/users",
-          "method": "GET"
-        },
-        "me": {
-          "uri": "/users/me",
-          "method": "GET"
-        },
-        "getById": {
-          "uri": "/users/%s",
-          "method": "GET"
-        },
-        "updateMe": {
-          "uri": "/users/me",
-          "method": "POST"
-        },
-        "updateById": {
-          "uri": "/users/%s",
-          "method": "POST"
-        }
+      "create": {
+        "uri": "/users",
+        "method": "POST"
+      },
+      "getAll": {
+        "uri": "/users",
+        "method": "GET"
+      },
+      "me": {
+        "uri": "/users/me",
+        "method": "GET"
+      },
+      "getById": {
+        "uri": "/users/%s",
+        "method": "GET"
+      },
+      "updateMe": {
+        "uri": "/users/me",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/users/%s",
+        "method": "POST"
+      }
     },
     "category": {
       "create": {
