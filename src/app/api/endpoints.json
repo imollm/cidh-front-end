@@ -1,21 +1,66 @@
 {
-  "baseUrl": "http://localhost:8080/",
-  "headers": {
-    "authorization": "Bearer %s",
-    "accept": "application/json"
-  },
   "endpoints": {
+    "test": {
+      "ping": {
+        "uri": "/ping",
+        "method": "GET"
+      }
+    },
     "auth": {
-      "register": {
-        "uri": "/auth/register",
-        "method": "POST"
-      },
       "login": {
-        "uri": "/auth/login",
+        "uri": "/users/login",
         "method": "POST"
       },
-      "logout": {
-        "uri": "/auth/logout",
+      "invalidateToken": {
+        "uri": "/users/invalidate-token",
+        "method": "POST"
+      },
+      "refreshToken": {
+        "uri": "/users/refresh-token",
+        "method": "POST"
+      }
+    },
+    "user": {
+        "create": {
+          "uri": "/users",
+          "method": "POST"
+        },
+        "getAll": {
+          "uri": "/users",
+          "method": "GET"
+        },
+        "me": {
+          "uri": "/users/me",
+          "method": "GET"
+        },
+        "getById": {
+          "uri": "/users/%s",
+          "method": "GET"
+        },
+        "updateMe": {
+          "uri": "/users/me",
+          "method": "POST"
+        },
+        "updateById": {
+          "uri": "/users/%s",
+          "method": "POST"
+        }
+    },
+    "category": {
+      "create": {
+        "uri": "/categories",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/categories/%s",
+        "method": "PUT"
+      },
+      "getById": {
+        "uri": "/categories/%s",
+        "method": "GET"
+      },
+      "getAll": {
+        "uri": "/categories",
         "method": "GET"
       }
     }
