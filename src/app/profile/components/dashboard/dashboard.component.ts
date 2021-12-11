@@ -17,5 +17,13 @@ export class DashboardComponent implements OnInit {
     this.authService.currentMessage.subscribe(data => {
       this.permissions = data.permissions;
     });
+    this.blockBackWebBrowserButton();
+  }
+
+  blockBackWebBrowserButton(): void {
+    window.navigator.userAgent.toLocaleLowerCase().indexOf('chrome') > -1 ?
+      window.location.hash="Again-No-back-button" :
+      window.location.hash="no-back-button";
+    window.onhashchange=function(){window.location.hash="no-back-button";}
   }
 }
