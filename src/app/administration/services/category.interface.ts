@@ -1,8 +1,8 @@
 import { Category } from "../models/category.model";
 
 export interface ICategoryService {
-  addCategory(name: string, description: string): void;
-  updateCategory(name: string, description: string): void;
-  showCategory(name: string): void;
-  listAllCategories(): Category[];
+  addCategory(category: Category): Promise<Category>;
+  updateCategory(category: Category): Promise<Category>;
+  showCategory(category: Category): Promise<Category>;
+  listAllCategories(): Promise<Category[]>;
 }
