@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { IRegistration } from 'src/app/profile/models/registration.model';
-import { SignupService } from 'src/app/profile/services/auth/signup.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,14 +17,16 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private signUpService: SignupService
+    private authService: AuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
     ) {
     this.form = this.fb.group({
-      name: new FormControl('', Validators.required),
-      surname: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
       fiscalId: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
-      language: new FormControl('', Validators.required),
+      preferredLanguage: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
@@ -33,11 +37,16 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      let data: IRegistration = this.form.value;
-      this.signUpService.send(data).then(res => {
-
+      let user: IRegistration = this.form.value;
+      console.log(user);
+      this.authService.registerUser(user).then(res => {
+        this.spinner.show();
+        if (res) {
+          this.router.navigate(['/profile/login']);
+        }
+      }).then(() => {
+        this.spinner.hide();
       });
     }
   }
-
 }

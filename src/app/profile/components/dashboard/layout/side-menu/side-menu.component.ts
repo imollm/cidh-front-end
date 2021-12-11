@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
 import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { IUser } from 'src/app/profile/models/user.model';
+import { IPermissions } from 'src/app/profile/models/permissions.model';
 
 @Component({
   selector: 'app-dashboard-side-menu',
@@ -9,7 +9,7 @@ import { IUser } from 'src/app/profile/models/user.model';
 })
 export class SideMenuComponent implements OnInit {
 
-  @Input() user: IUser | undefined;
+  @Input() permissions: IPermissions = {} as IPermissions;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;
@@ -29,7 +29,9 @@ export class SideMenuComponent implements OnInit {
   @ViewChild('openSideMenuButton') openSideMenuButton: ElementRef;
   @ViewChildren('sideMenuItemTitle') sideMenuItemsTitle!: QueryList<ElementRef>;
 
-  constructor(private er: ElementRef) {
+  constructor(
+    private er: ElementRef,
+  ) {
     this.sideMenu = this.er;
     this.sideMenuTitle = this.er;
     this.closeSideMenuButton = this.er;
@@ -37,6 +39,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = JSON.parse(String(this.permissions));
   }
 
   ngAfterViewInit(): void {

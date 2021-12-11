@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { AuthService } from '../profile/services/auth/auth.service';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let request: HttpRequest<any> = req;
-    const token: string = this.authService.getToken();
+    const token: string = this.authService.getAccessToken();
 
     if (token) {
       request = req.clone({

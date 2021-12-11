@@ -1,13 +1,11 @@
-import { IPermissions } from "./permissions.model";
-
 export interface IUser {
-    name: string;
-    surname: string;
+    id?: string;
+    firstName: string;
+    lastName: string;
     fiscalId: string;
     address: string;
-    language: string;
+    preferredLanguage: string;
     email: string;
     password: string;
     role: string;
-    permissions: IPermissions;
 }

@@ -4,11 +4,11 @@
       <h1 class="h4">Dasz Events Panel</h1>
     </div>
     <div class="dashboard-header-navbar-profile">
-      <span>Hola, Ivan!</span>
+      <span *ngIf="user">Hola, {{ user.firstName + ' ' + user.lastName }}!</span>
       <fa-icon [icon]="faUserCircle" (click)="toggleProfileMenu()"></fa-icon>
       <button #profileMenu class="dashboard-header-navbar-profile-menu hide">
         <ul class="dashboard-header-navbar-profile-menu-content">
-          <li *ngIf="user && user.permissions.profile.modifyPersonalData" class="dashboard-header-navbar-profile-menu-content-item">
+          <li *ngIf="permissions && permissions.profile && permissions.profile.modifyPersonalData === true" class="dashboard-header-navbar-profile-menu-content-item">
             <a [routerLink]="['/profile/dashboard/userprofile']">Perfil</a>
           </li>
           <li class="dashboard-header-navbar-profile-menu-content-item">

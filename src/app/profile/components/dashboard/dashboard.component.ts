@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../models/user.model';
+import { IPermissions } from '../../models/permissions.model';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,52 +9,21 @@ import { IUser } from '../../models/user.model';
 })
 export class DashboardComponent implements OnInit {
 
-  user: IUser = {
-    name: "",
-    surname: "",
-    fiscalId: "",
-    address: "",
-    language: "",
-    email: "",
-    password: "",
-    role: "admin",
-    permissions: {
-      administration: {
-        manageCategories: true,
-        manageEventOrganizers: true,
-        manageAdministrators: true,
-        associateAdminToEventOrganizer: true,
-        manageLabels: true
-      },
-      profile: {
-        manageEvents: false,
-        modifyPersonalData: true
-      },
-      event: {
-        getEventSubscription: false,
-        listEventsByCategory: false,
-        searchEventByLabel: false,
-        searchEventByName: false,
-        consultEventData: false,
-        subscriptionsHistory: false,
-        accessToEvent: false
-      },
-      media: {
-        sendACommentAboutEvent: false,
-        makeRatingAboutEvent: false,
-        recommendEventToAFriend: false,
-        addEventToHisFavourites: false,
-        consultHisFavouritesEvents: false,
-        answerForumQuestion: true,
-        viewForumQuestions: true,
-        makeForumQuestion: false
-      }
-    }
-  };
+  permissions: IPermissions;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.currentMessage.subscribe(data => {
+      this.permissions = data.permissions;
+    });
+    this.blockBackWebBrowserButton();
   }
 
+  blockBackWebBrowserButton(): void {
+    window.navigator.userAgent.toLocaleLowerCase().indexOf('chrome') > -1 ?
+      window.location.hash="Again-No-back-button" :
+      window.location.hash="no-back-button";
+    window.onhashchange=function(){window.location.hash="no-back-button";}
+  }
 }

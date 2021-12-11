@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { IRegistration } from '../../models/registration.model';
 import { IAuthService } from './auth.interface';
-import { Observable } from 'rxjs';
-import { IAuth } from 'src/app/api/auth.model';
 import { HttpClient } from '@angular/common/http';
-import {tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
+import { ILogin } from '../../models/login.model';
+import { IUser } from '../../models/user.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,53 +14,79 @@ import { Router } from '@angular/router';
 export class AuthService implements IAuthService {
 
   private token: string | null | undefined;
+  private refreshToken: string | null | undefined;
+
+  private message: ILogin = {} as ILogin;
+  private messageSource = new BehaviorSubject<ILogin>(this.message);
+  currentMessage = this.messageSource.asObservable();
 
   constructor(
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private endpointMapper: EndPointMapper,
     ) { }
 
-  login(user: any): Observable<IAuth> {
-    return this.httpClient.post<IAuth>('http://localhost:8080/users/login',
-      user).pipe(tap(
-      (res: IAuth) => {
-        if (res) {
-          this.saveToken(res.jwt);
-          this.router.navigate(['profile/dashboard']);
-        }
-      }
-    ));
+  login(user: any): Promise<ILogin> {
+    const endpoint = this.endpointMapper.getEndPointUrl('auth', 'login');
+    return this.httpClient.post<ILogin>(endpoint, user).toPromise();
   }
 
-  logout(): void {
+  logout(): Promise<void> {
+    const endpoint = this.endpointMapper.getEndPointUrl('auth', 'invalidateToken');
+    return this.httpClient.post(endpoint, this.getRefreshToken()).toPromise().then(() => {
+      this.removeToken().then(() => {
+        this.router.navigate(['/']);
+      });
+    });
   }
 
-  registerUser(user: IRegistration): void {
+  registerUser(user: IRegistration): Promise<IRegistration> {
+    const endpoint = this.endpointMapper.getEndPointUrl('user', 'create');
+    return this.httpClient.post<IRegistration>(endpoint, user).toPromise();
   }
 
-  private removeToken(): Promise<boolean> {
+  getUser(): Promise<IUser> {
+    const endpoint = this.endpointMapper.getEndPointUrl('user', 'me');
+  return this.httpClient.get<IUser>(endpoint).toPromise();
+  }
+
+  removeToken(): Promise<boolean> {
     return new Promise<boolean>(resolve => {
       this.token = '';
       localStorage.removeItem('ACCESS_TOKEN');
-      localStorage.removeItem('EXPIRES_IN');
+      localStorage.removeItem('REFRESH_TOKEN');
       resolve(true);
     });
   }
 
-  private saveToken(token: string): void {
+  saveAccessToken(token: string): void {
     localStorage.setItem('ACCESS_TOKEN', token);
-    // localStorage.setItem('EXPIRES_IN', expiresIn);
     this.token = token;
   }
 
-  getToken(): string {
-    if (!this.token) {
-      this.token = localStorage.getItem('ACCESS_TOKEN');
-    }
-    return this.token as string;
+  getAccessToken(): string {
+    return this.token = localStorage.getItem('ACCESS_TOKEN');
   }
 
   isLogged(): boolean {
-    return this.getToken() !== null;
+    return this.getAccessToken() !== null;
+  }
+
+  saveRefreshToken(refreshToken: string): void {
+    localStorage.setItem('REFRESH_TOKEN', refreshToken);
+    this.refreshToken = refreshToken;
+  }
+
+  getRefreshToken(): string {
+    return this.refreshToken = localStorage.getItem('REFRESH_TOKEN');
+  }
+
+  /**
+   * Method to send ILogin to subscribers
+   * (Subscriber) DashboardComponent
+   *
+  */
+  changeMessage(message: ILogin) {
+    this.messageSource.next(message);
   }
 }
