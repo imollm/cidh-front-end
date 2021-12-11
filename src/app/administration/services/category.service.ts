@@ -2,34 +2,32 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Category } from '../models/category.model';
 import { ICategoryService } from './category.interface';
-import * as faker from 'faker';
+import { EndPointMapper } from '../../helpers/endpoint-mapper.helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService implements ICategoryService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private endpointMapper: EndPointMapper
+    ) { }
 
+  addCategory(category: Category): Promise<Category> {
+    const endpoint = this.endpointMapper.getEndPointUrl('category', 'create');
+    return this.httpClient.post<Category>(endpoint, category).toPromise();
   }
-  addCategory(name: string, description: string): void {
-    throw new Error('Method not implemented.');
+  updateCategory(category: Category): Promise<Category> {
+    const endpoint = this.endpointMapper.getEndPointUrl('category', 'updateById', category.id);
+    return this.httpClient.put<Category>(endpoint, category).toPromise();
   }
-  updateCategory(name: string, description: string): void {
-    throw new Error('Method not implemented.');
+  showCategory(category: Category): Promise<Category> {
+    const endpoint = this.endpointMapper.getEndPointUrl('category', 'getById', category.id);
+    return this.httpClient.get<Category>(endpoint).toPromise();
   }
-  showCategory(name: string): void {
-    throw new Error('Method not implemented.');
-  }
-  listAllCategories(): Category[] {
-    let categories: Category[] = [];
-    for (let i = 0; i < 10; i++) {
-      categories.push({
-        id: faker.datatype.uuid(),
-        name: faker.commerce.productName(),
-        description: faker.commerce.productAdjective()
-      });
-    }
-    return categories;
+  listAllCategories(): Promise<Category[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('category', 'getAll');
+    return this.httpClient.get<Category[]>(endpoint).toPromise();
   }
 }
