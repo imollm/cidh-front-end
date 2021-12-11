@@ -6,8 +6,7 @@ import { Router } from '@angular/router';
 import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 import { ILogin } from '../../models/login.model';
 import { IUser } from '../../models/user.model';
-import { NgxSpinnerService } from 'ngx-spinner';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +16,19 @@ export class AuthService implements IAuthService {
   private token: string | null | undefined;
   private refreshToken: string | null | undefined;
 
+  private message: ILogin = {} as ILogin;
+  private messageSource = new BehaviorSubject<ILogin>(this.message);
+  currentMessage = this.messageSource.asObservable();
+
   constructor(
     private httpClient: HttpClient,
     private router: Router,
     private endpointMapper: EndPointMapper,
-    private spinner: NgxSpinnerService
     ) { }
 
-  login(user: any): void {
-    this.spinner.show();
+  login(user: any): Promise<ILogin> {
     const endpoint = this.endpointMapper.getEndPointUrl('auth', 'login');
-    this.httpClient.post<ILogin>(endpoint, user).toPromise().then(res => {
-      if (res && res.jwt) {
-        this.router.navigate(['/profile/dashboard']).then(() => {
-          this.saveAccessToken(res.jwt);
-          this.saveRefreshToken(res.refreshToken);
-          this.spinner.hide();
-        });
-      }
-    });;
+    return this.httpClient.post<ILogin>(endpoint, user).toPromise();
   }
 
   logout(): Promise<void> {
@@ -57,7 +50,7 @@ export class AuthService implements IAuthService {
   return this.httpClient.get<IUser>(endpoint).toPromise();
   }
 
-  private removeToken(): Promise<boolean> {
+  removeToken(): Promise<boolean> {
     return new Promise<boolean>(resolve => {
       this.token = '';
       localStorage.removeItem('ACCESS_TOKEN');
@@ -66,7 +59,7 @@ export class AuthService implements IAuthService {
     });
   }
 
-  private saveAccessToken(token: string): void {
+  saveAccessToken(token: string): void {
     localStorage.setItem('ACCESS_TOKEN', token);
     this.token = token;
   }
@@ -86,5 +79,14 @@ export class AuthService implements IAuthService {
 
   getRefreshToken(): string {
     return this.refreshToken = localStorage.getItem('REFRESH_TOKEN');
+  }
+
+  /**
+   * Method to send ILogin to subscribers
+   * (Subscriber) DashboardComponent
+   *
+  */
+  changeMessage(message: ILogin) {
+    this.messageSource.next(message);
   }
 }

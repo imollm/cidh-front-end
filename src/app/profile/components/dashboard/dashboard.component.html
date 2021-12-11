@@ -1,10 +1,10 @@
 <app-dashboard-header
-  [user]="user"
+  [permissions]="permissions"
 ></app-dashboard-header>
 
 <div class="dashboard-container">
   <app-dashboard-side-menu
-    [user]="user"
+    [permissions]="permissions"
   ></app-dashboard-side-menu>
   <div class="dashboard-container-router-outlet">
     <router-outlet></router-outlet>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IPermissions } from '../../models/permissions.model';
-import { IUser } from '../../models/user.model';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -10,17 +9,13 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  user: IUser;
+  permissions: IPermissions;
 
-  constructor(
-    private authService: AuthService
-  ) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.getUser().then(user => {
-      this.user = user;
-    }).then(() => {
-      console.log(this.user);
+    this.authService.currentMessage.subscribe(data => {
+      this.permissions = data.permissions;
     });
   }
 }

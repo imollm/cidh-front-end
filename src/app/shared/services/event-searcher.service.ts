@@ -8,8 +8,8 @@ import { EventSearcher as EventSearcherModel} from '../models/event-searcher.mod
 
 /**
  * Service to communicate between
- * (Parent) EventSearcherComponent
- * (Sibling) EventResultsComponent
+ * (Origin) EventSearcherComponent
+ * (Destination) EventResultsComponent
  *
  * @class EventSearcherService
 */
