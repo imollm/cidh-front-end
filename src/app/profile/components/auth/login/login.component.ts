@@ -34,12 +34,11 @@ export class LoginComponent implements OnInit {
       this.spinner.show();
       this.authService.login(this.form.value).then(res => {
         if (res && res.jwt) {
-          this.router.navigate(['/profile/dashboard']).then(() => {
-            this.authService.saveAccessToken(res.jwt);
-            this.authService.saveRefreshToken(res.refreshToken);
-            this.authService.changeMessage(res);
-            this.spinner.hide();
-          });
+          this.authService.saveAccessToken(res.jwt);
+          this.authService.saveRefreshToken(res.refreshToken);
+          this.authService.changeMessage(res);
+          this.spinner.hide();
+          this.router.navigate(['/profile/dashboard']);
         }
       });
     }

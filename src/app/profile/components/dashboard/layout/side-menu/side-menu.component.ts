@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { IPermissions } from 'src/app/profile/models/permissions.model';
 
 @Component({
@@ -21,6 +21,10 @@ export class SideMenuComponent implements OnInit {
   faLabels = faTags;
   faQuestion = faQuestion;
   faEvents = faCalendarDay;
+  faNewSubscription = faHandPointUp;
+  faEventHistory = faHistory;
+  faAccessToEvent = faVrCardboard;
+  faEventSearcher = faSearch;
 
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
