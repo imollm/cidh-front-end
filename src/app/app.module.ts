@@ -14,6 +14,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CatCardComponent } from './components/categories/components/cat-card/cat-card.component';
 import { LabelsComponent } from './components/labels/labels.component';
 import { LabCardComponent } from './components/labels/components/lab-card/lab-card.component';
+import { EndPointMapper } from './helpers/endpoint-mapper.helper.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { LabCardComponent } from './components/labels/components/lab-card/lab-ca
     SharedModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [EndPointMapper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

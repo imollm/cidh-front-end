@@ -1,24 +1,18 @@
-import {isNil} from 'ramda';
-import * as apiConfig from '../api/endpoints.json';
-import {sprintf} from 'sprintf-js';
-import {HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { isNil } from 'ramda';
+import ApiEndpoints from '../api/endpoints.json';
+import { sprintf } from 'sprintf-js';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class EndPointMapper {
 
-  private baseUrl: string;
-  private baseHeaders: {
-    accept: string;
-    authorization: string;
-  };
+  private readonly baseUrl: string;
   private readonly endpoints: {};
 
   constructor() {
-    this.baseUrl = apiConfig.baseUrl;
-    this.baseHeaders = apiConfig.headers;
-    this.endpoints = apiConfig.endpoints;
-
+    this.baseUrl = environment.apiUrl;
+    this.endpoints = ApiEndpoints.endpoints;
   }
 
   getEndPointUrl(resource: string = '', action: string = '', id: string = ''): string {
@@ -34,20 +28,5 @@ export class EndPointMapper {
     } else {
       throw new Error(sprintf('Endpoint have no resource or resource have no action, [%s - %s]', resource, action));
     }
-  }
-
-  getBaseHeaders(): HttpHeaders {
-    const headers = new HttpHeaders();
-
-    headers.set('Accept', this.baseHeaders.accept);
-
-    return headers;
-  }
-
-  getIsAuthEndPoint(resource: string, action: string): boolean {
-    if (this.endpoints.hasOwnProperty(resource) && this.endpoints[resource].hasOwnProperty(action)) {
-      return this.endpoints[resource][action].auth;
-    }
-    return false;
   }
 }
