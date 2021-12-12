@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Event } from '../../event/models/event.model';
 import * as faker from 'faker';
 
@@ -7,15 +7,12 @@ import * as faker from 'faker';
   templateUrl: './upcoming.component.html',
   styleUrls: ['./upcoming.component.sass']
 })
-export class UpcomingComponent implements OnInit {
+export class UpcomingComponent {
 
   upcomingEvents: Event[] = [];
 
   constructor() {
     this.initEvents();
-  }
-
-  ngOnInit(): void {
   }
 
   private initEvents(): void {

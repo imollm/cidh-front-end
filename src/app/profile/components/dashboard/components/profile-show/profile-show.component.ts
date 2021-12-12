@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './profile-show.component.html',
   styleUrls: ['./profile-show.component.sass']
 })
-export class ProfileShowComponent implements OnInit {
+export class ProfileShowComponent {
 
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
@@ -24,9 +24,6 @@ export class ProfileShowComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit(): void {

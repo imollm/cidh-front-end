@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { IPermissions } from 'src/app/profile/models/permissions.model';
 
@@ -7,7 +7,7 @@ import { IPermissions } from 'src/app/profile/models/permissions.model';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.sass']
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit, AfterViewInit {
 
   @Input() permissions: IPermissions = {} as IPermissions;
 
