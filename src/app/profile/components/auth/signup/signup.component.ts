@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.sass']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   formTitle = 'Registre nou usuari';
   form: FormGroup;
@@ -30,9 +30,6 @@ export class SignupComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit(): void {

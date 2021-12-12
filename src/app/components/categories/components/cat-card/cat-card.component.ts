@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/administration/models/category.model';
 import { EventService } from 'src/app/event/services/event.service';
@@ -10,7 +10,7 @@ import { EventSearcherService } from 'src/app/shared/services/event-searcher.ser
   templateUrl: './cat-card.component.html',
   styleUrls: ['./cat-card.component.sass']
 })
-export class CatCardComponent implements OnInit {
+export class CatCardComponent {
 
   @Input() category: Category;
 
@@ -19,9 +19,6 @@ export class CatCardComponent implements OnInit {
     private messageService: EventSearcherService,
     private eventService: EventService
   ) { }
-
-  ngOnInit(): void {
-  }
 
   goToResultsPage(): void {
     this.router.navigate(['/results']).then(() => {

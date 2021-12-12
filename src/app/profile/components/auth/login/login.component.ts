@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/profile/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   formTitle = 'Inicia sessió';
   form: FormGroup;
@@ -24,9 +24,6 @@ export class LoginComponent implements OnInit {
       email: new FormControl('anyuseremail1@anyserver.com', Validators.required),
       password: new FormControl('Secure8DigitUpperCaseLowerCasePasswordWithNumbers', Validators.required)
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit(): void {
