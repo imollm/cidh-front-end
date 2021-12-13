@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Registration } from 'src/app/profile/models/registration';
 import { SignupService } from 'src/app/profile/services/auth/signup.service';
@@ -8,7 +8,7 @@ import { SignupService } from 'src/app/profile/services/auth/signup.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.sass']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   formTitle = 'Registre nou usuari';
   form: FormGroup;
@@ -26,9 +26,6 @@ export class SignupComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit(): void {
