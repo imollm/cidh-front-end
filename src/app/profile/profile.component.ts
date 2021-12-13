@@ -4,11 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-profile',
   templateUrl: './profile.component.html'
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
