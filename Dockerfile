@@ -1,23 +1,21 @@
-# Create image based on the official Node 14.16 image from dockerhub
-FROM node:14.15
+FROM node:14.15-alpine3.13 AS build
 
-# Create a directory where our app will be placed
-RUN mkdir -p /usr/src/app
-
-# Change directory so that our commands run inside this new directory
 WORKDIR /usr/src/app
 
-# Copy dependency definitions
-COPY package.json /usr/src/app
+COPY package.json ./
 
-# Install dependecies
 RUN npm install
 
-# Get all the code needed to run the app
-COPY . /usr/src/app
+COPY . .
 
-# Expose the port the app runs in
-EXPOSE 4200
+RUN npm run build
 
-# Serve the app
-CMD ["npm", "start"]
+
+FROM nginx:latest AS ngi
+# Copying compiled code and nginx config to different folder
+# NOTE: This path may change according to your project's output folder 
+COPY --from=build /usr/src/app/dist/cidh-front-end /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+# Exposing a port, here it means that inside the container 
+# the app will be using Port 80 while running
+EXPOSE 80
