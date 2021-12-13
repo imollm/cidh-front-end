@@ -1,7 +1,6 @@
 stages:
   - install
   - lint
-  - build
   - deploy
 
 install:
@@ -12,7 +11,7 @@ install:
     - npm install
   cache:
     paths:
-      - node_modules/
+      - node_modules
   only:
     refs:
       - main
@@ -21,66 +20,33 @@ install:
 
 lint:
   stage: lint
-  image: node:14.15-alpine3.14
+  image: node:14.15-alpine3.13
   script:
+    - echo "Lint project"
     - npm run lint
+  cache:
+    paths:
+      - node_modules
   only:
     refs:
       - main
       - develop
       - merge_request
 
-before_script:
-  - |
-    # docker variables for name and tag of new image
-    export DOCKER_TAG="${CI_COMMIT_SHA:0:8}"
-    export DOCKER_REPO="$CI_REGISTRY_IMAGE"
-    export DOCKER_IMAGE="${DOCKER_REPO}:${DOCKER_TAG}"
-    export DOCKER_CACHE_IMAGE="${DOCKER_REPO}:${CI_COMMIT_REF_NAME}"
-
-# Build of docker image and push it to project Container registry
-build:
-  # Lightweight image with support of running docker in docker
-  image: docker:stable
-  services:
-    - docker:dind
-  stage: build
-  when: manual
-  script:
-    # Login to Container registry
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    # Load existing images for build optimisation
-    - docker pull "$DOCKER_CACHE_IMAGE" || docker pull "${DOCKER_REPO}:main" || true # allow failure
-    - docker pull "$DOCKER_IMAGE" || true # allow failure
-    # Build our docker image
-    - docker build --pull --cache-from "$DOCKER_IMAGE" --cache-from "$DOCKER_CACHE_IMAGE" --cache-from "${DOCKER_REPO}:main" -t "$DOCKER_IMAGE" .
-    # Save built image to Container registry under branch name tag and commit hash tag
-    - docker push "$DOCKER_IMAGE"
-    - docker tag "$DOCKER_IMAGE" "$DOCKER_CACHE_IMAGE"
-    - docker push "$DOCKER_CACHE_IMAGE"
-  only:
-    refs:
-      - main
-
 deploy:
-  # Lightweight image with ssh
   image: kroniak/ssh-client
   stage: deploy
-  when: manual
+  environment:
+    name: production
+    url: https://culture.indahou.se
   script:
-    # Set right chmod on SSH key file
-    - chmod 400 $MASTER_SSH_KEY
-    # Login to Gitlab Container registry
-    - ssh -o StrictHostKeyChecking=no -i $MASTER_SSH_KEY "${MASTER_SSH_USER}@${MASTER_HOST}" "docker login -u ${CI_DEPLOY_USER} -p ${CI_DEPLOY_PASSWORD} ${CI_REGISTRY}"
-    # Remove old containers and images if exists
-    - ssh -o StrictHostKeyChecking=no -i $MASTER_SSH_KEY "${MASTER_SSH_USER}@${MASTER_HOST}" "docker rm -f ${CI_PROJECT_NAME} || true"
-    - ssh -o StrictHostKeyChecking=no -i $MASTER_SSH_KEY "${MASTER_SSH_USER}@${MASTER_HOST}" "docker rmi \$(docker images -q ${DOCKER_REPO}) || true"
-    # Download and run new image
-    - ssh -o StrictHostKeyChecking=no -i $MASTER_SSH_KEY "${MASTER_SSH_USER}@${MASTER_HOST}"
-      docker run
-      --name=$CI_PROJECT_NAME
-      --restart=always
-      --network="host"
-      -d $DOCKER_IMAGE
+    - echo "Start deploy"
+    - apk add --no-cache rsync openssh
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - rsync -avzr -e "ssh" --progress / $MASTER_HOST:/var/www/html
   only:
     - main
