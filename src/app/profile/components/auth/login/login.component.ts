@@ -35,7 +35,7 @@ export class LoginComponent {
           this.authService.saveRefreshToken(res.refreshToken);
           this.authService.changeMessage(res);
           this.spinner.hide();
-          this.router.navigate(['/profile/dashboard']);
+          this.router.navigate(['/profile/dashboard/home']);
         }
       });
     }

@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EventSearcherComponent } from './components/event-searcher/event-searcher.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { TableComponent } from './components/table/table.component';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -20,6 +21,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     EventCardComponent,
     BannerComponent,
     EventResultsComponent,
+    TableComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FontAwesomeModule,
     SweetAlert2Module,
     NgxPaginationModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TableComponent
   ]
 })
 export class SharedModule { }

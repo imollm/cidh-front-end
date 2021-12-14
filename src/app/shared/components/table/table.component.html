@@ -1,0 +1,107 @@
+<div class="card shadow my-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary" *ngIf="dataTable">
+      {{ dataTable.title }}
+    </h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table *ngIf="dataTable" class="table table-bordered" id="dataTable">
+        <thead>
+          <tr *ngIf="!dataTable.inverse">
+            <th *ngFor="let colName of dataTable.colsName" class="text-center">
+              {{ colName.text }}
+            </th>
+            <th *ngIf="actionButtons.active">
+              Accions
+            </th>
+          </tr>
+        </thead>
+        <div *ngIf="dataTable.inverse; then inverse else normal" class="text-center"></div>
+        <ng-template #normal>
+          <tfoot>
+            <tr>
+              <th *ngFor="let colName of dataTable.colsName" class="text-center">
+                {{ colName.text | titlecase }}
+              </th>
+              <th *ngIf="actionButtons.active" class="text-center">
+                Accions
+              </th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr *ngFor="let element of dataTable.data">
+              <td *ngFor="let row of dataTable.colsName">
+                <div [ngSwitch]="row.colName">
+                  <div *ngSwitchCase="'reference'" class="text-center">
+                    {{ element[row.colName] }}
+                  </div>
+                  <div *ngSwitchCase="'price'" class="text-center">
+                    {{ formatPrice(element[row.colName]) }}
+                  </div>
+                  <div *ngSwitchCase="'built_meters'"
+                    innerHTML="<div class='text-center'>{{formatMeters(element[row.colName])}}</div>"></div>
+                  <div *ngSwitchCase="'created_at'" class="text-center">
+                    {{ formatDate(element[row.colName]) }}
+                  </div>
+                  <div *ngSwitchCase="'plot_meters'"
+                    innerHTML="<div class='text-center'>{{formatMeters(element[row.colName])}}</div>"></div>
+                  <div *ngSwitchCase="'sold'" class="text-center">
+                    {{ element[row.colName] === 1 ? 'Si' : 'No' }}
+                  </div>
+                  <div *ngSwitchCase="'start'" class="text-center">
+                    {{formatDate(element[row.colName])}}
+                  </div>
+                  <div *ngSwitchCase="'end'" class="text-center">
+                    <div *ngIf="element[row.colName]==='-'; then withOutDate else withDate" class="text-center"></div>
+                    <ng-template #withOutDate>-</ng-template>
+                    <ng-template #withDate>{{formatDate(element[row.colName])}}</ng-template>
+                  </div>
+                  <div *ngSwitchCase="'date'" class="text-center">
+                    {{formatDate(element[row.colName])}}
+                  </div>
+                  <div *ngSwitchDefault class="text-center">
+                    <div *ngIf="_isNumber(element[row.colName]); then isNumber else isString"></div>
+                    <ng-template #isString>
+                      {{element[row.colName] | titlecase}}
+                    </ng-template>
+                    <ng-template #isNumber>
+                      {{element[row.colName]}}
+                    </ng-template>
+                  </div>
+                </div>
+              </td>
+              <td *ngIf="actionButtons && actionButtons.active">
+                <div class="d-flex flex-row justify-content-around">
+                  <div *ngIf="actionButtons.actions.view">
+                    <a [routerLink]="['/dashboard/'+actionButtons.resource+'/details', element.id]">
+                      <fa-icon [icon]="faView" class="icon-view"></fa-icon>
+                    </a>
+                  </div>
+                  <div *ngIf="actionButtons.actions.edit">
+                    <a [routerLink]="['/dashboard/'+actionButtons.resource+'/edit', element.id]">
+                      <fa-icon [icon]="faEdit" class="icon-edit"></fa-icon>
+                    </a>
+                  </div>
+                  <div *ngIf="actionButtons.actions.delete">
+                    <a (click)="showDeleteModal('/dashboard/' + actionButtons.resource + '/delete/' + element.id)">
+                      <fa-icon [icon]="faDelete" class="icon-delete"></fa-icon>
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </ng-template>
+        <ng-template #inverse>
+          <tbody>
+            <tr *ngFor="let element of dataTable.colsName">
+              <td class="font-weight-bold">{{element.text}}</td>
+              <td>{{dataTable.data[element.colName]}}</td>
+            </tr>
+          </tbody>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+</div>
