@@ -50,23 +50,23 @@
                     {{ element[row.colName] === 1 ? 'Si' : 'No' }}
                   </div>
                   <div *ngSwitchCase="'start'" class="text-center">
-                    {{formatDate(element[row.colName])}}
+                    {{ formatDate(element[row.colName]) }}
                   </div>
                   <div *ngSwitchCase="'end'" class="text-center">
                     <div *ngIf="element[row.colName]==='-'; then withOutDate else withDate" class="text-center"></div>
                     <ng-template #withOutDate>-</ng-template>
-                    <ng-template #withDate>{{formatDate(element[row.colName])}}</ng-template>
+                    <ng-template #withDate>{{ formatDate(element[row.colName]) }}</ng-template>
                   </div>
                   <div *ngSwitchCase="'date'" class="text-center">
-                    {{formatDate(element[row.colName])}}
+                    {{ formatDate(element[row.colName]) }}
                   </div>
                   <div *ngSwitchDefault class="text-center">
                     <div *ngIf="_isNumber(element[row.colName]); then isNumber else isString"></div>
                     <ng-template #isString>
-                      {{element[row.colName] | titlecase}}
+                      {{ element[row.colName] | titlecase }}
                     </ng-template>
                     <ng-template #isNumber>
-                      {{element[row.colName]}}
+                      {{ element[row.colName] }}
                     </ng-template>
                   </div>
                 </div>
@@ -74,17 +74,19 @@
               <td *ngIf="actionButtons && actionButtons.active">
                 <div class="d-flex flex-row justify-content-around">
                   <div *ngIf="actionButtons.actions.view">
-                    <a [routerLink]="['/dashboard/'+actionButtons.resource+'/details', element.id]">
+                    TODO: Implement [routerLink]="['/url', element.id]"
+                    <a href="#">
                       <fa-icon [icon]="faView" class="icon-view"></fa-icon>
                     </a>
                   </div>
                   <div *ngIf="actionButtons.actions.edit">
-                    <a [routerLink]="['/dashboard/'+actionButtons.resource+'/edit', element.id]">
+                    TODO: Implement [routerLink]="['/url', element.id]"
+                    <a href="#">
                       <fa-icon [icon]="faEdit" class="icon-edit"></fa-icon>
                     </a>
                   </div>
                   <div *ngIf="actionButtons.actions.delete">
-                    <a (click)="showDeleteModal('/dashboard/' + actionButtons.resource + '/delete/' + element.id)">
+                    <a (click)="showDeleteModal('')">
                       <fa-icon [icon]="faDelete" class="icon-delete"></fa-icon>
                     </a>
                   </div>
@@ -96,8 +98,8 @@
         <ng-template #inverse>
           <tbody>
             <tr *ngFor="let element of dataTable.colsName">
-              <td class="font-weight-bold">{{element.text}}</td>
-              <td>{{dataTable.data[element.colName]}}</td>
+              <td class="font-weight-bold">{{ element.text }}</td>
+              <td>{{ dataTable.data[element.colName] }}</td>
             </tr>
           </tbody>
         </ng-template>

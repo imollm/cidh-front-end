@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.sass']
 })
 export class TableComponent implements OnChanges {
-d
+
   @Input() toShow: IDashboardTable = {} as IDashboardTable;
   @Input() actionButtons: IActionButtons;
   dataTable: IDashboardTable = {} as IDashboardTable;

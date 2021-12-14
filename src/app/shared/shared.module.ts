@@ -28,7 +28,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FontAwesomeModule
   ],
   exports: [
     EventSearcherComponent,
