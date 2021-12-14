@@ -7,6 +7,7 @@ import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 import { ILogin } from '../../models/login.model';
 import { IUser } from '../../models/user.model';
 import { BehaviorSubject } from 'rxjs';
+import { ILogout } from '../../components/dashboard/components/logout/logout.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +34,12 @@ export class AuthService implements IAuthService {
 
   logout(): Promise<void> {
     const endpoint = this.endpointMapper.getEndPointUrl('auth', 'invalidateToken');
-    return this.httpClient.post(endpoint, this.getRefreshToken()).toPromise().then(() => {
-      this.removeToken().then(() => {
-        this.router.navigate(['/']);
-      });
+    const payload: ILogout = {
+      refreshToken: this.getRefreshToken()
+    };
+    return this.httpClient.post<ILogout>(endpoint, payload).toPromise().then(() => {
+      this.removeTokens();
+      this.router.navigate(['/']);
     });
   }
 
@@ -50,13 +53,9 @@ export class AuthService implements IAuthService {
   return this.httpClient.get<IUser>(endpoint).toPromise();
   }
 
-  removeToken(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.token = '';
-      localStorage.removeItem('ACCESS_TOKEN');
-      localStorage.removeItem('REFRESH_TOKEN');
-      resolve(true);
-    });
+  removeTokens(): void {
+    localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('REFRESH_TOKEN');
   }
 
   saveAccessToken(token: string): void {
