@@ -1,6 +1,7 @@
 stages:
   - install
   - lint
+  - build
   - deploy
 
 install:
@@ -33,6 +34,20 @@ lint:
       - develop
       - merge_request
 
+build:
+  stage: build
+  image: node:14.15-alpine3.13
+  script:
+    - echo -e "Start building"
+    - npm run build
+    - cp docker-compose.yml dist
+  cache:
+    paths:
+      - dist
+  only:
+    refs:
+      - main
+
 deploy:
   image: kroniak/ssh-client
   stage: deploy
@@ -47,6 +62,9 @@ deploy:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - rsync -avzr -e "ssh" --progress / $MASTER_HOST:/var/www/html
+    - ssh $MASTER_HOST docker-compose -f /var/www/html/dist/docker-compose.yml down
+    - ssh rm -rf /var/www/html/
+    - scp dist $MASTER_HOST:/var/www/html
+    - ssh $MASTER_HOST docker-compose -f /var/www/html/dist/docker-compose.yml up -d
   only:
     - main
