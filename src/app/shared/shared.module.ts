@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventResultsComponent } from './components/event-results/event-results.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EventResultsComponent } from './components/event-results/event-results.
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
+    NgxSpinnerModule
   ],
   exports: [
     EventSearcherComponent,
@@ -33,6 +35,7 @@ import { EventResultsComponent } from './components/event-results/event-results.
     FontAwesomeModule,
     SweetAlert2Module,
     NgxPaginationModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }

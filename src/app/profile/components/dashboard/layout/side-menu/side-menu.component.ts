@@ -1,15 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList } from '@angular/core';
-import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { IUser } from 'src/app/profile/models/user.model';
+import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IPermissions } from 'src/app/profile/models/permissions.model';
 
 @Component({
   selector: 'app-dashboard-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.sass']
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit, AfterViewInit {
 
-  @Input() user: IUser | undefined;
+  @Input() permissions: IPermissions = {} as IPermissions;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;
@@ -21,6 +21,10 @@ export class SideMenuComponent implements OnInit {
   faLabels = faTags;
   faQuestion = faQuestion;
   faEvents = faCalendarDay;
+  faNewSubscription = faHandPointUp;
+  faEventHistory = faHistory;
+  faAccessToEvent = faVrCardboard;
+  faEventSearcher = faSearch;
 
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
@@ -29,7 +33,9 @@ export class SideMenuComponent implements OnInit {
   @ViewChild('openSideMenuButton') openSideMenuButton: ElementRef;
   @ViewChildren('sideMenuItemTitle') sideMenuItemsTitle!: QueryList<ElementRef>;
 
-  constructor(private er: ElementRef) {
+  constructor(
+    private er: ElementRef,
+  ) {
     this.sideMenu = this.er;
     this.sideMenuTitle = this.er;
     this.closeSideMenuButton = this.er;
@@ -37,6 +43,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = JSON.parse(String(this.permissions));
   }
 
   ngAfterViewInit(): void {

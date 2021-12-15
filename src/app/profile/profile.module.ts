@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 // Custom imports
 import { ProfileRoutingModule } from './profile-routing.module';
@@ -13,6 +13,7 @@ import { SideMenuComponent as DashboardSideMenuComponent } from './components/da
 import { HomeComponent as DashboardHomeComponent} from './components/dashboard/components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
+import { LogoutComponent } from './components/dashboard/components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,13 @@ import { ProfileShowComponent } from './components/dashboard/components/profile-
     DashboardSideMenuComponent,
     DashboardHomeComponent,
     ProfileShowComponent,
+    LogoutComponent,
   ],
   imports: [
-    CommonModule,
     ProfileRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    CommonModule,
   ]
 })
 export class ProfileModule { }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,16 +6,13 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   faMobileMenuIcon = faBars;
   @ViewChild('MobileMenu') mobileMenu: ElementRef;
 
   constructor(private element: ElementRef) {
     this.mobileMenu = this.element;
-  }
-
-  ngOnInit(): void {
   }
 
   closeMobileMenu(): void {

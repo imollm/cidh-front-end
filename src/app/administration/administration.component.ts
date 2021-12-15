@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-administration',
   templateUrl: './administration.component.html'
 })
-export class AdministrationComponent implements OnInit {
+export class AdministrationComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

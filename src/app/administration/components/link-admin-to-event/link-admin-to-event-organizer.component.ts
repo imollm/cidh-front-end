@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-link-admin-to-event-organizer',
   templateUrl: './link-admin-to-event-organizer.component.html',
   styleUrls: ['./link-admin-to-event-organizer.component.sass']
 })
-export class LinkAdminToEventOrganizerComponent implements OnInit {
+export class LinkAdminToEventOrganizerComponent {
 
   formTitle: string = 'Associa un admin. a una empresa';
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   changeColor(event : Event): void {
     let select = (event.target as HTMLSelectElement);

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Answer } from '../../models/answer.model';
 
@@ -7,15 +7,12 @@ import { Answer } from '../../models/answer.model';
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.sass']
 })
-export class AnswerComponent implements OnInit {
+export class AnswerComponent {
 
   @Input() answer = {} as Answer | undefined;
 
   faUser = faUser;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

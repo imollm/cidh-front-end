@@ -1,0 +1,70 @@
+stages:
+  - install
+  - lint
+  - build
+  - deploy
+
+install:
+  stage: install
+  image: node:14.15-alpine3.13
+  script:
+    - echo "Install dependencies"
+    - npm install
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - main
+      - develop
+      - merge_request
+
+lint:
+  stage: lint
+  image: node:14.15-alpine3.13
+  script:
+    - echo "Lint project"
+    - npm run lint
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - main
+      - develop
+      - merge_request
+
+build:
+  stage: build
+  image: node:14.15-alpine3.13
+  script:
+    - echo -e "Start building"
+    - npm run build
+    - cp docker-compose.yml dist
+  cache:
+    paths:
+      - dist
+  only:
+    refs:
+      - main
+
+deploy:
+  image: kroniak/ssh-client
+  stage: deploy
+  environment:
+    name: production
+    url: https://culture.indahou.se
+  script:
+    - echo "Start deploy"
+    - apk add --no-cache rsync openssh
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh $MASTER_HOST docker-compose -f /var/www/html/dist/docker-compose.yml down
+    - ssh rm -rf /var/www/html/
+    - scp dist $MASTER_HOST:/var/www/html
+    - ssh $MASTER_HOST docker-compose -f /var/www/html/dist/docker-compose.yml up -d
+  only:
+    - main
