@@ -15,4 +15,10 @@ export class ProfileService {
      const endpoint = 'http://localhost:8080/users/me'
      return this.httpClient.get(endpoint).toPromise();
    }
+
+   
+   updateUser(user: Userprofile): Promise<any> {
+    const endpoint = 'http://localhost:8080/users/me'
+    return this.httpClient.post(endpoint, user).toPromise()
+   }
 }

@@ -13,11 +13,11 @@ export class ProfileShowComponent implements OnInit {
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
   user: Userprofile = {
-    name: '',
-    surname: '',
+    firstName: '',
+    lastName: '',
     fiscalId: '',
     address: '',
-    language: '',
+    preferredLanguage: '',
     email: '',
     password: ''
   }
@@ -28,13 +28,13 @@ export class ProfileShowComponent implements OnInit {
     //private signUpService: SignupService
     ) {
     this.form = this.fb.group({
-      name: new FormControl('', Validators.required),
-      surname: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
       fiscalId: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
-      language: new FormControl('', Validators.required),
+      preferredLanguage: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', Validators.required)
+      //password: new FormControl('', )
     });
   }
 
@@ -44,6 +44,13 @@ export class ProfileShowComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
+      if(window.confirm('Estas segur de que vols cambiar les teves dades personals?')){
+        this.profileService.updateUser(this.form.value).then(res => {
+          if(!res.error){
+            window.alert('Dades modificades!')
+          }
+        })
+      }
       //let data: Registration = this.form.value;
       //this.signUpService.send(data).then(res => {
       //}
@@ -53,11 +60,11 @@ export class ProfileShowComponent implements OnInit {
 
   getUser(): void {
     this.profileService.showUser().then(res => {
-      this.user.name = res.firstName
-      this.user.surname = res.lastName
+      this.user.firstName = res.firstName
+      this.user.lastName = res.lastName
       this.user.fiscalId = res.fiscalId
       this.user.address = res.address
-      this.user.language = res.preferredLanguage
+      this.user.preferredLanguage = res.preferredLanguage
       this.user.email = res.email
       this.setValues(this.user)
 
@@ -65,7 +72,7 @@ export class ProfileShowComponent implements OnInit {
   }
 
   setValues(user: Userprofile): void {
-    Object.keys(user).forEach(key => {
+    Object.keys(this.form.value).forEach(key => {
       this.form.get(key).setValue(user[key])
     })
   }
