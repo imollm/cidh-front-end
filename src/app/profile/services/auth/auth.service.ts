@@ -50,7 +50,7 @@ export class AuthService implements IAuthService {
 
   getUser(): Promise<IUser> {
     const endpoint = this.endpointMapper.getEndPointUrl('user', 'me');
-  return this.httpClient.get<IUser>(endpoint).toPromise();
+    return this.httpClient.get<IUser>(endpoint).toPromise();
   }
 
   removeTokens(): void {

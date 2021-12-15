@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Userprofile } from '../models/userprofile'
+import { IUser } from '../models/user.model'
+import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private endPointMapper: EndPointMapper) {
    
    }
 
    showUser(): Promise<any> {
-     const endpoint = 'http://localhost:8080/users/me'
+     const endpoint = this.endPointMapper.getEndPointUrl('user', 'me')
      return this.httpClient.get(endpoint).toPromise();
    }
 
    
-   updateUser(user: Userprofile): Promise<any> {
-    const endpoint = 'http://localhost:8080/users/me'
+   updateUser(user: IUser): Promise<any> {
+    const endpoint = this.endPointMapper.getEndPointUrl('user', 'updateMe')
     return this.httpClient.post(endpoint, user).toPromise()
    }
 }
