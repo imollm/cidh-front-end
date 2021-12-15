@@ -1,10 +1,10 @@
 
 export interface Userprofile {
-    name: string;
-    surname: string;
+    firstName: string;
+    lastName: string;
     fiscalId: string;
     address: string;
-    language: string;
+    preferredLanguage: string;
     email: string;
     password: string;
 }
