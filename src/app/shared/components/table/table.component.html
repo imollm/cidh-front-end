@@ -32,60 +32,21 @@
           <tbody>
             <tr *ngFor="let element of dataTable.data">
               <td *ngFor="let row of dataTable.colsName">
-                <div [ngSwitch]="row.colName">
-                  <div *ngSwitchCase="'reference'" class="text-center">
-                    {{ element[row.colName] }}
-                  </div>
-                  <div *ngSwitchCase="'price'" class="text-center">
-                    {{ formatPrice(element[row.colName]) }}
-                  </div>
-                  <div *ngSwitchCase="'built_meters'"
-                    innerHTML="<div class='text-center'>{{formatMeters(element[row.colName])}}</div>"></div>
-                  <div *ngSwitchCase="'created_at'" class="text-center">
-                    {{ formatDate(element[row.colName]) }}
-                  </div>
-                  <div *ngSwitchCase="'plot_meters'"
-                    innerHTML="<div class='text-center'>{{formatMeters(element[row.colName])}}</div>"></div>
-                  <div *ngSwitchCase="'sold'" class="text-center">
-                    {{ element[row.colName] === 1 ? 'Si' : 'No' }}
-                  </div>
-                  <div *ngSwitchCase="'start'" class="text-center">
-                    {{ formatDate(element[row.colName]) }}
-                  </div>
-                  <div *ngSwitchCase="'end'" class="text-center">
-                    <div *ngIf="element[row.colName]==='-'; then withOutDate else withDate" class="text-center"></div>
-                    <ng-template #withOutDate>-</ng-template>
-                    <ng-template #withDate>{{ formatDate(element[row.colName]) }}</ng-template>
-                  </div>
-                  <div *ngSwitchCase="'date'" class="text-center">
-                    {{ formatDate(element[row.colName]) }}
-                  </div>
-                  <div *ngSwitchDefault class="text-center">
-                    <div *ngIf="_isNumber(element[row.colName]); then isNumber else isString"></div>
-                    <ng-template #isString>
-                      {{ element[row.colName] | titlecase }}
-                    </ng-template>
-                    <ng-template #isNumber>
-                      {{ element[row.colName] }}
-                    </ng-template>
-                  </div>
-                </div>
+                {{ element[row.colName] }}
               </td>
               <td *ngIf="actionButtons && actionButtons.active">
                 <div class="d-flex flex-row justify-content-around">
-                  <div *ngIf="actionButtons.actions.view">
-                    TODO: Implement [routerLink]="['/url', element.id]"
+                  <div *ngIf="actionButtons.actions && actionButtons.actions.view">
                     <a href="#">
                       <fa-icon [icon]="faView" class="icon-view"></fa-icon>
                     </a>
                   </div>
-                  <div *ngIf="actionButtons.actions.edit">
-                    TODO: Implement [routerLink]="['/url', element.id]"
+                  <div *ngIf="actionButtons.actions && actionButtons.actions.edit">
                     <a href="#">
                       <fa-icon [icon]="faEdit" class="icon-edit"></fa-icon>
                     </a>
                   </div>
-                  <div *ngIf="actionButtons.actions.delete">
+                  <div *ngIf="actionButtons.actions && actionButtons.actions.delete">
                     <a (click)="showDeleteModal('')">
                       <fa-icon [icon]="faDelete" class="icon-delete"></fa-icon>
                     </a>

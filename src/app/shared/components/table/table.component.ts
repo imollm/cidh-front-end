@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IDashboardTable } from './models/table.model';
-import { UtilsService } from '../../../helpers/utils.helper.service';
 import { faTimes, faEye, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { IActionButtons } from './models/action-buttons.model';
 import Swal from 'sweetalert2';
@@ -43,25 +42,6 @@ export class TableComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataTable = changes.toShow.currentValue;
-  }
-
-  formatPrice(price: any): string {
-    return UtilsService.formatPrice(price);
-  }
-
-  formatMeters(meters: any): string {
-    return UtilsService.formatMeters(meters);
-  }
-
-  formatDate(timestamp: string): string {
-    return UtilsService.formatDate(timestamp);
-  }
-
-  _isNumber(value: any): boolean {
-    return UtilsService.isNumber(value);
-  }
-
-  _isString(value: any): boolean {
-    return UtilsService.isString(value);
+    console.log(this.dataTable);
   }
 }
