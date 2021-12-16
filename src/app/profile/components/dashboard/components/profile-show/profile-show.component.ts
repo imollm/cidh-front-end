@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalResultService } from 'src/app/helpers/modal.service';
 import { ProfileService } from '../../../../services/profile-service.service'
 
 
@@ -17,7 +19,9 @@ export class ProfileShowComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
-    ) {
+    private modalResultService: ModalResultService,
+    private spinner: NgxSpinnerService
+  ) {
     this.form = this.fb.group({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -34,21 +38,26 @@ export class ProfileShowComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      if(window.confirm('Estas segur de que vols cambiar les teves dades personals?')){
-        this.profileService.updateUser(this.form.value).then(res => {
-          if(!res.error){
-            window.alert('Dades modificades!')
-          }
-        })
-      }
+      this.spinner.show();
+      this.profileService.updateUser(this.form.value).then(res => {
+        if (res) {
+          this.spinner.hide();
+          this.modalResultService.editResultModal(res);
+          this.form.reset();
+          this.getUser();
+        }
+      });
     }
   }
 
   getUser(): void {
+    this.spinner.show();
     this.profileService.showUser().then(user => {
-        Object.keys(this.form.value).forEach(key => {
-        this.form.get(key).setValue(user[key])
-      })
-    })
+      Object.keys(this.form.value).forEach(key => {
+        this.form.get(key).setValue(user[key]);
+      });
+    }).then(() => {
+      this.spinner.hide();
+    });
   }
 }
