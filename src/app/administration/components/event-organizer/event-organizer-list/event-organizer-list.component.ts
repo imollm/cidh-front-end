@@ -18,7 +18,7 @@ export class EventOrganizerListComponent implements OnInit {
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
     active: true,
-    resource: '/administration/event-organizer',
+    resource: '/administration/dashboard/event-organizer',
     actions: {
       view: true,
       edit: true,
