@@ -21,8 +21,8 @@ export class LoginComponent {
     private spinner: NgxSpinnerService
   ) {
     this.form = this.fb.group({
-      email: new FormControl('anyuseremail1@anyserver.com', Validators.required),
-      password: new FormControl('Secure8DigitUpperCaseLowerCasePasswordWithNumbers', Validators.required)
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
     });
   }
 

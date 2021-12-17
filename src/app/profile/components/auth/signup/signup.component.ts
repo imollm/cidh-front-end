@@ -22,13 +22,13 @@ export class SignupComponent {
     private spinner: NgxSpinnerService
     ) {
     this.form = this.fb.group({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      fiscalId: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
-      preferredLanguage: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', Validators.required)
+      firstName: new FormControl('Ivan', Validators.required),
+      lastName: new FormControl('Moll', Validators.required),
+      fiscalId: new FormControl('NOTVALIDATED', Validators.required),
+      address: new FormControl('Some address', Validators.required),
+      preferredLanguage: new FormControl('English', Validators.required),
+      email: new FormControl('imollm@uoc.edu', [Validators.email, Validators.required]),
+      password: new FormControl('Ciutadella1919!', Validators.required)
     });
   }
 

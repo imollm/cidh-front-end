@@ -34,7 +34,8 @@
               <div class="mb-3 row">
                 <label for="preferredLanguage" class="col-sm-4 col-form-label text-sm-end">Idioma</label>
                 <div class="col-sm-8">
-                  <select id="preferredLanguage" formControlName="preferredLanguage" class="form-control" [ngModel]="userLanguage">
+                  <select id="preferredLanguage" formControlName="preferredLanguage" class="form-select">
+                    <option [ngValue]="" disabled>Tria un idioma</option>
                     <option *ngFor="let language of selectLanguages" [ngValue]="language">
                       {{language}}
                     </option>

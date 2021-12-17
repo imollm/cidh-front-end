@@ -1,6 +1,6 @@
 export const preferredLanguages = [
-    'spanish',
-    'english',
-    'catalan',
-    'french'
+    'Spanish',
+    'English',
+    'Catalan',
+    'French'
 ]
