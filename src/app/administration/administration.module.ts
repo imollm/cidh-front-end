@@ -7,13 +7,15 @@ import { AdministrationComponent } from './administration.component';
 import { LinkAdminToEventOrganizerComponent } from './components/event-organizer/link-admin-to-event/link-admin-to-event-organizer.component';
 import { EventOrganizerListComponent } from './components/event-organizer/event-organizer-list/event-organizer-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { EventOrganizerCreateComponent } from './components/event-organizer/event-organizer-create/event-organizer-create.component';
 
 
 @NgModule({
   declarations: [
     AdministrationComponent,
     LinkAdminToEventOrganizerComponent,
-    EventOrganizerListComponent
+    EventOrganizerListComponent,
+    EventOrganizerCreateComponent
   ],
   imports: [
     CommonModule,
