@@ -1,6 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="col">
+            <div class="text-center p-2">
+                <h2>{{ title }}</h2>
+            </div>
+            <div class="p-5">
+                <a [routerLink]="['/administration/event-organizer/create']" class="btn btn-outline-dark">
+                    Crear empresa
+                </a>
+            </div>
             <div *ngIf="eventOrganizers && eventOrganizers.length > 0; then withResults else withOutResults">Hola</div>
             <ng-template #withResults>
                 <app-dashboard-table

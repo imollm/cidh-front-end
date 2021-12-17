@@ -13,6 +13,7 @@ import { IDashboardTable } from 'src/app/shared/components/table/models/table.mo
 })
 export class EventOrganizerListComponent implements OnInit {
 
+  title: string = 'Gestiona les empreses';
   eventOrganizers: EventOrganizer[] = [];
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
