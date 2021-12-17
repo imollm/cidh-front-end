@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventOrganizerService } from 'src/app/administration/services/event-organizer/event-organizer.service';
 
 @Component({
   selector: 'app-event-organizer-list',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventOrganizerListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private eventOrganizerService: EventOrganizerService
+  ) { }
 
   ngOnInit(): void {
   }
