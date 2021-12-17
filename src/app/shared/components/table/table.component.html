@@ -37,12 +37,12 @@
               <td *ngIf="actionButtons && actionButtons.active">
                 <div class="d-flex flex-row justify-content-around">
                   <div *ngIf="actionButtons.actions && actionButtons.actions.view">
-                    <a [routerLink]="[actionButtons.resource + '/create/', element.id]">
+                    <a [routerLink]="[actionButtons.resource + '/view/', element.id]">
                       <fa-icon [icon]="faView" class="icon-view"></fa-icon>
                     </a>
                   </div>
                   <div *ngIf="actionButtons.actions && actionButtons.actions.edit">
-                    <a [routerLink]="[actionButtons.resource + '/update/', element.id]">
+                    <a [routerLink]="[actionButtons.resource + '/edit/', element.id]">
                       <fa-icon [icon]="faEdit" class="icon-edit"></fa-icon>
                     </a>
                   </div>
