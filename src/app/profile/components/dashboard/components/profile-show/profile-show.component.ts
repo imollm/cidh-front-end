@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { ProfileService } from '../../../../services/profile-service.service'
+import { preferredLanguages } from 'src/app/profile/models/preferredLanguages.model';
 
 
 @Component({
@@ -14,6 +15,8 @@ export class ProfileShowComponent implements OnInit {
 
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
+  selectLanguages = preferredLanguages
+  userLanguage = ""
 
 
   constructor(
@@ -56,6 +59,7 @@ export class ProfileShowComponent implements OnInit {
       Object.keys(this.form.value).forEach(key => {
         this.form.get(key).setValue(user[key]);
       });
+      this.userLanguage = user['preferredLanguage'].toLowerCase()
     }).then(() => {
       this.spinner.hide();
     });
