@@ -1,8 +1,8 @@
 import { EventOrganizer } from "../../models/event-organizer.model";
 
 export interface IEventOrganizerService {
-    addEventOrganizer(eventOrganizer: EventOrganizer): void;
-    updateEventOrganizer(eventOrganizer: EventOrganizer): void;
-    showEventOrganizer(eventOrganizerId: String): EventOrganizer;
-    listAllEventOrganizers(): EventOrganizer[];
+    addEventOrganizer(eventOrganizer: EventOrganizer): Promise<EventOrganizer>;
+    updateEventOrganizer(eventOrganizer: EventOrganizer): Promise<EventOrganizer>;
+    showEventOrganizer(eventOrganizerId: String): Promise<EventOrganizer>;
+    listAllEventOrganizers(): Promise<EventOrganizer[]>;
 }
