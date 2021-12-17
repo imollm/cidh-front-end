@@ -15,8 +15,9 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CatCardComponent } from './components/categories/components/cat-card/cat-card.component';
 import { LabelsComponent } from './components/labels/labels.component';
 import { LabCardComponent } from './components/labels/components/lab-card/lab-card.component';
+import { AuthInterceptorService } from "./api/auth-interceptor.service";
 import { EndPointMapper } from './helpers/endpoint-mapper.helper.service';
-import { AuthInterceptorService } from './api/auth-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +45,6 @@ import { AuthInterceptorService } from './api/auth-interceptor.service';
       useClass: AuthInterceptorService,
       multi: true
     }],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
