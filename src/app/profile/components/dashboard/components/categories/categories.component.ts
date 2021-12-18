@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Category } from 'src/app/administration/models/category.model';
+import { CategoryService } from 'src/app/administration/services/category.service';
 import { IActionButtons } from 'src/app/shared/components/table/models/action-buttons.model';
 import { IDashboardTable } from 'src/app/shared/components/table/models/table.model';
 import { TableComponent } from 'src/app/shared/components/table/table.component';
@@ -32,22 +34,39 @@ export class CategoriesComponent implements OnInit {
     }
   } as IActionButtons
 
-  constructor() { }
+
+
+  constructor(
+    private categoriService: CategoryService, 
+    private spinner: NgxSpinnerService
+    ) { }
+
 
   ngOnInit(): void {
-    this.dataTable.data = this.getCategories()
+    this.getCategories()
+    }
+
+
+  getCategories() : void{
+    this.categoriService.listAllCategories().then(res => {
+      this.dataTable.data = res
+    })
   }
 
+  createCategory(category: Category): void{
+    this.spinner.show()
+    this.categoriService.addCategory(category).then(res => {
+      this.getCategories()
+      this.spinner.hide()
+    })
+  }
 
-  getCategories() : Category[]{
-    return [
-      { name: 'Juan', description: 'correo@correo.com', createdAt: Date.now(), id:'1'},
-      { name: 'Juan', description: 'correo@correo.com', createdAt: 12345678790, id:'2'},
-      { name: 'Juan', description: 'correo@correo.com', createdAt: 12345678790, id:'3'},
-      { name: 'Juan', description: 'correo@correo.com', createdAt: 12345678790, id:'4'},
-      { name: 'Juan', description: 'correo@correo.com', createdAt: 12345678790, id:'5'}
-
-    ]
+  updateCategory(category : Category): void {
+    this.spinner.show()
+    this.categoriService.updateCategory(category).then(res => {
+      this.getCategories()
+      this.spinner.hide()
+    })
   }
 
 }
