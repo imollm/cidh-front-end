@@ -1,23 +1,31 @@
 <div class="container">
     <div class="row">
-        <div class="col form-container">
+        <div class="col-12 col-lg-6 offset-lg-3 col-md-8 offset-md-2 form-container">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="text-center">
                     <h2 class="pt-5 pb-3">{{ title }}</h2>
                 </div>
                 <div>
                     <div class="form-group mb-5">
-                        <label for="eventOrganizerName" class="form-label">Nom</label>
+                        <label for="eventOrganizerName" class="form-label">Nom<sup>*</sup></label>
                         <input type="text" id="eventOrganizerName" class="form-control" formControlName="name">
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventOrganizerDescription" class="form-label">Descripció</label>
                         <input type="text" id="eventOrganizerDescription" class="form-control" formControlName="description">
                     </div>
-                    <input type="hidden" value="" formControlName="admin">
+                    <div class="form-group mb-5">
+                        <label for="eventOrganizerAdmin" class="form-label">Administrador<sup>*</sup></label>
+                        <select formControlName="admin" id="eventOrganizerAdmin" class="form-select">
+                            <!-- <option [ngValue]="" disabled selected>Tria un administrador</option>
+                            <option *ngFor="let administrator of administrators" [ngValue]="administrator.id">
+                                {{ administrator.firstName }}
+                              </option> -->
+                        </select>
+                    </div>
                     <div class="form-group p-4">
                         <button class="form-control btn btn-dark text-white">
-                            Crear
+                            {{ btnText }}
                         </button>
                     </div>
                 </div>

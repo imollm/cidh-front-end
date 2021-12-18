@@ -23,7 +23,7 @@ const routes: Routes = [
           { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent },
           { path: 'list', component: EventOrganizerListComponent },
           { path: 'create', component: EventOrganizerCreateEditComponent },
-          { path: 'edit', component: EventOrganizerCreateEditComponent }
+          { path: 'edit/:id', component: EventOrganizerCreateEditComponent }
         ]
       }
     ]

@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +7,6 @@ import { EventOrganizerService } from 'src/app/administration/services/event-org
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IUser } from 'src/app/profile/models/user.model';
-import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-event-organizer-create-edit',
@@ -18,9 +16,11 @@ import { AuthService } from 'src/app/profile/services/auth/auth.service';
 export class EventOrganizerCreateEditComponent {
 
   title: string = 'Crear una nova empresa';
+  btnText: string = 'Crear';
   form: FormGroup;
   mode: string;
-  eventOrganizer: IEventOrganizer;
+  eventOrganizerId: string;
+  eventOrganizer: IEventOrganizer = {} as IEventOrganizer;
   administrators: IUser[] = [];
 
   constructor(
@@ -29,25 +29,23 @@ export class EventOrganizerCreateEditComponent {
     private router: Router,
     private spinner: NgxSpinnerService,
     private modalResultService: ModalResultService,
-    private authService: AuthService
   ) {
     this.form = this.fb.group({
       name: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      //TODO: Render a select with administrators
+      description: new FormControl(''),
       admin: new FormControl('', Validators.required)
     });
   }
 
   ngOnInit(): void {
-    let mode = UtilsService.getMode(this.router.url); 
+    this.mode = UtilsService.getMode(this.router.url); 
 
-    if (!mode && mode === 'create') {
+    if (this.mode && this.mode === 'create') {
       this.createMode();
-    } else if (!mode && mode === 'edit') {
+    } else if (this.mode && this.mode === 'edit') {
       this.editMode();
-    } else {
-      this.router.navigate(['/administration/dashboard/event-organizer/list']);
+      this.title = 'Edita la empresa';
+      this.btnText = 'Edita';
     }
   }
 
@@ -56,25 +54,25 @@ export class EventOrganizerCreateEditComponent {
   }
 
   editMode(): void {
-    this.eventOrganizer.id = UtilsService.getResourceIdFromURI(this.router.url);
-    this.eventOrganizer.id 
-      ? this.getEventOrganizer(this.eventOrganizer)
+    this.eventOrganizerId = UtilsService.getResourceIdFromURI(this.router.url);
+    this.eventOrganizerId 
+      ? this.getEventOrganizer()
       : this.router.navigate(['/administration/dashboard/event-organizer/list']);
   }
   
-  getEventOrganizer(eventOrganizer: IEventOrganizer): void {
-    this.eventOrganizerService.showEventOrganizer(eventOrganizer.id).then(res => {
+  getEventOrganizer(): void {
+    this.eventOrganizerService.showEventOrganizer(this.eventOrganizerId).then(res => {
       this.spinner.show();
       if (res) {
         this.eventOrganizer = res;
-
+        this.eventOrganizerId = res.id;
         this.form.patchValue({
-          id: this.eventOrganizer.id,
           name: this.eventOrganizer.name,
           description: this.eventOrganizer.description,
           admin: this.eventOrganizer.admin
         });
       }
+      this.spinner.hide();
     });
   }
 
@@ -85,15 +83,29 @@ export class EventOrganizerCreateEditComponent {
   onSubmit(): void {
     if (this.form.valid) {
       this.spinner.show();
-      this.eventOrganizerService.addEventOrganizer(this.form.value).then(res => {
-        if (res) {
-          this.router.navigate(['/administration/dashboard/event-organizer/list']).then(() => {
-            this.modalResultService.createResultModal(true);
-          });
-        } else {
-          this.modalResultService.createResultModal(false);
-        }
-      }).then(() => this.spinner.hide());
+
+      if (this.mode && this.mode === 'create') {
+        this.eventOrganizerService.addEventOrganizer(this.form.value).then(res => {
+          this.eventOrganizer = res;
+        }).then(() => this.redirectUser());
+      } else if (this.mode && this.mode === 'edit') {
+        this.eventOrganizerService.updateEventOrganizer(this.eventOrganizerId, this.form.value).then(res => {
+          this.eventOrganizer = res;
+        }).then(() => this.redirectUser());
+      }
     }
+  }
+
+  // Redirect user on list component and show modal with result
+  redirectUser(): void {
+    this.router.navigate(['/administration/dashboard/event-organizer/list']).then(() => {
+      let result: Boolean = this.eventOrganizer.hasOwnProperty('id');
+
+      if (this.mode === 'create') {
+        this.modalResultService.createResultModal(result);
+      } else if (this.mode === 'edit') {
+        this.modalResultService.editResultModal(result);
+      }
+    }).then(() => this.spinner.hide());
   }
 }
