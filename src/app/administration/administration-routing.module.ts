@@ -6,10 +6,10 @@ import { AdministrationComponent } from './administration.component';
 import { DashboardComponent } from '../profile/components/dashboard/dashboard.component';
 import { LinkAdminToEventOrganizerComponent } from './components/event-organizer/link-admin-to-event/link-admin-to-event-organizer.component';
 import { EventOrganizerListComponent } from './components/event-organizer/event-organizer-list/event-organizer-list.component';
+import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
-import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { EventOrganizer } from 'src/app/administration/models/event-organizer.model';
+import { IEventOrganizer } from 'src/app/administration/models/event-organizer.model';
 import { EventOrganizerService } from 'src/app/administration/services/event-organizer/event-organizer.service';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { IActionButtons } from 'src/app/shared/components/table/models/action-buttons.model';
@@ -14,7 +14,7 @@ import { IDashboardTable } from 'src/app/shared/components/table/models/table.mo
 export class EventOrganizerListComponent implements OnInit {
 
   title: string = 'Gestiona les empreses';
-  eventOrganizers: EventOrganizer[] = [];
+  eventOrganizers: IEventOrganizer[] = [];
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
     active: true,

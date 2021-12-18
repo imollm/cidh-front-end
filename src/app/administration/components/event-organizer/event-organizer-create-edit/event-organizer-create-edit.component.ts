@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { EventOrganizer } from 'src/app/administration/models/event-organizer.model';
+import { IEventOrganizer } from 'src/app/administration/models/event-organizer.model';
 import { EventOrganizerService } from 'src/app/administration/services/event-organizer/event-organizer.service';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
@@ -19,9 +19,9 @@ export class EventOrganizerCreateEditComponent {
 
   title: string = 'Crear una nova empresa';
   form: FormGroup;
-  meAsSuperAdmin: IUser;
   mode: string;
-  eventOrganizer: EventOrganizer;
+  eventOrganizer: IEventOrganizer;
+  administrators: IUser[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -62,7 +62,7 @@ export class EventOrganizerCreateEditComponent {
       : this.router.navigate(['/administration/dashboard/event-organizer/list']);
   }
   
-  getEventOrganizer(eventOrganizer: EventOrganizer): void {
+  getEventOrganizer(eventOrganizer: IEventOrganizer): void {
     this.eventOrganizerService.showEventOrganizer(eventOrganizer.id).then(res => {
       this.spinner.show();
       if (res) {
