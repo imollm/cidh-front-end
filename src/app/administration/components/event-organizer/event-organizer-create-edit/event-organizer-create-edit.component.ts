@@ -34,7 +34,8 @@ export class EventOrganizerCreateEditComponent {
     this.form = this.fb.group({
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      admin: new FormControl('')
+      //TODO: Render a select with administrators
+      admin: new FormControl('', Validators.required)
     });
   }
 
@@ -42,7 +43,7 @@ export class EventOrganizerCreateEditComponent {
     let mode = UtilsService.getMode(this.router.url); 
 
     if (!mode && mode === 'create') {
-      this.createMode()
+      this.createMode();
     } else if (!mode && mode === 'edit') {
       this.editMode();
     } else {
@@ -51,7 +52,6 @@ export class EventOrganizerCreateEditComponent {
   }
 
   createMode(): void {
-    this.getUser();
     this.form.reset();
   }
 
@@ -61,15 +61,6 @@ export class EventOrganizerCreateEditComponent {
       ? this.getEventOrganizer(this.eventOrganizer)
       : this.router.navigate(['/administration/dashboard/event-organizer/list']);
   }
-
-  getUser(): void {
-    this.authService.getUser().then(res => {
-      if (res) {
-        this.form.get('admin').setValue(res.id);
-      }
-    });
-  }
-
   
   getEventOrganizer(eventOrganizer: EventOrganizer): void {
     this.eventOrganizerService.showEventOrganizer(eventOrganizer.id).then(res => {
@@ -85,6 +76,10 @@ export class EventOrganizerCreateEditComponent {
         });
       }
     });
+  }
+
+  getAdministrators(): void {
+    "TODO: Retrieve administrators and render a <select> with these admins"
   }
 
   onSubmit(): void {
