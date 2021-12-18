@@ -50,6 +50,9 @@ export class CategoriesComponent implements OnInit {
   getCategories() : void{
     this.categoriService.listAllCategories().then(res => {
       this.dataTable.data = res
+      this.dataTable.data.forEach(data=> {
+        data.createdAt = Intl.DateTimeFormat('es-ES').format(data.createdAt)
+      })
     })
   }
 
