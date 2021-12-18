@@ -14,6 +14,7 @@ import { HomeComponent as DashboardHomeComponent} from './components/dashboard/c
 import { SharedModule } from '../shared/shared.module';
 import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 import { LogoutComponent } from './components/dashboard/components/logout/logout.component';
+import { CategoriesComponent } from './components/dashboard/components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LogoutComponent } from './components/dashboard/components/logout/logout
     DashboardHomeComponent,
     ProfileShowComponent,
     LogoutComponent,
+    CategoriesComponent,
   ],
   imports: [
     ProfileRoutingModule,
