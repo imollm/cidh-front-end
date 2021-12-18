@@ -10,6 +10,7 @@ import { EventOrganizerCreateEditComponent } from './components/event-organizer/
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
+import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
           { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent },
           { path: 'list', component: EventOrganizerListComponent },
           { path: 'create', component: EventOrganizerCreateEditComponent },
-          { path: 'edit/:id', component: EventOrganizerCreateEditComponent }
+          { path: 'edit/:id', component: EventOrganizerCreateEditComponent },
+          { path: 'view/:id', component: EventOrganizerDetailComponent }
         ]
       }
     ]

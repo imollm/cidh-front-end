@@ -63,9 +63,9 @@ export class EventOrganizerCreateEditComponent {
   getEventOrganizer(): void {
     this.eventOrganizerService.showEventOrganizer(this.eventOrganizerId).then(res => {
       this.spinner.show();
-      if (res) {
-        this.eventOrganizer = res;
-        this.eventOrganizerId = res.id;
+      if (res.length > 0) {
+        this.eventOrganizer = res[0];
+        this.eventOrganizerId = this.eventOrganizer.id;
         this.form.patchValue({
           name: this.eventOrganizer.name,
           description: this.eventOrganizer.description,

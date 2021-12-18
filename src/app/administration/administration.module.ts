@@ -8,6 +8,7 @@ import { LinkAdminToEventOrganizerComponent } from './components/event-organizer
 import { EventOrganizerListComponent } from './components/event-organizer/event-organizer-list/event-organizer-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
+import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { EventOrganizerCreateEditComponent } from './components/event-organizer/
     AdministrationComponent,
     LinkAdminToEventOrganizerComponent,
     EventOrganizerListComponent,
-    EventOrganizerCreateEditComponent
+    EventOrganizerCreateEditComponent,
+    EventOrganizerDetailComponent
   ],
   imports: [
     CommonModule,
