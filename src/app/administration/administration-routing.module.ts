@@ -9,7 +9,7 @@ import { EventOrganizerListComponent } from './components/event-organizer/event-
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
-import { EventOrganizerCreateComponent } from './components/event-organizer/event-organizer-create/event-organizer-create.component';
+import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
@@ -22,7 +22,8 @@ const routes: Routes = [
         children: [
           { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent },
           { path: 'list', component: EventOrganizerListComponent },
-          { path: 'create', component: EventOrganizerCreateComponent }
+          { path: 'create', component: EventOrganizerCreateEditComponent },
+          { path: 'edit', component: EventOrganizerCreateEditComponent }
         ]
       }
     ]

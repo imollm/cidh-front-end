@@ -8,11 +8,11 @@ import { IUser } from 'src/app/profile/models/user.model';
 import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
-  selector: 'app-event-organizer-create',
-  templateUrl: './event-organizer-create.component.html',
-  styleUrls: ['./event-organizer-create.component.sass']
+  selector: 'app-event-organizer-create-edit',
+  templateUrl: './event-organizer-create-edit.component.html',
+  styleUrls: ['./event-organizer-create-edit.component.sass']
 })
-export class EventOrganizerCreateComponent {
+export class EventOrganizerCreateEditComponent {
 
   title: string = 'Crear una nova empresa';
   form: FormGroup;
