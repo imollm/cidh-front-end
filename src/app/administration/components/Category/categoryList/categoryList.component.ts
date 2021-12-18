@@ -8,10 +8,10 @@ import { TableComponent } from 'src/app/shared/components/table/table.component'
 
 @Component({
   selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.sass']
+  templateUrl: './categoryList.component.html',
+  styleUrls: ['./categoryList.component.sass']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoryListComponent implements OnInit {
   
   dataTable: IDashboardTable = {
       title : 'Categories',
