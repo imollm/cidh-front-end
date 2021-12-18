@@ -11,7 +11,9 @@
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventOrganizers"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
-          <a [routerLink]="['/administration/dashboard/event-organizer/list']">Empreses</a>
+          <a [routerLink]="['/administration/dashboard/event-organizer/list']">
+            Empreses
+          </a>
         </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageAdministrators"
