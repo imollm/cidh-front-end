@@ -42,6 +42,12 @@ export class TableComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataTable = changes.toShow.currentValue;
-    console.log(this.dataTable);
+    this.dataTable.data.forEach(e => {
+      e.createdAt = this.formatDate(e.createdAt)
+    });
+  }
+
+  formatDate(timestamp: number){
+    return Intl.DateTimeFormat('es-ES').format(timestamp)
   }
 }
