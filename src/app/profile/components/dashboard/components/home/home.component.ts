@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  formTitle= 'Home User';
+  formTitle= 'Home';
   constructor() 
   { }
 
