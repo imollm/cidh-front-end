@@ -14,6 +14,9 @@ enum ModalResultIcon {
 
 export class ModalResultService {
 
+  private readonly unsuccessfullyLoginTitleError = 'Login incorrecte';
+  private readonly unsuccessfullyLoginTextError = 'Email i/o constrasenya incorrectes.';
+
   private readonly createTitleSuccess = 'Creat correctament!';
   private readonly createTitleError = 'Error al crear!';
   private readonly createTextSuccess = 'El recurs s\'ha creat satisfactoriament.';
@@ -34,6 +37,13 @@ export class ModalResultService {
   private resultIcon: ModalResultIcon;
 
   constructor() { }
+
+  unsuccessfulLogin(): void {
+    this.resultTitle = this.unsuccessfullyLoginTitleError;
+    this.resultText = this.unsuccessfullyLoginTextError;
+
+    this.fireSwal();
+  }
 
   createResultModal(resultResponse: Boolean): void {
     if (resultResponse) {
