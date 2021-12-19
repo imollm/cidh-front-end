@@ -53,7 +53,7 @@
       },
       "updateById": {
         "uri": "/categories/%s",
-        "method": "PUT"
+        "method": "POST"
       },
       "getById": {
         "uri": "/categories/%s",
@@ -71,7 +71,7 @@
       },
       "updateById": {
         "uri": "/event-organizer/%s",
-        "method": "PUT"
+        "method": "POST"
       },
       "getById": {
         "uri": "/event-organizer/%s",
