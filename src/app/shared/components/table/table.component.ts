@@ -42,6 +42,5 @@ export class TableComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataTable = changes.toShow.currentValue;
-    console.log(this.dataTable);
   }
 }

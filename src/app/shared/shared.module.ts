@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // Custom components
 import { EventSearcherComponent } from './components/event-searcher/event-searcher.component';
@@ -29,7 +30,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
     NgxSpinnerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule
   ],
   exports: [
     EventSearcherComponent,
@@ -39,7 +41,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SweetAlert2Module,
     NgxPaginationModule,
     NgxSpinnerModule,
-    TableComponent
+    TableComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

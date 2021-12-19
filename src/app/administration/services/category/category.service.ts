@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category } from '../models/category.model';
+import { Category } from '../../models/category.model';
 import { ICategoryService } from './category.interface';
-import { EndPointMapper } from '../../helpers/endpoint-mapper.helper.service';
+import { EndPointMapper } from '../../../helpers/endpoint-mapper.helper.service';
 
 @Injectable({
   providedIn: 'root'

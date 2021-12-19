@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Label } from 'src/app/administration/models/label.model';
-import { LabelService } from 'src/app/administration/services/label.service';
+import { LabelService } from 'src/app/administration/services/label/label.service';
 
 @Component({
   selector: 'app-labels',

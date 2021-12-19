@@ -1,4 +1,4 @@
-import { Category } from "../models/category.model";
+import { Category } from "../../models/category.model";
 
 export interface ICategoryService {
   addCategory(category: Category): Promise<Category>;
