@@ -5,19 +5,17 @@ import { faTimes, faEye, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { IActionButtons } from 'src/app/shared/components/table/models/action-buttons.model';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-dashboard-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent {
 
   formTitle= 'Home';
-  dataTable: any;
-  //actionsButtons: any;
+  dataTable: IDashboardTable = {} as IDashboardTable;
+
   constructor() 
-  { 
-    
-  }
+  { }
 
   ngOnInit(): void {
     this.setDataTable();
