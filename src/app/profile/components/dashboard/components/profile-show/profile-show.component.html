@@ -1,38 +1,37 @@
-<div id="signup-page">
+<div id="userprofile-page">
     <div class="container">
       <div class="row">
-        <div class="col-12 form-content-wrapper">
-          <h1 class="form-title h4 mb-3">
+        <div class="col-12 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 form-content-wrapper">
+          <h1 class="form-title h4 m-5 text-center">
             {{ formTitle }}
           </h1>
-          <form class="form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="container">
+          <form class="" [formGroup]="form" (ngSubmit)="onSubmit()">
               <div class="mb-3 row">
-                <label for="inputName" class="col-sm-4 col-form-label text-sm-end">Nom</label>
+                <label for="inputName" class="col-sm-3 col-form-label text-sm-end">Nom</label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" id="inputName" placeholder="Nom" formControlName="firstName"/> 
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="inputSurname" class="col-sm-4 col-form-label text-sm-end">Cognom</label>
+                <label for="inputSurname" class="col-sm-3 col-form-label text-sm-end">Cognom</label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" id="inputSurname" placeholder="Cognom" formControlName="lastName"/>
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="inputFiscalId" class="col-sm-4 col-form-label text-sm-end">Nif</label>
+                <label for="inputFiscalId" class="col-sm-3 col-form-label text-sm-end">Nif</label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" id="inputFiscalId" placeholder="Nif" formControlName="fiscalId"/>
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="inputAddress" class="col-sm-4 col-form-label text-sm-end">Domicili</label>
+                <label for="inputAddress" class="col-sm-3 col-form-label text-sm-end">Domicili</label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" id="inputAddress" placeholder="Domicili" formControlName="address"/>
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="preferredLanguage" class="col-sm-4 col-form-label text-sm-end">Idioma</label>
+                <label for="preferredLanguage" class="col-sm-3 col-form-label text-sm-end">Idioma</label>
                 <div class="col-sm-8">
                   <select id="preferredLanguage" formControlName="preferredLanguage" class="form-select">
                     <option [ngValue]="" disabled>Tria un idioma</option>
@@ -42,18 +41,12 @@
                   </select>
                 </div>
               </div>
-              <div class="mb-3 row">
-                <label for="inputEmail" class="col-sm-4 col-form-label text-sm-end">Email</label>
-                <div class="col-sm-8">
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email"/>
-                </div>
-              </div>
+              <input type="hidden" formControlName="email" />
               <div class="mt-4 mb-3 row">
                 <div class="d-flex justify-content-center">
-                  <button class="container-fluid btn btn-dark">Modificar</button>
+                  <button class="btn btn-dark">Modificar</button>
                 </div>
               </div>
-            </div>
           </form>
         </div>
       </div>
