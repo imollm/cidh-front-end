@@ -54,17 +54,17 @@ export class AuthService implements IAuthService {
   }
 
   removeTokens(): void {
-    localStorage.removeItem('ACCESS_TOKEN');
-    localStorage.removeItem('REFRESH_TOKEN');
+    sessionStorage.removeItem('ACCESS_TOKEN');
+    sessionStorage.removeItem('REFRESH_TOKEN');
   }
 
   saveAccessToken(token: string): void {
-    localStorage.setItem('ACCESS_TOKEN', token);
+    sessionStorage.setItem('ACCESS_TOKEN', token);
     this.token = token;
   }
 
   getAccessToken(): string {
-    return this.token = localStorage.getItem('ACCESS_TOKEN');
+    return this.token = sessionStorage.getItem('ACCESS_TOKEN');
   }
 
   isLogged(): boolean {
@@ -72,12 +72,12 @@ export class AuthService implements IAuthService {
   }
 
   saveRefreshToken(refreshToken: string): void {
-    localStorage.setItem('REFRESH_TOKEN', refreshToken);
+    sessionStorage.setItem('REFRESH_TOKEN', refreshToken);
     this.refreshToken = refreshToken;
   }
 
   getRefreshToken(): string {
-    return this.refreshToken = localStorage.getItem('REFRESH_TOKEN');
+    return this.refreshToken = sessionStorage.getItem('REFRESH_TOKEN');
   }
 
   /**

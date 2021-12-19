@@ -63,6 +63,24 @@
         "uri": "/categories",
         "method": "GET"
       }
+    },
+    "event-organizer": {
+      "create": {
+        "uri": "/event-organizer",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/event-organizer/%s",
+        "method": "PUT"
+      },
+      "getById": {
+        "uri": "/event-organizer/%s",
+        "method": "GET"
+      },
+      "getAll": {
+        "uri": "/event-organizer",
+        "method": "GET"
+      }
     }
   }
 }

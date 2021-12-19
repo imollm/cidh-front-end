@@ -5,7 +5,7 @@ import { EventSearcherService } from '../../services/event-searcher.service';
 import { EventSearcher as EventSearcherModel } from '../../models/event-searcher.model';
 import { EventService } from 'src/app/event/services/event.service';
 import { Label } from 'src/app/administration/models/label.model';
-import { LabelService } from 'src/app/administration/services/label.service';
+import { LabelService } from 'src/app/administration/services/label/label.service';
 
 @Component({
   selector: 'app-event-searcher',
