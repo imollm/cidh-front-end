@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalResultService } from 'src/app/helpers/modal.service';
@@ -15,15 +16,15 @@ export class ProfileShowComponent implements OnInit {
 
   formTitle = 'Modifica les teves dades';
   form: FormGroup;
-  selectLanguages = preferredLanguages
-  userLanguage = ""
+  selectLanguages = preferredLanguages;
 
 
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
     private modalResultService: ModalResultService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       firstName: new FormControl('', Validators.required),
@@ -39,29 +40,35 @@ export class ProfileShowComponent implements OnInit {
     this.getUser()
   }
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      this.spinner.show();
-      this.profileService.updateUser(this.form.value).then(res => {
-        if (res) {
-          this.spinner.hide();
-          this.modalResultService.editResultModal(res);
-          this.form.reset();
-          this.getUser();
-        }
-      });
-    }
-  }
-
   getUser(): void {
     this.spinner.show();
     this.profileService.showUser().then(user => {
-      Object.keys(this.form.value).forEach(key => {
-        this.form.get(key).setValue(user[key]);
+      this.form.patchValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        fiscalId: user.fiscalId,
+        address: user.address,
+        preferredLanguage: user.preferredLanguage,
+        email: user.email
       });
-      this.userLanguage = user['preferredLanguage'].toLowerCase()
     }).then(() => {
       this.spinner.hide();
     });
+  }
+
+  onSubmit(): void {
+    let result: Boolean;
+
+    if (this.form.valid) {
+      this.spinner.show();
+      this.profileService.updateUser(this.form.value).then(res => {
+        result = res.hasOwnProperty('id');
+      }).then(() => {
+        this.router.navigate(['/profile/dashboard/home']).then(() => {
+          this.modalResultService.editResultModal(result);
+          this.spinner.hide();
+        });
+      });
+    }
   }
 }

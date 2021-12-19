@@ -7,20 +7,21 @@ import { IProfileService } from './profile-service.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService implements IProfileService{
+export class ProfileService implements IProfileService {
 
-  constructor(private httpClient: HttpClient, private endPointMapper: EndPointMapper) {
-   
-   }
+  constructor(
+    private httpClient: HttpClient,
+    private endPointMapper: EndPointMapper
+  ) { }
 
-   showUser(): Promise<any> {
+   showUser(): Promise<IUser> {
      const endpoint = this.endPointMapper.getEndPointUrl('user', 'me')
-     return this.httpClient.get(endpoint).toPromise();
+     return this.httpClient.get<IUser>(endpoint).toPromise();
    }
 
    
-   updateUser(user: IUser): Promise<any> {
+   updateUser(user: IUser): Promise<IUser> {
     const endpoint = this.endPointMapper.getEndPointUrl('user', 'updateMe')
-    return this.httpClient.post(endpoint, user).toPromise()
+    return this.httpClient.post<IUser>(endpoint, user).toPromise()
    }
 }
