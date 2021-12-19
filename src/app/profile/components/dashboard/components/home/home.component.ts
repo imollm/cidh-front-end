@@ -13,6 +13,9 @@ export class HomeComponent {
 
   formTitle= 'Home';
   dataTable: IDashboardTable = {} as IDashboardTable;
+  actionButtons: IActionButtons = {
+    active: false
+  } as IActionButtons;
 
   constructor() 
   { }
