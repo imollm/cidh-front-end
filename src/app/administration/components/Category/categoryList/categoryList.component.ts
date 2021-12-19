@@ -12,63 +12,52 @@ import { TableComponent } from 'src/app/shared/components/table/table.component'
   styleUrls: ['./categoryList.component.sass']
 })
 export class CategoryListComponent implements OnInit {
-  
-  dataTable: IDashboardTable = {
-      title : 'Categories',
-      colsName : [
-      { colName: 'name', text: 'Nom' },
-      { colName: 'description', text: 'Descripció' },
-      { colName: 'createdAt', text: 'Data de creació' }
-    ],
-      data : [],
-    inverse : false
-  } as IDashboardTable
+
+  title: string = 'Gestiona les categories'
+  categories : Category[] = []
+  dataTable : IDashboardTable = {} as IDashboardTable
   
   actionButtons : IActionButtons = {
     active: true,
-    resource: 'categories',
+    resource: '/administration/dashboard/category',
     actions: {
       view: false,
       edit: true,
-      delete: true,
+      delete: false,
     }
   } as IActionButtons
-
-
 
   constructor(
     private categoriService: CategoryService, 
     private spinner: NgxSpinnerService
     ) { }
 
-
   ngOnInit(): void {
     this.getCategories()
+    console.log(this.dataTable)
     }
 
-
-  getCategories() : void{
-    this.categoriService.listAllCategories().then(res => {
-      this.dataTable.data = res
-      this.dataTable.data.forEach(data=> {
-        data.createdAt = Intl.DateTimeFormat('es-ES').format(data.createdAt)
-      })
-    })
-  }
-
-  createCategory(category: Category): void{
-    this.spinner.show()
-    this.categoriService.addCategory(category).then(res => {
-      this.getCategories()
-      this.spinner.hide()
-    })
-  }
-
-  updateCategory(category : Category): void {
-    this.spinner.show()
-    this.categoriService.updateCategory(category).then(res => {
-      this.getCategories()
-      this.spinner.hide()
+    getCategories() : void{
+      this.spinner.show()
+      this.categoriService.listAllCategories().then(res => {
+        if(res.length > 0){
+          this.categories = res
+          this.setDataTable()
+        }
+        this.spinner.hide()
+        })
+      }
+  
+  setDataTable() : void {
+    this.dataTable.title = 'Categories registrades'
+    this.dataTable.colsName = [
+      { colName: 'name', text: 'Nom' },
+      { colName: 'description', text: 'Descripció' },
+      { colName: 'createdAt', text: 'Data de creació' }
+    ]
+    this.dataTable.data = this.categories
+    this.dataTable.data.forEach(category => {
+      category.createdAt = Intl.DateTimeFormat('es-ES').format(category.createdAt)
     })
   }
 

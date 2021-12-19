@@ -5,7 +5,9 @@
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageCategories"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faCategories"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Categories</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          <a [routerLink]="['/administration/dashboard/category/list']">Categories</a>
+        </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageEventOrganizers"
         class="sidebar-menu-content-items-item">
