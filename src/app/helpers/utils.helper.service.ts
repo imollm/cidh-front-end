@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class UtilsService {
     }
 
     return id;
+  }
+
+  static getRoleFromAccessToken(): string {
+    const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
+    return jwt['authorities'];
   }
 }
