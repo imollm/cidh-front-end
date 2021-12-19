@@ -81,6 +81,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     this.sideMenuItemsTitle.forEach(element => {
       (element.nativeElement as HTMLElement).style.display = 'none';
     });
+
+    // Resize dashboard container
+    let dashboardContainer = document.querySelector('.dashboard-container-router-outlet');
+    (dashboardContainer as HTMLElement).style.marginLeft = '118px';
   }
 
   openSideMenu(): void {
@@ -126,6 +130,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       title.style.fontWeight = 'bold';
       title.style.color = '#161925';
     });
+  
+    // Resize dashboard container
+    let dashboardContainer = document.querySelector('.dashboard-container-router-outlet');
+    (dashboardContainer as HTMLElement).style.marginLeft = '268px';
   }
 
   hideSideMenuTitles(): void {
