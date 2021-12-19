@@ -8,6 +8,7 @@ import { LinkAdminToEventOrganizerComponent } from '../administration/components
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
+import { CategoryListComponent } from './components/Category/categoryList/categoryList.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
@@ -15,7 +16,13 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent, /* canActivate: [AuthGuard] */ },
+      { path: 'category', 
+        children: [
+          { path: 'list', component: CategoryListComponent}
+        ]
+      }
     ]
+  
   },
 ];
 
