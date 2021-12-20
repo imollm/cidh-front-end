@@ -56,5 +56,9 @@ export interface IUser {
     preferredLanguage: string;
     email: string;
     password?: string;
-    homeData?: UserHomeData | AdminHomeData | SuperAdminHomeData;
+    homeData?: {
+        user?: UserHomeData,
+        admin?: AdminHomeData,
+        superadmin?: SuperAdminHomeData
+    }
 }
