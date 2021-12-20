@@ -17,6 +17,7 @@ import { LabelsComponent } from './components/labels/labels.component';
 import { LabCardComponent } from './components/labels/components/lab-card/lab-card.component';
 import { AuthInterceptorService } from "./api/auth-interceptor.service";
 import { EndPointMapper } from './helpers/endpoint-mapper.helper.service';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EndPointMapper } from './helpers/endpoint-mapper.helper.service';
     CategoriesComponent,
     CatCardComponent,
     LabelsComponent,
-    LabCardComponent
+    LabCardComponent,
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,
