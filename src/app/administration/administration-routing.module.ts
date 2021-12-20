@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', component: AdministrationComponent },
   {
     path: 'dashboard', component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [ AuthGuard ],
     children: [
       { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent, /* canActivate: [AuthGuard] */ },
       { path: 'category', 
