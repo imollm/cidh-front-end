@@ -39,7 +39,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SweetAlert2Module,
     NgxPaginationModule,
     NgxSpinnerModule,
-    TableComponent
+    TableComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
