@@ -1,10 +1,11 @@
 <div id="home-page">
+  <h1 *ngIf="role" class="text-center mb-5 h4">Panell {{ role }}</h1>
   <div class="container">
     <div class="row home-content-wrapper">
       <div *ngIf="me && me.firstName && me.lastName">
-        <h1 class="text-center h4 p-5">
+        <h2 class="text-center h4 p-5">
           Benvingut {{ me.firstName + ' ' + me.lastName }}
-        </h1>
+        </h2>
       </div>
       <div [ngSwitch]="role">
         <div *ngSwitchCase="'USER'">
