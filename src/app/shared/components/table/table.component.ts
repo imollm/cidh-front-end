@@ -43,8 +43,4 @@ export class TableComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.dataTable = changes.toShow.currentValue;
   }
-
-  formatDate(timestamp: number){
-    return Intl.DateTimeFormat('es-ES').format(timestamp)
-  }
 }

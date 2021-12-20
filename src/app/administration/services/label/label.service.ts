@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Label } from '../models/label.model';
+import { Label } from '../../models/label.model';
 import { ILabelService } from './label.interface';
 import * as faker from 'faker';
 import { HttpClient } from '@angular/common/http';

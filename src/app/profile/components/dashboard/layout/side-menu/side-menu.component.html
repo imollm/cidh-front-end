@@ -12,7 +12,11 @@
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageEventOrganizers"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventOrganizers"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Empreses</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          <a [routerLink]="['/administration/dashboard/event-organizer/list']">
+            Empreses
+          </a>
+        </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageAdministrators"
         class="sidebar-menu-content-items-item">
@@ -23,7 +27,7 @@
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAssociateAdminToEvent"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
-          <a [routerLink]="['/administration/dashboard/linkAdminToEventOrganizer']">Associar admin.</a>
+          <a [routerLink]="['/administration/dashboard/event-organizer/linkAdminToEventOrganizer']">Associar admin.</a>
         </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageLabels"
