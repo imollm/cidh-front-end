@@ -4,12 +4,11 @@ import { Category } from 'src/app/administration/models/category.model';
 import { CategoryService } from 'src/app/administration/services/category.service';
 import { IActionButtons } from 'src/app/shared/components/table/models/action-buttons.model';
 import { IDashboardTable } from 'src/app/shared/components/table/models/table.model';
-import { TableComponent } from 'src/app/shared/components/table/table.component';
 
 @Component({
   selector: 'app-categories',
-  templateUrl: './categoryList.component.html',
-  styleUrls: ['./categoryList.component.sass']
+  templateUrl: './category-list.component.html',
+  styleUrls: ['./category-list.component.sass']
 })
 export class CategoryListComponent implements OnInit {
 
@@ -34,7 +33,6 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories()
-    console.log(this.dataTable)
     }
 
     getCategories() : void{
@@ -57,7 +55,7 @@ export class CategoryListComponent implements OnInit {
     ]
     this.dataTable.data = this.categories
     this.dataTable.data.forEach(category => {
-      category.createdAt = Intl.DateTimeFormat('es-ES').format(category.createdAt)
+      category.createdAt = Intl.DateTimeFormat('es-ES').format(category.createdAt*1000)
     })
   }
 
