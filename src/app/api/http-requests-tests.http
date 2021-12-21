@@ -1,0 +1,228 @@
+@baseUrl = http://localhost:8080/api/v1
+@email = "anyuseremail1@anyserver.com"
+@password = "Secure8DigitUpperCaseLowerCasePasswordWithNumbers"
+@accesToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI1Y2JlNzdjMy1iYjBjLTQ1MGYtOWUzNy05NzViY2U1OTBkOTgiLCJuYmYiOjE2NDAwMzIxNzgsImV4cCI6MTY0MDAzNTc3OCwiYXV0aG9yaXRpZXMiOiJVU0VSIiwidXNlcm5hbWUiOiI1Y2JlNzdjMy1iYjBjLTQ1MGYtOWUzNy05NzViY2U1OTBkOTgifQ.HMuWAWHBrh19jQSbayUUNgpYNQdyN7j3FieQJwb4HyU4moLaITtE1tBXdFRb8zlVpR5Cs3DcVxT9dLE3S8j_L9b4qnr4ciBbpVYSAKlBF6RV__1vHKfwXX6TtUqCzi6qtWX50i9iaZdBeuj1fuvdGHNqbxmTf89pi7hIcubuM5sOGKhtXWbDqHmt9_CTJyQr32Fhs8x-cAf5s1VNnvQlOC-bB2hJlUVqqJun49vU7E9wUjY729ha0Ds7oHI25B-bwzT3QLwG4F9CJoNblNq4yrr3YarKr_wPwQrvy3UYue7vCVnKUZpZ7vFNNe4KVv7d_HAnADU_A5JzM5pIu783zQ"
+@refreshToken = "23aa6460-fb51-4609-b184-31e2133672dd"
+
+
+
+############################################################################
+################################### USERS #################################
+############################################################################
+
+############################################################################
+### CREATE USER
+############################################################################
+POST {{baseUrl}}/users HTTP/1.1
+content-type: application/json
+
+{
+    "email": {{email}},
+    "password": {{password}},
+    "firstName": "John",
+    "lastName": "Dow",
+    "fiscalId": "NOTVALIDATED",
+    "address": " Somewhere over the rainbow street 565",
+    "preferredLanguage": "english"
+}
+
+
+############################################################################
+### LOGIN
+############################################################################
+# @name login
+POST {{baseUrl}}/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": {{email}},
+    "password": {{password}}
+}
+
+
+############################################################################
+### GET TOKEN
+############################################################################
+@auth = {{login.response.body.$.jwt}}
+
+
+############################################################################
+### GET USER
+############################################################################
+GET {{baseUrl}}/users/me HTTP/1.1
+Authorization: Bearer {{auth}}
+
+
+############################################################################
+### GET ALL USERS
+############################################################################
+GET {{baseUrl}}/users/users?role=User&role=Administrator&role=SuperAdmin HTTP/1.1
+Authorization: Bearer {{auth}}
+
+
+############################################################################
+### UPDATE USER
+############################################################################
+POST {{baseUrl}}/users/me HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "email": {{email}},
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "fiscalId": "Do not have any",
+    "address": "Hell street 1234",
+    "preferredLanguage": "spanish"
+}
+
+
+############################################################################
+### LOGIN WITH REFRESH TOKEN
+############################################################################
+POST {{baseUrl}}/users/refresh-token HTTP/1.1
+content-type: application/json
+
+{
+    "refreshToken": {{refreshToken}}
+}
+
+
+############################################################################
+################################# CATEGORIES ###############################
+############################################################################
+@categoryId = d5a8fae9-d376-4e37-a5b0-46f9128beb4a
+
+############################################################################
+### CREATE CATEGORY
+############################################################################
+POST {{baseUrl}}/categories HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "name": "NameModified",
+    "description": "DescriptionModified"
+}
+
+
+############################################################################
+### READ CATEGORY
+############################################################################
+GET {{baseUrl}}/categories/{{categoryId}} HTTP/1.1
+
+
+############################################################################
+### UPDATE CATEGORY
+############################################################################
+PUT  {{baseUrl}}/categories/{{categoryId}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "name": "Very freeze ice creamssssss",
+    "description": "This ice creams come directly from south poleeeee"
+}
+
+
+############################################################################
+### READ ALL CATEGORIES
+############################################################################
+GET {{baseUrl}}/categories HTTP/1.1
+Authorization: Bearer {{auth}}
+
+
+############################################################################
+############################## EVENT ORGANIZER ############################
+############################################################################
+@nameEventOrganizer = "New Event Organizer"
+@descriptionEventOrganizer = "The newest Event Organizer"
+@adminId = "277f69ec-333e-4243-b0a7-ec69a68a1e4a"
+@eventOrganizerId = 
+
+############################################################################
+### CREATE EVENT ORGANIZER
+############################################################################
+POST {{baseUrl}}/event-organizer HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "name": {{nameEventOrganizer}},
+    "description": {{descriptionEventOrganizer}},
+    "admin": {{adminId}}
+}
+
+
+############################################################################
+### UPDATE EVENT ORGANIZER
+############################################################################
+POST {{baseUrl}}/event-organizer/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "name": {{nameEventOrganizer}},
+    "description": {{descriptionEventOrganizer}},
+    "admin": {{adminId}}
+}
+
+
+############################################################################
+### GET ALL EVENT ORGANIZERS
+############################################################################
+GET {{baseUrl}}/event-organizer HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": {{nameEventOrganizer}},
+    "description": {{descriptionEventOrganizer}},
+    "admin": {{adminId}}
+}
+
+
+############################################################################
+### GET EVENT ORGANIZER
+############################################################################
+GET {{baseUrl}}/event-organizer/{{eventOrganizerId}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+
+############################################################################
+################################### EVENTS #################################
+############################################################################
+
+############################################################################
+### CREATE EVENT
+############################################################################
+POST {{baseUrl}}/events HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "name": "EventAlpha",
+    "description": "First Event Created Via API",
+    "headerImage": "https://i.pinimg.com/originals/50/c5/1e/50c51e02a205b44c3449fc128400ff20.jpg",
+    "startDate": "1640014085",
+    "endDate": "1640024885",
+    "category": "TestEvent",
+    "organizerId": "b3161490-f322-417b-b64f-19169de70c4b"
+}
+
+
+############################################################################
+################################### LABELS #################################
+############################################################################
+
+############################################################################
+### CREATE LABEL
+############################################################################
+POST {{baseUrl}}/labels HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+    "name": "This is amazing label",
+    "description": "Everything do you need is love"
+}
