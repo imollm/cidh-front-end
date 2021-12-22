@@ -81,6 +81,28 @@
         "uri": "/event-organizer",
         "method": "GET"
       }
-    }
+    },
+    "event": {
+      "create": {
+        "uri": "/events",
+        "method": "POST"
+      },
+      "getByFilters": {
+        "uri": "/events%s",
+        "method": "GET"
+      },
+      "getById": {
+        "uri": "/events/%s",
+        "method": "GET"
+      },
+      "updateById": {
+        "uri": "/events/%s",
+        "method": "POST"
+      },
+      "getLast": {
+        "uri": "/events/last/%s",
+        "method": "GET"
+      }
+    } 
   }
 }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 // Custom imports
 import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { EventComponent } from './event.component';
   ],
   imports: [
     CommonModule,
-    EventRoutingModule
+    EventRoutingModule,
+    SharedModule
   ]
 })
 export class EventModule { }

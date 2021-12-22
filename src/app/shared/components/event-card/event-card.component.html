@@ -13,12 +13,12 @@
   <div class="card-footer text-center">
     <div>
       <small class="text-muted">
-        <strong><i>Inici</i></strong> {{ event.initDate | date:'medium':'+0200' }}
+        <strong><i>Inici</i></strong> {{ event.startDate | formatDate }}
       </small>
     </div>
     <div>
       <small class="text-muted">
-        <strong><i>Fi</i></strong> {{ event.endDate | date:'medium':'+0200' }}
+        <strong><i>Fi</i></strong> {{ event.endDate | formatDate }}
       </small>
     </div>
   </div>

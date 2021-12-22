@@ -13,28 +13,28 @@
       <div class="col-12">
         <div class="results-container-search-params">
           <h5>Resultats de la cerca amb els parametre/s:</h5>
-          <div *ngIf="searchModel.name" class="results-container-search-params-param">
+          <div *ngIf="searchModel.name && searchModel.name.length > 0" class="results-container-search-params-param">
             <span class="results-container-search-params-param-title">
               Nom:
             </span>
-            <span class="results-container-search-params-param-value">
-              {{ searchModel.name }}
+            <span *ngFor="let name of searchModel.name" class="results-container-search-params-param-value">
+              {{ name + ', ' }}
             </span>
           </div>
-          <div *ngIf="searchModel.label" class="results-container-search-params-param">
+          <div *ngIf="searchModel.label && searchModel.label.length > 0" class="results-container-search-params-param">
             <span class="results-container-search-params-param-title">
               Etiqueta:
             </span>
-            <span class="results-container-search-params-param-value">
-              {{ searchModel.label.name }}
+            <span *ngFor="let label of searchModel.label" class="results-container-search-params-param-value">
+              {{ label.name + ', ' }}
             </span>
           </div>
-          <div *ngIf="searchModel.category" class="results-container-search-params-param">
+          <div *ngIf="searchModel.category && searchModel.category.length > 0" class="results-container-search-params-param">
             <span class="results-container-search-params-param-title">
               Categoria:
             </span>
-            <span class="results-container-search-params-param-value">
-              {{ searchModel.category.name }}
+            <span *ngFor="let category of searchModel.category" class="results-container-search-params-param-value">
+              {{ category.name + ', ' }}
             </span>
           </div>
         </div>

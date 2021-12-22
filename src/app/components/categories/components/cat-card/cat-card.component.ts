@@ -23,9 +23,12 @@ export class CatCardComponent {
   goToResultsPage(): void {
     this.router.navigate(['/results']).then(() => {
       let searchParams: EventSearcher = {} as EventSearcher;
-      searchParams.category = this.category;
-      searchParams.events = this.eventService.findEventsByCategory(this.category.id);
-      this.messageService.changeMessage(searchParams);
+      searchParams.category.push(this.category);
+      this.eventService.findEvents(searchParams).then(res => {
+        searchParams.events = res;
+      }).then(() => {
+        this.messageService.changeMessage(searchParams);
+      });
     });
   }
 }
