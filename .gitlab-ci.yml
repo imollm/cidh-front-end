@@ -1,7 +1,6 @@
 stages:
   - install
-  - lint
-  - e2e
+  - test
   - build
   - deploy
 
@@ -21,7 +20,7 @@ install:
       - merge_request
 
 lint:
-  stage: lint
+  stage: test
   image: node:14.15-alpine3.13
   script:
     - echo "Lint project"
@@ -36,16 +35,14 @@ lint:
       - merge_request
 
 e2e:
-  stage: e2e
+  stage: test
   image: cypress/base:10
   script:
     - echo "Start e2e tests"
+    - npm install
     - cypress install
     - $(npm bin)/cypress verify
     - npm run e2e
-  cache:
-    paths:
-      - node_modules
   only:
     refs:
       - main
