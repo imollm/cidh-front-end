@@ -10,7 +10,7 @@ install:
   image: node:14.15-alpine3.13
   script:
     - echo "Install dependencies"
-    - npm install
+    - npm ci
   cache:
     paths:
       - node_modules
