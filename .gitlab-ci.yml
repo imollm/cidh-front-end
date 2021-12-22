@@ -39,9 +39,6 @@ e2e:
   image: cypress/base:10
   script:
     - echo "Start e2e tests"
-    - npm install
-    - cypress install
-    - $(npm bin)/cypress verify
     - npm run e2e
   only:
     refs:
