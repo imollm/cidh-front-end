@@ -1,6 +1,7 @@
 stages:
   - install
   - lint
+  - e2e
   - build
   - deploy
 
