@@ -13,6 +13,7 @@ install:
   cache:
     paths:
       - node_modules
+      - /root/.cache/Cypress
   only:
     refs:
       - main
@@ -28,10 +29,26 @@ lint:
   cache:
     paths:
       - node_modules
+      - /root/.cache/Cypress
   only:
     refs:
       - main
       - develop
+      - merge_request
+
+e2e:
+  stage: e2e
+  image: cypress/base:10
+  script:
+    - echo "Start e2e tests"
+    - $(npm bin)/cypress verify
+    - npm run e2e
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - main
       - merge_request
 
 build:
