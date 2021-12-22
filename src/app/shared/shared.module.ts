@@ -8,6 +8,7 @@ import { EventSearcherComponent } from './components/event-searcher/event-search
 import { EventCardComponent } from './components/event-card/event-card.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { TableComponent } from './components/table/table.component';
+import { FormatDatePipe } from '../helpers/format-date.pipe';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -23,6 +24,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BannerComponent,
     EventResultsComponent,
     TableComponent,
+    FormatDatePipe
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxPaginationModule,
     NgxSpinnerModule,
     TableComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormatDatePipe
   ]
 })
 export class SharedModule { }

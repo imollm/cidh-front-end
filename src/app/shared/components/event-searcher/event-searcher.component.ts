@@ -46,8 +46,11 @@ export class EventSearcherComponent implements OnInit {
     this.router.navigate(['/results']).then(() => {
       let searchModel: EventSearcherModel = {} as EventSearcherModel;
       searchModel = this.form.value;
-      searchModel.events = this.eventService.findEvents(searchModel);
-      this.messageService.changeMessage(searchModel);
+      this.eventService.findEvents(searchModel).then(res => {
+        searchModel.events = res;
+      }).then(() => {
+        this.messageService.changeMessage(searchModel);
+      });
     });
   }
 }

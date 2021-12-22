@@ -1,33 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/event/services/event.service';
 import { Event } from '../../event/models/event.model';
-import * as faker from 'faker';
 
 @Component({
   selector: 'app-upcoming',
   templateUrl: './upcoming.component.html',
   styleUrls: ['./upcoming.component.sass']
 })
-export class UpcomingComponent {
+export class UpcomingComponent implements OnInit {
 
   upcomingEvents: Event[] = [];
 
-  constructor() {
+  constructor(private eventService: EventService) 
+  { }
+
+  ngOnInit(): void {
     this.initEvents();
   }
 
   private initEvents(): void {
-    let event = {} as Event;
-    for (let i = 0; i < 4; i++) {
-      event.name = faker.name.title();
-      event.description = faker.commerce.productDescription();
-      event.picture = faker.image.imageUrl();
-      event.rating = faker.datatype.number();
-      event.location = faker.internet.url();
-      event.initDate = faker.datatype.datetime();
-      event.endDate = faker.datatype.datetime();
-      this.upcomingEvents.push(event);
-      event = {} as Event;
-    }
+    this.eventService.upcomingEvents().then(res => {
+      if (res && res.length > 0) {
+        this.upcomingEvents = res;
+      }
+    });
   }
 
 }
