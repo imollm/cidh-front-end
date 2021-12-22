@@ -14,7 +14,6 @@ install:
   cache:
     paths:
       - node_modules
-      - /root/.cache/Cypress
   only:
     refs:
       - main
@@ -30,7 +29,6 @@ lint:
   cache:
     paths:
       - node_modules
-      - /root/.cache/Cypress
   only:
     refs:
       - main
@@ -42,6 +40,7 @@ e2e:
   image: cypress/base:10
   script:
     - echo "Start e2e tests"
+    - cypress install
     - $(npm bin)/cypress verify
     - npm run e2e
   cache:
