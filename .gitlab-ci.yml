@@ -1,37 +1,59 @@
 stages:
   - install
-  - lint
+  - test
   - build
   - deploy
 
-install:
-  stage: install
-  image: node:14.15-alpine3.13
-  script:
-    - echo "Install dependencies"
-    - npm install
-  cache:
-    paths:
-      - node_modules
-  only:
-    refs:
-      - main
-      - develop
-      - merge_request
+variables:
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
 
-lint:
-  stage: lint
-  image: node:14.15-alpine3.13
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .cache/*
+    - cache/Cypress
+    - node_modules
+    - test
+    - build
+    - deploy
+
+# install:
+#   image: node:14.15.5-alpine3.13
+#   stage: install
+#   script:
+#     - npm ci
+
+# lint:
+#   stage: test
+#   image: node:14.15-alpine3.13
+#   script:
+#     - echo "Lint project"
+#     - npm run lint
+#   cache:
+#     paths:
+#       - node_modules
+#   only:
+#     refs:
+#       - main
+#       - merge_request
+
+e2e:
+  stage: test
+  image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
-    - echo "Lint project"
-    - npm run lint
-  cache:
+    - echo "Start e2e tests"
+    - npm ci
+    - npm run start:ci && npm run e2e
+  artifacts:
+    when: always
     paths:
-      - node_modules
+      - "cypress/videos/**/*.mp4"
+      - "cypress/screenshots/**/*.png"
+    expire_in: 1 days
   only:
     refs:
       - main
-      - develop
       - merge_request
 
 build:
@@ -49,6 +71,8 @@ build:
       - main
 
 deploy:
+  variables:
+    MASTER_SSH_KEY: $MASTER_SSH_KEY
   image: kroniak/ssh-client
   stage: deploy
   environment:
@@ -56,7 +80,7 @@ deploy:
     url: https://culture.indahou.se
   script:
     - echo "Start deploy"
-    - apk add --no-cache rsync openssh
+    - apk add --no-cache scp openssh
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
