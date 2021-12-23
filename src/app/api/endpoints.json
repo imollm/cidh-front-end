@@ -103,6 +103,28 @@
         "uri": "/events/last/%s",
         "method": "GET"
       }
-    } 
+    } ,
+    "label": {
+      "create": {
+        "uri": "/labels",
+        "method": "POST"
+      },
+      "getById": {
+        "uri": "/labels/%s",
+        "method": "GET"
+      },
+      "updateById": {
+        "uri": "/labels/%s",
+        "method": "POST"
+      },
+      "getAll": {
+        "uri": "/labels",
+        "method": "GET"
+      },
+      "deleteById": {
+        "uri": "/labels/%s",
+        "method": "DELETE"
+      }
+    }
   }
 }

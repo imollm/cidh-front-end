@@ -35,7 +35,11 @@ export class EventSearcherComponent implements OnInit {
   }
 
   getLabels(): void {
-    this.labels = this.labelService.listAllLabels();
+    this.labelService.listAllLabels().then(res => {
+      if (res && res.length > 0) {
+        this.labels = res;
+      }
+    });
   }
 
   onSubmit(): void {

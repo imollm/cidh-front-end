@@ -19,7 +19,11 @@ export class LabelsComponent implements OnInit {
   }
 
   getAllLabels() {
-    this.labels = this.labelService.listAllLabels();
+    this.labelService.listAllLabels().then(res => {
+      if (res && res.length > 0) {
+        this.labels = res;
+      }
+    });
   }
 
 }

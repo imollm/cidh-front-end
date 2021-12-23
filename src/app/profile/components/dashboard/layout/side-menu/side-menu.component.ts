@@ -16,6 +16,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
 
   faUserAdmin = faUserTie;
   faCategories = faCubes;
+  faTags = faTags;
   faEventOrganizers = faBriefcase;
   faAssociateAdminToEvent = faCompressAlt;
   faLabels = faTags;

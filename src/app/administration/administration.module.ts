@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EventOrganizerListComponent } from './components/event-organizer/event-organizer-list/event-organizer-list.component';
 import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
+import { LabelListComponent } from './components/label/label-list/label-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EventOrganizerDetailComponent } from './components/event-organizer/even
     CategoryListComponent,
     EventOrganizerListComponent,
     EventOrganizerCreateEditComponent,
-    EventOrganizerDetailComponent
+    EventOrganizerDetailComponent,
+    LabelListComponent
   ],
   imports: [
     CommonModule,

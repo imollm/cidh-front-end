@@ -9,6 +9,7 @@ import { EventOrganizerListComponent } from './components/event-organizer/event-
 import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
 import { CategoryListComponent } from './components/category/list/category-list.component';
+import { LabelListComponent } from './components/label/label-list/label-list.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
@@ -19,10 +20,10 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent,
     canActivate: [ AuthGuard ],
     children: [
-      { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent, /* canActivate: [AuthGuard] */ },
+      { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent },
       { path: 'category', 
         children: [
-          { path: 'list', component: CategoryListComponent }
+          { path: 'list', component: CategoryListComponent },
         ]
       },
       {
@@ -33,6 +34,12 @@ const routes: Routes = [
           { path: 'create', component: EventOrganizerCreateEditComponent },
           { path: 'edit/:id', component: EventOrganizerCreateEditComponent },
           { path: 'view/:id', component: EventOrganizerDetailComponent }
+        ]
+      },
+      {
+        path: 'label',
+        children: [
+          { path: 'list', component: LabelListComponent }
         ]
       }
     ]
