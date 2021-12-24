@@ -10,6 +10,7 @@ import { Event } from '../../event/models/event.model';
 export class UpcomingComponent implements OnInit {
 
   upcomingEvents: Event[] = [];
+  lastEvents: string = '10';
 
   constructor(private eventService: EventService) 
   { }
@@ -19,11 +20,11 @@ export class UpcomingComponent implements OnInit {
   }
 
   private initEvents(): void {
-    this.eventService.upcomingEvents().then(res => {
+    this.eventService.upcomingEvents(this.lastEvents).then(res => {
       if (res && res.length > 0) {
         this.upcomingEvents = res;
       }
-    });
+    }).catch(err => console.log(err));
   }
 
 }

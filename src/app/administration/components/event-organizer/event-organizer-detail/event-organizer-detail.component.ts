@@ -28,7 +28,6 @@ export class EventOrganizerDetailComponent implements OnInit {
     this.eventOrganizerService.showEventOrganizer(this.eventOrganizer.id).then(res => {
       if (res.length > 0) {
         this.eventOrganizer = res[0];
-        console.log('Entra 3');
       }
     });
   }

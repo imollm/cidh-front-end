@@ -36,7 +36,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (err.status === 401 && this.router.url.includes('login')) {
           this.modalResultService.unsuccessfulLogin();
         } else if (err.status === 401) {
-          this.router.navigate(['login']).then(() => {
+          this.router.navigate(['profile/login']).then(() => {
             if (this.authService.isLogged()) {
               this.authService.logout();
             }

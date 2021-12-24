@@ -35,7 +35,6 @@ export class SignupComponent {
   onSubmit(): void {
     if (this.form.valid) {
       let user: IRegistration = this.form.value;
-      console.log(user);
       this.authService.registerUser(user).then(res => {
         this.spinner.show();
         if (res) {

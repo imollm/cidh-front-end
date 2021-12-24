@@ -21,13 +21,14 @@ export class EventService implements IEventService {
   }
 
   upcomingEvents(limit: string = '0'): Promise<Event[]> {
-    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getLast', limit);
+    let limitParam = `?limit=${limit}`;
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents', limitParam);
     return this.httpClient.get<Event[]>(endpoint).toPromise();
   }
 
   findEvents(searchParams: EventSearcherModel): Promise<Event[]> {
     const query = this.setSearchParams(searchParams);
-    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getLast', query);
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents', query);
     return this.httpClient.get<Event[]>(endpoint).toPromise();
   }
   showEvent(eventId: string): void {
