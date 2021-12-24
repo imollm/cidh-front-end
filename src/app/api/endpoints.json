@@ -104,7 +104,7 @@
         "method": "GET"
       },
       "getEvents": {
-        "uri": "/events%s",
+        "uri": "/events",
         "method": "GET"
       },
       "updateById": {

@@ -18,7 +18,7 @@
               Nom:
             </span>
             <span *ngFor="let name of searchModel.name" class="results-container-search-params-param-value">
-              {{ name + ', ' }}
+              {{ name + ' ' }}
             </span>
           </div>
           <div *ngIf="searchModel.label && searchModel.label.length > 0" class="results-container-search-params-param">
@@ -26,7 +26,7 @@
               Etiqueta:
             </span>
             <span *ngFor="let label of searchModel.label" class="results-container-search-params-param-value">
-              {{ label.name + ', ' }}
+              {{ label.name + ' ' }}
             </span>
           </div>
           <div *ngIf="searchModel.category && searchModel.category.length > 0" class="results-container-search-params-param">
@@ -34,7 +34,7 @@
               Categoria:
             </span>
             <span *ngFor="let category of searchModel.category" class="results-container-search-params-param-value">
-              {{ category.name + ', ' }}
+              {{ category.name + ' ' }}
             </span>
           </div>
         </div>
