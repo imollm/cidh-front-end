@@ -1,3 +1,5 @@
+import { IPermissions } from "./permissions.model";
+
 export interface IUser {
     id?: string;
     firstName: string;
@@ -8,4 +10,5 @@ export interface IUser {
     email: string;
     password?: string;
     role: string;
+    permissions?: IPermissions
 }

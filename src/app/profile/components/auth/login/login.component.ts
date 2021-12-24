@@ -30,7 +30,6 @@ export class LoginComponent {
         if (res && res.jwt) {
           this.authService.saveAccessToken(res.jwt);
           this.authService.saveRefreshToken(res.refreshToken);
-          this.authService.changeMessage(res);
           this.router.navigate(['/profile/dashboard/home']);
         }
       });

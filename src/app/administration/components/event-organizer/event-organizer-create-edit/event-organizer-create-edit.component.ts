@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IEventOrganizer } from 'src/app/administration/models/event-organizer.model';
+import { AdministratorService } from 'src/app/administration/services/administrator/administrator.service';
 import { EventOrganizerService } from 'src/app/administration/services/event-organizer/event-organizer.service';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IUser } from 'src/app/profile/models/user.model';
+import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-event-organizer-create-edit',
   templateUrl: './event-organizer-create-edit.component.html',
   styleUrls: ['./event-organizer-create-edit.component.sass']
 })
-export class EventOrganizerCreateEditComponent {
+export class EventOrganizerCreateEditComponent implements OnInit {
 
   title: string = 'Crear una nova empresa';
   btnText: string = 'Crear';
@@ -29,6 +31,7 @@ export class EventOrganizerCreateEditComponent {
     private router: Router,
     private spinner: NgxSpinnerService,
     private modalResultService: ModalResultService,
+    private adminService: AdministratorService
   ) {
     this.form = this.fb.group({
       name: new FormControl('', Validators.required),
@@ -47,6 +50,8 @@ export class EventOrganizerCreateEditComponent {
       this.title = 'Edita la empresa';
       this.btnText = 'Edita';
     }
+
+    this.getAdministrators();
   }
 
   createMode(): void {
@@ -63,8 +68,9 @@ export class EventOrganizerCreateEditComponent {
   getEventOrganizer(): void {
     this.eventOrganizerService.showEventOrganizer(this.eventOrganizerId).then(res => {
       this.spinner.show();
-      if (res.length > 0) {
-        this.eventOrganizer = res[0];
+      console.log(res);
+      if (res) {
+        this.eventOrganizer = res;
         this.eventOrganizerId = this.eventOrganizer.id;
         this.form.patchValue({
           name: this.eventOrganizer.name,
@@ -77,7 +83,11 @@ export class EventOrganizerCreateEditComponent {
   }
 
   getAdministrators(): void {
-    "TODO: Retrieve administrators and render a <select> with these admins"
+    this.adminService.listAllAdministrators().then(res => {
+      if (res && res.length > 0) {
+        this.administrators = res;
+      }
+    }).catch(err => console.log(err));
   }
 
   onSubmit(): void {

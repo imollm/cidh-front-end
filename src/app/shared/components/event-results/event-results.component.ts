@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from 'src/app/event/models/event.model';
+import { IEvent } from 'src/app/event/models/event.model';
 import { EventSearcher as EventSearcherModel} from '../../models/event-searcher.model';
 import { EventSearcherService } from '../../services/event-searcher.service';
 
@@ -11,7 +11,7 @@ import { EventSearcherService } from '../../services/event-searcher.service';
 export class EventResultsComponent implements OnInit {
 
   searchModel: EventSearcherModel | undefined;
-  events: Event[] = [];
+  events: IEvent[] = [];
   actualPage: number = 1;
 
   constructor(
