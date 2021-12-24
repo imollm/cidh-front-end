@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,7 +14,7 @@ import { IUser } from 'src/app/profile/models/user.model';
   templateUrl: './event-organizer-create-edit.component.html',
   styleUrls: ['./event-organizer-create-edit.component.sass']
 })
-export class EventOrganizerCreateEditComponent {
+export class EventOrganizerCreateEditComponent implements OnInit {
 
   title: string = 'Crear una nova empresa';
   btnText: string = 'Crear';

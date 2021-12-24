@@ -14,24 +14,27 @@ export class LabelService implements ILabelService {
     private endpointMapper: EndPointMapper
   )
   { }
-  addLabel(name: string, description: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  addLabel(label: Label): Promise<Label> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'create');
+    console.log(endpoint)
+    return this.httpClient.post<Label>(endpoint, label).toPromise();
   }
-  updateLabel(name: string, description: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  updateLabel(labelId: string, label: Label): Promise<Label> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'updateById', labelId);
+    console.log(endpoint)
+    return this.httpClient.post<Label>(endpoint, label).toPromise();
   }
-  showLabel(name: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  showLabel(labelId: string): Promise<Label> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'getById', labelId);
+    return this.httpClient.get<Label>(endpoint).toPromise();
   }
   listAllLabels(): Promise<Label[]> {
     const endpoint = this.endpointMapper.getEndPointUrl('label', 'getAll');
     return this.httpClient.get<Label[]>(endpoint).toPromise();
   }
-  removeLabel(name: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  removeLabel(labelId: string): Promise<boolean> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'deleteById', labelId);
+    console.log(endpoint)
+    return this.httpClient.delete<boolean>(endpoint).toPromise();
   }
 }

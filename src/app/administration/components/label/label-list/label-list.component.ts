@@ -4,6 +4,9 @@ import { LabelService } from 'src/app/administration/services/label/label.servic
 import { IActionButtons } from 'src/app/shared/components/table/models/action-buttons.model';
 import { IDashboardTable } from 'src/app/shared/components/table/models/table.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/helpers/utils.helper.service';
+import { ModalResultService } from 'src/app/helpers/modal.service';
 
 @Component({
   selector: 'app-label-list',
@@ -17,7 +20,7 @@ export class LabelListComponent implements OnInit {
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
     active: true,
-    resource: '/administration/dashboard/label',
+    resource: '/administration/dashboard/labels',
     actions: {
       view: true,
       edit: true,
@@ -28,6 +31,8 @@ export class LabelListComponent implements OnInit {
   constructor(
     private labelService: LabelService,
     private spinner: NgxSpinnerService,
+    private router: Router,
+    private modalResultService: ModalResultService
   ) { }
 
   ngOnInit(): void {

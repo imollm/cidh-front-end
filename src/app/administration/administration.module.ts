@@ -11,6 +11,8 @@ import { EventOrganizerListComponent } from './components/event-organizer/event-
 import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
 import { LabelListComponent } from './components/label/label-list/label-list.component';
+import { LabelCreateEditComponent } from './components/label/label-create-edit/label-create-edit.component';
+import { LabelDeleteComponent } from './components/label/label-delete/label-delete.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { LabelListComponent } from './components/label/label-list/label-list.com
     EventOrganizerListComponent,
     EventOrganizerCreateEditComponent,
     EventOrganizerDetailComponent,
-    LabelListComponent
+    LabelListComponent,
+    LabelCreateEditComponent,
+    LabelDeleteComponent
   ],
   imports: [
     CommonModule,
