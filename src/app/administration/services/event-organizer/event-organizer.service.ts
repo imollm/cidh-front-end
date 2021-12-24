@@ -26,9 +26,9 @@ export class EventOrganizerService implements IEventOrganizerService {
     return this.httpClient.post<IEventOrganizer>(endpoint, eventOrganizer).toPromise();
   }
 
-  showEventOrganizer(eventOrganizerId: string): Promise<IEventOrganizer[]> {
+  showEventOrganizer(eventOrganizerId: string): Promise<IEventOrganizer> {
     const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'getById', eventOrganizerId);
-    return this.httpClient.get<IEventOrganizer[]>(endpoint).toPromise();
+    return this.httpClient.get<IEventOrganizer>(endpoint).toPromise();
   }
 
   listAllEventOrganizers(): Promise<IEventOrganizer[]> {

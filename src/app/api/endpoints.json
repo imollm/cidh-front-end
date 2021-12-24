@@ -44,6 +44,18 @@
       "updateById": {
         "uri": "/users/%s",
         "method": "POST"
+      },
+      "getAdmins": {
+        "uri": "/users?role=Admin",
+        "method": "GET"
+      },
+      "getSuperAdmins": {
+        "uri": "/users?role=SuperAdmin",
+        "method": "GET"
+      },
+      "getUsers": {
+        "uri": "/users?role=User",
+        "method": "GET"
       }
     },
     "category": {
@@ -99,6 +111,6 @@
         "uri": "/events/%s",
         "method": "POST"
       }
-    } 
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Event } from 'src/app/event/models/event.model';
+import { IEvent } from 'src/app/event/models/event.model';
 
 @Component({
   selector: 'app-event-card',
@@ -9,7 +9,7 @@ import { Event } from 'src/app/event/models/event.model';
 })
 export class EventCardComponent implements OnInit {
 
-  @Input() event: Event;
+  @Input() event: IEvent;
   today: Date;
   eventRoute: string;
 

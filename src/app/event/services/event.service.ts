@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IEventService } from './event.interface';
-import { Event } from '../models/event.model';
+import { IEvent } from '../models/event.model';
 import { EventSearcher as EventSearcherModel } from 'src/app/shared/models/event-searcher.model';
 import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 
@@ -20,16 +20,16 @@ export class EventService implements IEventService {
     throw new Error('Method not implemented.');
   }
 
-  upcomingEvents(limit: string = '0'): Promise<Event[]> {
+  upcomingEvents(limit: string = '0'): Promise<IEvent[]> {
     let limitParam = `?limit=${limit}`;
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents', limitParam);
-    return this.httpClient.get<Event[]>(endpoint).toPromise();
+    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
   }
 
-  findEvents(searchParams: EventSearcherModel): Promise<Event[]> {
+  findEvents(searchParams: EventSearcherModel): Promise<IEvent[]> {
     const query = this.setSearchParams(searchParams);
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents', query);
-    return this.httpClient.get<Event[]>(endpoint).toPromise();
+    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
   }
   showEvent(eventId: string): void {
     TODO: 'Method not implemented.'

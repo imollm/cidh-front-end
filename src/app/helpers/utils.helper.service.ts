@@ -21,7 +21,7 @@ export class UtilsService {
   static getResourceIdFromURI(uri: string): string {
     let id: string | undefined;
 
-    if (uri.includes('edit')) {
+    if (uri.includes('edit') || uri.includes('view')) {
       id = uri.split('/').slice(-1)[0];
       if (id.includes('#')) {
         id = uri.split('/').slice(-2)[0];
