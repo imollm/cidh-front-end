@@ -25,7 +25,7 @@ import { LogoutComponent } from './components/dashboard/components/logout/logout
     DashboardSideMenuComponent,
     DashboardHomeComponent,
     ProfileShowComponent,
-    LogoutComponent,
+    LogoutComponent
   ],
   imports: [
     ProfileRoutingModule,

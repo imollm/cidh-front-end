@@ -16,6 +16,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EventResultsComponent } from './components/event-results/event-results.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BannerComponent,
     EventResultsComponent,
     TableComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    EventDetailComponent
   ],
   imports: [
     CommonModule,

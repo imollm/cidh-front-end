@@ -2,6 +2,12 @@
   <h2 #sideMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
+      <li class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faHome"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          <a [routerLink]="['/profile/dashboard/home']">Home</a>
+        </span>
+      </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageCategories"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faCategories"></fa-icon>
@@ -30,12 +36,19 @@
           Administradors
         </a>
       </li>
+<<<<<<< HEAD
       <li *ngIf="permissions && permissions.administration && permissions.administration.associateAdminToEventOrganizer"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAssociateAdminToEvent"></fa-icon>
           <a #sideMenuItemTitle class="sidebar-menu-content-items-item-title" [routerLink]="['/administration/dashboard/event-organizer/linkAdminToEventOrganizer']">
             Associar admin.
           </a>
+=======
+      <li *ngIf="permissions && permissions.administration && permissions.administration.manageLabels"
+        class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faLabels"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Etiquetes</span>
+>>>>>>> develop
       </li>
       <li *ngIf="permissions && permissions.profile && permissions.profile.manageEvents"
         class="sidebar-menu-content-items-item">
