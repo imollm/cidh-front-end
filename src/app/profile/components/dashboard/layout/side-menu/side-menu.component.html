@@ -23,13 +23,6 @@
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faUserAdmin"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Administradors</span>
       </li>
-      <li *ngIf="permissions && permissions.administration && permissions.administration.associateAdminToEventOrganizer"
-        class="sidebar-menu-content-items-item">
-        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAssociateAdminToEvent"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
-          <a [routerLink]="['/administration/dashboard/event-organizer/linkAdminToEventOrganizer']">Associar admin.</a>
-        </span>
-      </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageLabels"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faLabels"></fa-icon>
