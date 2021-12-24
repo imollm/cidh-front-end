@@ -111,7 +111,6 @@
         "uri": "/events/%s",
         "method": "POST"
       }
-<<<<<<< HEAD
     } ,
     "label": {
       "create": {
@@ -134,8 +133,6 @@
         "uri": "/labels/%s",
         "method": "DELETE"
       }
-=======
->>>>>>> develop
     }
   }
 }

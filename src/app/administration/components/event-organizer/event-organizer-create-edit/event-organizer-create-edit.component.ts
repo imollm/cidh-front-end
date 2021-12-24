@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-=======
 import { Component, OnInit } from '@angular/core';
->>>>>>> develop
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';

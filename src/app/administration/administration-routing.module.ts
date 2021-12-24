@@ -21,10 +21,6 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent,
     canActivate: [ AuthGuard ],
     children: [
-<<<<<<< HEAD
-      { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent },
-=======
->>>>>>> develop
       { path: 'category', 
         children: [
           { path: 'list', component: CategoryListComponent },
