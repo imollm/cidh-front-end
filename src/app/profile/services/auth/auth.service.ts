@@ -18,8 +18,6 @@ export class AuthService implements IAuthService {
   private refreshToken: string | null | undefined;
 
   private message: ILogin = {} as ILogin;
-  private messageSource = new BehaviorSubject<ILogin>(this.message);
-  currentMessage = this.messageSource.asObservable();
 
   constructor(
     private httpClient: HttpClient,
@@ -78,14 +76,5 @@ export class AuthService implements IAuthService {
 
   getRefreshToken(): string {
     return this.refreshToken = sessionStorage.getItem('REFRESH_TOKEN');
-  }
-
-  /**
-   * Method to send ILogin to subscribers
-   * (Subscriber) DashboardComponent
-   *
-  */
-  changeMessage(message: ILogin) {
-    this.messageSource.next(message);
   }
 }

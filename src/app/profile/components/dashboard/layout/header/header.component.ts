@@ -11,8 +11,8 @@ import { AuthService } from 'src/app/profile/services/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() permissions: IPermissions = {} as IPermissions;
-  user: IUser;
+  permissions: IPermissions = {} as IPermissions;
+  user: IUser = {} as IUser;
 
   faUserCircle = faUserCircle;
 
@@ -26,10 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.permissions = JSON.parse(String(this.permissions));
-    this.authService.getUser().then(user => {
-      this.user = user;
-    });
+    this.getUser();
   }
 
   toggleProfileMenu(): void {
@@ -40,5 +37,16 @@ export class HeaderComponent implements OnInit {
       this.profileMenu.nativeElement.classList.remove('show');
       this.profileMenu.nativeElement.classList.add('hide');
     }
+  }
+
+  getUser(): void {
+    this.authService.getUser().then(res => {
+      if (res) {
+        this.user = res; 
+        if (res.permissions) {
+          this.permissions = JSON.parse(String(res.permissions));
+        }
+      }
+    }).catch(err => console.log(err));
   }
 }

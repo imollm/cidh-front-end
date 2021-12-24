@@ -14,9 +14,6 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.currentMessage.subscribe(data => {
-      this.permissions = data.permissions;
-    });
     this.blockBackWebBrowserButton();
   }
 

@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { IPermissions } from 'src/app/profile/models/permissions.model';
+import { IUser } from 'src/app/profile/models/user.model';
+import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard-side-menu',
@@ -9,7 +11,8 @@ import { IPermissions } from 'src/app/profile/models/permissions.model';
 })
 export class SideMenuComponent implements OnInit, AfterViewInit {
 
-  @Input() permissions: IPermissions = {} as IPermissions;
+  user: IUser = {} as IUser;
+  permissions: IPermissions = {} as IPermissions;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;
@@ -35,6 +38,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
 
   constructor(
     private er: ElementRef,
+    private authService: AuthService
   ) {
     this.sideMenu = this.er;
     this.sideMenuTitle = this.er;
@@ -43,7 +47,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.permissions = JSON.parse(String(this.permissions));
+    this.getUser();
   }
 
   ngAfterViewInit(): void {
@@ -128,7 +132,14 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
   }
 
-  hideSideMenuTitles(): void {
-
+  getUser(): void {
+    this.authService.getUser().then(res => {
+      if (res) {
+        this.user = res;
+        if (res.permissions) {
+          this.permissions = JSON.parse(String(res.permissions));
+        }
+      }
+    }).catch(err => console.log(err));
   }
 }
