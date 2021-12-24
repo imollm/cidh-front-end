@@ -2,6 +2,12 @@
   <h2 #sideMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
+      <li class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faHome"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          <a [routerLink]="['/profile/dashboard/home']">Home</a>
+        </span>
+      </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageCategories"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faCategories"></fa-icon>

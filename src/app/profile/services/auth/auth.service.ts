@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 import { ILogin } from '../../models/login.model';
 import { IUser } from '../../models/user.model';
-import { BehaviorSubject } from 'rxjs';
 import { ILogout } from '../../components/dashboard/components/logout/logout.model';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,6 @@ export class AuthService implements IAuthService {
 
   private token: string | null | undefined;
   private refreshToken: string | null | undefined;
-
-  private message: ILogin = {} as ILogin;
 
   constructor(
     private httpClient: HttpClient,
@@ -76,5 +74,9 @@ export class AuthService implements IAuthService {
 
   getRefreshToken(): string {
     return this.refreshToken = sessionStorage.getItem('REFRESH_TOKEN');
+  }
+
+  getJWTDecoded(): any {
+    return jwt_decode(this.getAccessToken());
   }
 }
