@@ -13,7 +13,10 @@ export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
   actualPage: number = 1;
 
-  constructor(private categoryService: CategoryService, private spinner: NgxSpinnerService) { }
+  constructor(
+    private categoryService: CategoryService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();

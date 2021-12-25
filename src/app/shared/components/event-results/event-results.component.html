@@ -4,7 +4,44 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <app-event-searcher></app-event-searcher>
+        <section class="searcher">
+          <div class="container">
+            <form class="searcher-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row pt-5 px-5">
+                <div class="col-sm-4">
+                  <label for="inputName" class="mb-2 mt-2 mt-sm-0">Nom</label>
+                  <input id="inputName" type="text" class="form-control" placeholder="Nom" formControlName="name" />
+                  <small>Pots introduir més de un nom separat per una coma. Exemple: Rock, Festival</small>
+                </div>
+                <div class="col-sm-4">
+                  <label for="selectLabel" class="mb-2 mt-2 mt-sm-0">Etiqueta</label>
+                  <select id="selectLabel" class="form-control" formControlName="label">
+                    <option [ngValue]="" disabled selected>Selecciona etiqueta</option>
+                    <option *ngFor="let label of labels" [ngValue]="label">
+                      {{ label.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <label for="selectCategory" class="mb-2 mt-2 mt-sm-0">Categoria</label>
+                  <select id="selectCategory" class="form-control" formControlName="category">
+                    <option [ngValue]="" disabled selected>Selecciona categoria</option>
+                    <option *ngFor="let category of categories" [ngValue]="category">
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </div>
+            </div>
+            <div class="row pb-5">
+              <div class="col-sm-3 offset-sm-4 mt-sm-0 mt-5 d-flex align-items-end justify-content-center">
+                <div>
+                  <button type="submit" class="btn btn-dark">Cercar</button>
+                </div>
+              </div>
+            </div>
+            </form>
+          </div>
+        </section>
       </div>
     </div>
     <div
@@ -18,7 +55,7 @@
               Nom:
             </span>
             <span *ngFor="let name of searchModel.name" class="results-container-search-params-param-value">
-              {{ name + ', ' }}
+              {{ name + ' ' }}
             </span>
           </div>
           <div *ngIf="searchModel.label && searchModel.label.length > 0" class="results-container-search-params-param">
@@ -26,7 +63,7 @@
               Etiqueta:
             </span>
             <span *ngFor="let label of searchModel.label" class="results-container-search-params-param-value">
-              {{ label.name + ', ' }}
+              {{ label + ' ' }}
             </span>
           </div>
           <div *ngIf="searchModel.category && searchModel.category.length > 0" class="results-container-search-params-param">
@@ -34,7 +71,7 @@
               Categoria:
             </span>
             <span *ngFor="let category of searchModel.category" class="results-container-search-params-param-value">
-              {{ category.name + ', ' }}
+              {{ category + ' ' }}
             </span>
           </div>
         </div>

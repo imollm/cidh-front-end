@@ -16,6 +16,8 @@ export class TableComponent implements OnChanges {
   @Input() actionButtons: IActionButtons;
   dataTable: IDashboardTable = {} as IDashboardTable;
 
+  elementId: string;
+
   faView = faEye;
   faEdit = faPencilAlt;
   faDelete = faTimes;
@@ -24,7 +26,9 @@ export class TableComponent implements OnChanges {
     private router: Router
   ) { }
 
-  showDeleteModal(url: string): void {
+  showDeleteModal(element): void {
+    let id = element.id;
+
     Swal.fire({
       title: 'Estas segur de voler eliminar?',
       text: 'L\'acció no es podra desfer',
@@ -33,10 +37,10 @@ export class TableComponent implements OnChanges {
       confirmButtonColor: '#589c1d',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, elimina!'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    }).then(() => {
+        const url = `${this.actionButtons.resource}/delete/${id}`;
+        console.log(url)
         this.router.navigate([url]);
-      }
     });
   }
 

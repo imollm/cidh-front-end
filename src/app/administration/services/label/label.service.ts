@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Label } from '../../models/label.model';
 import { ILabelService } from './label.interface';
-import * as faker from 'faker';
 import { HttpClient } from '@angular/common/http';
+import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LabelService implements ILabelService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private endpointMapper: EndPointMapper
+  )
+  { }
+  addLabel(label: Label): Promise<Label> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'create');
+    return this.httpClient.post<Label>(endpoint, label).toPromise();
+  }
 
+  updateLabel(labelId: string, label: Label): Promise<Label> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'updateById', labelId);
+    return this.httpClient.post<Label>(endpoint, label).toPromise();
   }
-  addLabel(name: string, description: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+
+  showLabel(labelId: string): Promise<Label> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'getById', labelId);
+    return this.httpClient.get<Label>(endpoint).toPromise();
   }
-  updateLabel(name: string, description: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+
+  listAllLabels(): Promise<Label[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'getAll');
+    return this.httpClient.get<Label[]>(endpoint).toPromise();
   }
-  showLabel(name: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
-  }
-  listAllLabels(): Label[] {
-    TODO: 'Method not implemented.'
-    let labels: Label[] = [];
-    for (let i = 0; i < 10; i++) {
-      labels.push({
-        id: faker.datatype.uuid(),
-        name: faker.lorem.word(),
-        description: faker.lorem.words()
-      });
-    }
-    return labels;
-  }
-  removeLabel(name: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  
+  removeLabel(labelId: string): Promise<boolean> {
+    const endpoint = this.endpointMapper.getEndPointUrl('label', 'deleteById', labelId);
+    return this.httpClient.delete<boolean>(endpoint).toPromise();
   }
 }

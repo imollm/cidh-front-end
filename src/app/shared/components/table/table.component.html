@@ -52,7 +52,7 @@
                     </a>
                   </div>
                   <div *ngIf="actionButtons.actions && actionButtons.actions.delete">
-                    <a (click)="showDeleteModal('')">
+                    <a (click)="showDeleteModal(element)">
                       <fa-icon [icon]="faDelete" class="icon-delete"></fa-icon>
                     </a>
                   </div>
