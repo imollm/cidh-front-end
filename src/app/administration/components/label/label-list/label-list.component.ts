@@ -36,6 +36,12 @@ export class LabelListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let mode = UtilsService.getMode(this.router.url);
+
+    if (mode === 'delete') {
+      let labelId = UtilsService.getResourceIdFromURI(this.router.url);
+      this.deleteLabel(labelId);
+    }
     this.getLabels();
   }
 
@@ -58,6 +64,15 @@ export class LabelListComponent implements OnInit {
       { colName: "createdAt",  text: "Creada" }
     ];
     this.dataTable.data = this.labels;
+  }
+
+  deleteLabel(labelId: string): void {
+    this.labelService.removeLabel(labelId).then(res => {})
+    .then(() => this.modalResultService.deleteResultModal(true))
+    .catch(err => {
+      console.log(err);
+      this.modalResultService.deleteResultModal(false);
+    });
   }
 
 }

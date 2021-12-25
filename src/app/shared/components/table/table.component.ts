@@ -38,7 +38,8 @@ export class TableComponent implements OnChanges {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, elimina!'
     }).then(() => {
-        const url = `${this.actionButtons.resource}/delete/${id}`
+        const url = `${this.actionButtons.resource}/delete/${id}`;
+        console.log(url)
         this.router.navigate([url]);
     });
   }

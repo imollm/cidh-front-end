@@ -10,7 +10,6 @@ import { EventOrganizerDetailComponent } from './components/event-organizer/even
 import { CategoryListComponent } from './components/category/list/category-list.component';
 import { LabelListComponent } from './components/label/label-list/label-list.component';
 import { LabelCreateEditComponent } from './components/label/label-create-edit/label-create-edit.component';
-import { LabelDeleteComponent } from './components/label/label-delete/label-delete.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
@@ -42,7 +41,7 @@ const routes: Routes = [
           { path: 'create', component: LabelCreateEditComponent },
           { path: 'edit/:id', component: LabelCreateEditComponent },
           { path: 'view/:id' },
-          { path: 'delete/:id', component: LabelDeleteComponent }
+          { path: 'delete/:id', component: LabelListComponent }
         ]
       }
     ]
