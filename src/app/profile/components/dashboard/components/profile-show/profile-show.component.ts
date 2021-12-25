@@ -34,8 +34,6 @@ export class ProfileShowComponent implements OnInit {
       address: new FormControl('', Validators.required),
       preferredLanguage: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email, Validators.required]),
-      password1: new FormControl('', [UtilsService.strong, Validators.minLength(8)]),
-      password2: new FormControl('', [UtilsService.strong, Validators.minLength(8)])
     });
   }
 
@@ -64,6 +62,7 @@ export class ProfileShowComponent implements OnInit {
 
     if (this.form.valid) {
       this.spinner.show();
+
       this.profileService.updateUser(this.form.value).then(res => {
         result = res.hasOwnProperty('id');
       }).then(() => {
@@ -73,18 +72,5 @@ export class ProfileShowComponent implements OnInit {
         });
       });
     }
-  }
-
-  isPwdEquals(): boolean {
-    return this.form.get('password1').value === this.form.get('password2').value;
-  }
-
-  setPassword(): void {
-    const pwd = this.form.value.password1;
-
-    delete this.form.value.password1;
-    delete this.form.value.password2;
-
-    this.form.value.password = pwd;
   }
 }

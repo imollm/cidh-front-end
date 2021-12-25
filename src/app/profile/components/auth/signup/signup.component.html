@@ -148,7 +148,7 @@
           </div>
             <div class="mt-5 mb-3 row">
               <div class="col-12 d-flex justify-content-center">
-                <button class="btn btn-dark">Envia</button>
+                <button class="btn btn-dark" [disabled]="form.invalid && !isPwdEquals()">Envia</button>
               </div>
             </div>
           </div>
