@@ -74,12 +74,15 @@ export class AdministratorCreateEditComponent implements OnInit {
 
         this.adminService.addAdministrator(newAdmin).then(res => {
           this.administrator = res;
-        }).then(() => this.redirectUser());
+        })
+        .then(() => this.redirectUser(true))
+        .catch(err => this.redirectUser(false));
 
       } else if (this.mode && this.mode === 'edit') {
         this.adminService.updateAdministrator(this.adminId, this.form.value).then(res => {
           this.administrator = res;
-        }).then(() => this.redirectUser());
+        }).then(() => this.redirectUser(true))
+        .catch(err => this.redirectUser(false));
       }
     }
   }
@@ -114,14 +117,14 @@ export class AdministratorCreateEditComponent implements OnInit {
   }
 
   // Redirect user on list component and show modal with result
-  redirectUser(): void {
+  redirectUser(valid: boolean): void {
     this.router.navigate(['/administration/dashboard/administrator/list']).then(() => {
       let result: boolean = this.administrator.hasOwnProperty('id');
 
       if (this.mode === 'create') {
-        this.modalResultService.createResultModal(result);
+        this.modalResultService.createResultModal(valid && result);
       } else if (this.mode === 'edit') {
-        this.modalResultService.editResultModal(result);
+        this.modalResultService.editResultModal(valid && result);
       }
     }).then(() => this.spinner.hide());
   }
