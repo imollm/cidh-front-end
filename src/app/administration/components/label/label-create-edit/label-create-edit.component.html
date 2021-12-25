@@ -7,15 +7,31 @@
                 </div>
                 <div>
                     <div class="form-group mb-5">
-                        <label for="eventOrganizerName" class="form-label">Nom<sup>*</sup></label>
-                        <input type="text" id="eventOrganizerName" class="form-control" formControlName="name">
+                        <label for="labelName" class="form-label">Nom<sup>*</sup></label>
+                        <input type="text" id="labelName" class="form-control" formControlName="name"
+                            [ngClass]="{ 'is-invalid': !form.pending && form.get('name').invalid, 'is-valid': form.get('name').valid }" />
+                        <div *ngIf="form.get('name').invalid && 
+                                    form.get('name').errors && 
+                                    (form.get('name').dirty || form.get('name').touched)">
+                            <small class="text-danger" *ngIf="form.get('name').hasError('required')">
+                                El nom es obligatori.
+                            </small>
+                        </div>
                     </div>
                     <div class="form-group mb-5">
-                        <label for="eventOrganizerDescription" class="form-label">Descripció<sup>*</sup></label>
-                        <input type="text" id="eventOrganizerDescription" class="form-control" formControlName="description">
+                        <label for="labelDescription" class="form-label">Descripció<sup>*</sup></label>
+                        <input type="text" id="labelDescription" class="form-control" formControlName="description"
+                            [ngClass]="{ 'is-invalid': !form.pending && form.get('description').invalid, 'is-valid': form.get('description').valid }" />
+                        <div *ngIf="form.get('description').invalid && 
+                                    form.get('description').errors && 
+                                    (form.get('description').dirty || form.get('description').touched)">
+                            <small class="text-danger" *ngIf="form.get('description').hasError('required')">
+                                La descripció es obligatoria.
+                            </small>
+                        </div>
                     </div>
                     <div class="form-group p-4">
-                        <button class="form-control btn btn-dark text-white">
+                        <button class="form-control btn btn-dark text-white" [disabled]="form.invalid">
                             {{ btnText }}
                         </button>
                     </div>

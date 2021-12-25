@@ -22,7 +22,7 @@ export class LabelListComponent implements OnInit {
     active: true,
     resource: '/administration/dashboard/labels',
     actions: {
-      view: true,
+      view: false,
       edit: true,
       delete: true
     }

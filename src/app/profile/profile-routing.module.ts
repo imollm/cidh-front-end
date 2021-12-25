@@ -22,6 +22,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: '/profile/dashboard/home', pathMatch: 'full' },
       { path: 'home', component: DashboardHomeComponent },
       { path: 'userprofile', component: ProfileShowComponent },
       { path: 'logout', component: LogoutComponent },

@@ -6,7 +6,6 @@ import { ModalResultService } from 'src/app/helpers/modal.service';
 import { ProfileService } from '../../../../services/profile-service.service'
 import { preferredLanguages } from 'src/app/profile/models/preferredLanguages.model';
 
-
 @Component({
   selector: 'app-profile-show',
   templateUrl: './profile-show.component.html',
@@ -32,11 +31,12 @@ export class ProfileShowComponent implements OnInit {
       fiscalId: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
       preferredLanguage: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.email, Validators.required]),
+      email: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
+    this.form.get('email').disable();
     this.getUser()
   }
 
@@ -58,13 +58,15 @@ export class ProfileShowComponent implements OnInit {
 
   onSubmit(): void {
     let result: Boolean;
-
+    
     if (this.form.valid) {
       this.spinner.show();
+      this.form.value.email = this.form.get('email').value;
+
       this.profileService.updateUser(this.form.value).then(res => {
         result = res.hasOwnProperty('id');
       }).then(() => {
-        this.router.navigate(['/profile/dashboard/home']).then(() => {
+        this.router.navigate(['/profile/dashboard']).then(() => {
           this.modalResultService.editResultModal(result);
           this.spinner.hide();
         });

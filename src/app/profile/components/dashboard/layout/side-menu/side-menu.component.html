@@ -33,7 +33,8 @@
           </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageAdministrators"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/administration/dashboard/administrator/list']" routerLinkActive="router-link-active" >
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faUserAdmin"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
           Administradors

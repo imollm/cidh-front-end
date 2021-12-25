@@ -19,7 +19,7 @@ export class EventOrganizerListComponent implements OnInit {
     active: true,
     resource: '/administration/dashboard/event-organizer',
     actions: {
-      view: true,
+      view: false,
       edit: true,
       delete: false
     }
