@@ -68,7 +68,7 @@ export class EventOrganizerCreateEditComponent implements OnInit {
   getEventOrganizer(): void {
     this.eventOrganizerService.showEventOrganizer(this.eventOrganizerId).then(res => {
       this.spinner.show();
-      console.log(res);
+      
       if (res) {
         this.eventOrganizer = res;
         this.eventOrganizerId = this.eventOrganizer.id;

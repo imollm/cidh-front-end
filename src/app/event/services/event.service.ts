@@ -29,7 +29,6 @@ export class EventService implements IEventService {
   findEvents(searchParams: EventSearcherModel): Promise<IEvent[]> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents');
     const url = this.setSearchParams(endpoint, searchParams);
-    console.log(url)
     return this.httpClient.get<IEvent[]>(url).toPromise();
   }
   showEvent(eventId: string): void {
@@ -55,7 +54,6 @@ export class EventService implements IEventService {
 
   private setSearchParams(endpoint, searchParams) {
     let url = new URL(endpoint);
-    let paramValues: string = '';
 
     if (searchParams && (searchParams.category || searchParams.name || searchParams.label)) {
       Object.keys(searchParams).map(key => {

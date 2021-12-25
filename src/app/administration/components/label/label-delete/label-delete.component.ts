@@ -19,7 +19,7 @@ export class LabelDeleteComponent implements OnInit {
 
   ngOnInit(): void {
     let labelId = UtilsService.getResourceIdFromURI(this.router.url);
-    console.log(labelId);
+
     this.labelService.removeLabel(labelId).then(() => {
       this.router.navigate(['/dashboard/labels/list']).then(() => {
         this.modalResultService.deleteResultModal(true)
