@@ -8,8 +8,8 @@ import { EventSearcher as EventSearcherModel} from '../models/event-searcher.mod
 
 /**
  * Service to communicate between
- * (Origin) EventSearcherComponent
- * (Destination) EventResultsComponent
+ * (Origin) CatCardComponent, LabCardComponent
+ * (Destination) EventSearcherComponent
  *
  * @class EventSearcherService
 */
@@ -24,4 +24,16 @@ export class EventSearcherService {
   changeMessage(message: EventSearcherModel) {
     this.messageSource.next(message);
   }
+
+  deleteMessage(): void {
+    this.message.category && this.message.category.length > 0
+      ? this.message.category.length = 0 : null;
+    this.message.label && this.message.label.length > 0 
+      ? this.message.label.length = 0 : null
+    this.message.name && this.message.name.length > 0 
+      ? this.message.name.length = 0 : null
+    this.message.events && this.message.events.length > 0 
+      ? this.message.events.length = 0 : null
+  }
+  
 }

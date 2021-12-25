@@ -16,10 +16,10 @@ export class UpcomingComponent implements OnInit {
   { }
 
   ngOnInit(): void {
-    this.initEvents();
+    this.getEvents();
   }
 
-  private initEvents(): void {
+  private getEvents(): void {
     this.eventService.upcomingEvents(this.lastEvents).then(res => {
       if (res && res.length > 0) {
         this.upcomingEvents = res;

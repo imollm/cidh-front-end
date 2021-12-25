@@ -14,7 +14,7 @@ import { FormatDatePipe } from '../helpers/format-date.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { EventResultsComponent } from './components/event-results/event-results.component';
+// import { EventResultsComponent } from './components/event-results/event-results.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
 
@@ -23,7 +23,7 @@ import { EventDetailComponent } from './components/event/event-detail/event-deta
     EventSearcherComponent,
     EventCardComponent,
     BannerComponent,
-    EventResultsComponent,
+    // EventResultsComponent,
     TableComponent,
     FormatDatePipe,
     EventDetailComponent

@@ -27,9 +27,10 @@ export class EventService implements IEventService {
   }
 
   findEvents(searchParams: EventSearcherModel): Promise<IEvent[]> {
-    const query = this.setSearchParams(searchParams);
-    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents', query);
-    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents');
+    const url = this.setSearchParams(endpoint, searchParams);
+    console.log(url)
+    return this.httpClient.get<IEvent[]>(url).toPromise();
   }
   showEvent(eventId: string): void {
     TODO: 'Method not implemented.'
@@ -52,35 +53,18 @@ export class EventService implements IEventService {
     throw new Error('Method not implemented.');
   }
 
-  private setSearchParams(searchParams: EventSearcherModel): string {
-    let params = '';
+  private setSearchParams(endpoint, searchParams) {
+    let url = new URL(endpoint);
+    let paramValues: string = '';
 
-    if (searchParams && (searchParams.category || searchParams.label || searchParams.name)) {
-      let flag = false;
-      params += '?';
-
-      Object.keys(searchParams).every((key) => {
-        if (searchParams[key].isArray() && searchParams[key] > 0) {
-          let param = searchParams[key];
-          
-          if (flag) {
-            params += `&${key}=`;
-          }
-
-          // Here iterate over Category:obj[]/Label:obj[]/name:string[]
-          param.forEach((obj: any) => {
-            if (typeof obj === 'object') {
-              params += `${obj.name},`;
-            } else if (typeof obj === 'string') {
-              params += `${obj},`;
-            }
-          });
-
-          flag = true;
+    if (searchParams && (searchParams.category || searchParams.name || searchParams.label)) {
+      Object.keys(searchParams).map(key => {
+        if (searchParams[key].length > 0 && key !== 'events') {
+          url.searchParams.append(key.toLocaleLowerCase(), searchParams[key].toString());
         }
       });
     }
 
-    return params;
+    return url.toString();
   }
 }
