@@ -17,9 +17,9 @@ export class AdministratorListComponent implements OnInit {
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
     active: true,
-    resource: '/administration/dashboard/event-organizer',
+    resource: '/administration/dashboard/administrator',
     actions: {
-      view: true,
+      view: false,
       edit: true,
       delete: false
     }
@@ -50,9 +50,6 @@ export class AdministratorListComponent implements OnInit {
     this.dataTable.colsName = [
       { colName: "firstName",  text: "Nom" },
       { colName: "lastName", text: "Cognoms" },
-      { colName: "fiscalId", text: "ID Fiscal"},
-      { colName: "address", text: "Adreça"},
-      { colName: "preferredLanguage", text: "Idioma pref."},
       { colName: "email", text: "Email"}
     ];
     this.dataTable.data = this.admins;

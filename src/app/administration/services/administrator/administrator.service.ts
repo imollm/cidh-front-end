@@ -15,24 +15,23 @@ export class AdministratorService implements IAdministratorService {
   ) {
   }
 
-  addAdministrator(email: string, password: string, name: string, surname: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  addAdministrator(admin: IUser): Promise<IUser> {
+    const endpoint = this.endpointMapper.getEndPointUrl("user", "create");
+    return this.httpClient.post<IUser>(endpoint, admin).toPromise();
   }
-  updateAdministrator(email: string, password: string, name: string, surname: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+
+  updateAdministrator(adminId: string, admin: IUser): Promise<IUser> {
+    const endpoint = this.endpointMapper.getEndPointUrl("user", "updateById", adminId);
+    return this.httpClient.post<IUser>(endpoint, admin).toPromise();
   }
+
   showAdministrator(adminId: string): Promise<IUser> {
     const endpoint = this.endpointMapper.getEndPointUrl('user', 'getById', adminId);
     return this.httpClient.get<IUser>(endpoint).toPromise();
   }
+
   listAllAdministrators(): Promise<IUser[]> {
     const endpoint = this.endpointMapper.getEndPointUrl('user', 'getAdmins');
     return this.httpClient.get<IUser[]>(endpoint).toPromise();
-  }
-  assignAdministratorToEventOrganizer(email: string, name: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
   }
 }

@@ -14,6 +14,7 @@ import { LabelCreateEditComponent } from './components/label/label-create-edit/l
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
 import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
+import { AdministratorCreateEditComponent } from './components/administrator/administrator-create-edit/administrator-create-edit.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
@@ -41,14 +42,15 @@ const routes: Routes = [
           { path: 'list', component: LabelListComponent },
           { path: 'create', component: LabelCreateEditComponent },
           { path: 'edit/:id', component: LabelCreateEditComponent },
-          { path: 'view/:id' },
           { path: 'delete/:id', component: LabelListComponent }
         ]
       },
       {
         path: 'administrator',
         children: [
-          { path: 'list', component: AdministratorListComponent }
+          { path: 'list', component: AdministratorListComponent },
+          { path: 'create', component: AdministratorCreateEditComponent },
+          { path: 'edit/:id', component: AdministratorCreateEditComponent }
         ]
       }
     ]

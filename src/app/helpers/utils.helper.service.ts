@@ -1,5 +1,10 @@
 
 import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+export interface ValidationResult {
+  [key: string]: boolean;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +36,17 @@ export class UtilsService {
     }
 
     return id;
+  }
+
+  static strong(control: FormControl): ValidationResult {
+    let hasUpper = /[A-Z]/.test(control.value);
+    let hasLower = /[a-z]/.test(control.value);
+    // console.log('Num, Upp, Low', hasNumber, hasUpper, hasLower);
+    const valid = hasUpper && hasLower;
+    if (!valid) {
+        // return what´s not valid
+        return { strong: true };
+    }
+    return null;
   }
 }
