@@ -56,29 +56,53 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="inputPass" class="col-sm-4 col-form-label text-sm-end">Contrasenya</label>
+                            <label for="inputPass1" class="col-sm-4 col-form-label text-sm-end">Contrasenya</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPass" placeholder="Contrasenya"
-                                    formControlName="password"
-                                    [ngClass]="{ 'is-invalid': !form.pending && form.get('password').invalid, 'is-valid': form.get('password').valid }" />
-                                <div *ngIf="form.get('password').invalid && 
-                                    form.get('password').errors && 
-                                    (form.get('password').dirty || form.get('password').touched)">
-                                    <small class="text-danger" *ngIf="form.get('password').hasError('required')">
+                                <input type="password" class="form-control" id="inputPass1" placeholder="Contrasenya"
+                                    formControlName="password1"
+                                    [ngClass]="{ 'is-invalid': !form.pending && form.get('password1').invalid, 'is-valid': form.get('password1').valid }" />
+                                <div *ngIf="form.get('password1').invalid && 
+                                    form.get('password1').errors && 
+                                    (form.get('password1').dirty || form.get('password1').touched)">
+                                    <small class="text-danger" *ngIf="form.get('password1').hasError('required')">
                                         La contrasenya es obligatori.
                                     </small>
-                                    <small class="text-danger" *ngIf="form.get('password').hasError('minlength')">
+                                    <small class="text-danger" *ngIf="form.get('password1').hasError('minlength')">
                                         La longitud mínima son 8 caracters.
                                     </small>
-                                    <small class="text-danger" *ngIf="form.get('password').hasError('strong')">
+                                    <small class="text-danger" *ngIf="form.get('password1').hasError('strong')">
                                         La constrasenya ha de tenir almmenys una maj. i una min.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPass2" class="col-sm-4 col-form-label text-sm-end">Repeteix contrasenya</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="inputPass2" placeholder="Contrasenya"
+                                    formControlName="password2"
+                                    [ngClass]="{ 'is-invalid': !form.pending && form.get('password2').invalid && !isPwdEquals(), 'is-valid': form.get('password2').valid && isPwdEquals()}" />
+                                <div *ngIf="form.get('password2').invalid && 
+                                    form.get('password2').errors && 
+                                    (form.get('password2').dirty || form.get('password2').touched) || !isPwdEquals()">
+                                    <small class="text-danger" *ngIf="form.get('password2').hasError('required')">
+                                        La contrasenya es obligatori.
+                                    </small>
+                                    <small class="text-danger" *ngIf="form.get('password2').hasError('minlength')">
+                                        La longitud mínima son 8 caracters.
+                                    </small>
+                                    <small class="text-danger" *ngIf="form.get('password2').hasError('strong')">
+                                        La constrasenya ha de tenir almmenys una maj. i una min.
+                                    </small>
+                                    <small class="text-danger" *ngIf="!isPwdEquals()">
+                                        Les constrasenyes no son iguals.
                                     </small>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-5 mb-3 row">
                             <div class="col-12 d-flex justify-content-center">
-                                <button class="btn btn-dark" [disabled]="form.invalid">Envia</button>
+                                <button class="btn btn-dark" [disabled]="form.invalid && isPwdEquals()">Envia</button>
                             </div>
                         </div>
                     </div>

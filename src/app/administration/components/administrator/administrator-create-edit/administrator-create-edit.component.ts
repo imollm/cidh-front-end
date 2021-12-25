@@ -15,7 +15,7 @@ import { preferredLanguages } from 'src/app/profile/models/preferredLanguages.mo
 })
 export class AdministratorCreateEditComponent implements OnInit {
 
-  title: string = 'Crear una nova empresa';
+  title: string = 'Crear un nou administrador';
   btnText: string = 'Crear';
   form: FormGroup;
   mode: string;
@@ -34,7 +34,8 @@ export class AdministratorCreateEditComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [UtilsService.strong, Validators.minLength(8)])
+      password1: new FormControl('', [UtilsService.strong, Validators.minLength(8)]),
+      password2: new FormControl('', [UtilsService.strong, Validators.minLength(8)])
     });
   }
 
@@ -62,8 +63,10 @@ export class AdministratorCreateEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
+    if (this.form.valid && this.isPwdEquals()) {
       this.spinner.show();
+
+      this.setPassword();
 
       if (this.mode && this.mode === 'create') {
         let newAdmin = this.form.value;
@@ -72,12 +75,26 @@ export class AdministratorCreateEditComponent implements OnInit {
         this.adminService.addAdministrator(newAdmin).then(res => {
           this.administrator = res;
         }).then(() => this.redirectUser());
+
       } else if (this.mode && this.mode === 'edit') {
         this.adminService.updateAdministrator(this.adminId, this.form.value).then(res => {
           this.administrator = res;
         }).then(() => this.redirectUser());
       }
     }
+  }
+
+  isPwdEquals(): boolean {
+    return this.form.get('password1').value === this.form.get('password2').value;
+  }
+
+  setPassword(): void {
+    const pwd = this.form.value.password1;
+
+    delete this.form.value.password1;
+    delete this.form.value.password2;
+
+    this.form.value.password = pwd;
   }
 
   getAdministrator(): void {
