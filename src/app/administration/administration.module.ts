@@ -11,6 +11,7 @@ import { EventOrganizerCreateEditComponent } from './components/event-organizer/
 import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
 import { LabelListComponent } from './components/label/label-list/label-list.component';
 import { LabelCreateEditComponent } from './components/label/label-create-edit/label-create-edit.component';
+import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LabelCreateEditComponent } from './components/label/label-create-edit/l
     EventOrganizerCreateEditComponent,
     EventOrganizerDetailComponent,
     LabelListComponent,
-    LabelCreateEditComponent
+    LabelCreateEditComponent,
+    AdministratorListComponent
   ],
   imports: [
     CommonModule,

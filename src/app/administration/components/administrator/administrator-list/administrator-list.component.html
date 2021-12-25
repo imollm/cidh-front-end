@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div *ngIf="admins && admins.length > 0; then withResults else withOutResults">Hola</div>
+            <ng-template #withResults>
+                <div class="text-center p-2">
+                    <h2>{{ title }}</h2>
+                </div>
+                <div class="p-5">
+                    <a [routerLink]="['/administration/dashboard/administrator/create']" class="btn btn-outline-dark">
+                        Crear un admin
+                    </a>
+                </div>
+                <app-dashboard-table
+                    [toShow]="dataTable"
+                    [actionButtons]="actionButtons"
+                ></app-dashboard-table>
+            </ng-template>
+            <ng-template #withOutResults>
+                <h2 class="text-center">Encara no hi ha administradors registrats</h2>
+                <div class="text-center mt-5">
+                    <a [routerLink]="['/administration/dashboard/administrator/create']" class="btn btn-outline-dark">
+                        Crear un admin
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
