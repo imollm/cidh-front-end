@@ -16,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { EventRatingComponent } from './components/event-rating/event-rating.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BannerComponent,
     TableComponent,
     FormatDatePipe,
-    EventDetailComponent
+    EventDetailComponent,
+    EventRatingComponent
   ],
   imports: [
     CommonModule,

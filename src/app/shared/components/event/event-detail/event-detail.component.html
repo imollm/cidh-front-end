@@ -20,7 +20,7 @@
                         </figure>
                     </div>
                 </ng-template>
-                <h1 class="my-5 text-white">{{ event.name }}</h1>
+                <h1 class="event-title">{{ event.name }}</h1>
                 <div *ngIf="event.startDate" class="mb-3">
                     <span class="date-title">Data Inici: </span>
                     <span class="date">{{ event.startDate | formatDate | titlecase }}</span>
@@ -46,7 +46,10 @@
                     </p>
                 </div>
                 <div *ngIf="true" class="rating">
-                    
+                    <app-event-rating
+                        [rating]="4"
+                        [readonly]="true"
+                    ></app-event-rating>
                 </div>
             </div>
         </div>

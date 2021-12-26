@@ -1,0 +1,6 @@
+<div class="rating-wrapper">
+    <span>Puntuació:</span>
+    <fa-icon *ngFor="let star of stars" [icon]="faStar"
+        [ngClass]="{'enabled': star === true, 'disabled': star === false}"
+    ></fa-icon>
+</div>
