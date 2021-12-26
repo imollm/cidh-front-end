@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Question } from '../../../media/models/question.model';
 import { ForumService } from '../../../media/services/forum.service';
@@ -14,10 +15,19 @@ export class ForumComponent implements OnInit {
   actualPage: number = 1;
   newQuestion = {} as Question;
 
-  constructor(private forumService: ForumService) { }
+  @ViewChild('forumContainer') forumContainer: ElementRef;
+
+  constructor(
+    private forumService: ForumService,
+    private router: Router,
+    private er: ElementRef,
+  ) {
+    this.forumContainer = er;
+  }
 
   ngOnInit(): void {
     this.lastQuestions = this.forumService.listAllQuestions('0');
+    this.borderStyle();
   }
 
   addQuestion(): void {
@@ -57,6 +67,13 @@ export class ForumComponent implements OnInit {
     }).then(() => {
       console.log(this.newQuestion)
     })
+  }
+
+  borderStyle(): void {
+    if (this.router.url.includes('event-detail')) {
+      this.forumContainer.nativeElement.style.borderRadius = '5px';
+      console.log(this.forumContainer.nativeElement.style.borderRadius);
+    }
   }
 
 }
