@@ -64,15 +64,12 @@ export class ForumComponent implements OnInit {
           })
         }
       })
-    }).then(() => {
-      console.log(this.newQuestion)
-    })
+    });
   }
 
   borderStyle(): void {
     if (this.router.url.includes('event-detail')) {
       this.forumContainer.nativeElement.style.borderRadius = '25px';
-      console.log(this.forumContainer.nativeElement.style.borderRadius);
     }
   }
 
