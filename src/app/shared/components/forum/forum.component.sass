@@ -21,7 +21,8 @@
 
   &-container
     background-color: $turquoise
-    border-radius: 25px
+    border-top-right-radius: 25px
+    border-top-left-radius: 25px
     padding: 3em 1.2em 1.2em 1.2em
     display: flex
     flex-wrap: wrap
@@ -33,13 +34,16 @@
       @include max-lg()
         width: 100%
 
-  .paginator
-    display: flex
-    justify-content: center
-    margin-top: 16px
+.paginator
+  display: flex
+  justify-content: center
+  background-color: $turquoise
+  border-bottom-left-radius: 25px
+  border-bottom-right-radius: 25px
+  padding: .5em 0 1em 0
 
-    &::ng-deep
-      .ngx-pagination
-        padding: 0
-        background-color: $white
-        border-radius: 5px
+  &::ng-deep
+    .ngx-pagination
+      padding: 0
+      background-color: $white
+      border-radius: 5px

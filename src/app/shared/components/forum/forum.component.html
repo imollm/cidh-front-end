@@ -19,13 +19,13 @@
             [question]="question"
           ></app-question>
         </div>
-        <div class="paginator">
-          <pagination-controls
-            (pageChange)="actualPage = $event"
-            [autoHide]="true"
-            [responsive]="true"
-          ></pagination-controls>
-        </div>
+      </div>
+      <div class="paginator">
+        <pagination-controls
+          (pageChange)="actualPage = $event"
+          [autoHide]="true"
+          [responsive]="true"
+        ></pagination-controls>
       </div>
     </div>
   </div>

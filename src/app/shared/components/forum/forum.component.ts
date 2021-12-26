@@ -71,7 +71,7 @@ export class ForumComponent implements OnInit {
 
   borderStyle(): void {
     if (this.router.url.includes('event-detail')) {
-      this.forumContainer.nativeElement.style.borderRadius = '5px';
+      this.forumContainer.nativeElement.style.borderRadius = '25px';
       console.log(this.forumContainer.nativeElement.style.borderRadius);
     }
   }
