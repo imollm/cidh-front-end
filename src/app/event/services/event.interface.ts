@@ -4,6 +4,7 @@ import { IEvent } from "../models/event.model";
 export interface IEventService {
   orderEvent(eventId: string, email: string, reservationId: string): void;
   findEvents(searchParams: EventSearcherModel): Promise<IEvent[]>;
+  findEventById(eventId: string): Promise<IEvent>;
   showEvent(eventId: string): void;
   findOrdersByUser(email: string): void;
   findAllOrders(): void;

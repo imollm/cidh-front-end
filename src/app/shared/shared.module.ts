@@ -9,21 +9,19 @@ import { EventCardComponent } from './components/event-card/event-card.component
 import { BannerComponent } from './components/banner/banner.component';
 import { TableComponent } from './components/table/table.component';
 import { FormatDatePipe } from '../helpers/format-date.pipe';
+import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
-// import { EventResultsComponent } from './components/event-results/event-results.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
 
 @NgModule({
   declarations: [
     EventSearcherComponent,
     EventCardComponent,
     BannerComponent,
-    // EventResultsComponent,
     TableComponent,
     FormatDatePipe,
     EventDetailComponent

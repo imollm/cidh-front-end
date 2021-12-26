@@ -1,0 +1,60 @@
+@import "../../../../../assets/css/_variables"
+@import "../../../../../assets/css/_breakpoints"
+
+.event-detail
+  background-color: $richBlack
+  padding: 3em 0
+
+  &-container
+    padding: 3em 0
+    background-color: $turquoise
+    border-radius: 15px
+    padding: 3em
+
+    .event-img
+      display: flex
+      justify-content: center
+      align-items: center
+
+    .labels-wrapper
+      background-color: $richBlack
+      padding: .5em
+      border-radius: 5px
+      display: flex
+      flex-direction: row
+      justify-content: space-evenly
+      margin-top: 2em
+
+      &-label
+        background-color: $turquoise
+        color: $richBlack
+        border-radius: 5px
+        padding: .4em
+        cursor: pointer
+
+        &:hover
+          transform: scale(1.1)
+          color: $white
+
+        &:not(&:hover)
+          transform: scale(1)
+          color: $richBlack
+
+.date-title
+  color: $richBlack
+  font-weight: bold
+
+.date
+  color: $richBlack
+  font-style: italic
+
+.description
+  margin-top: 2em
+  background-color: $richBlack
+  color: $white
+  padding: 2em
+  border-radius: 5px
+
+  p
+    text-align: justify
+    margin-bottom: 0

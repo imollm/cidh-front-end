@@ -99,12 +99,12 @@
         "uri": "/events",
         "method": "POST"
       },
-      "getByFilters": {
-        "uri": "/events%s",
-        "method": "GET"
-      },
       "getEvents": {
         "uri": "/events",
+        "method": "GET"
+      },
+      "getEventById": {
+        "uri": "/events/%s",
         "method": "GET"
       },
       "updateById": {
