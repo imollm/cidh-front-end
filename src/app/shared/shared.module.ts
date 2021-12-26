@@ -10,6 +10,9 @@ import { BannerComponent } from './components/banner/banner.component';
 import { TableComponent } from './components/table/table.component';
 import { FormatDatePipe } from '../helpers/format-date.pipe';
 import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
+import { ForumComponent } from './components/forum/forum.component';
+import { QuestionComponent } from './components/question/question.component';
+import { AnswerComponent } from './components/answer/answer.component';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,7 +29,10 @@ import { EventRatingComponent } from './components/event-rating/event-rating.com
     TableComponent,
     FormatDatePipe,
     EventDetailComponent,
-    EventRatingComponent
+    EventRatingComponent,
+    ForumComponent,
+    QuestionComponent,
+    AnswerComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +53,10 @@ import { EventRatingComponent } from './components/event-rating/event-rating.com
     NgxSpinnerModule,
     TableComponent,
     ReactiveFormsModule,
-    FormatDatePipe
+    FormatDatePipe,
+    ForumComponent,
+    QuestionComponent,
+    AnswerComponent
   ]
 })
 export class SharedModule { }

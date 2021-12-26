@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Custom imports
-import { ForumComponent } from './components/forum/forum.component';
+import { ForumComponent } from '../shared/components/forum/forum.component';
 import { MediaComponent } from './media.component';
 
 const routes: Routes = [

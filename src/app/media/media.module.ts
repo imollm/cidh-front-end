@@ -4,17 +4,11 @@ import { CommonModule } from '@angular/common';
 // Custom imports
 import { MediaRoutingModule } from './media-routing.module';
 import { MediaComponent } from './media.component';
-import { ForumComponent } from './components/forum/forum.component';
 import { SharedModule } from '../shared/shared.module';
-import { QuestionComponent } from './components/question/question.component';
-import { AnswerComponent } from './components/answer/answer.component';
 
 @NgModule({
   declarations: [
     MediaComponent,
-    ForumComponent,
-    QuestionComponent,
-    AnswerComponent
   ],
   imports: [
     CommonModule,
