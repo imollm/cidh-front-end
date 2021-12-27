@@ -14,6 +14,7 @@ import { HomeComponent as DashboardHomeComponent} from './components/dashboard/c
 import { SharedModule } from '../shared/shared.module';
 import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 import { LogoutComponent } from './components/dashboard/components/logout/logout.component';
+import { EventCreateEditComponent } from './components/event/event-create-edit/event-create-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LogoutComponent } from './components/dashboard/components/logout/logout
     DashboardSideMenuComponent,
     DashboardHomeComponent,
     ProfileShowComponent,
-    LogoutComponent
+    LogoutComponent,
+    EventCreateEditComponent
   ],
   imports: [
     ProfileRoutingModule,
