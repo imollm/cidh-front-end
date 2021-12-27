@@ -41,7 +41,7 @@ export class UtilsService {
   static strong(control: FormControl): ValidationResult {
     let hasUpper = /[A-Z]/.test(control.value);
     let hasLower = /[a-z]/.test(control.value);
-    // console.log('Num, Upp, Low', hasNumber, hasUpper, hasLower);
+    
     const valid = hasUpper && hasLower;
     if (!valid) {
         // return what´s not valid

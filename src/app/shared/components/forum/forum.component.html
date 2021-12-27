@@ -1,0 +1,32 @@
+<section class="forum" #forumContainer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="forum-header">
+          <h2 class="h4 text-white py-5">
+            Darreres preguntes
+          </h2>
+          <div class="forum-header-add-btn">
+            <button class="forum-header-add btn" (click)="addQuestion()">
+              Fer pregunta
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="forum-container col-12">
+        <div *ngFor="let question of lastQuestions | paginate: { itemsPerPage: 6, currentPage: actualPage }" class="question-container">
+          <app-question
+            [question]="question"
+          ></app-question>
+        </div>
+      </div>
+      <div class="paginator">
+        <pagination-controls
+          (pageChange)="actualPage = $event"
+          [autoHide]="true"
+          [responsive]="true"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</section>

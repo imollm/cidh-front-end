@@ -9,24 +9,30 @@ import { EventCardComponent } from './components/event-card/event-card.component
 import { BannerComponent } from './components/banner/banner.component';
 import { TableComponent } from './components/table/table.component';
 import { FormatDatePipe } from '../helpers/format-date.pipe';
+import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
+import { ForumComponent } from './components/forum/forum.component';
+import { QuestionComponent } from './components/question/question.component';
+import { AnswerComponent } from './components/answer/answer.component';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
-// import { EventResultsComponent } from './components/event-results/event-results.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
+import { EventRatingComponent } from './components/event-rating/event-rating.component';
 
 @NgModule({
   declarations: [
     EventSearcherComponent,
     EventCardComponent,
     BannerComponent,
-    // EventResultsComponent,
     TableComponent,
     FormatDatePipe,
-    EventDetailComponent
+    EventDetailComponent,
+    EventRatingComponent,
+    ForumComponent,
+    QuestionComponent,
+    AnswerComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +53,10 @@ import { EventDetailComponent } from './components/event/event-detail/event-deta
     NgxSpinnerModule,
     TableComponent,
     ReactiveFormsModule,
-    FormatDatePipe
+    FormatDatePipe,
+    ForumComponent,
+    QuestionComponent,
+    AnswerComponent
   ]
 })
 export class SharedModule { }

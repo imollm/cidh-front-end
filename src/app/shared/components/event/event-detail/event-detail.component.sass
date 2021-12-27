@@ -1,0 +1,89 @@
+@import "../../../../../assets/css/_variables"
+@import "../../../../../assets/css/_breakpoints"
+
+.event-detail
+  background-color: $richBlack
+  padding: 3em 0
+
+  &-container
+    padding: 3em 0
+    background-color: $turquoise
+    border-radius: 15px
+    padding: 3em
+
+    .event-img
+      display: flex
+      justify-content: center
+      align-items: center
+
+    .event-title
+      margin: 1em 0
+      color: $white
+      padding-bottom: .5em
+      border-bottom: 2px solid $richBlack
+
+    .labels-wrapper
+      background-color: $richBlack
+      padding: .5em
+      border-radius: 5px
+      display: flex
+      flex-direction: row
+      justify-content: space-evenly
+      margin-top: 2em
+
+      &-label
+        background-color: $turquoise
+        color: $richBlack
+        border-radius: 5px
+        padding: .4em
+        cursor: pointer
+
+        &:hover
+          transform: scale(1.1)
+          color: $white
+
+        &:not(&:hover)
+          transform: scale(1)
+          color: $richBlack
+
+    .rating
+      margin-top: 3em
+      display: flex
+      justify-content: center
+      align-items: center
+
+    .subscription
+      margin-top: 3em
+      background-color: $richBlack
+      border-radius: 5px
+      color: $white
+      padding: 1em 0
+      display: flex
+      justify-content: center
+      align-items: center
+      cursor: pointer
+
+    .forum
+      margin-top: 3em
+
+      &-title
+        font-weight: bold
+
+.date-title
+  color: $richBlack
+  font-weight: bold
+
+.date
+  color: $richBlack
+  font-style: italic
+
+.description
+  margin-top: 2em
+  background-color: $richBlack
+  color: $white
+  padding: 2em
+  border-radius: 5px
+
+  p
+    text-align: justify
+    margin-bottom: 0

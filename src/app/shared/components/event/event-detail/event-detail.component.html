@@ -1,1 +1,64 @@
-<p>event-detail works!</p>
+<app-banner *ngIf="parent==='public'"></app-banner>
+
+<section class="event-detail">
+    <div class="container">
+        <div class="row">
+            <div class="event-detail-container col-lg-10 offset-lg-1">
+                <div *ngIf="event.headerImage; then withImg else defaultImg"></div>
+                <ng-template #withImg>
+                    <div class="event-img">
+                        <figure class="figure figure-img">
+                            <img [src]="event.headerImage" [alt]="event.id" class="img-fluid">
+                        </figure>
+                    </div>
+                </ng-template>
+                <ng-template #defaultImg>
+                    <div class="event-img">
+                        <figure class="figure figure-img">
+                            <img src="../../../../../assets/img/event-detail-img.jpeg" [alt]="event.id"
+                                class="img-fluid">
+                        </figure>
+                    </div>
+                </ng-template>
+                <h1 class="event-title">{{ event.name }}</h1>
+                <div *ngIf="event.startDate" class="mb-3">
+                    <span class="date-title">Data Inici: </span>
+                    <span class="date">{{ event.startDate | formatDate | titlecase }}</span>
+                </div>
+                <div *ngIf="event.endDate" class="mb-3">
+                    <span class="date-title">Data Fi: </span>
+                    <span class="date">{{ event.endDate | formatDate | titlecase }}</span>
+                </div>
+                <div *ngIf="event.location">
+                    <span>{{ event.location }}</span>
+                </div>
+                <!-- <div *ngIf="labels && labels.length > 0">
+                                    <div *ngFor="let label of labels" class="label"></div>
+                                </div> -->
+                <div class="labels-wrapper">
+                    <div class="labels-wrapper-label">Label 1</div>
+                    <div class="labels-wrapper-label">Label 2</div>
+                    <div class="labels-wrapper-label">Label 3</div>
+                </div>
+                <div *ngIf="event.description" class="description">
+                    <p>
+                        {{ event.description }}
+                    </p>
+                </div>
+                <div *ngIf="true" class="rating">
+                    <app-event-rating
+                        [rating]="2"
+                        [readonly]="true"
+                    ></app-event-rating>
+                </div>
+                <div href="#" class="col-sm-6 offset-sm-3 subscription">
+                    <span>Subscriu-te!</span>
+                </div>
+                <div class="forum">
+                    <h2 class="forum-title">Fòrum</h2>
+                    <app-forum></app-forum>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -70,7 +70,6 @@ export class LabelListComponent implements OnInit {
     this.labelService.removeLabel(labelId).then(res => {})
     .then(() => this.modalResultService.deleteResultModal(true))
     .catch(err => {
-      console.log(err);
       this.modalResultService.deleteResultModal(false);
     });
   }

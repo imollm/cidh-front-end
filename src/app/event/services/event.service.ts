@@ -31,6 +31,12 @@ export class EventService implements IEventService {
     const url = this.setSearchParams(endpoint, searchParams);
     return this.httpClient.get<IEvent[]>(url).toPromise();
   }
+
+  findEventById(eventId: string): Promise<IEvent> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventById', eventId);
+    return this.httpClient.get<IEvent>(endpoint).toPromise();
+  }
+
   showEvent(eventId: string): void {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
