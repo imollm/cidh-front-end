@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Answer } from '../models/answer.model';
 import { Question } from '../models/question.model';
 import { IForumService } from './forum.interface';
-import * as faker from 'faker';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class ForumService implements IForumService {
   answerQuestion(questionId: string, answer: Answer): void { }
 
   listAllQuestions(eventId: string): Question[] {
-    return this.makeFakeQuestions();
+    return [];
   }
   getAnswer(questionId: string): Answer {
     const answer = {} as Answer;
@@ -29,17 +28,5 @@ export class ForumService implements IForumService {
   getQuestion(questionId: string): Question {
     const question = {} as Question;
     return question;
-  }
-
-  private makeFakeQuestions(): Question[] {
-    const questions: Question[] = [];
-    for (let i = 0; i < 10; i++) {
-      const question = {} as Question;
-      question.id = faker.datatype.uuid();
-      question.title = faker.name.title();
-      question.message = faker.lorem.sentence();
-      questions.push(question);
-    }
-    return questions;
   }
 }

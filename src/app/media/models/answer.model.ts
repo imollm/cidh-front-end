@@ -1,4 +1,7 @@
 export interface Answer {
-  id: number;
-  message: string;
+  userId: string;
+  eventId: string;
+  parentId?: string;
+  createdAt: string;
+  comment: string;
 }

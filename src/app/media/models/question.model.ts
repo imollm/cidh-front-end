@@ -1,9 +1,10 @@
 import { Answer } from "./answer.model";
 
 export interface Question {
-  id: string;
-  title: string;
-  message: string;
-  answer?: Answer;
+  userId: string;
   eventId: string;
+  parentId?: string;
+  createdAt: string;
+  comment: string;
+  answer?: Answer;
 }

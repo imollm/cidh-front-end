@@ -59,7 +59,7 @@ export class ForumComponent implements OnInit {
         cancelButtonColor: '#8ea8c3',
         inputValidator: (message) => {
           return new Promise((resolve) => {
-            this.newQuestion.message = message;
+            this.newQuestion.comment = message;
             resolve(null)
           })
         }
