@@ -76,6 +76,13 @@
           Historic subs.
         </span>
       </li>
+      <li *ngIf="permissions && permissions.media && permissions.media.consultHisFavouritesEvents"
+        class="sidebar-menu-content-items-item">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faFavourites"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Favorits 
+        </span>
+      </li>
       <li *ngIf="permissions && permissions.event && permissions.event.accessToEvent"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAccessToEvent"></fa-icon>

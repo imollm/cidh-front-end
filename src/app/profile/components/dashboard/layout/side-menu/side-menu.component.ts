@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch, faHome, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IPermissions } from 'src/app/profile/models/permissions.model';
 import { IUser } from 'src/app/profile/models/user.model';
@@ -31,6 +31,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   faEventHistory = faHistory;
   faAccessToEvent = faVrCardboard;
   faEventSearcher = faSearch;
+  faFavourites = faHeart;
 
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
