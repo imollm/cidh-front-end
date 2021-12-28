@@ -14,8 +14,8 @@ export class CommentService implements ICommentService {
     private endpointMapper: EndPointMapper
   ) { }
 
-  sendComment(comment: IComment): Promise<void> {
-    const endpoint = this.endpointMapper.getEndPointUrl('comment', 'add', comment.eventId);
+  sendComment(eventId: string, comment: IComment): Promise<void> {
+    const endpoint = this.endpointMapper.getEndPointUrl('comment', 'add', eventId);
     return this.httpClient.post<void>(endpoint, comment).toPromise();
   }
   addRating(eventId: string, rating: number): Promise<void> {

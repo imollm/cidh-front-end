@@ -58,7 +58,6 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
 
   sendComment(): void {
     let comment: IComment = {} as IComment;
-    comment.eventId = this.event.id;
     comment.createdAt = new Date();
 
     Swal.fire({
@@ -79,7 +78,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     }).then(() => {
       console.log(comment);
       console.log(this.event);
-      this.commentService.sendComment(comment).then(res => {
+      this.commentService.sendComment(this.event.id, comment).then(res => {
         this.modalResultService.successPostComment();
       }).catch(err => {
         this.modalResultService.errorResultModal();
