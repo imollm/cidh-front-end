@@ -13,6 +13,8 @@ import { EventDetailComponent } from '../shared/components/event/event-detail/ev
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
+import { EventCreateEditComponent } from './components/eventProfile/event-profile-create-edit/event-profile-create-edit.component';
+import { EventListComponent } from './components/eventProfile/event-list/event-profile-list.component';
 
 const routes: Routes = [
   { path: '', component: ProfileComponent },
@@ -31,7 +33,14 @@ const routes: Routes = [
         children: [
           { path: 'detail/:id', component: EventDetailComponent }
         ]
-      }
+      },
+      {path: 'events',
+      children: [
+        { path: 'create', component: EventCreateEditComponent},
+        { path: 'edit/:id', component: EventCreateEditComponent},
+        { path: 'list', component: EventListComponent},
+      ]
+    }
     ]
   },
 ];

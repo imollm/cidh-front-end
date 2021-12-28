@@ -14,7 +14,8 @@ import { HomeComponent as DashboardHomeComponent} from './components/dashboard/c
 import { SharedModule } from '../shared/shared.module';
 import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 import { LogoutComponent } from './components/dashboard/components/logout/logout.component';
-import { EventCreateEditComponent } from './components/event/event-create-edit/event-create-edit.component';
+import { EventCreateEditComponent } from './components/eventProfile/event-profile-create-edit/event-profile-create-edit.component';
+import { EventListComponent } from './components/eventProfile/event-list/event-profile-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EventCreateEditComponent } from './components/event/event-create-edit/e
     DashboardHomeComponent,
     ProfileShowComponent,
     LogoutComponent,
-    EventCreateEditComponent
+    EventCreateEditComponent,
+    EventListComponent
   ],
   imports: [
     ProfileRoutingModule,
