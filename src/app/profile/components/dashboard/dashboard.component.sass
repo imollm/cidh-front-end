@@ -1,9 +1,18 @@
+@import "../../../../assets/css/_variables"
+@import "../../../../assets/css/_breakpoints"
+
 .dashboard-container
     display: flex
     flex-direction: row
     min-height: 100vh
-    
+
     &-router-outlet
         width: 100%
         margin: 20px 20px 0 20px
         padding-top: 2em
+
+        @include max-lg()
+            margin-left: 100px
+
+        @include min-lg()
+            margin-left: 250px
