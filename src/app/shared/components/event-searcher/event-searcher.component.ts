@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { EventSearcherService } from '../../services/event-searcher.service';
 import { EventSearcher as EventSearcherModel } from '../../models/event-searcher.model';
@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { Category } from 'src/app/administration/models/category.model';
 import { CategoryService } from 'src/app/administration/services/category/category.service';
 import { IEvent } from 'src/app/event/models/event.model';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-event-searcher',
@@ -30,7 +32,9 @@ export class EventSearcherComponent implements OnInit, OnDestroy {
     private messageService: EventSearcherService, //Service to send search params to EventResultsComponent
     private eventService: EventService,
     private labelService: LabelService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router,
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       name: new FormControl(''),
@@ -43,6 +47,19 @@ export class EventSearcherComponent implements OnInit, OnDestroy {
     this.subscription = this.messageService.currentMessage.subscribe(message => this.searchParams = message);
     this.getLabels();
     this.getCategories();
+    this.onDashboard();
+  }
+
+  onDashboard(): void {
+    if (this.router.url.includes('dashboard')) {
+      let sections = document.getElementsByTagName('section');
+      sections[0].style.backgroundColor = 'white';
+      sections[1].style.backgroundColor = 'white';
+    }
+  }
+
+  isDashboard(): boolean {
+    return this.authService.isLogged();
   }
 
   getLabels(): void {

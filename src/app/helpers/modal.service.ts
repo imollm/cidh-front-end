@@ -32,15 +32,26 @@ export class ModalResultService {
   private readonly deleteTextSuccess = 'El recurs s\'ha eliminat satisfactoriament.';
   private readonly deleteTextError = 'El recurs no s\'ha eliminat satisfactoriament.';
 
+  private readonly commentHasBeenSentTitle = 'Gràcies per la teva col·laboració';
+  private readonly commentHasBeenSentText = 'El comentari s\'ha enviat correctament';
+  private readonly commentHasNotBeenSent = 'El comentari no s\'ha enviat correctament';
+
   private resultTitle: string;
   private resultText: string;
   private resultIcon: ModalResultIcon;
 
   constructor() { }
 
+  successPostComment(): void {
+    this.resultTitle = this.commentHasBeenSentTitle;
+    this.resultText = this.commentHasBeenSentText;
+    this.resultIcon = ModalResultIcon.success;
+  }
+
   unsuccessfulLogin(): void {
     this.resultTitle = this.unsuccessfullyLoginTitleError;
     this.resultText = this.unsuccessfullyLoginTextError;
+    this.resultIcon = ModalResultIcon.error;
 
     this.fireSwal();
   }
@@ -88,19 +99,23 @@ export class ModalResultService {
     this.resultTitle = 'Ooops!';
     this.resultText = 'Alguna cosa no ha anat bé, torna a provar d\'aquí una estona';
     this.resultIcon = ModalResultIcon.error;
+
     this.fireSwal();
   }
 
-  registerResultModal(user: IUser): void {
-    if (user) {
-      this.resultTitle = 'Enhorabona ' + `${user.firstName} ${user.lastName}!`.toLocaleUpperCase();
-      this.resultText = 'Te has registrat a Cultureindahouse.';
-      this.resultIcon = ModalResultIcon.success;
-    } else {
-      this.resultTitle = 'Ooops!';
-      this.resultText = 'El registre ha fallat, contacte amb l\'Administrador.';
-      this.resultIcon = ModalResultIcon.error;
-    }
+  signUpSuccessResult(user: IUser): void {
+    this.resultTitle = 'Enhorabona ' + `${user.firstName} ${user.lastName}!`.toLocaleUpperCase();
+    this.resultText = 'Te has registrat a Cultureindahouse.';
+    this.resultIcon = ModalResultIcon.success;
+
+    this.fireSwal();
+  }
+
+  signUpErrorResult(): void {
+    this.resultTitle = 'Ooops!';
+    this.resultText = 'El registre ha fallat, torna a intentar-ho.';
+    this.resultIcon = ModalResultIcon.error;
+
     this.fireSwal();
   }
 

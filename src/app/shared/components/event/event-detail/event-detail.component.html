@@ -1,6 +1,6 @@
 <app-banner *ngIf="parent==='public'"></app-banner>
 
-<section class="event-detail">
+<section class="event-detail" #eventDetailContainer>
     <div class="container">
         <div class="row">
             <div class="event-detail-container col-lg-10 offset-lg-1">
@@ -51,8 +51,11 @@
                         [readonly]="true"
                     ></app-event-rating>
                 </div>
-                <div href="#" class="col-sm-6 offset-sm-3 subscription">
-                    <span>Subscriu-te!</span>
+                <div href="#" class="d-flex justify-content-center">
+                    <span class="button">Subscriu-te!</span>
+                </div>
+                <div *ngIf="isLogged()" class="d-flex justify-content-center" (click)="sendComment()">
+                    <span class="button">Deixa un comentari</span>
                 </div>
                 <div class="forum">
                     <h2 class="forum-title">Fòrum</h2>

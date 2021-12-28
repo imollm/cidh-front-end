@@ -90,7 +90,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
     // Change with of dashboard router-outlet
     let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
-    dashboardRouterOutlet.style.marginLeft = '100px';
+    dashboardRouterOutlet.style.marginLeft = '120px';
     dashboardRouterOutlet.style.transition = '.3s linear';
   }
 
@@ -139,7 +139,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
     // Change with of dashboard router-outlet
     let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
-    dashboardRouterOutlet.style.marginLeft = '250px';
+    dashboardRouterOutlet.style.marginLeft = '270px';
     dashboardRouterOutlet.style.transition = '.3s linear';
   }
 

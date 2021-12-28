@@ -10,11 +10,11 @@ import { EventOrganizerDetailComponent } from './components/event-organizer/even
 import { CategoryListComponent } from './components/category/list/category-list.component';
 import { LabelListComponent } from './components/label/label-list/label-list.component';
 import { LabelCreateEditComponent } from './components/label/label-create-edit/label-create-edit.component';
+import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
+import { AdministratorCreateEditComponent } from './components/administrator/administrator-create-edit/administrator-create-edit.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
-import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
-import { AdministratorCreateEditComponent } from './components/administrator/administrator-create-edit/administrator-create-edit.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
