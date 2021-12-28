@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IEvent } from 'src/app/event/models/event.model';
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.sass']
 })
-export class EventDetailComponent implements OnInit {
+export class EventDetailComponent implements OnInit, AfterViewInit {
 
   parent: string;
   event: IEvent = {} as IEvent;
@@ -31,12 +31,15 @@ export class EventDetailComponent implements OnInit {
     private modalResultService: ModalResultService,
     private er: ElementRef
   ) {
-    this.eventDetailContainer = er;
+    this.eventDetailContainer = this.er;
   }
 
   ngOnInit(): void {
     this.getEventById(this.route.snapshot.params.id);
-    this.onDashboard();
+  }
+
+  ngAfterViewInit(): void {
+    this.eventDetailContainer.nativeElement.style.backgroundColor = 'white';
   }
 
   getEventById(eventId: string): void {
@@ -47,10 +50,6 @@ export class EventDetailComponent implements OnInit {
     });
 
     this.spinner.hide();
-  }
-
-  onDashboard(): void {
-    this.eventDetailContainer.nativeElement.style.backgroundColor = 'white';
   }
 
   isLogged(): boolean {

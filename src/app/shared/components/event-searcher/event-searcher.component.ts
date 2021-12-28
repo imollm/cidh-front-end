@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { EventSearcherService } from '../../services/event-searcher.service';
 import { EventSearcher as EventSearcherModel } from '../../models/event-searcher.model';
@@ -17,7 +17,7 @@ import { AuthService } from 'src/app/profile/services/auth/auth.service';
   templateUrl: './event-searcher.component.html',
   styleUrls: ['./event-searcher.component.sass']
 })
-export class EventSearcherComponent implements OnInit, OnDestroy {
+export class EventSearcherComponent implements OnInit, AfterViewInit, OnDestroy {
 
   form: FormGroup;
   labels: Label[] = [];
@@ -27,6 +27,9 @@ export class EventSearcherComponent implements OnInit, OnDestroy {
   events: IEvent[] = [];
   actualPage: number = 1;
 
+  @ViewChild('eventResults') eventResults: ElementRef;
+  @ViewChild('eventSearcher') eventSearcher: ElementRef;
+
   constructor(
     private fb: FormBuilder,
     private messageService: EventSearcherService, //Service to send search params to EventResultsComponent
@@ -34,27 +37,28 @@ export class EventSearcherComponent implements OnInit, OnDestroy {
     private labelService: LabelService,
     private categoryService: CategoryService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private er: ElementRef
   ) {
     this.form = this.fb.group({
       name: new FormControl(''),
       label: new FormControl(''),
       category: new FormControl('')
     });
+    this.eventResults = this.er;
+    this.eventSearcher = this.er;
   }
 
   ngOnInit(): void {
     this.subscription = this.messageService.currentMessage.subscribe(message => this.searchParams = message);
     this.getLabels();
     this.getCategories();
-    this.onDashboard();
   }
 
-  onDashboard(): void {
+  ngAfterViewInit(): void {
     if (this.router.url.includes('dashboard')) {
-      let sections = document.getElementsByTagName('section');
-      sections[0].style.backgroundColor = 'white';
-      sections[1].style.backgroundColor = 'white';
+      this.eventResults.nativeElement.style.backgroundColor = 'white';
+      this.eventSearcher.nativeElement.style.backgroundColor = 'white';
     }
   }
 
