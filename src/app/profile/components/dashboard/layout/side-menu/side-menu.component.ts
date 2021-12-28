@@ -88,6 +88,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     this.sideMenuItemsTitle.forEach(element => {
       (element.nativeElement as HTMLElement).style.display = 'none';
     });
+    // Change with of dashboard router-outlet
+    let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
+    dashboardRouterOutlet.style.marginLeft = '100px';
+    dashboardRouterOutlet.style.transition = '.3s linear';
   }
 
   openSideMenu(): void {
@@ -133,6 +137,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       title.style.fontWeight = 'bold';
       title.style.color = '#161925';
     });
+    // Change with of dashboard router-outlet
+    let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
+    dashboardRouterOutlet.style.marginLeft = '250px';
+    dashboardRouterOutlet.style.transition = '.3s linear';
   }
 
   getUser(): void {
