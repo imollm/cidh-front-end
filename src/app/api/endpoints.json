@@ -140,7 +140,7 @@
         "method": "POST"
       }
     },
-    "favourite": {
+    "favorite": {
       "add": {
         "uri": "/events/%s/add-to-favorites",
         "method": "POST"
