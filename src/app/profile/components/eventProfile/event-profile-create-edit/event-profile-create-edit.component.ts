@@ -51,7 +51,8 @@ export class EventCreateEditComponent implements OnInit {
       endDate: new FormControl('', Validators.required),
       category: new FormControl(''),
       organizerId: new FormControl('', Validators.required),
-      eventLabels: []
+      labelIds: [],
+      eventUrl: new FormControl('', Validators.required)
     });
   }
 
@@ -94,6 +95,8 @@ export class EventCreateEditComponent implements OnInit {
           name: this.event.name,
           description: this.event.description,
           headerImage: this.event.headerImage,
+          eventUrl: this.event.eventUrl,
+          category: this.event.category,
         });
       }
       this.spinner.hide();
@@ -162,6 +165,7 @@ export class EventCreateEditComponent implements OnInit {
       const index = this.selectedLabels.find(label => label === name)
       this.selectedLabels.splice(index)
     }
-    this.eventLabels.setValue(this.selectedLabels)
+    this.form.get('labelIds').setValue(this.selectedLabels)
+    console.log(this.form.value)
   }
 }
