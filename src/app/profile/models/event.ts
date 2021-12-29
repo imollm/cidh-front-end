@@ -16,4 +16,6 @@ export interface IEvent {
     labels: Label[];
     eventOrganizer: IEventOrganizer;
     rating: Number;
+    labelIds: string[];
+    eventUrl: string;
 }
