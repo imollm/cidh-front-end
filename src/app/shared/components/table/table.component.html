@@ -33,7 +33,7 @@
             <tr *ngFor="let element of dataTable.data">
               <td *ngFor="let row of dataTable.colsName" class="text-center">
                 <div *ngIf="row.colName === 'createdAt'; else noDate">
-                  {{ element[row.colName] * 1000 | date:'d MMM yy' }}
+                  {{ element[row.colName] | formatDate }}
                 </div>
                 <ng-template #noDate>
                   {{ element[row.colName] }}
