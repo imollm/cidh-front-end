@@ -13,24 +13,31 @@ import { CategoryCreateEditComponent } from './components/Category/category-crea
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
-  { path: 'dashboard', component: DashboardComponent,
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     // canActivate: [AuthGuard],
     children: [
-      { path: 'linkAdminToEventOrganizer', component: LinkAdminToEventOrganizerComponent, /* canActivate: [AuthGuard] */ },
-      { path: 'category', 
+      {
+        path: 'linkAdminToEventOrganizer',
+        component:
+          LinkAdminToEventOrganizerComponent /* canActivate: [AuthGuard] */,
+      },
+      {
+        path: 'category',
         children: [
-          { path: 'list', component: CategoryListComponent},
-          { path: 'create', component: CategoryCreateEditComponent}
-
-        ]
-      }
-    ]
-  
+          { path: 'list', component: CategoryListComponent },
+          { path: 'create', component: CategoryCreateEditComponent },
+          { path: 'edit/:id', component: CategoryCreateEditComponent },
+          { path: 'view/:id', component: CategoryCreateEditComponent },
+        ],
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdministrationRoutingModule { }
+export class AdministrationRoutingModule {}
