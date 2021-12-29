@@ -1,1 +1,19 @@
-<p>favorite-list works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <div *ngIf="myFavoriteEvents && myFavoriteEvents.length > 0; then withResults else withOutResults">Hola</div>
+            <ng-template #withResults>
+                <div class="text-center p-2">
+                    <h2>{{ title }}</h2>
+                </div>
+                <app-dashboard-table
+                    [toShow]="dataTable"
+                    [actionButtons]="actionButtons"
+                ></app-dashboard-table>
+            </ng-template>
+            <ng-template #withOutResults>
+                <h2 class="text-center">Encara no tens cap event favorit.</h2>
+            </ng-template>
+      </div>
+    </div>
+  </div>

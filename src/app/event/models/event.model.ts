@@ -8,8 +8,8 @@ export interface IEvent {
     headerImage?: string;
     rating?: IRating;
     description: string;
-    startDate?: Date;
-    endDate?: Date;
+    startDate?: number;
+    endDate?: number;
     category: Category;
     labels: Label[];
     eventOrganizer: IEventOrganizer;

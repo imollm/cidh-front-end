@@ -32,7 +32,7 @@
           <tbody>
             <tr *ngFor="let element of dataTable.data">
               <td *ngFor="let row of dataTable.colsName" class="text-center">
-                <div *ngIf="row.colName === 'createdAt'; else noDate">
+                <div *ngIf="row.colName==='createdAt'||row.colName==='startDate'||row.colName==='endDate'; else noDate">
                   {{ element[row.colName] | formatDate }}
                 </div>
                 <ng-template #noDate>
