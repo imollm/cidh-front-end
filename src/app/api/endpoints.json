@@ -65,7 +65,7 @@
       },
       "updateById": {
         "uri": "/categories/%s",
-        "method": "PUT"
+        "method": "POST"
       },
       "getById": {
         "uri": "/categories/%s",
