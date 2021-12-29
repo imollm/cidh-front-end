@@ -65,7 +65,7 @@
       },
       "updateById": {
         "uri": "/categories/%s",
-        "method": "PUT"
+        "method": "POST"
       },
       "getById": {
         "uri": "/categories/%s",
@@ -138,6 +138,24 @@
       "add": {
         "uri": "/events/%s/post-comment",
         "method": "POST"
+      }
+    },
+    "favorite": {
+      "add": {
+        "uri": "/events/%s/add-to-favorites",
+        "method": "POST"
+      },
+      "remove": {
+        "uri": "/events/%s/remove-from-favorites",
+        "method": "POST"
+      },
+      "listByUserId": {
+        "uri": "/users/%s/favorite-events",
+        "method": "GET"
+      },
+      "listMyFavs": {
+        "uri": "/users/me/favorite-events",
+        "method": "GET"
       }
     }
   }

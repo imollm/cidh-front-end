@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 import { IUser } from '../profile/models/user.model';
-
-enum ModalResultIcon {
-  success = 'success',
-  error = 'error',
-  warning = 'warning'
-}
+import { ModalResultIcon } from './modal.icon.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -36,16 +31,35 @@ export class ModalResultService {
   private readonly commentHasBeenSentText = 'El comentari s\'ha enviat correctament';
   private readonly commentHasNotBeenSent = 'El comentari no s\'ha enviat correctament';
 
+  private readonly canNotDoThisActionTitle = 'No tens permís!';
+  private readonly canNotDoThisActionText = 'No tens permissos per realitzar aquesta acció.';
+
   private resultTitle: string;
   private resultText: string;
   private resultIcon: ModalResultIcon;
 
   constructor() { }
 
+  showModal(title: string, text: string, icon: ModalResultIcon): void {
+    this.resultTitle = title;
+    this.resultText = text;
+    this.resultIcon = icon;
+
+    this.fireSwal();
+  }
+
+  youCanNotDoThisAction(): void {
+    this.resultTitle = this.canNotDoThisActionTitle;
+    this.resultText = this.canNotDoThisActionText;
+    this.resultIcon = ModalResultIcon.warning;
+  }
+
   successPostComment(): void {
     this.resultTitle = this.commentHasBeenSentTitle;
     this.resultText = this.commentHasBeenSentText;
     this.resultIcon = ModalResultIcon.success;
+
+    this.fireSwal();
   }
 
   unsuccessfulLogin(): void {

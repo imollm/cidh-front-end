@@ -1,11 +1,15 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IEvent } from 'src/app/event/models/event.model';
 import { EventService } from 'src/app/event/services/event.service';
+import { ModalResultIcon } from 'src/app/helpers/modal.icon.enum';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { IComment } from 'src/app/media/models/comment.model';
 import { CommentService } from 'src/app/media/services/comment.service';
+import { FavoriteService } from 'src/app/media/services/favorite.service';
 import { AuthService } from 'src/app/profile/services/auth/auth.service';
 import Swal from 'sweetalert2';
 
@@ -19,8 +23,9 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   parent: string;
   event: IEvent = {} as IEvent;
   rating: number;
+  faFavorite = faHeart;
 
-  @ViewChild('eventDetailContainer') eventDetailContainer: ElementRef;
+  @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,17 +34,18 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private commentService: CommentService,
     private modalResultService: ModalResultService,
-    private er: ElementRef
-  ) {
-    this.eventDetailContainer = this.er;
-  }
+    private router: Router,
+    private favoriteService: FavoriteService
+  ) { }
 
   ngOnInit(): void {
     this.getEventById(this.route.snapshot.params.id);
   }
 
   ngAfterViewInit(): void {
-    this.eventDetailContainer.nativeElement.style.backgroundColor = 'white';
+    if (this.router.url.includes('dashboard')) {
+      this.eventDetailContainer.nativeElement.style.backgroundColor = 'white';
+    }
   }
 
   getEventById(eventId: string): void {
@@ -52,8 +58,39 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     this.spinner.hide();
   }
 
-  isLogged(): boolean {
-    return this.authService.isLogged();
+  addToMyFavorites(): void {
+    if (!this.authService.isLogged()) {
+      this.router.navigate(['profile/login']);
+
+    } else if (this.authService.isLogged() && this.authService.getRoleOfAuthUser() !== 'USER') {
+      this.modalResultService.youCanNotDoThisAction();
+
+    } else if (this.authService.isLogged() && this.authService.getRoleOfAuthUser() === 'USER') {
+      if (this.event.isFavorite) {
+        this.favoriteService.removeToFavorties(this.event.id).then(() => {
+          this.event.isFavorite = false;
+          this.modalResultService.showModal('Eliminat dels favorits', 'S\'ha eliminat correctament dels teus favorits', ModalResultIcon.success)
+        }).catch(err => {
+          if (err) {
+            this.modalResultService.showModal('Error al eliminar', 'S\'ha produït un error al eliminar el favorit', ModalResultIcon.error)
+          }
+        });
+
+      } else {
+        this.favoriteService.addToFavorites(this.event.id).then(() => {
+          this.event.isFavorite = true;
+          this.modalResultService.showModal('Afegit als favorits', 'S\'ha afegit correctament als teus favorits', ModalResultIcon.success);
+        }).catch(err => {
+          if (err) {
+            this.modalResultService.showModal('Error al afegir', 'S\'ha produït un error al afegir el favorit', ModalResultIcon.error)
+          }
+        });
+      }
+    }
+  }
+
+  isUserRole(): boolean {
+    return this.authService.getRoleOfAuthUser() === 'USER';
   }
 
   sendComment(): void {

@@ -16,11 +16,17 @@
       justify-content: center
       align-items: center
 
-    .event-title
-      margin: 1em 0
-      color: $white
-      padding-bottom: .5em
+    .event-title-wrapper
       border-bottom: 2px solid $richBlack
+
+      .event-title
+        margin: .3em 0
+        color: $white
+        padding-bottom: .5em
+
+      fa-icon
+        font-size: 2em
+        cursor: pointer
 
     .labels-wrapper
       background-color: $richBlack
@@ -92,3 +98,9 @@
   p
     text-align: justify
     margin-bottom: 0
+
+.isFavorite
+  color: $red
+
+.isNotFavorite
+  color: $richBlack

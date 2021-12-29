@@ -9,25 +9,27 @@ import { EndPointMapper } from '../../../helpers/endpoint-mapper.helper.service'
 })
 export class CategoryService implements ICategoryService {
 
+  private readonly resource: string = 'category';
+
   constructor(
     private httpClient: HttpClient,
     private endpointMapper: EndPointMapper
     ) { }
 
   addCategory(category: Category): Promise<Category> {
-    const endpoint = this.endpointMapper.getEndPointUrl('category', 'create');
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'create');
     return this.httpClient.post<Category>(endpoint, category).toPromise();
   }
-  updateCategory(category: Category): Promise<Category> {
-    const endpoint = this.endpointMapper.getEndPointUrl('category', 'updateById', category.id);
-    return this.httpClient.put<Category>(endpoint, category).toPromise();
+  updateCategory(category: Category, categoryId: string): Promise<Category> {
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'updateById', categoryId);
+    return this.httpClient.post<Category>(endpoint, category).toPromise();
   }
-  showCategory(category: Category): Promise<Category> {
-    const endpoint = this.endpointMapper.getEndPointUrl('category', 'getById', category.id);
+  showCategory(categoryId: string): Promise<Category> {
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'getById', categoryId);
     return this.httpClient.get<Category>(endpoint).toPromise();
   }
   listAllCategories(): Promise<Category[]> {
-    const endpoint = this.endpointMapper.getEndPointUrl('category', 'getAll');
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'getAll');
     return this.httpClient.get<Category[]>(endpoint).toPromise();
   }
 }

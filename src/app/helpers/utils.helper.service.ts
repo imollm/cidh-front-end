@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 export interface ValidationResult {
   [key: string]: boolean;
 }
+  
 @Injectable({
   providedIn: 'root'
 })
