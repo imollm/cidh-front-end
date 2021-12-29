@@ -135,7 +135,7 @@
       }
     },
     "comment": {
-      "add": {
+      "post": {
         "uri": "/events/%s/post-comment",
         "method": "POST"
       }

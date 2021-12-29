@@ -24,6 +24,11 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   event: IEvent = {} as IEvent;
   rating: number;
   faFavorite = faHeart;
+  comments: IComment[] = [
+    {authorId: 'Atuhor1', comment: 'Comment 1', createdAt: new Date()},
+    {authorId: 'Atuhor2', comment: 'Comment 2', createdAt: new Date()},
+    {authorId: 'Atuhor3', comment: 'Comment 3', createdAt: new Date()},
+  ];
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 

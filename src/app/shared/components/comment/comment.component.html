@@ -1,0 +1,11 @@
+<div class="comment-wrapper">
+    <div class="comment comment-author">
+        <span>{{ comment.authorId }}</span>
+    </div>
+    <div class="comment comment-message">
+        <span>{{ comment.comment }}</span>
+    </div>
+    <div class="comment comment-date">
+        <span>{{ comment.createdAt | date:'dd MM yy'}}</span>
+    </div>
+</div>

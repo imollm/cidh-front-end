@@ -13,6 +13,7 @@ import { EventDetailComponent } from './components/event/event-detail/event-deta
 import { ForumComponent } from './components/forum/forum.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerComponent } from './components/answer/answer.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -20,6 +21,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventRatingComponent } from './components/event-rating/event-rating.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { EventRatingComponent } from './components/event-rating/event-rating.com
     EventRatingComponent,
     ForumComponent,
     QuestionComponent,
-    AnswerComponent
+    AnswerComponent,
+    CarouselComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +46,7 @@ import { EventRatingComponent } from './components/event-rating/event-rating.com
     NgxPaginationModule,
     NgxSpinnerModule,
     FontAwesomeModule,
+    CarouselModule,
     RouterModule
   ],
   exports: [

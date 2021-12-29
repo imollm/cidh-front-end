@@ -28,6 +28,17 @@
         font-size: 2em
         cursor: pointer
 
+    .date-wrapper
+      display: flex
+      flex-direction: row
+      justify-content: space-evenly
+      align-items: center
+      margin-top: 1em
+
+      @include max-lg()
+        flex-direction: column
+        justify-content: center
+
     .labels-wrapper
       background-color: $richBlack
       padding: .5em
@@ -73,6 +84,19 @@
         background-color: $white
         color: $richBlack
         font-weight: bold
+
+    .comments
+      display: flex
+      justify-content: center
+
+      .owl-custom
+        background-color: $richBlack
+        color: $white
+        border-radius: 5px
+        padding: 1.5em
+        margin-top: 2em
+        width: 35%
+        border: solid 2px $white
 
     .forum
       margin-top: 3em
