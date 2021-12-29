@@ -79,4 +79,8 @@ export class AuthService implements IAuthService {
   getJWTDecoded(): any {
     return jwt_decode(this.getAccessToken());
   }
+
+  getRoleOfAuthUser(): string {
+    return this.getJWTDecoded().authorities;
+  }
 }
