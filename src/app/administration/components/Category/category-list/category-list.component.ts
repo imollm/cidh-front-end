@@ -54,9 +54,6 @@ export class CategoryListComponent implements OnInit {
       { colName: 'createdAt', text: 'Data de creació' }
     ]
     this.dataTable.data = this.categories
-    this.dataTable.data.forEach(category => {
-      category.createdAt = Intl.DateTimeFormat('es-ES').format(category.createdAt*1000)
-    })
   }
 
 }
