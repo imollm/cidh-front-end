@@ -1,8 +1,11 @@
-<section class="results">
+<section class="results" #eventResults>
+  <div *ngIf="isDashboard()">
+    <h1 class="text-center">Cercador d'events</h1>
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <section class="searcher">
+        <section class="searcher" #eventSearcher>
           <div class="container">
             <form class="searcher-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row pt-5 px-5">

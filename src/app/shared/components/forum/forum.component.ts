@@ -44,10 +44,12 @@ export class ForumComponent implements OnInit {
       confirmButtonColor: '#00adb5',
       cancelButtonColor: '#8ea8c3',
       inputValidator: (eventId) => {
-        return new Promise((resolve) => {
+        if (!eventId) {
+          return 'Necessites escollir un event';
+        } else {
           this.newQuestion.eventId = eventId;
-          resolve(null)
-        })
+          return null;
+        }
       }
     }).then(() => {
       Swal.fire({
@@ -58,10 +60,12 @@ export class ForumComponent implements OnInit {
         confirmButtonColor: '#00adb5',
         cancelButtonColor: '#8ea8c3',
         inputValidator: (message) => {
-          return new Promise((resolve) => {
+          if (!message) {
+            return 'Necessites escriure una pregunta vàlida!';
+          } else {
             this.newQuestion.message = message;
-            resolve(null)
-          })
+            return null;
+          }
         }
       })
     });

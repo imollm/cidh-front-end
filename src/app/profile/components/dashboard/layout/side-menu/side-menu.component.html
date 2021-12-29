@@ -85,7 +85,8 @@
       </li>
       <li
         *ngIf="permissions && permissions.event && permissions.event.listEventsByCategory && permissions.event.searchEventByLabel && permissions.event.searchEventByName"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/event/dashboard/event/search']">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventSearcher"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
           Cercador

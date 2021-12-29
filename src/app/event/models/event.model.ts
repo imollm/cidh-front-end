@@ -7,6 +7,7 @@ export interface IEvent {
     location: string;
     startDate?: Date;
     endDate?: Date;
+    isFavorite?: boolean;
     // category: Category;
     // labels: Label[];
     // eventOrganizer: EventOrganizer;

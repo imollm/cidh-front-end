@@ -17,7 +17,6 @@ import { CategoryCreateEditComponent } from './components/category/category-crea
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
 
-
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
   {
