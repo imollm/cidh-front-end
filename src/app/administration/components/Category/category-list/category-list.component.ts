@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Category } from 'src/app/administration/models/category.model';
-import { CategoryService } from 'src/app/administration/services/category.service';
+import { CategoryService } from 'src/app/administration/services/category/category.service';
 import { IActionButtons } from 'src/app/shared/components/table/models/action-buttons.model';
 import { IDashboardTable } from 'src/app/shared/components/table/models/table.model';
 

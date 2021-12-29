@@ -1,11 +1,12 @@
-export interface Event {
+export interface IEvent {
+    id?: string;
     name: string;
     description: string;
-    picture: string | undefined;
-    rating: number;
+    headerImage?: string;
+    rating?: number;
     location: string;
-    initDate: Date;
-    endDate: Date;
+    startDate?: Date;
+    endDate?: Date;
     // category: Category;
     // labels: Label[];
     // eventOrganizer: EventOrganizer;

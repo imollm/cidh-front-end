@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Label } from 'src/app/administration/models/label.model';
-import { LabelService } from 'src/app/administration/services/label.service';
+import { LabelService } from 'src/app/administration/services/label/label.service';
 
 @Component({
   selector: 'app-labels',
@@ -19,7 +19,11 @@ export class LabelsComponent implements OnInit {
   }
 
   getAllLabels() {
-    this.labels = this.labelService.listAllLabels();
+    this.labelService.listAllLabels().then(res => {
+      if (res && res.length > 0) {
+        this.labels = res;
+      }
+    });
   }
 
 }

@@ -44,6 +44,18 @@
       "updateById": {
         "uri": "/users/%s",
         "method": "POST"
+      },
+      "getAdmins": {
+        "uri": "/users?role=Admin",
+        "method": "GET"
+      },
+      "getSuperAdmins": {
+        "uri": "/users?role=SuperAdmin",
+        "method": "GET"
+      },
+      "getUsers": {
+        "uri": "/users?role=User",
+        "method": "GET"
       }
     },
     "category": {
@@ -62,6 +74,64 @@
       "getAll": {
         "uri": "/categories",
         "method": "GET"
+      }
+    },
+    "event-organizer": {
+      "create": {
+        "uri": "/event-organizer",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/event-organizer/%s",
+        "method": "PUT"
+      },
+      "getById": {
+        "uri": "/event-organizer/%s",
+        "method": "GET"
+      },
+      "getAll": {
+        "uri": "/event-organizer",
+        "method": "GET"
+      }
+    },
+    "event": {
+      "create": {
+        "uri": "/events",
+        "method": "POST"
+      },
+      "getEvents": {
+        "uri": "/events",
+        "method": "GET"
+      },
+      "getEventById": {
+        "uri": "/events/%s",
+        "method": "GET"
+      },
+      "updateById": {
+        "uri": "/events/%s",
+        "method": "POST"
+      }
+    } ,
+    "label": {
+      "create": {
+        "uri": "/labels",
+        "method": "POST"
+      },
+      "getById": {
+        "uri": "/labels/%s",
+        "method": "GET"
+      },
+      "updateById": {
+        "uri": "/labels/%s",
+        "method": "POST"
+      },
+      "getAll": {
+        "uri": "/labels",
+        "method": "GET"
+      },
+      "deleteById": {
+        "uri": "/labels/%s",
+        "method": "DELETE"
       }
     }
   }

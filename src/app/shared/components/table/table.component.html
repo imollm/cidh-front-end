@@ -31,23 +31,28 @@
           </tfoot>
           <tbody>
             <tr *ngFor="let element of dataTable.data">
-              <td *ngFor="let row of dataTable.colsName">
-                {{ element[row.colName] }}
+              <td *ngFor="let row of dataTable.colsName" class="text-center">
+                <div *ngIf="row.colName === 'createdAt'; else noDate">
+                  {{ element[row.colName] * 1000 | date:'d MMM yy' }}
+                </div>
+                <ng-template #noDate>
+                  {{ element[row.colName] }}
+                </ng-template>
               </td>
               <td *ngIf="actionButtons && actionButtons.active">
                 <div class="d-flex flex-row justify-content-around">
                   <div *ngIf="actionButtons.actions && actionButtons.actions.view">
-                    <a href="#">
+                    <a [routerLink]="[actionButtons.resource + '/view/', element.id]">
                       <fa-icon [icon]="faView" class="icon-view"></fa-icon>
                     </a>
                   </div>
                   <div *ngIf="actionButtons.actions && actionButtons.actions.edit">
-                    <a href="#">
+                    <a [routerLink]="[actionButtons.resource + '/edit/', element.id]">
                       <fa-icon [icon]="faEdit" class="icon-edit"></fa-icon>
                     </a>
                   </div>
                   <div *ngIf="actionButtons.actions && actionButtons.actions.delete">
-                    <a (click)="showDeleteModal('')">
+                    <a (click)="showDeleteModal(element)">
                       <fa-icon [icon]="faDelete" class="icon-delete"></fa-icon>
                     </a>
                   </div>

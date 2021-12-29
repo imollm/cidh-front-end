@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Category } from 'src/app/administration/models/category.model';
-import { CategoryService } from 'src/app/administration/services/category.service';
+import { CategoryService } from 'src/app/administration/services/category/category.service';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
 

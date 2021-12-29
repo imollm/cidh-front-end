@@ -4,18 +4,29 @@ import { CommonModule } from '@angular/common';
 // Custom imports
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
-import { LinkAdminToEventOrganizerComponent } from './components/link-admin-to-event/link-admin-to-event-organizer.component';
-import { CategoryListComponent } from './components/Category/category-list/category-list.component';
+import { CategoryListComponent } from './components/category/category-list/category-list.component';
 import { SharedModule } from '../shared/shared.module';
-import { CategoryCreateEditComponent } from './components/Category/category-create-edit/category-create-edit.component';
-
+import { CategoryCreateEditComponent } from './components/category/category-create-edit/category-create-edit.component';
+import { EventOrganizerListComponent } from './components/event-organizer/event-organizer-list/event-organizer-list.component';
+import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
+import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
+import { LabelListComponent } from './components/label/label-list/label-list.component';
+import { LabelCreateEditComponent } from './components/label/label-create-edit/label-create-edit.component';
+import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
+import { AdministratorCreateEditComponent } from './components/administrator/administrator-create-edit/administrator-create-edit.component';
 
 @NgModule({
   declarations: [
     AdministrationComponent,
-    LinkAdminToEventOrganizerComponent,
+    CategoryCreateEditComponent,
     CategoryListComponent,
-    CategoryCreateEditComponent
+    EventOrganizerListComponent,
+    EventOrganizerCreateEditComponent,
+    EventOrganizerDetailComponent,
+    LabelListComponent,
+    LabelCreateEditComponent,
+    AdministratorListComponent,
+    AdministratorCreateEditComponent
   ],
   imports: [
     CommonModule,

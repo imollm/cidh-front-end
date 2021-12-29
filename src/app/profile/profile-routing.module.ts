@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile.component';
 import { HomeComponent as DashboardHomeComponent } from './components/dashboard/components/home/home.component';
 import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 import { LogoutComponent } from './components/dashboard/components/logout/logout.component';
+import { EventDetailComponent } from '../shared/components/event/event-detail/event-detail.component'; 
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
@@ -17,12 +18,20 @@ const routes: Routes = [
   { path: '', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent,
+  {
+    path: 'dashboard', component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: '/profile/dashboard/home', pathMatch: 'full' },
       { path: 'home', component: DashboardHomeComponent },
-      { path: 'userprofile', component: ProfileShowComponent},
-      { path: 'logout', component: LogoutComponent }
+      { path: 'userprofile', component: ProfileShowComponent },
+      { path: 'logout', component: LogoutComponent },
+      {
+        path: 'event',
+        children: [
+          { path: 'detail/:id', component: EventDetailComponent }
+        ]
+      }
     ]
   },
 ];
