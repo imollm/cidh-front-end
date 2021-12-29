@@ -18,12 +18,11 @@ export class CategoryService implements ICategoryService {
 
   addCategory(category: Category): Promise<Category> {
     const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'create');
-    console.log(endpoint)
     return this.httpClient.post<Category>(endpoint, category).toPromise();
   }
   updateCategory(category: Category, categoryId: string): Promise<Category> {
     const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'updateById', categoryId);
-    return this.httpClient.put<Category>(endpoint, category).toPromise();
+    return this.httpClient.post<Category>(endpoint, category).toPromise();
   }
   showCategory(categoryId: string): Promise<Category> {
     const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'getById', categoryId);
