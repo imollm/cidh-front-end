@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IEvent } from 'src/app/event/models/event.model';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IEventOrganizer } from 'src/app/administration/models/event-organizer.model';
@@ -11,6 +11,8 @@ import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { EventProfileService } from 'src/app/profile/services/event/eventProfile.service';
 import { Category } from 'src/app/administration/models/category.model';
 import { CategoryService } from 'src/app/administration/services/category/category.service';
+import { Label } from 'src/app/administration/models/label.model';
+import { LabelService } from 'src/app/administration/services/label/label.service';
 
 @Component({
   selector: 'app-event-create-edit',
@@ -27,6 +29,8 @@ export class EventCreateEditComponent implements OnInit {
   event: IEvent = {} as IEvent
   categories: Category[] = []
   eventOrganizers: IEventOrganizer[] = []
+  labels: Label[] = []
+  selectedLabels = []
 
 
   constructor(
@@ -36,7 +40,8 @@ export class EventCreateEditComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private modalResultService: ModalResultService,
     private categoryService: CategoryService,
-    private eventOrganizerService: EventOrganizerService
+    private eventOrganizerService: EventOrganizerService,
+    private labelService: LabelService
   ) {
     this.form = this.fb.group({
       name: new FormControl('', Validators.required),
@@ -45,7 +50,8 @@ export class EventCreateEditComponent implements OnInit {
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('', Validators.required),
       category: new FormControl(''),
-      organizerId: new FormControl('', Validators.required)
+      organizerId: new FormControl('', Validators.required),
+      eventLabels: []
     });
   }
 
@@ -62,6 +68,7 @@ export class EventCreateEditComponent implements OnInit {
 
     this.getCategories()
     this.getEventOrganizers()
+    this.getLabels()
   }
 
   createMode(): void {
@@ -102,7 +109,6 @@ export class EventCreateEditComponent implements OnInit {
         endDate : new Date(this.form.get('endDate').value).getTime()/1000
       })
 
-      console.log(this.form.value)
       if (this.mode && this.mode === 'create') {
         this.eventService.addEvent(this.form.value).then(res => {
           this.event = res;
@@ -131,7 +137,6 @@ export class EventCreateEditComponent implements OnInit {
     this.categoryService.listAllCategories().then(res => {
       this.categories = res
     })
-    console.log(this.categories)
   }
 
   getEventOrganizers(): void {
@@ -140,4 +145,23 @@ export class EventCreateEditComponent implements OnInit {
     })
   }
 
+  getLabels(): void {
+    this.labelService.listAllLabels().then(res => {
+      this.labels = res
+    })
+  }
+
+  get eventLabels(): FormArray{
+    return this.form.get('eventLabels') as FormArray
+  }
+
+  onChange(name: string, event) {
+    if (event.target.checked) {
+      this.selectedLabels.push(name)
+    } else {
+      const index = this.selectedLabels.find(label => label === name)
+      this.selectedLabels.splice(index)
+    }
+    this.eventLabels.setValue(this.selectedLabels)
+  }
 }

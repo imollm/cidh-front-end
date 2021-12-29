@@ -41,7 +41,7 @@
                     <div class="form-group mb-5">
                         <label for="eventCategory" class="form-label">Categoria<sup>*</sup></label>
                         <select formControlName="category" id="eventCategory" class="form-select" [ngClass]="{ 'is-invalid': !form.pending && form.get('organizerId').invalid, 'is-valid': form.get('organizerId').valid }">
-                            <option [ngValue]="" disabled selected>Tria un organitzador</option>
+                            <option [ngValue]="" disabled selected>Tria una categoria</option>
                             <option *ngFor="let category of categories" [ngValue]="category.name">
                                 {{ category.name}}
                             </option>
@@ -50,7 +50,7 @@
                                     form.get('category').errors && 
                                     (form.get('category').dirty || form.get('category').touched)">
                             <small class="text-danger" *ngIf="form.get('category').hasError('required')">
-                                L'organitzador és obligatori.
+                                La categoria es obligatoria.
                             </small>
                         </div>
                     </div>
@@ -70,6 +70,11 @@
                             </small>
                         </div>
                     </div>
+                        <div *ngFor="let label of labels">
+                            <input type="checkbox" (change)="onChange(label.id, $event)" />
+                            {{label.name}}
+                        </div>
+
                     <div class="form-group p-4">
                         <button class="form-control btn btn-dark text-white" [disabled]="form.invalid">
                             {{ btnText }}
