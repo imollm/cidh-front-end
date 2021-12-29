@@ -16,12 +16,12 @@ export class FavouriteService implements IFavouriteService {
   
   addToFavourites(eventId: string): Promise<void> {
     const endpoint = this.endpointMapper.getEndPointUrl('favourite', 'add', eventId);
-    return this.httpClient.post<void>(endpoint, '').toPromise();
+    return this.httpClient.post<void>(endpoint, {}).toPromise();
   }
 
   removeToFavourties(eventId: string): Promise<void> {
     const endpoint = this.endpointMapper.getEndPointUrl('favourite', 'remove', eventId);
-    return this.httpClient.post<void>(endpoint, '').toPromise();
+    return this.httpClient.post<void>(endpoint, {}).toPromise();
   }
 
   listAllFavouritesByUserId(): Promise<IEvent[]> {
