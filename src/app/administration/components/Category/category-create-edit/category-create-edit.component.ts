@@ -60,7 +60,7 @@ export class CategoryCreateEditComponent implements OnInit {
     this.categoryService.showCategory(this.categoryId).then(res => {
       this.spinner.show();
       if (res) {
-        this.category = res[0];
+        this.category = res;
         this.categoryId = this.category.id;
         this.form.patchValue({
           name: this.category.name,
