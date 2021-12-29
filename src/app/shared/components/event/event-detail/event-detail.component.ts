@@ -24,11 +24,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   event: IEvent = {} as IEvent;
   rating: number;
   faFavorite = faHeart;
-  comments: IComment[] = [
-    {authorId: 'Atuhor1', comment: 'Comment 1', createdAt: new Date()},
-    {authorId: 'Atuhor2', comment: 'Comment 2', createdAt: new Date()},
-    {authorId: 'Atuhor3', comment: 'Comment 3', createdAt: new Date()},
-  ];
+  comments: IComment[];
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
@@ -57,7 +53,16 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     this.spinner.show();
 
     this.eventService.findEventById(eventId).then(res => {
-      this.event = res;
+      if (res) {
+        this.event = res;
+      }
+    })
+    .then(() => {
+      this.commentService.getCommentsByEventId(this.event.id).then(res => {
+        if (res && res.length > 0) {
+          this.comments = res;
+        }
+      });
     });
 
     this.spinner.hide();
