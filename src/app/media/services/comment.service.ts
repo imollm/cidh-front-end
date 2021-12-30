@@ -9,16 +9,21 @@ import { ICommentService } from './comment.interface';
 })
 export class CommentService implements ICommentService {
 
+  private readonly resource = 'comment';
+
   constructor(
     private httpClient: HttpClient,
     private endpointMapper: EndPointMapper
   ) { }
 
   sendComment(eventId: string, comment: IComment): Promise<void> {
-    const endpoint = this.endpointMapper.getEndPointUrl('comment', 'add', eventId);
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'add', eventId);
     return this.httpClient.post<void>(endpoint, comment).toPromise();
   }
+
   addRating(eventId: string, rating: number): Promise<void> {
-    throw new Error('Method not implemented.');
+    let endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'rate', eventId);
+    endpoint += `?rating=${rating}`;
+    return this.httpClient.post<void>(endpoint, {}).toPromise();
   }
 }

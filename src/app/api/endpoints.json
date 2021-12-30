@@ -138,6 +138,10 @@
       "add": {
         "uri": "/events/%s/post-comment",
         "method": "POST"
+      },
+      "rate": {
+        "uri": "/events/%s/rate",
+        "method": "POST"
       }
     },
     "favorite": {

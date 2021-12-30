@@ -7,6 +7,7 @@ export interface IEvent {
     name: string;
     headerImage?: string;
     rating?: IRating;
+    userRating?: number | null;
     description: string;
     startDate?: number;
     endDate?: number;
@@ -15,4 +16,5 @@ export interface IEvent {
     eventOrganizer: IEventOrganizer;
     eventUrl: string;
     isFavorite?: boolean;
+    isUserSubscribed?: boolean;
 }
