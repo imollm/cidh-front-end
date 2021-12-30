@@ -22,7 +22,9 @@ export class CommentService implements ICommentService {
   }
 
   addRating(eventId: string, rating: number): Promise<void> {
-    throw new Error('Method not implemented.');
+    let endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'rate', eventId);
+    endpoint += `?rating=${rating}`;
+    return this.httpClient.post<void>(endpoint, {}).toPromise();
   }
 
   getCommentsByEventId(eventId: string): Promise<IComment[]> {

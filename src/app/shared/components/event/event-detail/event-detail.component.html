@@ -1,6 +1,4 @@
-<app-banner *ngIf="parent==='public'"></app-banner>
-
-<h1 *ngIf="parent!=='public'" class="text-center mt-4 mb-4">
+<h1 *ngIf="isLogged()" class="text-center mt-4 mb-4">
     Detalls de l'event
 </h1>
 
@@ -45,20 +43,38 @@
                         {{ label.name }}
                     </div>
                 </div>
-                <h4 *ngIf="event.description" class="mt-5">Descripció</h4>
-                <div *ngIf="event.description" class="description">
-                    <p>
-                        {{ event.description }}
-                    </p>
+                <div *ngIf="event.description" class="mt-5">
+                    <h4>Descripció</h4>
+                    <div class="description">
+                        <p>
+                            {{ event.description }}
+                        </p>
+                    </div>
                 </div>
-                <div *ngIf="true" class="rating">
-                    <app-event-rating [rating]="2" [readonly]="true"></app-event-rating>
+                <div *ngIf="event.rating" class="rating">
+                    <app-event-rating [rating]="event.rating"></app-event-rating>
                 </div>
-                <div href="#" class="d-flex justify-content-center">
-                    <span class="button">Subscriu-te!</span>
-                </div>
-                <div class="d-flex justify-content-center" (click)="sendComment()">
-                    <span class="button">Deixa un comentari</span>
+                <div class="actions-wrapper">
+                    <h4>Accions</h4>
+                    <div class="actions">
+                        <div *ngIf="!event.isUserSubscribed" (click)="subscribeIt()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Subscriu-te!</button>
+                        </div>
+                        <div *ngIf="event.isUserSubscribed" (click)="unsubscribedIt()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Dona't de baixa!</button>
+                        </div>
+                        <div (click)="sendComment()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Deixa un comentari</button>
+                        </div>
+                        <div (click)="rateIt()">
+                            <button type="button" class="btn btn-dark"
+                                [disabled]="!isLogged() && !event.userRating !== null">Puntua'l</button>
+                        </div>
+                        <div (click)="shareIt()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Comparteix'lo</button>
+                        </div>
+                    </div>
+                    <small *ngIf="!isLogged()">Si no tens sessió iniciada no pots realizar aquestes accions</small>
                 </div>
                 <div *ngIf="comments && comments.length > 0">
                     <h4 class="text-center mt-5">Comentaris</h4>

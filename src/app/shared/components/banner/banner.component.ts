@@ -1,33 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.sass']
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent {
 
   bannerTitle = 'CULTURE IN DA HOUSE';
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.setTitle();
-  }
-
-  private setTitle(): void {
-    let url = this.router.url;
-    if (url.indexOf('/forum') > -1) {
-      this.bannerTitle = 'FORUM';
-    } else if (url.indexOf('/categories') > -1) {
-      this.bannerTitle = 'CATEGORIES';
-    } else if (url.indexOf('/labels') > -1) {
-      this.bannerTitle = 'ETIQUETES';
-    } else if (url.indexOf('/results') > -1) {
-      this.bannerTitle = 'RESULTATS CERCA';
-    } else if (url.indexOf('/event-detail') > -1) {
-      this.bannerTitle = 'DETALLS DEL EVENT';
-    }
-  }
 }

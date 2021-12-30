@@ -1,6 +1,6 @@
 {
   "name": "cidh-front-end",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start-prod": "ng serve --configuration production",
