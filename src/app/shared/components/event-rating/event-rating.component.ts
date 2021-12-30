@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import { IRating } from 'src/app/event/models/rating.model';
 
 @Component({
   selector: 'app-event-rating',
@@ -8,7 +9,7 @@ import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 })
 export class EventRatingComponent implements OnInit {
   
-  @Input() rating: number;
+  @Input() rating: IRating;
   @Input() readonly: boolean;
   maxRating: number = 5;
   stars: boolean[] = [];
@@ -18,8 +19,9 @@ export class EventRatingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.rating);
     for (let i = 0; i < this.maxRating; i++) {
-      this.stars.push(i < this.rating);
+      this.stars.push(i < this.rating.rating);
     }
   }
 
