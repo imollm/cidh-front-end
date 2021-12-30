@@ -49,7 +49,7 @@ export class EventCreateEditComponent implements OnInit {
       headerImage: new FormControl(''),
       startDate: new FormControl('', Validators.required),
       endDate: new FormControl('', Validators.required),
-      category: new FormControl(''),
+      category: new FormControl('', Validators.required),
       organizerId: new FormControl('', Validators.required),
       labelIds: [],
       eventUrl: new FormControl('', Validators.required)

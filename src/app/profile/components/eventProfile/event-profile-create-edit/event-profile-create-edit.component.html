@@ -45,7 +45,8 @@
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventCategory" class="form-label">Categoria<sup>*</sup></label>
-                        <select formControlName="category" id="eventCategory" class="form-select" [ngClass]="{ 'is-invalid': !form.pending && form.get('organizerId').invalid, 'is-valid': form.get('organizerId').valid }">
+                        <select formControlName="category" id="eventCategory" class="form-select"
+                        [ngClass]="{ 'is-invalid': !form.pending && form.get('category').invalid, 'is-valid': form.get('category').valid }">
                             <option [ngValue]="" disabled selected>Tria una categoria</option>
                             <option *ngFor="let category of categories" [ngValue]="category.name">
                                 {{ category.name}}
@@ -61,7 +62,8 @@
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventOrganizerId" class="form-label">Organitzador<sup>*</sup></label>
-                        <select formControlName="organizerId" id="eventOrganizerId" class="form-select" [ngClass]="{ 'is-invalid': !form.pending && form.get('organizerId').invalid, 'is-valid': form.get('organizerId').valid }">
+                        <select formControlName="organizerId" id="eventOrganizerId" class="form-select"
+                        [ngClass]="{ 'is-invalid': !form.pending && form.get('organizerId').invalid, 'is-valid': form.get('organizerId').valid }">
                             <option [ngValue]="" disabled selected>Tria un organitzador</option>
                             <option *ngFor="let eventOrganizer of eventOrganizers" [ngValue]="eventOrganizer.id">
                                 {{ eventOrganizer.name}}
