@@ -17,7 +17,7 @@ export class CommentService implements ICommentService {
   ) { }
 
   sendComment(eventId: string, comment: IComment): Promise<void> {
-    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'add', eventId);
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'post', eventId);
     return this.httpClient.post<void>(endpoint, comment).toPromise();
   }
 
@@ -25,5 +25,10 @@ export class CommentService implements ICommentService {
     let endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'rate', eventId);
     endpoint += `?rating=${rating}`;
     return this.httpClient.post<void>(endpoint, {}).toPromise();
+  }
+
+  getCommentsByEventId(eventId: string): Promise<IComment[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl(this.resource, 'getAll', eventId);
+    return this.httpClient.get<IComment[]>(endpoint).toPromise();
   }
 }

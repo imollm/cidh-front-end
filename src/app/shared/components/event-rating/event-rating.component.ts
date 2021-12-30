@@ -1,6 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, ElementRef, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faPoll, faStar, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { IRating } from 'src/app/event/models/rating.model';
 
 @Component({
@@ -8,41 +7,37 @@ import { IRating } from 'src/app/event/models/rating.model';
   templateUrl: './event-rating.component.html',
   styleUrls: ['./event-rating.component.sass']
 })
-export class EventRatingComponent implements OnChanges, AfterContentChecked {
-  
-  @Input() rating: IRating;
-  faStar = faStar;
-  currentRating: number;
-  isPrinted: boolean = false;
+export class EventRatingComponent implements OnInit, OnChanges {
 
-  @ViewChildren('star', { read: ElementRef }) stars: QueryList<ElementRef>;
+  @Input() rating: IRating;
+  @Input() userRating: number;
+  faStar = faStar;
+  faAverage = faPoll;
+  faUsers = faUsers;
 
   constructor() { }
 
-  ngAfterContentChecked(): void {
-    if (this.rating.rating > 0) {
-      this.setStars();
-    }
+  ngOnInit(): void {
+    this.setStars();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.userRating = changes.userRating.currentValue;
     this.rating = changes.rating.currentValue;
-    this.currentRating = this.rating.rating;
-
-    if (!changes.rating.firstChange && this.rating.rating === 0) {
-      this.setStars();
-    }
+    this.setStars();
   }
 
   setStars(): void {
-    if (this.rating.rating > 0 && this.stars && !this.isPrinted) {
-      this.stars.forEach(star => {
-        this.currentRating >= 1
-        ? star.nativeElement.classList.add('enabled')
-        : star.nativeElement.classList.add('disabled');
-        this.currentRating--;
-      })
-      this.isPrinted = true;
+    let stars = document.querySelectorAll('fa-icon.star');
+    let currentRating = this.userRating;
+
+    for (let i = 0; i < 5; i++) {
+      (stars[i] as HTMLElement).style.color = '';
+
+      if (currentRating >= 1) {
+        (stars[i] as HTMLElement).style.color = 'yellow';
+      }
+      currentRating--;
     }
   }
 }

@@ -24,6 +24,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   event: IEvent = {} as IEvent;
   rating: number;
   faFavorite = faHeart;
+  comments: IComment[];
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
@@ -52,7 +53,18 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     this.spinner.show();
 
     this.eventService.findEventById(eventId).then(res => {
-      this.event = res;
+      if (res) {
+        this.event = res;
+      }
+    })
+    .then(() => {
+      if (this.isLogged()) {
+        this.commentService.getCommentsByEventId(this.event.id).then(res => {
+          if (res && res.length > 0) {
+            this.comments = res;
+          }
+        });
+      }
     });
 
     this.spinner.hide();
@@ -100,7 +112,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   sendComment(): void {
     if (this.isLogged()) {
       let comment: IComment = {} as IComment;
-      comment.createdAt = new Date();
+      comment.createdAt = new Date().getTime() / 1000;
 
       Swal.fire({
         title: 'Escriu el teu comentari',
@@ -123,7 +135,11 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
         this.commentService.sendComment(this.event.id, comment).then(res => {
           this.modalResultService.successPostComment();
         }).catch(err => {
-          this.modalResultService.errorResultModal();
+          const title = 'Event ja comentat!';
+          const text = 'Ja has fet un comentari sobre aquest event';
+          const icon = ModalResultIcon.warning;
+
+          this.modalResultService.showModal(title, text, icon);
         })
       });
     }
@@ -149,12 +165,12 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
           if (!rating) {
             return 'Necessites escollir una puntuació';
           } else {
-            rate.rating = Number(rating);
+            this.event.rating.rating = Number(rating);
             return null;
           }
         }
       }).then(() => {
-        this.commentService.addRating(this.event.id, rate.rating).then(() => {
+        this.commentService.addRating(this.event.id, this.event.rating.rating).then(() => {
           const title: string = 'Puntuació enviada';
           const text: string = 'S\'ha registrat correctament la teva puntuació!'
           const icon: ModalResultIcon = ModalResultIcon.success;

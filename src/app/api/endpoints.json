@@ -135,9 +135,13 @@
       }
     },
     "comment": {
-      "add": {
+      "post": {
         "uri": "/events/%s/post-comment",
         "method": "POST"
+      },
+      "getAll": {
+        "uri": "/events/%s/comments",
+        "method": "GET"
       },
       "rate": {
         "uri": "/events/%s/rate",
