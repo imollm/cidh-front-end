@@ -1,6 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import jwt_decode from "jwt-decode"
+
 
 export interface ValidationResult {
   [key: string]: boolean;
@@ -39,6 +41,7 @@ export class UtilsService {
     return id;
   }
 
+
   static strong(control: FormControl): ValidationResult {
     let hasUpper = /[A-Z]/.test(control.value);
     let hasLower = /[a-z]/.test(control.value);
@@ -49,5 +52,11 @@ export class UtilsService {
         return { strong: true };
     }
     return null;
+
+  }
+
+  static getRoleFromAccessToken(): string {
+    const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
+    return jwt['authorities'];
   }
 }
