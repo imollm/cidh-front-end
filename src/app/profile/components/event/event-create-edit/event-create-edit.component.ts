@@ -16,8 +16,8 @@ import { LabelService } from 'src/app/administration/services/label/label.servic
 
 @Component({
     selector: 'app-event-create-edit',
-    templateUrl: './event-profile-create-edit.component.html',
-    styleUrls: ['./event-profile-create-edit.component.sass']
+    templateUrl: './event-create-edit.component.html',
+    styleUrls: ['./event-create-edit.component.sass']
 })
 export class EventCreateEditComponent implements OnInit {
 
@@ -96,7 +96,8 @@ export class EventCreateEditComponent implements OnInit {
                     description: this.event.description,
                     headerImage: this.event.headerImage,
                     eventUrl: this.event.eventUrl,
-                    category: this.event.category,
+                    category: this.event.category.id,
+                    organizerId: this.event.eventOrganizer.id
                 });
             }
             this.spinner.hide();
@@ -107,10 +108,8 @@ export class EventCreateEditComponent implements OnInit {
         if (this.form.valid) {
             this.spinner.show();
 
-            this.form.patchValue({
-                startDate: new Date(this.form.get('startDate').value).getTime() / 1000,
-                endDate: new Date(this.form.get('endDate').value).getTime() / 1000
-            })
+            this.form.value.startDate = new Date(this.form.get('startDate').value).getTime() / 1000;
+            this.form.value.endDate = new Date(this.form.get('endDate').value).getTime() / 1000;
 
             if (this.mode && this.mode === 'create') {
                 this.eventService.addEvent(this.form.value).then(res => {
