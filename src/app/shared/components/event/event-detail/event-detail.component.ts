@@ -110,7 +110,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   sendComment(): void {
     if (this.isLogged()) {
       let comment: IComment = {} as IComment;
-      comment.createdAt = new Date().getHours() / 1000;
+      comment.createdAt = new Date().getTime() / 1000;
 
       Swal.fire({
         title: 'Escriu el teu comentari',
