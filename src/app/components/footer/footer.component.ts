@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-footer',
@@ -6,7 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.sass']
 })
 export class FooterComponent {
+  
+  constructor(private authService: AuthService) { }
 
-  constructor() { }
-
+  isLogged(): Boolean{
+    return !this.authService.isLogged();
+  }
 }

@@ -3,7 +3,6 @@ export interface IPermissions {
         "manageCategories": boolean,
         "manageEventOrganizers": boolean,
         "manageAdministrators": boolean,
-        "associateAdminToEventOrganizer": boolean,
         "manageLabels": boolean,
     },
     "profile": {

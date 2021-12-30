@@ -1,12 +1,8 @@
-<app-dashboard-header
-  [permissions]="permissions"
-></app-dashboard-header>
+<app-dashboard-header></app-dashboard-header>
 
 <div class="dashboard-container">
-  <app-dashboard-side-menu
-    [permissions]="permissions"
-  ></app-dashboard-side-menu>
-  <div class="dashboard-container-router-outlet">
+  <app-dashboard-side-menu></app-dashboard-side-menu>
+  <div class="dashboard-container-router-outlet" id="dashboard-router-outlet">
     <router-outlet></router-outlet>
   </div>
 </div>

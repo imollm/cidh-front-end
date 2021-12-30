@@ -1,11 +1,11 @@
 {
   "name": "cidh-front-end",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start-prod": "ng serve --configuration production",
     "start-dev": "ng serve --configuration development",
-    "build-prod": "ng build --configuration production",
+    "build": "ng build --configuration production",
     "build-dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -28,6 +28,8 @@
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "bootstrap": "^5.1.3",
     "jquery": "^3.6.0",
+
+    "jwt-decode": "^3.1.2",
     "ngx-pagination": "^5.1.1",
     "ngx-spinner": "^12.0.0",
     "ramda": "^0.27.1",

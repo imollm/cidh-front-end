@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IPermissions } from '../../models/permissions.model';
-import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,12 +10,9 @@ export class DashboardComponent implements OnInit {
 
   permissions: IPermissions;
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.authService.currentMessage.subscribe(data => {
-      this.permissions = data.permissions;
-    });
     this.blockBackWebBrowserButton();
   }
 

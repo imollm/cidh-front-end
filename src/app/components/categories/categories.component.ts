@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/administration/models/category.model';
-import { CategoryService } from 'src/app/administration/services/category.service';
+import { CategoryService } from '../../administration/services/category/category.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -13,7 +13,10 @@ export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
   actualPage: number = 1;
 
-  constructor(private categoryService: CategoryService, private spinner: NgxSpinnerService) { }
+  constructor(
+    private categoryService: CategoryService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();

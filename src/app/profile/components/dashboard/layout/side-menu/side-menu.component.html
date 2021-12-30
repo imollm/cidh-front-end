@@ -2,67 +2,101 @@
   <h2 #sideMenuTitle class="h4">Dasz Menu</h2>
   <div class="sidebar-menu-content">
     <ul class="sidebar-menu-content-items">
+      <li class="sidebar-menu-content-items-item" [routerLink]="['/profile/dashboard/home']" routerLinkActive="active-link">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faHome"></fa-icon>
+          <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+            Home
+          </span>
+      </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageCategories"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/administration/dashboard/category/list']" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faCategories"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Categories</span>
+          <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+            Categories
+          </span>
+      </li>
+      <li *ngIf="permissions && permissions.administration && permissions.administration.manageLabels"
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/administration/dashboard/labels/list']" routerLinkActive="active-link">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faTags"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Etiquetes
+        </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageEventOrganizers"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/administration/dashboard/event-organizer/list']" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventOrganizers"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Empreses</span>
+          <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+            Empreses
+          </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageAdministrators"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/administration/dashboard/administrator/list']" routerLinkActive="router-link-active" >
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faUserAdmin"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Administradors</span>
-      </li>
-      <li *ngIf="permissions && permissions.administration && permissions.administration.associateAdminToEventOrganizer"
-        class="sidebar-menu-content-items-item">
-        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAssociateAdminToEvent"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
-          <a [routerLink]="['/administration/dashboard/linkAdminToEventOrganizer']">Associar admin.</a>
+          Administradors
         </span>
       </li>
       <li *ngIf="permissions && permissions.administration && permissions.administration.manageLabels"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faLabels"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Etiquetes</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Etiquetes
+        </span>
       </li>
       <li *ngIf="permissions && permissions.profile && permissions.profile.manageEvents"
-        class="sidebar-menu-content-items-item">
+        class="sidebar-menu-content-items-item" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEvents"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Actes</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Actes
+        </span>
       </li>
-      <li
-        *ngIf="permissions && permissions.media && (permissions.media.makeForumQuestion || permissions.media.viewForumQuestions)"
-        class="sidebar-menu-content-items-item">
+      <li *ngIf="permissions && permissions.media && (permissions.media.makeForumQuestion || permissions.media.viewForumQuestions)"
+        class="sidebar-menu-content-items-item" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faQuestion"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Preguntes</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Preguntes
+        </span>
       </li>
-      <li
-        *ngIf="permissions && permissions.event && permissions.event.getEventSubscription"
+      <li *ngIf="permissions && permissions.event && permissions.event.getEventSubscription"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faNewSubscription"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Subscriu-te</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Subscriu-te
+        </span>
       </li>
-      <li
-        *ngIf="permissions && permissions.event && permissions.event.subscriptionsHistory"
+      <li *ngIf="permissions && permissions.event && permissions.event.subscriptionsHistory"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventHistory"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Historic subs.</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Historic subs.
+        </span>
       </li>
-      <li
-        *ngIf="permissions && permissions.event && permissions.event.accessToEvent"
+      <li *ngIf="permissions && permissions.media && permissions.media.consultHisFavouritesEvents"
+          class="sidebar-menu-content-items-item"
+          [routerLink]="['/media/dashboard/favorite/list']" routerLinkActive="active-link">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faFavorites"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Favorits
+        </span>
+      </li>
+      <li *ngIf="permissions && permissions.event && permissions.event.accessToEvent"
         class="sidebar-menu-content-items-item">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faAccessToEvent"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Accedir</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Accedir
+        </span>
       </li>
-      <li
-        *ngIf="permissions && permissions.event && permissions.event.listEventsByCategory && permissions.event.searchEventByLabel && permissions.event.searchEventByName"
-        class="sidebar-menu-content-items-item">
+      <li *ngIf="permissions && permissions.event && permissions.event.listEventsByCategory && permissions.event.searchEventByLabel && permissions.event.searchEventByName"
+        class="sidebar-menu-content-items-item"
+        [routerLink]="['/event/dashboard/event/search']" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventSearcher"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">Cercador</span>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Cercador
+        </span>
       </li>
       <!-- OPEN & CLOSE BUTTONS -->
       <li class="sidebar-menu-content-items-item">

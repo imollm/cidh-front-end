@@ -1,27 +1,20 @@
-# CidhFrontEnd
+# Culture In Da House
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
+## Project description
+This is an educational project from Universitat Oberta de Catalunya. Represents a WebApp to manage events. There are three kind of users [User, Admin, SuperAdmin] they can manage and do actions on the platform, like create an event, category, label and so on.
 
-## Development server
+## Architecture of the project
+This is a UML design for this frontend project.
+[Architecture]('https://drive.google.com/file/d/1NUf27qlNK1GNLvKjH7ORDrzFaFGGMx_z/view?usp=sharing')
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## UI/UX
+There are two princpal parts:
+    - Public web: In this part, registered and unregesistered users can do some actions, like write a question on the forum, check all the events, check event details and so on.
+    - Backoffice: Only registered users can authenticate on this part, and make the actions related to his role.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Contributors
+    - Jorge Gomila (jgomilaa@uoc.edu)
+    - Manuel López (mlopezmont@uoc.edu)
+    - Raúl (raullc@uoc.edu)
+    - Iván González (igonzalezgut@uoc.edu)
+    - Iván Moll (imollm@uoc.edu)

@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch, faHome, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IPermissions } from 'src/app/profile/models/permissions.model';
+import { IUser } from 'src/app/profile/models/user.model';
+import { AuthService } from 'src/app/profile/services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard-side-menu',
@@ -9,13 +12,16 @@ import { IPermissions } from 'src/app/profile/models/permissions.model';
 })
 export class SideMenuComponent implements OnInit, AfterViewInit {
 
-  @Input() permissions: IPermissions = {} as IPermissions;
+  user: IUser = {} as IUser;
+  permissions: IPermissions = {} as IPermissions;
 
   faArrowClose = faAngleLeft;
   faArrowOpen = faAngleRight;
 
+  faHome = faHome;
   faUserAdmin = faUserTie;
   faCategories = faCubes;
+  faTags = faTags;
   faEventOrganizers = faBriefcase;
   faAssociateAdminToEvent = faCompressAlt;
   faLabels = faTags;
@@ -25,6 +31,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   faEventHistory = faHistory;
   faAccessToEvent = faVrCardboard;
   faEventSearcher = faSearch;
+  faFavorites = faHeart;
 
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
@@ -35,6 +42,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
 
   constructor(
     private er: ElementRef,
+    private authService: AuthService
   ) {
     this.sideMenu = this.er;
     this.sideMenuTitle = this.er;
@@ -43,7 +51,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.permissions = JSON.parse(String(this.permissions));
+    this.getUser();
   }
 
   ngAfterViewInit(): void {
@@ -81,6 +89,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     this.sideMenuItemsTitle.forEach(element => {
       (element.nativeElement as HTMLElement).style.display = 'none';
     });
+    // Change with of dashboard router-outlet
+    let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
+    dashboardRouterOutlet.style.marginLeft = '120px';
+    dashboardRouterOutlet.style.transition = '.3s linear';
   }
 
   openSideMenu(): void {
@@ -126,9 +138,20 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
       title.style.fontWeight = 'bold';
       title.style.color = '#161925';
     });
+    // Change with of dashboard router-outlet
+    let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
+    dashboardRouterOutlet.style.marginLeft = '270px';
+    dashboardRouterOutlet.style.transition = '.3s linear';
   }
 
-  hideSideMenuTitles(): void {
-
+  getUser(): void {
+    this.authService.getUser().then(res => {
+      if (res) {
+        this.user = res;
+        if (res.permissions) {
+          this.permissions = JSON.parse(String(res.permissions));
+        }
+      }
+    }).catch(err => console.log(err));
   }
 }

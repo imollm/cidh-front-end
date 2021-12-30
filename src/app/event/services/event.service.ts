@@ -1,65 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IEventService } from './event.interface';
-import * as faker from 'faker';
-import { Event } from '../models/event.model';
+import { IEvent } from '../models/event.model';
 import { EventSearcher as EventSearcherModel } from 'src/app/shared/models/event-searcher.model';
+import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService implements IEventService {
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private endpointMapper: EndPointMapper
+  ) { }
+
   orderEvent(eventId: string, email: string, reservationId: string): void {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
   }
-  listAllEvents(): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+
+  upcomingEvents(limit: string = '0'): Promise<IEvent[]> {
+    let limitParam = `?limit=${limit}`;
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents', limitParam);
+    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
   }
-  findEventsByCategory(categoryId: string): Event[] {
-    TODO: 'Method not implemented.'
-    let events: Event[] = [];
-    for (let i = 0; i < 10; i++) {
-      events.push({
-        name: faker.lorem.word(),
-        description: faker.lorem.word(),
-        picture: faker.image.imageUrl(),
-        rating: faker.datatype.number(),
-        location: faker.address.streetAddress(),
-        initDate: faker.date.soon(),
-        endDate: faker.date.future()
-      });
-    }
-    return events;
+
+  findEvents(searchParams: EventSearcherModel): Promise<IEvent[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents');
+    const url = this.setSearchParams(endpoint, searchParams);
+    return this.httpClient.get<IEvent[]>(url).toPromise();
   }
-  findEventsByName(name: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+
+  findEventById(eventId: string): Promise<IEvent> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventById', eventId);
+    return this.httpClient.get<IEvent>(endpoint).toPromise();
   }
-  findEventsByLabel(label: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
-  }
-  findEvents(searchParams: EventSearcherModel): Event[] {
-    TODO: 'Method not implemented.'
-    let events: Event[] = [];
-    for (let i = 0; i < 10; i++) {
-      events.push({
-        name: faker.lorem.word(),
-        description: faker.lorem.word(),
-        picture: faker.image.imageUrl(),
-        rating: faker.datatype.number(),
-        location: faker.address.streetAddress(),
-        initDate: faker.date.soon(),
-        endDate: faker.date.future()
-      });
-    }
-    return events;
-  }
+
   showEvent(eventId: string): void {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
@@ -79,5 +56,19 @@ export class EventService implements IEventService {
   showEventReserved(reservationId: string, location: URL): void {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
+  }
+
+  private setSearchParams(endpoint, searchParams) {
+    let url = new URL(endpoint);
+
+    if (searchParams && (searchParams.category || searchParams.name || searchParams.label)) {
+      Object.keys(searchParams).map(key => {
+        if (searchParams[key].length > 0 && key !== 'events') {
+          url.searchParams.append(key.toLocaleLowerCase(), searchParams[key].toString());
+        }
+      });
+    }
+
+    return url.toString();
   }
 }
