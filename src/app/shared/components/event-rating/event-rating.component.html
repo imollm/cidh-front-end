@@ -1,6 +1,5 @@
 <div class="rating-wrapper" #ratingWrapper>
     <div class="rating">
-        <span class="rating-title">Puntuació:</span>
         <fa-icon [icon]="faStar" class="star"></fa-icon>
         <fa-icon [icon]="faStar" class="star"></fa-icon>
         <fa-icon [icon]="faStar" class="star"></fa-icon>
@@ -8,6 +7,14 @@
         <fa-icon [icon]="faStar" class="star"></fa-icon>
     </div>
     <div class="total-ratings">
-        <span>Votacions totals: {{ rating.ratingsCount }}</span>
+        <div>
+            <fa-icon [icon]="faAverage" class="info"></fa-icon>
+            <span>{{ rating.rating + '.0'}}</span>
+        </div>
+        <span class="separator">|</span>
+        <div>
+            <fa-icon [icon]="faUsers" class="info"></fa-icon>
+            <span>{{ rating.ratingsCount }}</span>
+        </div>
     </div>
 </div>

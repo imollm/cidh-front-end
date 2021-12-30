@@ -52,7 +52,10 @@
                     </div>
                 </div>
                 <div *ngIf="event.rating" class="rating">
-                    <app-event-rating [rating]="event.rating"></app-event-rating>
+                    <app-event-rating
+                        [rating]="event.rating"
+                        [userRating]="event.userRating"
+                    ></app-event-rating>
                 </div>
                 <div class="actions-wrapper">
                     <h4>Accions</h4>
