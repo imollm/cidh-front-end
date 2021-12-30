@@ -4,8 +4,9 @@
 #main-header
     background-color: $richBlack
     padding: 1em
-    font-size: 1.25em
+    font-size: 1.1em
     width: 100%
+    border-bottom: 5px solid $turquoise
 
     nav
         display: flex
@@ -39,7 +40,7 @@
                     li
                         list-style: none
                         display: inline-block
-                        padding: 1em 1.2em
+                        padding: 1em .2em
 
                         a
                             color: $white
@@ -85,7 +86,7 @@
             color: $white
             font-size: 1.8em
 
-            fa-icon
+            .ng-fa-icon
                 border: 1px solid $white
                 border-radius: 5px
 
@@ -95,7 +96,7 @@
                 align-items: center
                 margin-right: 2em
 
-                fa-icon
+                .ng-fa-icon
                     padding: .2em .4em
 
             @include max-md()
@@ -104,7 +105,7 @@
                 align-items: center
                 margin-right: 1.2em
 
-                fa-icon
+                .ng-fa-icon
                     padding: .1em .2em
 
     .mobile-menu
@@ -112,14 +113,14 @@
         position: absolute
         top: 0
         right: 0
-        min-height: 1000px
         width: 100%
+        z-index: 999
         background-color: $richBlack
+        padding-bottom: 5rem
 
         &-links
             text-align: center
             margin-top: 170px
-
             &-link
                 display: flex
                 justify-content: center
@@ -148,3 +149,6 @@
             padding: 1.5em
             color: $white
             font-size: 2.2em
+
+            span
+                cursor: pointer

@@ -1,0 +1,47 @@
+@import "../../../../assets/css/_variables.sass"
+
+.event-link
+  &:hover,
+  &:visited,
+  &:link,
+  &:active
+    color: $richBlack
+    text-decoration: none
+
+.enabled
+    height: 100%
+    cursor: pointer
+
+    &:hover
+      transform: scale(1.1)
+      transition: all 0.3s linear
+      color: $turquoise
+      background-color: $richBlack
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75)
+
+      .card-footer
+          transition: all 0.3s linear
+          background-color: $cadetGray
+
+    &:not(&:hover)
+      transform: scale(1)
+      transition: all 0.3s linear
+
+.disabled
+  height: 100%
+  position: relative
+
+  &::after
+    content: "Celebrat"
+    text-align: center
+    font-size: 18px
+    vertical-align: middle
+    color: $white
+    position: absolute
+    top: 78px
+    left: 2px
+    width: 100%
+    height: 40px
+    border-style: solid
+    border-color: $red
+    background-color: $red

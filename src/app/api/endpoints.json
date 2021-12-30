@@ -1,0 +1,162 @@
+{
+  "endpoints": {
+    "test": {
+      "ping": {
+        "uri": "/ping",
+        "method": "GET"
+      }
+    },
+    "auth": {
+      "login": {
+        "uri": "/users/login",
+        "method": "POST"
+      },
+      "invalidateToken": {
+        "uri": "/users/invalidate-token",
+        "method": "POST"
+      },
+      "refreshToken": {
+        "uri": "/users/refresh-token",
+        "method": "POST"
+      }
+    },
+    "user": {
+      "create": {
+        "uri": "/users",
+        "method": "POST"
+      },
+      "getAll": {
+        "uri": "/users",
+        "method": "GET"
+      },
+      "me": {
+        "uri": "/users/me",
+        "method": "GET"
+      },
+      "getById": {
+        "uri": "/users/%s",
+        "method": "GET"
+      },
+      "updateMe": {
+        "uri": "/users/me",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/users/%s",
+        "method": "POST"
+      },
+      "getAdmins": {
+        "uri": "/users?role=Admin",
+        "method": "GET"
+      },
+      "getSuperAdmins": {
+        "uri": "/users?role=SuperAdmin",
+        "method": "GET"
+      },
+      "getUsers": {
+        "uri": "/users?role=User",
+        "method": "GET"
+      }
+    },
+    "category": {
+      "create": {
+        "uri": "/categories",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/categories/%s",
+        "method": "POST"
+      },
+      "getById": {
+        "uri": "/categories/%s",
+        "method": "GET"
+      },
+      "getAll": {
+        "uri": "/categories",
+        "method": "GET"
+      }
+    },
+    "event-organizer": {
+      "create": {
+        "uri": "/event-organizer",
+        "method": "POST"
+      },
+      "updateById": {
+        "uri": "/event-organizer/%s",
+        "method": "PUT"
+      },
+      "getById": {
+        "uri": "/event-organizer/%s",
+        "method": "GET"
+      },
+      "getAll": {
+        "uri": "/event-organizer",
+        "method": "GET"
+      }
+    },
+    "event": {
+      "create": {
+        "uri": "/events",
+        "method": "POST"
+      },
+      "getEvents": {
+        "uri": "/events",
+        "method": "GET"
+      },
+      "getEventById": {
+        "uri": "/events/%s",
+        "method": "GET"
+      },
+      "updateById": {
+        "uri": "/events/%s",
+        "method": "POST"
+      }
+    } ,
+    "label": {
+      "create": {
+        "uri": "/labels",
+        "method": "POST"
+      },
+      "getById": {
+        "uri": "/labels/%s",
+        "method": "GET"
+      },
+      "updateById": {
+        "uri": "/labels/%s",
+        "method": "POST"
+      },
+      "getAll": {
+        "uri": "/labels",
+        "method": "GET"
+      },
+      "deleteById": {
+        "uri": "/labels/%s",
+        "method": "DELETE"
+      }
+    },
+    "comment": {
+      "add": {
+        "uri": "/events/%s/post-comment",
+        "method": "POST"
+      }
+    },
+    "favorite": {
+      "add": {
+        "uri": "/events/%s/add-to-favorites",
+        "method": "POST"
+      },
+      "remove": {
+        "uri": "/events/%s/remove-from-favorites",
+        "method": "POST"
+      },
+      "listByUserId": {
+        "uri": "/users/%s/favorite-events",
+        "method": "GET"
+      },
+      "listMyFavs": {
+        "uri": "/users/me/favorite-events",
+        "method": "GET"
+      }
+    }
+  }
+}

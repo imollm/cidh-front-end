@@ -1,0 +1,37 @@
+@import "../../../../../assets/css/_variables.sass"
+@import "../../../../../assets/css/_breakpoints"
+
+.card
+  &:hover
+    transform: scale(1.1)
+    transition: all 0.3s linear
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5)
+  &:not(:hover)
+    transform: scale(1)
+    transition: all 0.3s linear
+
+  &-img-overlay
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    p
+      font-style: italic
+
+    &:hover
+      h5
+        transform: scale(1.8)
+        color: $turquoise
+        transition: all 0.3s linear
+      p
+        display: none
+        transition: all 0.3s linear
+    &:not(:hover)
+      h5
+        transform: scale(1)
+        color: $white
+        transition: all 0.3s linear
+      p
+        display: block
+        transition: all 0.3s linear

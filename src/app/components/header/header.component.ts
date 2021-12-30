@@ -17,10 +17,28 @@ export class HeaderComponent {
 
   closeMobileMenu(): void {
     this.mobileMenu.nativeElement.style.display = 'none';
+    this.element.nativeElement.parentNode.childNodes.forEach( (el:HTMLElement) => {
+      if (el.localName !== 'app-header' && el.localName !== 'router-outlet'){
+        if(el.style){
+          el.style.display = 'block'
+        }
+      }
+    })
   }
 
   openMobileMenu(): void {
     this.mobileMenu.nativeElement.style.display = 'block';
+    this.element.nativeElement.parentNode.childNodes.forEach( (el:HTMLElement) => {
+      if (el.localName !== 'app-header' && el.localName !== 'router-outlet'){
+        if(el.style){
+          el.style.display = 'none'
+        }
+      }
+    })
+  }
+
+  isDashboard(): boolean {
+    return window.location.href.indexOf('dashboard') > -1;
   }
 
 }

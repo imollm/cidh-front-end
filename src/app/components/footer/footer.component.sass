@@ -1,0 +1,36 @@
+@import "../../../assets/css/_variables.sass"
+@import "../../../assets/css/_breakpoints"
+
+#main-footer
+    width: 100%
+    background-color: $turquoise
+    display: flex
+    justify-content: space-around
+    padding: 1rem
+    align-items: center
+    color: $richBlack
+    font-weight: 600
+
+    ul
+        list-style: none
+
+        li
+
+            a
+                padding: 0.5rem 1rem
+                text-decoration: none
+                color: $richBlack
+                &:hover
+                    color: $white
+
+    @include max-lg()
+        flex-direction: column-reverse
+        gap: 1.5rem
+
+        ul
+            margin: 0
+            padding: 0
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 1rem

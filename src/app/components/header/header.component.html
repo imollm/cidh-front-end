@@ -1,4 +1,4 @@
-<header id="main-header">
+<header id="main-header" *ngIf="!isDashboard()">
     <nav>
         <div class="logo-wrapper">
             <div class="logo-wrapper-title">
@@ -12,13 +12,28 @@
             <div class="nav-links">
                 <ul>
                     <li>
-                        <a href="#">
+                        <a [routerLink]="['/home']">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/categories']">
                             Categories
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a [routerLink]="['/labels']">
                             Etiquetes
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/media/forum']">
+                            Forum
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/search']">
+                            Cercador
                         </a>
                     </li>
                 </ul>
@@ -27,12 +42,12 @@
         <div class="auth-wrapper">
             <ul>
                 <li>
-                    <a href="#">
+                    <a [routerLink]="['/profile/signup']">
                         Registra't
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a [routerLink]="['/profile/login']">
                         Inicia sessió
                     </a>
                 </li>
@@ -43,25 +58,37 @@
         </div>
     </nav>
     <div class="mobile-menu" #MobileMenu>
-        <div class="mobile-menu-close" (click)="closeMobileMenu()">x</div>
+        <div class="mobile-menu-close" (click)="closeMobileMenu()">
+          <span>x</span>
+        </div>
         <ul class="mobile-menu-links">
             <li class="mobile-menu-links-link">
-                <a href="#">
-                    Categories
+                <a [routerLink]="['/home']" (click)="closeMobileMenu()">
+                    Home
                 </a>
             </li>
             <li class="mobile-menu-links-link">
-                <a href="#">
+                <a [routerLink]="['/categories']" (click)="closeMobileMenu()">
+                    Categories
+                </a>
+            </li>
+            <li class="mobile-menu-links-link" >
+                <a [routerLink]="['/labels']" (click)="closeMobileMenu()">
                     Etiquetes
                 </a>
             </li>
             <li class="mobile-menu-links-link">
-                <a href="#">
+                <a [routerLink]="['/media/forum']" (click)="closeMobileMenu()">
+                    Forum
+                </a>
+            </li>
+            <li class="mobile-menu-links-link">
+                <a [routerLink]="['/profile/login']" (click)="closeMobileMenu()">
                     Inicia sessió
                 </a>
             </li>
             <li class="mobile-menu-links-link">
-                <a href="#">
+                <a [routerLink]="['/profile/signup']" (click)="closeMobileMenu()">
                     Registra't
                 </a>
             </li>

@@ -1,0 +1,28 @@
+@import "../../../../../../assets/css/_variables"
+@import "../../../../../../assets/css/_breakpoints"
+
+#userprofile-page
+  padding: 3rem
+  width: 100%
+  height: 100%
+
+  .form-content-wrapper
+    padding: 1rem
+    background-color: $turquoise
+    border-radius: 0.5rem
+    margin-bottom: 1em
+
+    .form-title
+      color: $richBlack
+      text-align: center
+      font-size: 2rem
+
+      label
+        color: $richBlack
+
+  @include max-lg()
+    padding: 1rem
+
+button
+  @include max-lg()
+    margin-top: 2rem

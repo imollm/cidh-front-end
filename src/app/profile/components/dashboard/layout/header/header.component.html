@@ -1,0 +1,24 @@
+<header class="dashboard-header">
+  <nav class="dashboard-header-navbar">
+    <div class="dashboard-header-navbar-title">
+      <h1 class="h4">Dasz Events Panel</h1>
+    </div>
+    <div class="dashboard-header-navbar-profile">
+      <span *ngIf="user">Hola, {{ user.firstName + ' ' + user.lastName }}!</span>
+      <fa-icon [icon]="faUserCircle" (click)="toggleProfileMenu()"></fa-icon>
+      <button #profileMenu class="dashboard-header-navbar-profile-menu hide">
+        <ul class="dashboard-header-navbar-profile-menu-content">
+          <li *ngIf="permissions && permissions.profile && permissions.profile.modifyPersonalData === true" class="dashboard-header-navbar-profile-menu-content-item">
+            <a (click)="toggleProfileMenu()" [routerLink]="['/profile/dashboard/userprofile']" >Perfil</a>
+          </li>
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a (click)="toggleProfileMenu()" href="#">Preferencies</a>
+          </li>
+          <li class="dashboard-header-navbar-profile-menu-content-item">
+            <a (click)="toggleProfileMenu()" [routerLink]="['/profile/dashboard/logout']">Logout</a>
+          </li>
+        </ul>
+      </button>
+    </div>
+  </nav>
+</header>

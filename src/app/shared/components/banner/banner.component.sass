@@ -1,0 +1,31 @@
+@import "../../../../assets/css/_variables"
+@import "../../../../assets/css/_breakpoints"
+
+#banner
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: -3
+  width: 100%
+  background-color: $richBlack
+  border-top: 2px solid $cadetGray
+
+  .banner-title
+    position: absolute
+    width: 100%
+    color: $white
+    z-index: 1
+    letter-spacing: .2em
+    font-size: 3.5em
+    font-weight: 900
+    text-align: center
+
+    @include btw-md-sm()
+      font-size: 3em
+
+    @include max-md()
+      font-size: 2em
+
+    @include sm()
+      font-size: 1.5em
