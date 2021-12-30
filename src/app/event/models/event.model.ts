@@ -7,14 +7,14 @@ export interface IEvent {
     name: string;
     headerImage?: string;
     rating?: IRating;
+    userRating?: number | null;
     description: string;
-    startDate?: Date;
-    endDate?: Date;
+    startDate?: number;
+    endDate?: number;
     category: Category;
     labels: Label[];
     eventOrganizer: IEventOrganizer;
     eventUrl: string;
     isFavorite?: boolean;
-    location: string;
-
+    isUserSubscribed?: boolean;
 }

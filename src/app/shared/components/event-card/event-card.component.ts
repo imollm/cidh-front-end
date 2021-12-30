@@ -20,7 +20,7 @@ export class EventCardComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.router.url.includes('dashboard')) {
-      this.eventRoute = '/profile/dashobard/event/detail';
+      this.eventRoute = '/profile/dashboard/event/detail';
     } else {
       this.eventRoute = '/event-detail';
     }

@@ -7,14 +7,15 @@ import { DashboardComponent } from '../profile/components/dashboard/dashboard.co
 import { EventOrganizerListComponent } from './components/event-organizer/event-organizer-list/event-organizer-list.component';
 import { EventOrganizerCreateEditComponent } from './components/event-organizer/event-organizer-create-edit/event-organizer-create-edit.component';
 import { EventOrganizerDetailComponent } from './components/event-organizer/event-organizer-detail/event-organizer-detail.component';
-import { CategoryListComponent } from './components/category/list/category-list.component';
+import { CategoryListComponent } from './components/category/category-list/category-list.component';
 import { LabelListComponent } from './components/label/label-list/label-list.component';
 import { LabelCreateEditComponent } from './components/label/label-create-edit/label-create-edit.component';
+import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
+import { AdministratorCreateEditComponent } from './components/administrator/administrator-create-edit/administrator-create-edit.component';
+import { CategoryCreateEditComponent } from './components/category/category-create-edit/category-create-edit.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
-import { AdministratorListComponent } from './components/administrator/administrator-list/administrator-list.component';
-import { AdministratorCreateEditComponent } from './components/administrator/administrator-create-edit/administrator-create-edit.component';
 
 const routes: Routes = [
   { path: '', component: AdministrationComponent },
@@ -25,6 +26,9 @@ const routes: Routes = [
       { path: 'category', 
         children: [
           { path: 'list', component: CategoryListComponent },
+          { path: 'create', component: CategoryCreateEditComponent },
+          { path: 'edit/:id', component: CategoryCreateEditComponent },
+          { path: 'view/:id', component: CategoryCreateEditComponent },
         ]
       },
       {
@@ -54,12 +58,11 @@ const routes: Routes = [
         ]
       }
     ]
-  
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdministrationRoutingModule { }
+export class AdministrationRoutingModule {}

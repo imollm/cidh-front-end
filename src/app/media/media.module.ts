@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { MediaRoutingModule } from './media-routing.module';
 import { MediaComponent } from './media.component';
 import { SharedModule } from '../shared/shared.module';
+import { FavoriteListComponent } from './components/favorite/favorite-list/favorite-list.component';
 
 @NgModule({
   declarations: [
     MediaComponent,
+    FavoriteListComponent,
   ],
   imports: [
     CommonModule,

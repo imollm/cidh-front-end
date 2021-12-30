@@ -5,6 +5,7 @@
   background-color: $turquoise
   border-right: 2px solid $richBlack
   height: 100%
+  position: fixed
 
   @include max-lg()
     padding: 0.5em 0
@@ -138,3 +139,11 @@
     font-size: 1em
     font-weight: bold
     color: $richBlack
+
+.active-link
+  background-color: $richBlack
+  border-right: 4px solid $white
+  color: $white
+  
+  span
+    color: $white
