@@ -135,7 +135,11 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
         this.commentService.sendComment(this.event.id, comment).then(res => {
           this.modalResultService.successPostComment();
         }).catch(err => {
-          this.modalResultService.errorResultModal();
+          const title = 'Event ja comentat!';
+          const text = 'Ja has fet un comentari sobre aquest event';
+          const icon = ModalResultIcon.warning;
+
+          this.modalResultService.showModal(title, text, icon);
         })
       });
     }

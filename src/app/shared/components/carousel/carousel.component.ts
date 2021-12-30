@@ -17,7 +17,7 @@ export class CarouselComponent {
     pullDrag: false,
     dots: false,
     navSpeed: 700,
-    navText: [ '<i class="fa-chevron-left"></i>', '<i class="fa-chevron-right></i>"' ],
+    navText: [ '', '' ],
     responsive: {
       0: {
         items: 1
