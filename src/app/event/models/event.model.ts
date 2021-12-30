@@ -1,19 +1,20 @@
 import { Category } from "src/app/administration/models/category.model";
 import { IEventOrganizer } from "src/app/administration/models/event-organizer.model";
 import { Label } from "src/app/administration/models/label.model";
+import { IRating } from "./rating.model";
 export interface IEvent {
     id?: string;
     name: string;
-    description: string;
     headerImage?: string;
-    rating?: number;
-    location: string;
+    rating?: IRating;
+    description: string;
     startDate?: Date;
     endDate?: Date;
     category: Category;
     labels: Label[];
     eventOrganizer: IEventOrganizer;
-    labelIds: string[];
     eventUrl: string;
+    isFavorite?: boolean;
+    location: string;
 
 }
