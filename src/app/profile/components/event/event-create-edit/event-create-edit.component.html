@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 col-lg-6 offset-lg-3 col-md-8 offset-md-2 form-container">
+        <div class="col-md-8 offset-md-2 form-container">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="text-center">
                     <h2 class="pt-5 pb-3">{{ title }}</h2>
@@ -20,7 +20,15 @@
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventDescription" class="form-label">Descripció</label>
-                        <input type="text" id="eventDescription" class="form-control" formControlName="description" />
+                        <input type="text" id="eventDescription" class="form-control" formControlName="description"
+                            [ngClass]="{ 'is-invalid': !form.pending && form.get('description').invalid, 'is-valid': form.get('description').valid }" />
+                        <div *ngIf="form.get('description').invalid && 
+                                    form.get('description').errors && 
+                                    (form.get('description').dirty || form.get('description').touched)">
+                            <small class="text-danger" *ngIf="form.get('description').hasError('required')">
+                                La descripció es obligatoria.
+                            </small>
+                        </div>
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventHeaderImage" class="form-label">Imatge</label>
@@ -28,15 +36,42 @@
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventUrl" class="form-label">URL per accedir al acte</label>
-                        <input type="text" id="eventUrl" class="form-control" formControlName="eventUrl" />
+                        <input type="text" id="eventUrl" class="form-control" formControlName="eventUrl"
+                            [ngClass]="{ 'is-invalid': !form.pending && form.get('eventUrl').invalid, 'is-valid': form.get('eventUrl').valid }" />
+                        <div *ngIf="form.get('eventUrl').invalid && 
+                                    form.get('eventUrl').errors && 
+                                    (form.get('eventUrl').dirty || form.get('eventUrl').touched)">
+                            <small class="text-danger" *ngIf="form.get('eventUrl').hasError('required')">
+                                La URL es obligatoria.
+                            </small>
+                            <small class="text-danger" *ngIf="form.get('eventUrl').hasError('pattern')">
+                                No és una URL vàlida.
+                            </small>
+                        </div>
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventInitDate" class="form-label">Data d'inici</label>
-                        <input type="date" id="eventInitDate" class="form-control" formControlName="startDate" />
+                        <input type="date" id="eventInitDate" class="form-control" formControlName="startDate"
+                            [ngClass]="{ 'is-invalid': !form.pending && form.get('startDate').invalid, 'is-valid': form.get('startDate').valid }" />
+                        <div *ngIf="form.get('startDate').invalid && 
+                                    form.get('startDate').errors && 
+                                    (form.get('startDate').dirty || form.get('startDate').touched)">
+                            <small class="text-danger" *ngIf="form.get('startDate').hasError('required')">
+                                La data d'inici es obligatoria.
+                            </small>
+                        </div>
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventEndDate" class="form-label">Data final</label>
-                        <input type="date" id="eventEndDate" class="form-control" formControlName="endDate" />
+                        <input type="date" id="eventEndDate" class="form-control" formControlName="endDate"
+                            [ngClass]="{ 'is-invalid': !form.pending && form.get('endDate').invalid, 'is-valid': form.get('endDate').valid }" />
+                        <div *ngIf="form.get('endDate').invalid && 
+                                    form.get('endDate').errors && 
+                                    (form.get('endDate').dirty || form.get('endDate').touched)">
+                            <small class="text-danger" *ngIf="form.get('endDate').hasError('required')">
+                                La data fi es obligatoria.
+                            </small>
+                        </div>
                     </div>
                     <div class="form-group mb-5">
                         <label for="eventCategory" class="form-label">Categoria<sup>*</sup></label>
@@ -72,9 +107,14 @@
                             </small>
                         </div>
                     </div>
-                    <div *ngFor="let label of labels">
-                        <input type="checkbox" (change)="onChange(label.id, $event)" />
-                        {{label.name}}
+                    <h6 class="labels-title">Etiquetes:</h6>
+                    <div class="labels-wrapper">
+                        <ng-container formArrayName="labelIds" *ngFor="let label of labelIdsFormArray.controls; let i = index">
+                            <label class="p-3" *ngIf="labels[i]">
+                                <input type="checkbox" [formControlName]="i" />
+                                {{ labels[i].name }}
+                            </label>
+                        </ng-container>
                     </div>
                     <div class="form-group p-4">
                         <button class="form-control btn btn-dark text-white" [disabled]="form.invalid">
