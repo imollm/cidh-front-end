@@ -48,7 +48,7 @@
         </span>
       </li>
       <li *ngIf="permissions && permissions.profile && permissions.profile.manageEvents"
-        class="sidebar-menu-content-items-item" routerLinkActive="active-link">
+        class="sidebar-menu-content-items-item" [routerLink]="['/profile/dashboard/events/list']" routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEvents"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
           Actes
