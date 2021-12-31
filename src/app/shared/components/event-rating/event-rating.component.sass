@@ -2,19 +2,34 @@
 @import "../../../../assets/css/_breakpoints"
     
 .rating-wrapper
-    font-size: 2em
+    display: flex
+    flex-direction: column
+    justify-content: center
 
     @include max-md()
         font-size: 1em
 
-    span
-        font-weight: bold
+    .rating
+        font-size: 2em
+        display: flex
+        justify-content: center
 
-    .star
-        margin-left: 10px
+        .star
+            margin-left: 10px
+    
+    .total-ratings
+        display: flex
+        justify-content: space-evenly
+        font-size: 1em
+        margin-top: 1em
+        font-style: italic
+        font-weight: bolder
+        font-size: 2em
 
-    .enabled
-        color: yellow
-
-    .disabled
-        color: inherit
+        .separator
+            font-style: normal
+            
+        .info
+            margin-right: .5em
+                
+                

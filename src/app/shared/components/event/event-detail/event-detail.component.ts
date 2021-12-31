@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IEvent } from 'src/app/event/models/event.model';
+import { IRating } from 'src/app/event/models/rating.model';
 import { EventService } from 'src/app/event/services/event.service';
 import { ModalResultIcon } from 'src/app/helpers/modal.icon.enum';
 import { ModalResultService } from 'src/app/helpers/modal.service';
@@ -24,6 +24,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   event: IEvent = {} as IEvent;
   rating: number;
   faFavorite = faHeart;
+  comments: IComment[];
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
@@ -52,7 +53,18 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     this.spinner.show();
 
     this.eventService.findEventById(eventId).then(res => {
-      this.event = res;
+      if (res) {
+        this.event = res;
+      }
+    })
+    .then(() => {
+      if (this.isLogged()) {
+        this.commentService.getCommentsByEventId(this.event.id).then(res => {
+          if (res && res.length > 0) {
+            this.comments = res;
+          }
+        });
+      }
     });
 
     this.spinner.hide();
@@ -89,37 +101,108 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     }
   }
 
+  subscribeIt(): void {
+
+  }
+
+  unsubscribedIt(): void {
+
+  }
+
+  sendComment(): void {
+    if (this.isLogged()) {
+      let comment: IComment = {} as IComment;
+      comment.createdAt = new Date().getTime() / 1000;
+
+      Swal.fire({
+        title: 'Escriu el teu comentari',
+        input: 'textarea',
+        inputPlaceholder: 'El meu comentari...',
+        showCancelButton: true,
+        confirmButtonColor: '#00adb5',
+        cancelButtonColor: '#8ea8c3',
+        inputValidator: (message) => {
+          if (!message) {
+            return 'Necessites escriure un comentari';
+          } else {
+            comment.comment = message;
+            return null;
+          }
+        }
+      }).then(() => {
+        console.log(comment);
+        console.log(this.event);
+        this.commentService.sendComment(this.event.id, comment).then(res => {
+          this.modalResultService.successPostComment();
+        }).catch(err => {
+          const title = 'Event ja comentat!';
+          const text = 'Ja has fet un comentari sobre aquest event';
+          const icon = ModalResultIcon.warning;
+
+          this.modalResultService.showModal(title, text, icon);
+        })
+      });
+    }
+  }
+
+  rateIt(): void {
+    if (this.isLogged()) {
+      let rate: IRating = {} as IRating;
+
+      Swal.fire({
+        title: 'Puntua del 1 al 5',
+        input: 'select',
+        inputOptions: {
+          'Puntuacions': {
+            1: '1',
+            2: '2',
+            3: '3',
+            4: '4',
+            5: '5'
+          }
+        },
+        inputValidator: (rating) => {
+          if (!rating) {
+            return 'Necessites escollir una puntuació';
+          } else {
+            this.event.rating.rating = Number(rating);
+            return null;
+          }
+        }
+      }).then(() => {
+        this.commentService.addRating(this.event.id, this.event.rating.rating).then(() => {
+          const title: string = 'Puntuació enviada';
+          const text: string = 'S\'ha registrat correctament la teva puntuació!'
+          const icon: ModalResultIcon = ModalResultIcon.success;
+          this.ngOnInit();
+          this.modalResultService.showModal(title, text, icon);
+        }).catch(() => this.modalResultService.errorResultModal())
+      });
+    }
+  }
+
+  shareIt(): void {
+    if (this.isLogged()) {
+      Swal.fire({
+        title: 'Input email address',
+        input: 'email',
+        inputLabel: 'Your email address',
+        inputPlaceholder: 'Enter your email address'
+      }).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Enviada correctament!',
+          text: 'La teva recomenació s\'ha enviat correctament.',
+        })
+      });
+    }
+  }
+
   isUserRole(): boolean {
     return this.authService.getRoleOfAuthUser() === 'USER';
   }
 
-  sendComment(): void {
-    let comment: IComment = {} as IComment;
-    comment.createdAt = new Date();
-
-    Swal.fire({
-      title: 'Escriu el teu comentari',
-      input: 'textarea',
-      inputPlaceholder: 'El meu comentari...',
-      showCancelButton: true,
-      confirmButtonColor: '#00adb5',
-      cancelButtonColor: '#8ea8c3',
-      inputValidator: (message) => {
-        if (!message) {
-          return 'Necessites escriure un comentari';
-        } else {
-          comment.comment = message;
-          return null;
-        }
-      }
-    }).then(() => {
-      console.log(comment);
-      console.log(this.event);
-      this.commentService.sendComment(this.event.id, comment).then(res => {
-        this.modalResultService.successPostComment();
-      }).catch(err => {
-        this.modalResultService.errorResultModal();
-      })
-    });
+  isLogged(): boolean {
+    return this.authService.isLogged();
   }
 }

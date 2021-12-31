@@ -208,7 +208,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
-    "name": "EventAlpha",
+    "name": "EventAlpha2",
     "description": "First Event Created Via API",
     "headerImage": "https://i.pinimg.com/originals/50/c5/1e/50c51e02a205b44c3449fc128400ff20.jpg",
     "startDate": "1640014085",
@@ -216,6 +216,14 @@ Authorization: Bearer {{auth}}
     "category": "TestEvent",
     "organizerId": "b3161490-f322-417b-b64f-19169de70c4b"
 }
+
+
+############################################################################
+### GET ALL EVENTS
+############################################################################
+GET {{baseUrl}}/events HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{auth}}
 
 
 ############################################################################

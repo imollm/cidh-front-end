@@ -1,6 +1,4 @@
-<app-banner *ngIf="parent==='public'"></app-banner>
-
-<h1 *ngIf="parent!=='public'" class="text-center mt-4 mb-4">
+<h1 *ngIf="isLogged()" class="text-center mt-4 mb-4">
     Detalls de l'event
 </h1>
 
@@ -26,44 +24,66 @@
                 </ng-template>
                 <div class="d-flex justify-content-between align-items-center event-title-wrapper">
                     <h1 class="event-title">{{ event.name }}</h1>
-                    <fa-icon
-                        (click)="addToMyFavorites()"
-                        [icon]="faFavorite"
-                        [ngClass]="{ 'isFavorite': event.isFavorite, 'isNotFavorite': !event.isFavorite }"
-                    ></fa-icon>
+                    <fa-icon (click)="addToMyFavorites()" [icon]="faFavorite"
+                        [ngClass]="{ 'isFavorite': event.isFavorite, 'isNotFavorite': !event.isFavorite }"></fa-icon>
                 </div>
-                <div *ngIf="event.startDate" class="mt-3 mb-3">
-                    <span class="date-title">Data Inici: </span>
-                    <span class="date">{{ event.startDate | formatDate | titlecase }}</span>
+                <div *ngIf="event.startDate || event.endDate" class="date-wrapper">
+                    <div *ngIf="event.startDate" class="mt-3 mb-3">
+                        <span class="date-title">Data Inici: </span>
+                        <span class="date">{{ event.startDate | formatDate | titlecase }}</span>
+                    </div>
+                    <div *ngIf="event.endDate" class="mt-3 mb-3">
+                        <span class="date-title">Data Fi: </span>
+                        <span class="date">{{ event.endDate | formatDate | titlecase }}</span>
+                    </div>
                 </div>
-                <div *ngIf="event.endDate" class="mb-3">
-                    <span class="date-title">Data Fi: </span>
-                    <span class="date">{{ event.endDate | formatDate | titlecase }}</span>
+                <h4 *ngIf="event.labels && event.labels.length > 0" class="mt-5">Etiquetes</h4>
+                <div *ngIf="event.labels && event.labels.length > 0" class="labels-wrapper">
+                    <div *ngFor="let label of event.labels" class="labels-wrapper-label">
+                        {{ label.name }}
+                    </div>
                 </div>
-                <!-- <div *ngIf="labels && labels.length > 0">
-                                    <div *ngFor="let label of labels" class="label"></div>
-                                </div> -->
-                <div class="labels-wrapper">
-                    <div class="labels-wrapper-label">Label 1</div>
-                    <div class="labels-wrapper-label">Label 2</div>
-                    <div class="labels-wrapper-label">Label 3</div>
+                <div *ngIf="event.description" class="mt-5">
+                    <h4>Descripció</h4>
+                    <div class="description">
+                        <p>
+                            {{ event.description }}
+                        </p>
+                    </div>
                 </div>
-                <div *ngIf="event.description" class="description">
-                    <p>
-                        {{ event.description }}
-                    </p>
-                </div>
-                <div *ngIf="true" class="rating">
+                <div *ngIf="event.rating" class="rating">
                     <app-event-rating
-                        [rating]="2"
-                        [readonly]="true"
+                        [rating]="event.rating"
+                        [userRating]="event.userRating"
                     ></app-event-rating>
                 </div>
-                <div href="#" class="d-flex justify-content-center">
-                    <span class="button">Subscriu-te!</span>
+                <div class="actions-wrapper">
+                    <h4>Accions</h4>
+                    <div class="actions">
+                        <div *ngIf="!event.isUserSubscribed" (click)="subscribeIt()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Subscriu-te!</button>
+                        </div>
+                        <div *ngIf="event.isUserSubscribed" (click)="unsubscribedIt()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Dona't de baixa!</button>
+                        </div>
+                        <div (click)="sendComment()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Deixa un comentari</button>
+                        </div>
+                        <div (click)="rateIt()">
+                            <button type="button" class="btn btn-dark"
+                                [disabled]="!isLogged()">Puntua'l</button>
+                        </div>
+                        <div (click)="shareIt()">
+                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Comparteix'lo</button>
+                        </div>
+                    </div>
+                    <small *ngIf="!isLogged()">Si no tens sessió iniciada no pots realizar aquestes accions</small>
                 </div>
-                <div class="d-flex justify-content-center" (click)="sendComment()">
-                    <span class="button">Deixa un comentari</span>
+                <div *ngIf="comments && comments.length > 0">
+                    <h4 class="text-center mt-5">Comentaris</h4>
+                    <div class="comments">
+                        <app-carousel [comments]="comments" class="owl-custom"></app-carousel>
+                    </div>
                 </div>
                 <div class="forum">
                     <h2 class="forum-title">Fòrum</h2>
