@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'event',
         children: [
           { path: 'search', component: EventSearcherComponent },
-          { path: 'access', component: AccessToEventComponent }
+          { path: 'access/:id', component: AccessToEventComponent }
         ]
       }
     ]

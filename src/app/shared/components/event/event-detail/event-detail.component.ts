@@ -25,6 +25,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   rating: number;
   faFavorite = faHeart;
   comments: IComment[];
+  today: Date;
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
@@ -37,7 +38,9 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     private modalResultService: ModalResultService,
     private router: Router,
     private favoriteService: FavoriteService
-  ) { }
+  ) {
+    this.today = new Date();
+  }
 
   ngOnInit(): void {
     this.getEventById(this.route.snapshot.params.id);
@@ -226,5 +229,12 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
 
   isLogged(): boolean {
     return this.authService.isLogged();
+  }
+
+  isTheDayOfEvent(): boolean {
+    const eventStartDate = new Date(this.event.startDate * 1000).toISOString().split('T')[0];
+    const today = this.today.toISOString().split('T')[0];
+
+    return this.event.startDate && eventStartDate === today;
   }
 }

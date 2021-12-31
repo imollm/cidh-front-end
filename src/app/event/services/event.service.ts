@@ -79,8 +79,9 @@ export class EventService implements IEventService {
     throw new Error('Method not implemented.');
   }
 
-  accessToEvent(reservationId: string, location: URL): void {
-    
+  accessToEvent(eventId: string): Promise<void> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'access');
+    return this.httpClient.get<void>(endpoint).toPromise();
   }
 
   private setSearchParams(endpoint, searchParams) {

@@ -60,6 +60,14 @@
                         [userRating]="event.userRating"
                     ></app-event-rating>
                 </div>
+                <div class="access-wrapper" *ngIf="isLogged() && isTheDayOfEvent() && event.isUserSubscribed">
+                    <h4 class="text-center mb-5">Accedeix a l'event</h4>
+                    <div class="access">
+                        <button type="button" class="btn btn-danger" [routerLink]="['/event/dashboard/event/access', event.id]">
+                            Accedir
+                        </button>
+                    </div>
+                </div>
                 <div class="actions-wrapper">
                     <h4>Accions</h4>
                     <div class="actions">
