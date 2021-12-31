@@ -10,6 +10,6 @@ export interface IEventService {
   findOrdersByUser(email: string): void;
   findAllOrders(): void;
   showOrder(orderId: string): void;
-  showEventReserved(reservationId: string, location: URL): void;
+  accessToEvent(reservationId: string, location: URL): void;
   upcomingEvents(limit: string): Promise<IEvent[]>
 }
