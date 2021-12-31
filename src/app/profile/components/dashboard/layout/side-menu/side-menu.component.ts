@@ -93,6 +93,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
     dashboardRouterOutlet.style.marginLeft = '120px';
     dashboardRouterOutlet.style.transition = '.3s linear';
+
+    // Resize dashboard container
+    let dashboardContainer = document.querySelector('.dashboard-container-router-outlet');
+    (dashboardContainer as HTMLElement).style.marginLeft = '118px';
   }
 
   openSideMenu(): void {
@@ -142,6 +146,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
     dashboardRouterOutlet.style.marginLeft = '270px';
     dashboardRouterOutlet.style.transition = '.3s linear';
+  
+    // Resize dashboard container
+    let dashboardContainer = document.querySelector('.dashboard-container-router-outlet');
+    (dashboardContainer as HTMLElement).style.marginLeft = '268px';
   }
 
   getUser(): void {

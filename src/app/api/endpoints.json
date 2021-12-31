@@ -83,7 +83,7 @@
       },
       "updateById": {
         "uri": "/event-organizer/%s",
-        "method": "PUT"
+        "method": "POST"
       },
       "getById": {
         "uri": "/event-organizer/%s",
@@ -118,6 +118,22 @@
       "unsubscribe": {
         "uri": "/events/%s/unsubscribe",
         "method": "POST"
+      },
+      "getEventsByUser": {
+        "uri": "/events?user=%s",
+        "method": "GET"
+      },
+      "getEventsByAdmin": {
+        "uri": "/events?admin=%s",
+        "method": "GET"
+      },
+      "getAllComments": {
+        "uri": "/events/%s/comments",
+        "method": "GET"
+      },
+      "getForumId": {
+        "uri": "/events/%s/forum",
+        "method": "GET"
       }
     } ,
     "label": {
