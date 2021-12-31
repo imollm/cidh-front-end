@@ -5,15 +5,11 @@ import { AfterContentChecked, Component, Input, OnChanges, SimpleChanges } from 
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.sass']
 })
-export class BannerComponent implements OnChanges, AfterContentChecked {
+export class BannerComponent implements OnChanges {
 
   @Input() bannerTitle: string;
 
   constructor() { }
-
-  ngAfterContentChecked(): void {
-    
-  }  
 
   ngOnChanges(changes: SimpleChanges): void {
     this.bannerTitle = changes.bannerTitle.currentValue;
