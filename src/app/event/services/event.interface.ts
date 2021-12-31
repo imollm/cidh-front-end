@@ -2,7 +2,8 @@ import { EventSearcher as EventSearcherModel } from "src/app/shared/models/event
 import { IEvent } from "../models/event.model";
 
 export interface IEventService {
-  orderEvent(eventId: string, email: string, reservationId: string): void;
+  subscribe(eventId: string): Promise<void>;
+  unsubscribe(eventId: string): Promise<void>;
   findEvents(searchParams: EventSearcherModel): Promise<IEvent[]>;
   findEventById(eventId: string): Promise<IEvent>;
   showEvent(eventId: string): void;

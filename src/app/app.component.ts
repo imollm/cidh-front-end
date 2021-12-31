@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './profile/services/auth/auth.service';
 
 @Component({
@@ -8,13 +9,33 @@ import { AuthService } from './profile/services/auth/auth.service';
 })
 export class AppComponent {
 
-  title = 'cidh-front-end';
+  title: string = 'cidh-front-end';
+  bannerTitle: string = 'CULTURE IN DA HOUSE';
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        let url = this.router.url;
 
-  isDashboard(): boolean {
-    return this.authService.isLogged();
+        if (url === '/categories') {
+          this.bannerTitle = 'CATEGORIES';
+        } else if (url === '/labels') {
+          this.bannerTitle = 'ETIQUETES';
+        } else if (url === '/media/forum') {
+          this.bannerTitle = 'FORUM';
+        } else if (url === '/search') {
+          this.bannerTitle = 'CERCADOR';
+        } else {
+          this.bannerTitle = 'CULTURE IN DA HOUSE';
+        }
+      }
+    })
+  }
+
+  showBanner(): boolean {
+    return !this.authService.isLogged() && (!this.router.url.includes('login') && !this.router.url.includes('signup'));
   }
 }

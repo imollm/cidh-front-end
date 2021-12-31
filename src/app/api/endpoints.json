@@ -111,6 +111,14 @@
         "uri": "/events/%s",
         "method": "POST"
       },
+      "subscribe": {
+        "uri": "/events/%s/subscribe",
+        "method": "POST"
+      },
+      "unsubscribe": {
+        "uri": "/events/%s/unsubscribe",
+        "method": "POST"
+      },
       "getEventsByUser": {
         "uri": "/events?user=%s",
         "method": "GET"

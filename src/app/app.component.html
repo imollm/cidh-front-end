@@ -1,6 +1,9 @@
 <app-header></app-header>
 
-<app-banner *ngIf="!isDashboard()"></app-banner>
+<app-banner
+    *ngIf="showBanner()"
+    [bannerTitle]="bannerTitle"
+></app-banner>
 
 <ngx-spinner></ngx-spinner>
 

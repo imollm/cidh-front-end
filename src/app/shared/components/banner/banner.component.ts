@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.sass']
 })
-export class BannerComponent {
+export class BannerComponent implements OnChanges {
 
-  bannerTitle = 'CULTURE IN DA HOUSE';
+  @Input() bannerTitle: string;
 
   constructor() { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.bannerTitle = changes.bannerTitle.currentValue;
+  }
 }
