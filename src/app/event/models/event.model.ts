@@ -15,4 +15,5 @@ export interface IEvent {
     eventOrganizer: IEventOrganizer;
     eventUrl: string;
     isFavorite?: boolean;
+    isUserSubscribed?: boolean;
 }
