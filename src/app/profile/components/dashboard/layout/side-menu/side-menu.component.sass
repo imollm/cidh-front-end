@@ -6,10 +6,13 @@
   border-right: 2px solid $richBlack
   height: 100%
   position: fixed
+  top: 77px // Pending to check
+  left: 0 // Pending to check
 
   @include max-lg()
     padding: 0.5em 0
     width: 100px
+
   @include min-lg()
     padding: 1.5em 0
     width: 250px
@@ -89,24 +92,24 @@
 
           div
             fa-icon
-              background: $richBlack
-              border: 2px solid $white
-              color: $white
-              border-radius: 50%
-              cursor: pointer
+            background: $richBlack
+            border: 2px solid $white
+            color: $white
+            border-radius: 50%
+            cursor: pointer
 
-              &:hover
-                box-shadow: 0 0 30px $richBlack
+            &:hover
+              box-shadow: 0 0 30px $richBlack
 
             &:nth-child(1) // Close button
               fa-icon
-                font-size: 24px
-                padding: .2em .7em .2em .5em
+              font-size: 24px
+              padding: .2em .7em .2em .5em
 
             &:nth-child(2) // Open button
               fa-icon
-                font-size: 18px
-                padding: .2em .6em .2em .6em
+              font-size: 18px
+              padding: .2em .6em .2em .6em
 
 .opened
   padding: 1.5em 0
@@ -144,6 +147,6 @@
   background-color: $richBlack
   border-right: 4px solid $white
   color: $white
-  
+
   span
     color: $white

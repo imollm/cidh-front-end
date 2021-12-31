@@ -4,6 +4,8 @@ import { IEventService } from './event.interface';
 import { IEvent } from '../models/event.model';
 import { EventSearcher as EventSearcherModel } from 'src/app/shared/models/event-searcher.model';
 import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
+import { IMessage } from '../models/message.model';
+import { IEventForum } from '../models/event-forum.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,10 +43,23 @@ export class EventService implements IEventService {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
   }
-  findOrdersByUser(email: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  findOrdersByUser(userId: string): Promise<IEvent[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventsByUser', userId);
+    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
   }
+  findOrdersByAdmin(adminId: string): Promise<IEvent[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventsByAdmin', adminId);
+    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
+  }
+  getAllComments(eventId: string): Promise<[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getAllComments', eventId);
+    return this.httpClient.get<[]>(endpoint).toPromise();
+  }
+  getForumByEvent(eventId: string): Promise<IEventForum> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getForumId', eventId);
+    return this.httpClient.get<IEventForum>(endpoint).toPromise();
+  }
+
   findAllOrders(): void {
     TODO: 'Method not implemented.'
     throw new Error('Method not implemented.');
