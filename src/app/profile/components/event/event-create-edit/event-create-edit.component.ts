@@ -1,10 +1,9 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { IEvent } from 'src/app/event/models/event.model';
-import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IEventOrganizer } from 'src/app/administration/models/event-organizer.model';
-import { AdministratorService } from 'src/app/administration/services/administrator/administrator.service';
 import { EventOrganizerService } from 'src/app/administration/services/event-organizer/event-organizer.service';
 import { ModalResultService } from 'src/app/helpers/modal.service';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
@@ -13,7 +12,6 @@ import { Category } from 'src/app/administration/models/category.model';
 import { CategoryService } from 'src/app/administration/services/category/category.service';
 import { Label } from 'src/app/administration/models/label.model';
 import { LabelService } from 'src/app/administration/services/label/label.service';
-import { of } from 'rxjs';
 
 @Component({
     selector: 'app-event-create-edit',
