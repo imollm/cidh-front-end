@@ -18,7 +18,6 @@ export class AppComponent {
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        console.log(this.router.url)
         let url = this.router.url;
 
         if (url === '/categories') {

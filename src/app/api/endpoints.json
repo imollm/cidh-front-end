@@ -110,6 +110,14 @@
       "updateById": {
         "uri": "/events/%s",
         "method": "POST"
+      },
+      "subscribe": {
+        "uri": "/events/%s/subscribe",
+        "method": "POST"
+      },
+      "unsubscribe": {
+        "uri": "/events/%s/unsubscribe",
+        "method": "POST"
       }
     } ,
     "label": {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -57,15 +57,15 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
         this.event = res;
       }
     })
-    .then(() => {
-      if (this.isLogged()) {
-        this.commentService.getCommentsByEventId(this.event.id).then(res => {
-          if (res && res.length > 0) {
-            this.comments = res;
-          }
-        });
-      }
-    });
+      .then(() => {
+        if (this.isLogged()) {
+          this.commentService.getCommentsByEventId(this.event.id).then(res => {
+            if (res && res.length > 0) {
+              this.comments = res;
+            }
+          });
+        }
+      });
 
     this.spinner.hide();
   }
@@ -74,10 +74,10 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     if (!this.authService.isLogged()) {
       this.router.navigate(['profile/login']);
 
-    } else if (this.authService.isLogged() && this.authService.getRoleOfAuthUser() !== 'USER') {
+    } else if (this.authService.isLogged() && !this.isUserRole()) {
       this.modalResultService.youCanNotDoThisAction();
 
-    } else if (this.authService.isLogged() && this.authService.getRoleOfAuthUser() === 'USER') {
+    } else if (this.authService.isLogged() && this.isUserRole()) {
       if (this.event.isFavorite) {
         this.favoriteService.removeToFavorties(this.event.id).then(() => {
           this.event.isFavorite = false;
@@ -102,11 +102,33 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   }
 
   subscribeIt(): void {
+    if (!this.authService.isLogged()) {
+      this.router.navigate(['profile/login']);
 
-  }
+    } else if (this.authService.isLogged() && !this.isUserRole()) {
+      this.modalResultService.youCanNotDoThisAction();
 
-  unsubscribedIt(): void {
-
+    } else if (this.authService.isLogged() && this.isUserRole()) {
+      if (!this.event.isUserSubscribed) {
+        this.eventService.subscribe(this.event.id).then(() => {
+          this.event.isUserSubscribed = true;
+          this.modalResultService.showModal('Te has subscrit', 'La teva subscripció s\'ha guardat correctament!', ModalResultIcon.success);
+        }).catch(err => {
+          if (err) {
+            this.modalResultService.showModal('No se t\'ha pogut subscriure', 'La teva subscripció no s\'ha guardat correctament!', ModalResultIcon.error);
+          }
+        })
+      } else {
+        this.eventService.unsubscribe(this.event.id).then(() => {
+          this.event.isUserSubscribed = false;
+          this.modalResultService.showModal('Te has desubscrit', 'Se t\'ha donat de baixa de la teva subscripció!', ModalResultIcon.success);
+        }).catch(err => {
+          if (err) {
+            this.modalResultService.showModal('No se t\'ha pogut desubscriure', 'No se t\'ha pogut donar de baixa de la teva subscripció!', ModalResultIcon.error);
+          }
+        })
+      }
+    }
   }
 
   sendComment(): void {

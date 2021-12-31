@@ -66,8 +66,8 @@
                         <div *ngIf="!event.isUserSubscribed" (click)="subscribeIt()">
                             <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Subscriu-te!</button>
                         </div>
-                        <div *ngIf="event.isUserSubscribed" (click)="unsubscribedIt()">
-                            <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Dona't de baixa!</button>
+                        <div *ngIf="event.isUserSubscribed" (click)="subscribeIt()">
+                            <button type="button" class="btn btn-danger" [disabled]="!isLogged()">Dona't de baixa!</button>
                         </div>
                         <div (click)="sendComment()">
                             <button type="button" class="btn btn-dark" [disabled]="!isLogged()">Deixa un comentari</button>

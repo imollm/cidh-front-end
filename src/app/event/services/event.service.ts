@@ -15,9 +15,14 @@ export class EventService implements IEventService {
     private endpointMapper: EndPointMapper
   ) { }
 
-  orderEvent(eventId: string, email: string, reservationId: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
+  subscribe(eventId: string): Promise<void> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'subscribe', eventId);
+    return this.httpClient.post<void>(endpoint, {}).toPromise();
+  }
+
+  unsubscribe(eventId: string): Promise<void> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'unsubscribe', eventId);
+    return this.httpClient.post<void>(endpoint, {}).toPromise();
   }
 
   upcomingEvents(limit: string = '0'): Promise<IEvent[]> {
