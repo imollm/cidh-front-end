@@ -32,13 +32,14 @@ export class UtilsService {
   static getResourceIdFromURI(uri: string): string {
     let id: string | undefined;
 
-    if (uri.includes('edit') || uri.includes('view') || uri.includes('delete') || uri.includes('access')) {
-      id = uri.split('/').slice(-1)[0];
-      if (id.includes('#')) {
-        id = uri.split('/').slice(-2)[0];
+    if (uri.includes('edit') || uri.includes('view') || uri.includes('delete') || uri.includes('access')) {
+      if (uri.includes('#')) {
+        id = uri.split('#')[0].split('/').slice(-1)[0]
+      } else {
+        id = uri.split('/').slice(-1)[0];
       }
     }
-
+    
     return id;
   }
 

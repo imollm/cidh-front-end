@@ -25,7 +25,7 @@
                 <div class="d-flex justify-content-between align-items-center event-title-wrapper">
                     <h1 class="event-title h2">{{ event.name }}</h1>
                     <fa-icon (click)="addToMyFavorites()" [icon]="faFavorite"
-                        [ngClass]="{ 'isFavorite': event.isFavorite, 'isNotFavorite': !event.isFavorite }"></fa-icon>
+                        [ngClass]="{ 'isFavorite': event.isFavorite, 'isNotFavorite': !event.isFavorite }" *ngIf="isUserRole()"></fa-icon>
                     <div *ngIf="event.category" class="h2">
                         {{ event.category.name | titlecase }}
                     </div>
@@ -60,15 +60,15 @@
                         [userRating]="event.userRating"
                     ></app-event-rating>
                 </div>
-                <div class="access-wrapper" *ngIf="isLogged() && isTheDayOfEvent() && event.isUserSubscribed">
+                <div class="access-wrapper" *ngIf="isLogged() && isTheDayOfEvent() && event.isUserSubscribed && isUserRole()">
                     <h4 class="text-center mb-5">Accedeix a l'event</h4>
                     <div class="access">
-                        <button type="button" class="btn btn-danger" [routerLink]="['/event/dashboard/event/access', event.id]">
+                        <button type="button" class="btn btn-warning" [routerLink]="['/event/dashboard/event/access', event.id]">
                             Accedir
                         </button>
                     </div>
                 </div>
-                <div class="actions-wrapper">
+                <div class="actions-wrapper" *ngIf="isUserRole()">
                     <h4>Accions</h4>
                     <div class="actions">
                         <div *ngIf="!event.isUserSubscribed" (click)="subscribeIt()">
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="forum">
-                    <h2 class="forum-title">Fòrum</h2>
+                    <h2 class="forum-title mb-4">Fòrum</h2>
                     <app-forum></app-forum>
                 </div>
             </div>

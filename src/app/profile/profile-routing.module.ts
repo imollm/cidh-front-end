@@ -29,12 +29,6 @@ const routes: Routes = [
       { path: 'userprofile', component: ProfileShowComponent },
       { path: 'logout', component: LogoutComponent },
       {
-        path: 'event',
-        children: [
-          { path: 'detail/:id', component: EventDetailComponent }
-        ]
-      },
-      {
         path: 'events',
         children: [
           { path: 'create', component: EventCreateEditComponent },

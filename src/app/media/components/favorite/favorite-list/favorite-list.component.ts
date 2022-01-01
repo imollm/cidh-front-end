@@ -18,7 +18,7 @@ export class FavoriteListComponent implements OnInit {
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
     active: true,
-    resource: 'event/dashboard/event/detail',
+    resource: '/event/dashboard/event',
     actions: {
       view: true,
       edit: false,

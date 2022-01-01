@@ -10,7 +10,6 @@
         </span>
       </li>
       <li
-        *ngIf="permissions && permissions.event && permissions.event.listEventsByCategory && permissions.event.searchEventByLabel && permissions.event.searchEventByName"
         class="sidebar-menu-content-items-item" [routerLink]="['/event/dashboard/event/search']"
         routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventSearcher"></fa-icon>
@@ -79,6 +78,14 @@
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faFavorites"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
           Favorits
+        </span>
+      </li>
+      <li *ngIf="permissions && permissions.media && permissions.media.viewForumQuestions"
+        class="sidebar-menu-content-items-item" [routerLink]="['/media/dashboard/forum']"
+        routerLinkActive="active-link">
+        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faQuestion"></fa-icon>
+        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
+          Fòrum
         </span>
       </li>
       <!-- OPEN & CLOSE BUTTONS -->

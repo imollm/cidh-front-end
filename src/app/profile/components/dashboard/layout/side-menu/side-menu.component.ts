@@ -22,11 +22,9 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   faCategories = faCubes;
   faTags = faTags;
   faEventOrganizers = faBriefcase;
-  faAssociateAdminToEvent = faCompressAlt;
   faLabels = faTags;
   faQuestion = faQuestion;
   faEvents = faCalendarDay;
-  faNewSubscription = faHandPointUp;
   faEventHistory = faHistory;
   faAccessToEvent = faVrCardboard;
   faEventSearcher = faSearch;

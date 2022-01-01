@@ -12,8 +12,6 @@ import { FormatDatePipe } from '../helpers/format-date.pipe';
 import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
 import { EventRatingComponent } from './components/event-rating/event-rating.component';
 import { ForumComponent } from './components/forum/forum.component';
-import { QuestionComponent } from './components/question/question.component';
-import { AnswerComponent } from './components/answer/answer.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { SafeUrlPipe } from '../helpers/safe-url.pipe';
@@ -26,6 +24,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -37,13 +36,12 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     EventDetailComponent,
     EventRatingComponent,
     ForumComponent,
-    QuestionComponent,
-    AnswerComponent,
     CarouselComponent,
     CommentComponent,
     SafeUrlPipe,
     RatingPipe,
-    RatingCountPipe
+    RatingCountPipe,
+    MessageComponent
   ],
   imports: [
     CommonModule,
@@ -67,8 +65,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ReactiveFormsModule,
     FormatDatePipe,
     ForumComponent,
-    QuestionComponent,
-    AnswerComponent,
     SafeUrlPipe,
     RatingPipe,
     RatingCountPipe

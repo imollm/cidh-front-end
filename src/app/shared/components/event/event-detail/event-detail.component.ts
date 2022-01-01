@@ -11,6 +11,7 @@ import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IComment } from 'src/app/media/models/comment.model';
 import { CommentService } from 'src/app/media/services/comment.service';
 import { FavoriteService } from 'src/app/media/services/favorite.service';
+import { ForumService } from 'src/app/media/services/forum.service';
 import { AuthService } from 'src/app/profile/services/auth/auth.service';
 import Swal from 'sweetalert2';
 
@@ -228,7 +229,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private isUserRole(): boolean {
+  isUserRole(): boolean {
     return this.authService.getRoleOfAuthUser() === 'USER';
   }
 

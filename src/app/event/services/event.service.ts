@@ -4,7 +4,7 @@ import { IEventService } from './event.interface';
 import { IEvent } from '../models/event.model';
 import { EventSearcher as EventSearcherModel } from 'src/app/shared/models/event-searcher.model';
 import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
-import { IEventForum } from '../models/event-forum.model';
+import { IForum } from '../../media/models/forum.model';
 
 @Injectable({
   providedIn: 'root',
@@ -62,9 +62,9 @@ export class EventService implements IEventService {
     return this.httpClient.get<[]>(endpoint).toPromise();
   }
 
-  getForumByEvent(eventId: string): Promise<IEventForum> {
+  getForumByEvent(eventId: string): Promise<IForum> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getForumId', eventId);
-    return this.httpClient.get<IEventForum>(endpoint).toPromise();
+    return this.httpClient.get<IForum>(endpoint).toPromise();
   }
 
   private setSearchParams(endpoint, searchParams) {

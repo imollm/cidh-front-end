@@ -1,32 +1,36 @@
 <section class="forum" #forumContainer>
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <div class="forum-header">
-          <h2 class="h4 text-white py-5">
-            Darreres preguntes
-          </h2>
-          <div class="forum-header-add-btn">
-            <button class="forum-header-add btn" (click)="addQuestion()">
-              Fer pregunta
-            </button>
+      <div *ngIf="forum && forum.messages && forum.messages.length > 0; then withMsg else withOutMsg"></div>
+      <ng-template #withMsg>
+        <div class="col-12">
+          <div class="forum-header">
+            <h2 class="h4 text-white py-5">
+              Darrers missatges
+            </h2>
+            <div class="forum-header-add-btn" *ngIf="canThisUserMakeAQuestion()">
+              <button class="forum-header-add btn" (click)="addQuestion()">
+                Fer pregunta
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="forum-container col-12">
-        <div *ngFor="let question of lastQuestions | paginate: { itemsPerPage: 6, currentPage: actualPage }" class="question-container">
-          <app-question
-            [question]="question"
-          ></app-question>
+        <div class="forum-container col-12">
+          <div *ngFor="let message of forum.messages | paginate: { itemsPerPage: 6, currentPage: actualPage }"
+            class="question-container">
+            <app-message [message]="message"></app-message>
+          </div>
         </div>
-      </div>
-      <div class="paginator">
-        <pagination-controls
-          (pageChange)="actualPage = $event"
-          [autoHide]="true"
-          [responsive]="true"
-        ></pagination-controls>
-      </div>
+        <div class="paginator">
+          <pagination-controls (pageChange)="actualPage = $event" [autoHide]="true" [responsive]="true">
+          </pagination-controls>
+        </div>
+      </ng-template>
+      <ng-template #withOutMsg>
+        <div class="d-flex align-items-center justify-content-center">
+          <h3 class="text-white text-center">Encara no hi ha cap missatge</h3>
+        </div>
+      </ng-template>
     </div>
   </div>
 </section>

@@ -1,0 +1,14 @@
+<div class="message-wrapper">
+    <div class="message message-title">
+        <span>Usuari:</span> {{ message.authorFirstName }}
+    </div>
+    <div class="message message-body">
+        {{ message.message }}
+    </div>
+    <div class="message message-answer" *ngIf="message.parentMessageId">
+        {{ message.parentMessageId }}
+    </div>
+    <div class="message message-footer">
+        {{ message.createdAt | formatDate }}
+    </div>
+</div>

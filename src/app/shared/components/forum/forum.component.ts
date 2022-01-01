@@ -1,7 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IEvent } from 'src/app/event/models/event.model';
+import { EventService } from 'src/app/event/services/event.service';
+import { UtilsService } from 'src/app/helpers/utils.helper.service';
+import { IForum } from 'src/app/media/models/forum.model';
 import Swal from 'sweetalert2';
-import { Question } from '../../../media/models/question.model';
 import { ForumService } from '../../../media/services/forum.service';
 
 @Component({
@@ -11,23 +14,36 @@ import { ForumService } from '../../../media/services/forum.service';
 })
 export class ForumComponent implements OnInit {
 
-  lastQuestions: Question[] = [];
+  private eventId: string;
+  private message: string;
   actualPage: number = 1;
-  newQuestion = {} as Question;
+  forum: IForum;
+  events: IEvent[];
 
   @ViewChild('forumContainer') forumContainer: ElementRef;
 
   constructor(
     private forumService: ForumService,
+    private eventService: EventService,
     private router: Router,
     private er: ElementRef,
   ) {
-    this.forumContainer = er;
+    this.forumContainer = this.er;
   }
 
   ngOnInit(): void {
-    this.lastQuestions = this.forumService.listAllQuestions('0');
+    this.eventId = UtilsService.getResourceIdFromURI(this.router.url);
     this.borderStyle();
+    this.getEvents();
+    this.getForum();
+  }
+
+  private async getEvents(): Promise<void> {
+    this.events = await this.eventService.getAllEvents();
+  }
+
+  private async getForum(): Promise<void> {
+    this.forum = await this.forumService.getForum(this.eventId);
   }
 
   addQuestion(): void {
@@ -47,28 +63,36 @@ export class ForumComponent implements OnInit {
         if (!eventId) {
           return 'Necessites escollir un event';
         } else {
-          this.newQuestion.eventId = eventId;
+          this.eventId = eventId;
+          console.log(this.eventId);
           return null;
         }
       }
     }).then(() => {
       Swal.fire({
-        title: 'Escriu la teva pregunta',
+        title: 'Escriu el teu missatge',
         input: 'textarea',
-        inputPlaceholder: 'Quina pregunta tens...',
+        inputPlaceholder: 'Quin missatge es el teu...',
         showCancelButton: true,
         confirmButtonColor: '#00adb5',
         cancelButtonColor: '#8ea8c3',
         inputValidator: (message) => {
           if (!message) {
-            return 'Necessites escriure una pregunta vàlida!';
+            return 'Necessites escriure un missatge vàlid!';
           } else {
-            this.newQuestion.message = message;
+            this.message = message;
             return null;
           }
         }
       })
+    }).then(() => {
+      //TODO: Make a addQuestion HTTP Request if user is not ADMIN or SUPERADMIN
     });
+  }
+
+  canThisUserMakeAQuestion(): boolean {
+    const role = UtilsService.getRoleFromAccessToken();
+    return role !== 'ADMIN' && role !== 'SUPERADMIN';
   }
 
   borderStyle(): void {
