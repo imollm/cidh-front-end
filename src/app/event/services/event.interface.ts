@@ -8,6 +8,7 @@ export interface IEventService {
   upcomingEvents(limit: string): Promise<IEvent[]>;
   findEvents(searchParams: EventSearcherModel): Promise<IEvent[]>;
   findEventById(eventId: string): Promise<IEvent>;
+  getAllEvents(): Promise<IEvent[]>;
   findSubscriptionsByUser(email: string): Promise<IEvent[]>;
   findSubscriptionsByAdmin(adminId: string): Promise<IEvent[]>;
   getAllComments(eventId: string): Promise<[]>;

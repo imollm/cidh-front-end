@@ -4,18 +4,16 @@ import { IEventService } from './event.interface';
 import { IEvent } from '../models/event.model';
 import { EventSearcher as EventSearcherModel } from 'src/app/shared/models/event-searcher.model';
 import { EndPointMapper } from 'src/app/helpers/endpoint-mapper.helper.service';
-import { IMessage } from '../models/message.model';
 import { IEventForum } from '../models/event-forum.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService implements IEventService {
-
   constructor(
     private httpClient: HttpClient,
     private endpointMapper: EndPointMapper
-  ) { }
+  ) {}
 
   subscribe(eventId: string): Promise<void> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'subscribe', eventId);
@@ -44,6 +42,11 @@ export class EventService implements IEventService {
     return this.httpClient.get<IEvent>(endpoint).toPromise();
   }
 
+  getAllEvents(): Promise<IEvent[]> {
+    const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEvents');
+    return this.httpClient.get<IEvent[]>(endpoint).toPromise();
+  }
+
   findSubscriptionsByUser(userId: string): Promise<IEvent[]> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventsByUser', userId);
     return this.httpClient.get<IEvent[]>(endpoint).toPromise();
@@ -67,10 +70,16 @@ export class EventService implements IEventService {
   private setSearchParams(endpoint, searchParams) {
     let url = new URL(endpoint);
 
-    if (searchParams && (searchParams.category || searchParams.name || searchParams.label)) {
-      Object.keys(searchParams).map(key => {
+    if (
+      searchParams &&
+      (searchParams.category || searchParams.name || searchParams.label)
+    ) {
+      Object.keys(searchParams).map((key) => {
         if (searchParams[key].length > 0 && key !== 'events') {
-          url.searchParams.append(key.toLocaleLowerCase(), searchParams[key].toString());
+          url.searchParams.append(
+            key.toLocaleLowerCase(),
+            searchParams[key].toString()
+          );
         }
       });
     }
