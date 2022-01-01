@@ -17,6 +17,8 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { SafeUrlPipe } from '../helpers/safe-url.pipe';
+import { RatingPipe } from '../helpers/rating.pipe';
+import { RatingCountPipe } from '../helpers/rating-count.pipe';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -39,7 +41,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     AnswerComponent,
     CarouselComponent,
     CommentComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    RatingPipe,
+    RatingCountPipe
   ],
   imports: [
     CommonModule,
@@ -65,7 +69,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ForumComponent,
     QuestionComponent,
     AnswerComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    RatingPipe,
+    RatingCountPipe
   ]
 })
 export class SharedModule { }

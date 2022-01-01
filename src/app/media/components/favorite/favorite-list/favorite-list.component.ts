@@ -17,7 +17,13 @@ export class FavoriteListComponent implements OnInit {
   myFavoriteEvents: IEvent[] = [];
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
-    active: false
+    active: true,
+    resource: 'event/dashboard/event/detail',
+    actions: {
+      view: true,
+      edit: false,
+      delete: false
+    }
   } as IActionButtons;
 
   constructor(
@@ -40,9 +46,10 @@ export class FavoriteListComponent implements OnInit {
       this.dataTable.title = 'Llistat d\'events favorits';
       this.dataTable.colsName = [
         { colName: 'name', text: 'Nom' },
-        { colName: 'description', text: 'Descripció' },
         { colName: 'startDate', text: 'Comença' },
-        { colName: 'endDate', text: 'Acaba'}
+        { colName: 'endDate', text: 'Acaba'},
+        { colName: 'rating', text: 'Punts' },
+        { colName: 'rating', text: 'Total votacions' }
       ];
       this.dataTable.data = this.myFavoriteEvents;
       this.dataTable.inverse = false;

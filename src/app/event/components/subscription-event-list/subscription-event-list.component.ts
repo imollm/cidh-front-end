@@ -48,8 +48,8 @@ export class SubscriptionEventListComponent implements OnInit {
     this.dataTable.title = 'Events Subscrits';
     this.dataTable.colsName = [
       { colName: 'name', text: 'Nom' },
-      { colName: 'description', text: 'Descripció' },
-      { colName: 'eventUrl', text: 'URL del acte' },
+      { colName: 'startDate', text: 'Comença' },
+      { colName: 'endDate', text: 'Acaba' },
     ];
     this.dataTable.data = this.subscriptions;
   }

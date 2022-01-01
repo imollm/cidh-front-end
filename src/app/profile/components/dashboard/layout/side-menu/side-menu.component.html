@@ -66,7 +66,8 @@
         </span>
       </li>
       <li *ngIf="permissions && permissions.event && permissions.event.subscriptionsHistory"
-        class="sidebar-menu-content-items-item" [routerLink]="['/event/dashboard/event/subscription-event-list']">
+        class="sidebar-menu-content-items-item" [routerLink]="['/event/dashboard/event/subscription-event-list']"
+        routerLinkActive="active-link">
         <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faEventHistory"></fa-icon>
         <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
           Historic subs.

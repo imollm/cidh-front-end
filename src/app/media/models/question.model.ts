@@ -3,8 +3,8 @@ import { Answer } from "./answer.model";
 export interface Question {
   userId: string;
   eventId: string;
-  parentId?: string;
+  parentMessageId?: string;
   createdAt: string;
-  comment: string;
+  message: string;
   answer?: Answer;
 }

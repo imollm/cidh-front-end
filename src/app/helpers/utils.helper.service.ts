@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import jwt_decode from "jwt-decode"
+import { IEvent } from '../event/models/event.model';
 
 
 export interface ValidationResult {
