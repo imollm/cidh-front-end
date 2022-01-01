@@ -1,1 +1,78 @@
-<p>home works!</p>
+<div id="home-page">
+  <h1 *ngIf="role" class="text-center mb-5 h4">Panell {{ role }}</h1>
+  <div class="container">
+    <div class="row home-content-wrapper">
+      <div *ngIf="me && me.firstName && me.lastName">
+        <h2 class="text-center h4 p-5">
+          Benvingut {{ me.firstName + ' ' + me.lastName }}
+        </h2>
+      </div>
+      <div [ngSwitch]="role">
+        <div *ngSwitchCase="'USER'">
+          <div class="col-sm-8 offset-sm-2">
+            <app-dashboard-table
+              [toShow]="userTableSubscribedEvents"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+            <app-dashboard-table
+              [toShow]="userTableEventsToBeCelebrated"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+          </div>
+          <div class="col-sm-4 offset-sm-4 mt-5">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Totals events suscrits</div>
+              <div class="card-body">
+                <h5 class="card-title text-center">{{ userTotalOfSubscribedEvents }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngSwitchCase="'ADMIN'">
+          <div class="col-sm-8 offset-sm-2">
+            <app-dashboard-table
+              [toShow]="adminTableEventsManaged"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+            <app-dashboard-table
+              [toShow]="adminTablePendingQuestionsToBeAnswered"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+          </div>
+          <div class="col-sm-4 offset-sm-4 mt-5">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Totals events gestionats</div>
+              <div class="card-body">
+                <h5 class="card-title text-center">{{adminTotalEventsManaged}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngSwitchCase="'SUPERADMIN'">
+          <div class="col-sm-8 offset-sm-2">
+            <app-dashboard-table
+              [toShow]="superAdminTableLastEventOrganizersInTheSystem"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+            <app-dashboard-table
+              [toShow]="superAdminTableLastLabelsInTheSystem"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+            <app-dashboard-table
+              [toShow]="superAdminTableLastCategoriesInTheSystem"
+              [actionButtons]="actionButtons"
+              class="mb-5"
+            ></app-dashboard-table>
+          </div>
+        </div>
+        <div *ngSwitchDefault>output2</div>
+      </div>
+    </div>
+  </div>
+</div>

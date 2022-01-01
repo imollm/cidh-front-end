@@ -6,6 +6,7 @@ import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IRegistration } from 'src/app/profile/models/registration.model';
 import { AuthService } from '../../../services/auth/auth.service';
 import { preferredLanguages } from 'src/app/profile/models/preferredLanguages.model';
+import { ModalResultService } from 'src/app/helpers/modal.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +23,8 @@ export class SignupComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalResultService: ModalResultService
     ) {
     this.form = this.fb.group({
       firstName: new FormControl('', Validators.required),
@@ -44,10 +46,14 @@ export class SignupComponent {
       this.authService.registerUser(user).then(res => {
         this.spinner.show();
         if (res) {
-          this.router.navigate(['/profile/login']);
+          this.router.navigate(['/profile/login']).then(() => {
+            this.modalResultService.signUpSuccessResult(user);
+          });
         }
       }).then(() => {
         this.spinner.hide();
+      }).catch(err => {
+        this.modalResultService.signUpErrorResult();
       });
     }
   }

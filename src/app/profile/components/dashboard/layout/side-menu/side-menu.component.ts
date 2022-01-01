@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faBriefcase, faCompressAlt, faCubes, faTags, faUserTie, faQuestion, faCalendarDay, faHandPointUp, faHistory, faVrCardboard, faSearch, faHome, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IPermissions } from 'src/app/profile/models/permissions.model';
 import { IUser } from 'src/app/profile/models/user.model';
@@ -31,6 +31,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
   faEventHistory = faHistory;
   faAccessToEvent = faVrCardboard;
   faEventSearcher = faSearch;
+  faFavorites = faHeart;
 
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
@@ -90,8 +91,12 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
     // Change with of dashboard router-outlet
     let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
-    dashboardRouterOutlet.style.marginLeft = '100px';
+    dashboardRouterOutlet.style.marginLeft = '120px';
     dashboardRouterOutlet.style.transition = '.3s linear';
+
+    // Resize dashboard container
+    let dashboardContainer = document.querySelector('.dashboard-container-router-outlet');
+    (dashboardContainer as HTMLElement).style.marginLeft = '118px';
   }
 
   openSideMenu(): void {
@@ -139,8 +144,12 @@ export class SideMenuComponent implements OnInit, AfterViewInit {
     });
     // Change with of dashboard router-outlet
     let dashboardRouterOutlet = document.getElementById('dashboard-router-outlet');
-    dashboardRouterOutlet.style.marginLeft = '250px';
+    dashboardRouterOutlet.style.marginLeft = '270px';
     dashboardRouterOutlet.style.transition = '.3s linear';
+  
+    // Resize dashboard container
+    let dashboardContainer = document.querySelector('.dashboard-container-router-outlet');
+    (dashboardContainer as HTMLElement).style.marginLeft = '268px';
   }
 
   getUser(): void {
