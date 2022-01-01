@@ -76,7 +76,7 @@ export class HomeComponent {
   }
 
   async setUserHome(): Promise<void> {
-    const events = await this.eventService.findOrdersByUser(this.me.id);
+    const events = await this.eventService.findSubscriptionsByUser(this.me.id);
     const eventsSubscribed = events.filter((event) => event.isUserSubscribed);
     const currentDay = Date.now() / 1000;
     const eventSubscribedNotCelebrated = eventsSubscribed.filter(
@@ -104,7 +104,7 @@ export class HomeComponent {
   }
 
   async setAdminHome(): Promise<void> {
-    const events = await this.eventService.findOrdersByAdmin(this.me.id);
+    const events = await this.eventService.findSubscriptionsByAdmin(this.me.id);
     const eventIds = events.map((event) => event.id);
     const messages = await Promise.all(
       eventIds.map((eventId) =>

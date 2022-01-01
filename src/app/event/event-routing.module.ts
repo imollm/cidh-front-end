@@ -8,6 +8,7 @@ import { AuthGuard } from '../auth/auth.guard';
 
 // Custom imports
 import { EventComponent } from './event.component';
+import { AccessToEventComponent } from './components/access-to-event/access-to-event.component';
 
 const routes: Routes = [
   { path: '', component: EventComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
       {
         path: 'event',
         children: [
-          { path: 'search', component: EventSearcherComponent }
+          { path: 'search', component: EventSearcherComponent },
+          { path: 'access/:id', component: AccessToEventComponent }
         ]
       }
     ]
