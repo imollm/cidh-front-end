@@ -44,17 +44,12 @@ export class EventService implements IEventService {
     return this.httpClient.get<IEvent>(endpoint).toPromise();
   }
 
-  showEvent(eventId: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
-  }
-
-  findOrdersByUser(userId: string): Promise<IEvent[]> {
+  findSubscriptionsByUser(userId: string): Promise<IEvent[]> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventsByUser', userId);
     return this.httpClient.get<IEvent[]>(endpoint).toPromise();
   }
 
-  findOrdersByAdmin(adminId: string): Promise<IEvent[]> {
+  findSubscriptionsByAdmin(adminId: string): Promise<IEvent[]> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getEventsByAdmin', adminId);
     return this.httpClient.get<IEvent[]>(endpoint).toPromise();
   }
@@ -67,21 +62,6 @@ export class EventService implements IEventService {
   getForumByEvent(eventId: string): Promise<IEventForum> {
     const endpoint = this.endpointMapper.getEndPointUrl('event', 'getForumId', eventId);
     return this.httpClient.get<IEventForum>(endpoint).toPromise();
-  }
-
-  findAllOrders(): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
-  }
-
-  showOrder(orderId: string): void {
-    TODO: 'Method not implemented.'
-    throw new Error('Method not implemented.');
-  }
-
-  accessToEvent(eventId: string): Promise<void> {
-    const endpoint = this.endpointMapper.getEndPointUrl('event', 'access');
-    return this.httpClient.get<void>(endpoint).toPromise();
   }
 
   private setSearchParams(endpoint, searchParams) {

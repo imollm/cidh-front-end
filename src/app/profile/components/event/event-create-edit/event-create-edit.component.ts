@@ -143,8 +143,8 @@ export class EventCreateEditComponent implements OnInit, AfterViewChecked {
             eventUrl: this.event.eventUrl,
             category: this.event.category.name,
             organizerId: this.event.eventOrganizer.id,
-            startDate: new Date(this.event.startDate * 1000).toISOString().split('T')[0],
-            endDate: new Date(this.event.endDate * 1000).toISOString().split('T')[0]
+            startDate: UtilsService.humanitizeEpochDate(this.event.startDate),
+            endDate: UtilsService.humanitizeEpochDate(this.event.endDate)
         });
 
         this.spinner.hide();
@@ -152,10 +152,10 @@ export class EventCreateEditComponent implements OnInit, AfterViewChecked {
 
     private prepareDatesToBeSendIt(): void {
         this.form.value.startDate = this.form.value.startDate !== ''
-            ? new Date(this.form.get('startDate').value).getTime() / 1000
+            ? UtilsService.convertDateToEpoch(this.form.get('startDate').value)
             : null;
         this.form.value.endDate = this.form.value.endDate !== ''
-            ? new Date(this.form.get('endDate').value).getTime() / 1000
+            ? UtilsService.convertDateToEpoch(this.form.get('endDate').value)
             : null;
     }
 
@@ -188,11 +188,19 @@ export class EventCreateEditComponent implements OnInit, AfterViewChecked {
             if (this.mode && this.mode === 'create') {
                 this.eventService.addEvent(this.form.value).then(res => {
                     this.event = res;
-                }).then(() => this.redirectUser());
+                }).then(() => this.redirectUser())
+                .catch(err => {
+                    this.modalResultService.editResultModal(false);
+                    this.spinner.hide();
+                });;
             } else if (this.mode && this.mode === 'edit') {
                 this.eventService.updateEvent(this.eventId, this.form.value).then(res => {
                     this.event = res;
-                }).then(() => this.redirectUser());
+                }).then(() => this.redirectUser())
+                .catch(err => {
+                    this.modalResultService.editResultModal(false);
+                    this.spinner.hide();
+                });
             }
         }
     }

@@ -31,7 +31,7 @@ export class UtilsService {
   static getResourceIdFromURI(uri: string): string {
     let id: string | undefined;
 
-    if (uri.includes('edit') || uri.includes('view') || uri.includes('delete')) {
+    if (uri.includes('edit') || uri.includes('view') || uri.includes('delete') || uri.includes('access')) {
       id = uri.split('/').slice(-1)[0];
       if (id.includes('#')) {
         id = uri.split('/').slice(-2)[0];
@@ -58,5 +58,26 @@ export class UtilsService {
   static getRoleFromAccessToken(): string {
     const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
     return jwt['authorities'];
+  }
+
+  static humanitizeEpochDate(epochDate: any): any {
+    if (epochDate) {
+      return new Date(epochDate * 1000).toISOString().split('T')[0];
+    }
+    return null;
+  }
+
+  static convertDateToEpoch(humanDate: any): any {
+    if (humanDate) {
+      return new Date(humanDate).getTime() / 1000;
+    }
+    return null;
+  }
+
+  static getFullDate(date: any): any {
+    if (date) {
+      return date.toISOString().split('T')[0];
+    }
+    return null;
   }
 }
