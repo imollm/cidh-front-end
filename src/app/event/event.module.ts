@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event.component';
 import { SharedModule } from '../shared/shared.module';
+import { SubscriptionEventListComponent } from './components/subscription-event-list/subscription-event-list.component';
 
 @NgModule({
   declarations: [
-    EventComponent
+    EventComponent,
+    SubscriptionEventListComponent
   ],
   imports: [
     CommonModule,
