@@ -7,6 +7,7 @@ import { IRating } from 'src/app/event/models/rating.model';
 import { EventService } from 'src/app/event/services/event.service';
 import { ModalResultIcon } from 'src/app/helpers/modal.icon.enum';
 import { ModalResultService } from 'src/app/helpers/modal.service';
+import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IComment } from 'src/app/media/models/comment.model';
 import { CommentService } from 'src/app/media/services/comment.service';
 import { FavoriteService } from 'src/app/media/services/favorite.service';
@@ -25,6 +26,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   rating: number;
   faFavorite = faHeart;
   comments: IComment[];
+  today: Date;
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
@@ -37,7 +39,9 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     private modalResultService: ModalResultService,
     private router: Router,
     private favoriteService: FavoriteService
-  ) { }
+  ) {
+    this.today = new Date();
+  }
 
   ngOnInit(): void {
     this.getEventById(this.route.snapshot.params.id);
@@ -121,7 +125,7 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
       } else {
         this.eventService.unsubscribe(this.event.id).then(() => {
           this.event.isUserSubscribed = false;
-          this.modalResultService.showModal('Te has desubscrit', 'Se t\'ha donat de baixa de la teva subscripció!', ModalResultIcon.success);
+          this.modalResultService.showModal('Te has donat de baixa', 'Se t\'ha donat de baixa de la teva subscripció!', ModalResultIcon.success);
         }).catch(err => {
           if (err) {
             this.modalResultService.showModal('No se t\'ha pogut desubscriure', 'No se t\'ha pogut donar de baixa de la teva subscripció!', ModalResultIcon.error);
@@ -152,10 +156,14 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
           }
         }
       }).then(() => {
-        console.log(comment);
-        console.log(this.event);
         this.commentService.sendComment(this.event.id, comment).then(res => {
           this.modalResultService.successPostComment();
+
+          this.commentService.getCommentsByEventId(this.event.id).then(res => {
+            if (res && res.length > 0) {
+              this.comments = res;
+            }
+          });
         }).catch(err => {
           const title = 'Event ja comentat!';
           const text = 'Ja has fet un comentari sobre aquest event';
@@ -220,11 +228,26 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     }
   }
 
-  isUserRole(): boolean {
+  private isUserRole(): boolean {
     return this.authService.getRoleOfAuthUser() === 'USER';
   }
 
   isLogged(): boolean {
     return this.authService.isLogged();
+  }
+
+  isTheDayOfEvent(): boolean {
+    const eventStartDate = UtilsService.humanitizeEpochDate(this.event.startDate);
+    const eventEndDate = UtilsService.humanitizeEpochDate(this.event.endDate);
+    const today = UtilsService.getFullDate(this.today);
+
+    return this.event.startDate && (eventStartDate <= today) && (today <= eventEndDate);
+  }
+
+  hasEventCelebrated(): boolean {
+    const eventEndDate = UtilsService.humanitizeEpochDate(this.event.endDate);
+    const today = UtilsService.getFullDate(this.today);
+
+    return this.event.endDate && eventEndDate < today;
   }
 }

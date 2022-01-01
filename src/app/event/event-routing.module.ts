@@ -10,6 +10,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { EventComponent } from './event.component';
 import { SubscriptionEventListComponent } from './components/subscription-event-list/subscription-event-list.component';
 import { EventDetailComponent } from '../shared/components/event/event-detail/event-detail.component';
+import { AccessToEventComponent } from './components/access-to-event/access-to-event.component';
 
 const routes: Routes = [
   { path: '', component: EventComponent },
@@ -22,11 +23,9 @@ const routes: Routes = [
         path: 'event',
         children: [
           { path: 'search', component: EventSearcherComponent },
-          {
-            path: 'subscription-event-list',
-            component: SubscriptionEventListComponent,
-          },
+          { path: 'subscription-event-list', component: SubscriptionEventListComponent },
           { path: 'view/:id', component: EventDetailComponent },
+          { path: 'access/:id', component: AccessToEventComponent }
         ],
       },
     ],

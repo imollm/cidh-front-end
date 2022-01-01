@@ -10,19 +10,20 @@ import { BannerComponent } from './components/banner/banner.component';
 import { TableComponent } from './components/table/table.component';
 import { FormatDatePipe } from '../helpers/format-date.pipe';
 import { EventDetailComponent } from './components/event/event-detail/event-detail.component';
+import { EventRatingComponent } from './components/event-rating/event-rating.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { SafeUrlPipe } from '../helpers/safe-url.pipe';
 
 // Third party modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { EventRatingComponent } from './components/event-rating/event-rating.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CommentComponent } from './components/comment/comment.component';
     QuestionComponent,
     AnswerComponent,
     CarouselComponent,
-    CommentComponent
+    CommentComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { CommentComponent } from './components/comment/comment.component';
     FormatDatePipe,
     ForumComponent,
     QuestionComponent,
-    AnswerComponent
+    AnswerComponent,
+    SafeUrlPipe
   ]
 })
 export class SharedModule { }
