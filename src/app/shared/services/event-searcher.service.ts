@@ -8,7 +8,7 @@ import { EventSearcher as EventSearcherModel} from '../models/event-searcher.mod
 
 /**
  * Service to communicate between
- * (Origin) CatCardComponent, LabCardComponent
+ * (Origin) CatCardComponent, LabCardComponent, EventDetail
  * (Destination) EventSearcherComponent
  *
  * @class EventSearcherService
@@ -34,6 +34,7 @@ export class EventSearcherService {
       ? this.message.name.length = 0 : null
     this.message.events && this.message.events.length > 0 
       ? this.message.events.length = 0 : null
+    this.message.redirect = false;
   }
   
 }

@@ -1,6 +1,6 @@
 import { IMessage } from "./message.model";
 
-export interface IEventForum {
+export interface IForum {
     eventId: string;
     eventName: string;
     messages: IMessage[];

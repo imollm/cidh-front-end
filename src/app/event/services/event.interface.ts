@@ -1,5 +1,5 @@
 import { EventSearcher as EventSearcherModel } from "src/app/shared/models/event-searcher.model";
-import { IEventForum } from "../models/event-forum.model";
+import { IForum } from "../../media/models/forum.model";
 import { IEvent } from "../models/event.model";
 
 export interface IEventService {
@@ -12,5 +12,5 @@ export interface IEventService {
   findSubscriptionsByUser(email: string): Promise<IEvent[]>;
   findSubscriptionsByAdmin(adminId: string): Promise<IEvent[]>;
   getAllComments(eventId: string): Promise<[]>;
-  getForumByEvent(eventId: string): Promise<IEventForum>;
+  getForumByEvent(eventId: string): Promise<IForum>;
 }

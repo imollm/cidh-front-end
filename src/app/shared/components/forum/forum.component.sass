@@ -1,10 +1,13 @@
 @import "../../../../assets/css/_variables"
 @import "../../../../assets/css/_breakpoints"
 
+.forum-title
+  text-align: center
+  padding: .5em 0 1em 0
+
 .forum
   background-color: $richBlack
-  padding-bottom: 5em
-  border-radius: 25px
+  padding: 3em 1em
 
   &-header
     display: flex
@@ -14,11 +17,6 @@
     &-add-btn
       display: flex
       justify-content: flex-end
-
-      button
-        background-color: $turquoise
-        border: 3px $cadetGray solid
-        color: $white
 
   &-container
     background-color: $turquoise
@@ -48,3 +46,8 @@
       padding: 0
       background-color: $white
       border-radius: 5px
+
+.add-btn
+  background-color: $turquoise
+  border: 3px $cadetGray solid
+  color: $white

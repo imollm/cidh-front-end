@@ -1,0 +1,59 @@
+@import "../../../../assets/css/_variables"
+@import "../../../../assets/css/_breakpoints"
+
+.message-wrapper
+    background-color: $richBlack
+    border: 2px solid $white
+    border-radius: 15px
+    color: $white
+    width: 100%
+
+    .message
+        padding: 1em 0
+
+    .message-title
+        display: flex
+        justify-content: space-evenly
+        flex-direction: row
+        align-items: baseline
+        text-align: center
+
+        .user
+            span
+                color: $turquoise
+                font-style: italic
+
+    .message-body
+        text-align: center
+        padding: 2em
+
+    .message-answer-wrapper
+        padding: 0 .8em
+
+        .message-answer-body
+            background-color: $turquoise
+            border: 2px solid $cadetGray
+            border-radius: 15px
+            padding: .8em
+
+            .message-answer-title
+                font-style: italic
+                margin-bottom: 10px
+                color: $richBlack
+
+            small
+                font-style: italic
+                color: $richBlack
+                text-align: right
+
+    .message-footer
+        display: flex
+        flex-direction: row
+        justify-content: space-evenly
+        font-size: 12px
+        font-style: italic
+        text-align: center
+
+        .event-name
+            color: $turquoise
+            font-weight: bold

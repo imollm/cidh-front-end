@@ -2,11 +2,6 @@
   <h1 *ngIf="role" class="text-center mb-5 h4">Panell {{ role }}</h1>
   <div class="container">
     <div class="row home-content-wrapper">
-      <div *ngIf="me && me.firstName && me.lastName">
-        <h2 class="text-center h4 p-5">
-          Benvingut {{ me.firstName + ' ' + me.lastName }}
-        </h2>
-      </div>
       <div [ngSwitch]="role">
         <div *ngSwitchCase="'USER'">
           <div class="col-sm-8 offset-sm-2">
@@ -34,7 +29,15 @@
           <div class="col-sm-8 offset-sm-2">
             <app-dashboard-table
               [toShow]="adminTableEventsManaged"
-              [actionButtons]="actionButtons"
+              [actionButtons]="{
+                active: true,
+                resource: '/event/dashboard/event',
+                actions: {
+                  view: true,
+                  edit: false,
+                  delete: false
+                }
+              }"
               class="mb-5"
             ></app-dashboard-table>
             <app-dashboard-table

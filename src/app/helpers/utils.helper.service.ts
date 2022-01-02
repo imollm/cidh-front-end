@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import jwt_decode from "jwt-decode"
+import { IEvent } from '../event/models/event.model';
 
 
 export interface ValidationResult {
@@ -31,13 +32,14 @@ export class UtilsService {
   static getResourceIdFromURI(uri: string): string {
     let id: string | undefined;
 
-    if (uri.includes('edit') || uri.includes('view') || uri.includes('delete') || uri.includes('access')) {
-      id = uri.split('/').slice(-1)[0];
-      if (id.includes('#')) {
-        id = uri.split('/').slice(-2)[0];
+    if (uri.includes('edit') || uri.includes('view') || uri.includes('delete') || uri.includes('access') || uri.includes('event-detail')) {
+      if (uri.includes('#')) {
+        id = uri.split('#')[0].split('/').slice(-1)[0]
+      } else {
+        id = uri.split('/').slice(-1)[0];
       }
     }
-
+    
     return id;
   }
 
@@ -56,8 +58,11 @@ export class UtilsService {
   }
 
   static getRoleFromAccessToken(): string {
-    const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
-    return jwt['authorities'];
+    if (sessionStorage.getItem("ACCESS_TOKEN")) {
+      const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
+      return jwt['authorities'];
+    }
+    return null;
   }
 
   static humanitizeEpochDate(epochDate: any): any {

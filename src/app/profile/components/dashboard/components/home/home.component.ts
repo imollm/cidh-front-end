@@ -20,7 +20,7 @@ export class HomeComponent {
   role: string;
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
-    active: false,
+    active: false
   } as IActionButtons;
 
   // User tables

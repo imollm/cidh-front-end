@@ -12,7 +12,7 @@
             <th *ngFor="let colName of dataTable.colsName" class="text-center">
               {{ colName.text }}
             </th>
-            <th *ngIf="actionButtons.active">
+            <th *ngIf="actionButtons.active" class="text-center">
               Accions
             </th>
           </tr>
@@ -32,12 +32,38 @@
           <tbody>
             <tr *ngFor="let element of dataTable.data">
               <td *ngFor="let row of dataTable.colsName" class="text-center">
-                <div *ngIf="row.colName==='createdAt'||row.colName==='startDate'||row.colName==='endDate'; else noDate">
+                <div [ngSwitch]="row.colName">
+                  <div *ngSwitchCase="'createdAt'">
+                    {{ element[row.colName] | formatDate }}
+                  </div>
+                  <div *ngSwitchCase="'startDate'">
+                    {{ element[row.colName] | formatDate }}
+                  </div>
+                  <div *ngSwitchCase="'endDate'">
+                    {{ element[row.colName] | formatDate }}
+                  </div>
+                  <div *ngSwitchCase="'rating'">
+                    {{ element[row.colName] | rating }}
+                  </div>
+                  <div *ngSwitchCase="'ratingCount'">
+                    {{ element[row.colName] | ratingCount }}
+                  </div>
+                  <div *ngSwitchDefault>
+                    {{ element[row.colName] }}
+                  </div>
+                </div>
+                <!-- <div *ngIf="row.colName==='createdAt'||row.colName==='startDate'||row.colName==='endDate'">
                   {{ element[row.colName] | formatDate }}
                 </div>
-                <ng-template #noDate>
-                  {{ element[row.colName] }}
-                </ng-template>
+                <div *ngIf="row.colName==='rating'">
+                  {{ element[row.colName] | rating }}
+                </div>
+                <div *ngIf="row.colName==='ratingCount'">
+                  {{ element[row.colName] | ratingCount }}
+                </div> -->
+                <div>
+                  
+                </div>
               </td>
               <td *ngIf="actionButtons && actionButtons.active">
                 <div class="d-flex flex-row justify-content-around">

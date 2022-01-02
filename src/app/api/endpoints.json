@@ -189,6 +189,16 @@
         "uri": "/users/me/favorite-events",
         "method": "GET"
       }
+    },
+    "forum": {
+      "post": {
+        "uri": "/events/%s/forum/post-message",
+        "method": "POST"
+      },
+      "get": {
+        "uri": "/events/%s/forum",
+        "method": "GET"
+      }
     }
   }
 }

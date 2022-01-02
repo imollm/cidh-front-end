@@ -1,0 +1,32 @@
+<div class="message-wrapper" *ngIf="message.parentMessageId===null">
+    <div class="message message-title">
+        <div class="user">
+            <span>Usuari:</span> {{ message.authorFirstName }}
+        </div>
+        <div *ngIf="canBeAnswered()">
+            <button type="button" class="btn btn-sm btn-danger" (click)="answerQuestion()">
+                Respon
+            </button>
+        </div>
+    </div>
+    <div class="message message-body">
+        {{ message.message }}
+    </div>
+    <div class="message message-answer-wrapper">
+        <div class="message-answer-body" *ngIf="answer">
+            <div class="message-answer-title">
+                Resposta:
+            </div>
+            <p>{{ answer.message }}</p>
+            <small>{{ answer.createdAt | formatDate }}</small>
+        </div>
+    </div>
+    <div class="message message-footer">
+        <div class="text-center">
+            {{ message.createdAt | formatDate }}
+        </div>
+        <div class="text-center event-name">
+            {{ eventName || message.eventName}}
+        </div>
+    </div>
+</div>

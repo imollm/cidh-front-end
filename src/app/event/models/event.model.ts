@@ -17,4 +17,5 @@ export interface IEvent {
     eventUrl: string;
     isFavorite?: boolean;
     isUserSubscribed?: boolean;
+    ratingAvg: number;
 }

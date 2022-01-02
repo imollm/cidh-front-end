@@ -4,4 +4,5 @@ export interface EventSearcher {
   label?: string[];
   category?: string[];
   events?: IEvent[];
+  redirect?: boolean;
 }

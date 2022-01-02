@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <div class="video-wrapper ratio ratio-16x9">
         <iframe *ngIf="event && event.eventUrl" width="560" height="315" [src]="event.eventUrl | safeUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <button class="btn" [routerLink]="['/profile/dashboard/event/detail', event.id]">
+        <button class="btn" [routerLink]="['/event/dashboard/event/view', event.id]">
             <fa-icon [icon]="faBackToDetail"></fa-icon>
             Torna al detall
         </button>
