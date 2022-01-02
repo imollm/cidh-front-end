@@ -58,8 +58,11 @@ export class UtilsService {
   }
 
   static getRoleFromAccessToken(): string {
-    const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
-    return jwt['authorities'];
+    if (sessionStorage.getItem("ACCESS_TOKEN")) {
+      const jwt: string = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
+      return jwt['authorities'];
+    }
+    return null;
   }
 
   static humanitizeEpochDate(epochDate: any): any {

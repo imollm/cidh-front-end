@@ -38,8 +38,6 @@ export class AccessToEventComponent implements OnInit {
         });
       } else {
         this.event = res;
-        console.log(eventId);
-        console.log(this.event);
       }
     }).catch(err => {
       if (err) {

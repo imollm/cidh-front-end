@@ -1,6 +1,6 @@
 <h1 *ngIf="isDashboard() && !isEventDetail()" class="forum-title">Fòrum</h1>
 
-<section class="forum" #forumContainer>
+<section class="forum">
   <div class="container">
     <div class="row">
       <div *ngIf="forum && forum.messages && forum.messages.length > 0; then withMsg else withOutMsg"></div>
@@ -20,10 +20,8 @@
         <div class="forum-container col-12">
           <div *ngFor="let message of forum.messages | paginate: { itemsPerPage: 6, currentPage: actualPage }"
             class="question-container">
-            {{ forum.eventName }}
             <app-message
               [message]="message"
-              [eventName]="eventName"
             ></app-message>
           </div>
         </div>

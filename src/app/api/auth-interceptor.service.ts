@@ -22,7 +22,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     let request: HttpRequest<any> = req;
     const token: string = this.authService.getAccessToken();
 
-    if (token && !this.router.url.includes('login') && !this.router.url.includes('refresh-token')) {
+    if (token &&
+      !this.router.url.includes('login') &&
+      !this.router.url.includes('refresh-token')) {
       request = req.clone({
         setHeaders: {
           Authorization: `Bearer ${ token }`,

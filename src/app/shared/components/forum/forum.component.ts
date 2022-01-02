@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IEvent } from 'src/app/event/models/event.model';
 import { EventService } from 'src/app/event/services/event.service';
+import { ModalResultService } from 'src/app/helpers/modal.service';
 import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IForum } from 'src/app/media/models/forum.model';
 import { IMessage } from 'src/app/media/models/message.model';
@@ -21,22 +22,16 @@ export class ForumComponent implements OnInit {
   actualPage: number = 1;
   forum: IForum = {} as IForum;
   events: IEvent[];
-  eventName: string;
-
-  @ViewChild('forumContainer') forumContainer: ElementRef;
 
   constructor(
     private forumService: ForumService,
     private eventService: EventService,
     private router: Router,
-    private er: ElementRef,
-    private authService: AuthService
-  ) {
-    this.forumContainer = this.er;
-  }
+    private authService: AuthService,
+    private modalResultService: ModalResultService
+  ) { }
 
   async ngOnInit(): Promise<void> {
-    this.eventId = UtilsService.getResourceIdFromURI(this.router.url);
     this.borderStyle();
     await this.getEvents();
     await this.getForum();
@@ -50,6 +45,7 @@ export class ForumComponent implements OnInit {
     const site = this.router.url;
 
     if (site.includes('event/view')) {
+      this.eventId = UtilsService.getResourceIdFromURI(this.router.url);
       this.getEventForum();
     } else if (site.includes('media/forum') || site.includes('media/dashboard/forum')) {
       this.getAllForums();
@@ -66,10 +62,10 @@ export class ForumComponent implements OnInit {
 
     this.events.forEach(async event => {
       currentForum = await this.forumService.getForum(event.id);
-      this.eventName = currentForum.eventName;
       
       if (currentForum.messages.length > 0) {
         currentForum.messages.forEach(msg => {
+          msg.eventName = currentForum.eventName;
           this.forum.messages.push(msg);
         });
       }
@@ -80,11 +76,7 @@ export class ForumComponent implements OnInit {
     Swal.fire({
       title: 'Selecciona un event',
       input: 'select',
-      inputOptions: {
-        event1: 'Event 1',
-        event2: 'Event 2',
-        event3: 'Event 3',
-      },
+      inputOptions: this.setSelectOfEvents(),
       inputPlaceholder: 'Selecciona un event',
       showCancelButton: true,
       confirmButtonColor: '#00adb5',
@@ -94,7 +86,6 @@ export class ForumComponent implements OnInit {
           return 'Necessites escollir un event';
         } else {
           this.eventId = eventId;
-          console.log(this.eventId);
           return null;
         }
       }
@@ -114,20 +105,38 @@ export class ForumComponent implements OnInit {
             return null;
           }
         }
-      })
-    }).then(() => {
-      //TODO: Make a addQuestion HTTP Request if user is not ADMIN or SUPERADMIN
+      }).then(() => {
+        if (this.eventId && this.message && this.canThisUserMakeAQuestion()) {
+          let newMessage: IMessage = {
+            message: this.message,
+            createdAt: UtilsService.convertDateToEpoch(UtilsService.getFullDate(new Date())),
+            parentMessageId: null
+          };
+  
+          this.forumService.askQuestion(this.eventId, newMessage).then(() => {
+            this.modalResultService.successPostComment();
+          }).catch(err => {
+            if (err) {
+              this.modalResultService.errorResultModal();
+            }
+          })
+        }
+      }).then(() => {
+        this.ngOnInit();
+      });
     });
   }
 
   canThisUserMakeAQuestion(): boolean {
     const role = UtilsService.getRoleFromAccessToken();
-    return role !== 'ADMIN' && role !== 'SUPERADMIN';
+    return role === null || (role !== 'ADMIN' && role !== 'SUPERADMIN');
   }
 
-  borderStyle(): void {
-    if (this.router.url.includes('event-detail')) {
-      this.forumContainer.nativeElement.style.borderRadius = '25px';
+  private borderStyle(): void {
+    const url: string = this.router.url;
+
+    if (url.includes('media/dashboard/forum') || url.includes('event/view')) {
+      (document.querySelector('section.forum') as HTMLElement).style.borderRadius = '25px';
     }
   }
 
@@ -137,6 +146,24 @@ export class ForumComponent implements OnInit {
 
   isEventDetail(): boolean {
     return this.router.url.includes('event/view');
+  }
+
+  private setSelectOfEvents(): object {
+    let eventsObj = {};
+
+    if (this.isEventDetail()) {
+      this.events.forEach(event => {
+        if (event.id === this.eventId) {
+          eventsObj[event.id] = event.name;
+        }
+      })
+    } else {
+      this.events.forEach(event => {
+        eventsObj[event.id] = event.name;
+      })
+    }
+
+    return eventsObj;
   }
 
 }

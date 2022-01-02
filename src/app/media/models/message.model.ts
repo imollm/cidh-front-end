@@ -5,4 +5,5 @@ export interface IMessage {
     createdAt: number;
     parentMessageId: string | null;
     message: string
+    eventName?: string;
 }

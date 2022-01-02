@@ -49,13 +49,6 @@
           Administradors
         </span>
       </li>
-      <li *ngIf="permissions && permissions.administration && permissions.administration.manageLabels"
-        class="sidebar-menu-content-items-item" routerLinkActive="active-link">
-        <fa-icon class="sidebar-menu-content-items-item-icon" [icon]="faLabels"></fa-icon>
-        <span #sideMenuItemTitle class="sidebar-menu-content-items-item-title">
-          Etiquetes
-        </span>
-      </li>
       <li *ngIf="permissions && permissions.profile && permissions.profile.manageEvents"
         class="sidebar-menu-content-items-item" [routerLink]="['/profile/dashboard/events/list']"
         routerLinkActive="active-link">

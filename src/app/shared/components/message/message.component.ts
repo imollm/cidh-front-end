@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IMessage } from 'src/app/media/models/message.model';
 
 @Component({
@@ -9,7 +9,6 @@ import { IMessage } from 'src/app/media/models/message.model';
 export class MessageComponent {
 
   @Input() message: IMessage;
-  @Input() eventName: string;
 
   constructor() { }
 

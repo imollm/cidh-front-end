@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 import { IEvent } from 'src/app/event/models/event.model';
 import { IRating } from 'src/app/event/models/rating.model';
 import { EventService } from 'src/app/event/services/event.service';
@@ -13,6 +14,8 @@ import { CommentService } from 'src/app/media/services/comment.service';
 import { FavoriteService } from 'src/app/media/services/favorite.service';
 import { ForumService } from 'src/app/media/services/forum.service';
 import { AuthService } from 'src/app/profile/services/auth/auth.service';
+import { EventSearcher } from 'src/app/shared/models/event-searcher.model';
+import { EventSearcherService } from 'src/app/shared/services/event-searcher.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +23,7 @@ import Swal from 'sweetalert2';
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.sass']
 })
-export class EventDetailComponent implements OnInit, AfterViewInit {
+export class EventDetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   parent: string;
   event: IEvent = {} as IEvent;
@@ -28,6 +31,8 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
   faFavorite = faHeart;
   comments: IComment[];
   today: Date;
+  searchParams: EventSearcher;
+  subscription: Subscription;
 
   @ViewChild('eventDetailContainer') eventDetailContainer: any;
 
@@ -39,13 +44,16 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     private commentService: CommentService,
     private modalResultService: ModalResultService,
     private router: Router,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private messageService: EventSearcherService
   ) {
     this.today = new Date();
   }
 
   ngOnInit(): void {
     this.getEventById(this.route.snapshot.params.id);
+    this.subscription = this.messageService.currentMessage.subscribe(message => this.searchParams = message);
+    this.messageService.deleteMessage();
   }
 
   ngAfterViewInit(): void {
@@ -250,5 +258,31 @@ export class EventDetailComponent implements OnInit, AfterViewInit {
     const today = UtilsService.getFullDate(this.today);
 
     return this.event.endDate && eventEndDate < today;
+  }
+
+  goToCategoryResult(event: Event): void {
+    const categoryName = (event.target as HTMLElement).attributes[2].value;
+    this.searchParams.category = [];
+    this.searchParams.category.push(categoryName);
+    this.searchParams.redirect = true;
+
+    this.router.navigate(['event/dashboard/event/search']).then(() => {
+      this.messageService.changeMessage(this.searchParams);
+    });
+  }
+
+  goToLabelResults(event: Event): void {
+    const labelName = (event.target as HTMLElement).attributes[2].value;
+    this.searchParams.label = [];
+    this.searchParams.label.push(labelName);
+    this.searchParams.redirect = true;
+
+    this.router.navigate(['event/dashboard/event/search']).then(() => {
+      this.messageService.changeMessage(this.searchParams);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -26,7 +26,7 @@
                     <h1 class="event-title h2">{{ event.name }}</h1>
                     <fa-icon (click)="addToMyFavorites()" [icon]="faFavorite"
                         [ngClass]="{ 'isFavorite': event.isFavorite, 'isNotFavorite': !event.isFavorite }" *ngIf="isUserRole()"></fa-icon>
-                    <div *ngIf="event.category" class="h2">
+                    <div *ngIf="event.category" class="h2 btn btn-dark" (click)="goToCategoryResult($event)" id="{{event.category.name}}">
                         {{ event.category.name | titlecase }}
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 </div>
                 <h4 *ngIf="event.labels && event.labels.length > 0" class="mt-5">Etiquetes</h4>
                 <div *ngIf="event.labels && event.labels.length > 0" class="labels-wrapper">
-                    <div *ngFor="let label of event.labels" class="labels-wrapper-label">
+                    <div *ngFor="let label of event.labels" class="labels-wrapper-label" (click)="goToLabelResults($event)" id="{{label.name}}">
                         {{ label.name }}
                     </div>
                 </div>
