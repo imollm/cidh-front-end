@@ -48,14 +48,12 @@ export class MessageComponent implements OnInit {
 
       const response = await this.eventService.findEvents(searchParams);
       this.event = response[0];
-      console.log(this.event);
     }
   }
 
   private async getForum(): Promise<void> {
     if (this.event) {
       this.forum = await this.forumService.getForum(this.event.id);
-      console.log(this.forum);
     }
   }
 
@@ -64,7 +62,6 @@ export class MessageComponent implements OnInit {
       this.forum.messages.forEach(msg => {
         if (this.message.id === msg.parentMessageId) {
           this.answer = msg;
-          console.log(msg)
         }
       });
     }
@@ -83,7 +80,6 @@ export class MessageComponent implements OnInit {
   }
 
   answerQuestion(): void {
-    console.log(this.message.id)
     Swal.fire({
       title: 'Escriu una resposta',
       input: 'textarea',
