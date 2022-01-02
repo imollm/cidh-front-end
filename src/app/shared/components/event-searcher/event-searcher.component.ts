@@ -54,7 +54,6 @@ export class EventSearcherComponent implements OnInit, AfterViewInit, OnDestroy 
     this.searchParams.redirect ? this.onSubmit() : '';
     this.getLabels();
     this.getCategories();
-    console.log(this.searchParams);
   }
 
   ngAfterViewInit(): void {
@@ -94,7 +93,7 @@ export class EventSearcherComponent implements OnInit, AfterViewInit, OnDestroy 
       this.searchParams.events = res;
     }).then(() => {
       this.form.reset();
-      console.log(this.searchParams)
+      this.searchParams.redirect = false;
     }).catch(err => console.log(err));
   }
 

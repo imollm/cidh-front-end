@@ -5,15 +5,21 @@
     <div class="message message-body">
         {{ message.message }}
     </div>
-    <div class="message message-answer" *ngIf="message.parentMessageId">
-        {{ message.parentMessageId }}
+    <div class="message message-answer-wrapper" *ngIf="answer">
+        <div class="message-answer-body">
+            <div class="message-answer-title">
+                Resposta:
+            </div>
+            <p>{{ answer.message }}</p>
+            <small>{{ answer.createdAt | formatDate }}</small>
+        </div>
     </div>
     <div class="message message-footer">
         <div class="text-center">
             {{ message.createdAt | formatDate }}
         </div>
         <div class="text-center event-name">
-            {{ message.eventName }}
+            {{ eventName || message.eventName}}
         </div>
     </div>
 </div>

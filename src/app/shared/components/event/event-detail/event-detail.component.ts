@@ -12,7 +12,6 @@ import { UtilsService } from 'src/app/helpers/utils.helper.service';
 import { IComment } from 'src/app/media/models/comment.model';
 import { CommentService } from 'src/app/media/services/comment.service';
 import { FavoriteService } from 'src/app/media/services/favorite.service';
-import { ForumService } from 'src/app/media/services/forum.service';
 import { AuthService } from 'src/app/profile/services/auth/auth.service';
 import { EventSearcher } from 'src/app/shared/models/event-searcher.model';
 import { EventSearcherService } from 'src/app/shared/services/event-searcher.service';
@@ -262,24 +261,30 @@ export class EventDetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   goToCategoryResult(event: Event): void {
     const categoryName = (event.target as HTMLElement).attributes[2].value;
+    const redirectUrl: string = this.isLogged() ? 'event/dashboard/event/search' : '/search';
+
     this.searchParams.category = [];
     this.searchParams.category.push(categoryName);
     this.searchParams.redirect = true;
+    console.log(this.searchParams);
 
-    this.router.navigate(['event/dashboard/event/search']).then(() => {
-      this.messageService.changeMessage(this.searchParams);
-    });
+    this.messageService.changeMessage(this.searchParams);
+
+    this.router.navigate([redirectUrl]);
   }
 
   goToLabelResults(event: Event): void {
     const labelName = (event.target as HTMLElement).attributes[2].value;
+    const redirectUrl: string = this.isLogged() ? 'event/dashboard/event/search' : '/search';
+
     this.searchParams.label = [];
     this.searchParams.label.push(labelName);
     this.searchParams.redirect = true;
+    console.log(this.searchParams);
 
-    this.router.navigate(['event/dashboard/event/search']).then(() => {
-      this.messageService.changeMessage(this.searchParams);
-    });
+    this.messageService.changeMessage(this.searchParams);
+
+    this.router.navigate([redirectUrl]);
   }
 
   ngOnDestroy(): void {

@@ -19,6 +19,7 @@ export class ForumComponent implements OnInit {
 
   private eventId: string;
   private message: string;
+  eventName: string;
   actualPage: number = 1;
   forum: IForum = {} as IForum;
   events: IEvent[];
@@ -36,7 +37,7 @@ export class ForumComponent implements OnInit {
     await this.getEvents();
     await this.getForum();
   }
-  
+
   private async getEvents(): Promise<void> {
     this.events = await this.eventService.getAllEvents();
   }
@@ -44,7 +45,7 @@ export class ForumComponent implements OnInit {
   private getForum(): void {
     const site = this.router.url;
 
-    if (site.includes('event/view')) {
+    if (site.includes('event/view') || site.includes('event-detail')) {
       this.eventId = UtilsService.getResourceIdFromURI(this.router.url);
       this.getEventForum();
     } else if (site.includes('media/forum') || site.includes('media/dashboard/forum')) {
@@ -54,6 +55,7 @@ export class ForumComponent implements OnInit {
 
   private async getEventForum(): Promise<void> {
     this.forum = await this.forumService.getForum(this.eventId);
+    this.eventName = this.forum.eventName;
   }
 
   private async getAllForums(): Promise<void> {
@@ -62,7 +64,7 @@ export class ForumComponent implements OnInit {
 
     this.events.forEach(async event => {
       currentForum = await this.forumService.getForum(event.id);
-      
+
       if (currentForum.messages.length > 0) {
         currentForum.messages.forEach(msg => {
           msg.eventName = currentForum.eventName;
@@ -89,53 +91,57 @@ export class ForumComponent implements OnInit {
           return null;
         }
       }
-    }).then(() => {
-      Swal.fire({
-        title: 'Escriu el teu missatge',
-        input: 'textarea',
-        inputPlaceholder: 'Quin missatge es el teu...',
-        showCancelButton: true,
-        confirmButtonColor: '#00adb5',
-        cancelButtonColor: '#8ea8c3',
-        inputValidator: (message) => {
-          if (!message) {
-            return 'Necessites escriure un missatge vàlid!';
-          } else {
-            this.message = message;
-            return null;
-          }
-        }
-      }).then(() => {
-        if (this.eventId && this.message && this.canThisUserMakeAQuestion()) {
-          let newMessage: IMessage = {
-            message: this.message,
-            createdAt: UtilsService.convertDateToEpoch(UtilsService.getFullDate(new Date())),
-            parentMessageId: null
-          };
-  
-          this.forumService.askQuestion(this.eventId, newMessage).then(() => {
-            this.modalResultService.successPostComment();
-          }).catch(err => {
-            if (err) {
-              this.modalResultService.errorResultModal();
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Escriu el teu missatge',
+          input: 'textarea',
+          inputPlaceholder: 'Quin missatge es el teu...',
+          showCancelButton: true,
+          confirmButtonColor: '#00adb5',
+          cancelButtonColor: '#8ea8c3',
+          inputValidator: (message) => {
+            if (!message) {
+              return 'Necessites escriure un missatge vàlid!';
+            } else {
+              this.message = message;
+              return null;
             }
-          })
-        }
-      }).then(() => {
-        this.ngOnInit();
-      });
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (this.eventId && this.message && this.canThisUserMakeAQuestion()) {
+              let newMessage: IMessage = {
+                message: this.message,
+                createdAt: UtilsService.convertDateToEpoch(UtilsService.getFullDate(new Date())),
+                parentMessageId: null
+              };
+
+              this.forumService.askQuestion(this.eventId, newMessage).then(() => {
+                this.modalResultService.successPostComment();
+              })
+              .then(() => this.ngOnInit())
+              .catch(err => {
+                if (err) {
+                  this.modalResultService.errorResultModal();
+                }
+              })
+            }
+          }
+        });
+      }
     });
   }
 
   canThisUserMakeAQuestion(): boolean {
     const role = UtilsService.getRoleFromAccessToken();
-    return role === null || (role !== 'ADMIN' && role !== 'SUPERADMIN');
+    return role === null || role === 'USER';
   }
 
   private borderStyle(): void {
     const url: string = this.router.url;
 
-    if (url.includes('media/dashboard/forum') || url.includes('event/view')) {
+    if (url.includes('media/dashboard/forum') || url.includes('event/view') || url.includes('/event-detail/')) {
       (document.querySelector('section.forum') as HTMLElement).style.borderRadius = '25px';
     }
   }
@@ -145,7 +151,8 @@ export class ForumComponent implements OnInit {
   }
 
   isEventDetail(): boolean {
-    return this.router.url.includes('event/view');
+    const url: string = this.router.url;
+    return url.includes('event/view') || url.includes('event-detail');
   }
 
   private setSelectOfEvents(): object {

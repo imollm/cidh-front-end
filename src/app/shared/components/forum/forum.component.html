@@ -10,7 +10,7 @@
             <h2 class="h4 text-white py-5">
               Darrers missatges
             </h2>
-            <div class="forum-header-add-btn" *ngIf="canThisUserMakeAQuestion()">
+            <div class="forum-header btn add-btn" *ngIf="canThisUserMakeAQuestion()">
               <button class="forum-header-add btn" (click)="addQuestion()">
                 Fer pregunta
               </button>
@@ -22,6 +22,7 @@
             class="question-container">
             <app-message
               [message]="message"
+              [eventName]="eventName"
             ></app-message>
           </div>
         </div>
@@ -31,8 +32,13 @@
         </div>
       </ng-template>
       <ng-template #withOutMsg>
-        <div class="d-flex align-items-center justify-content-center">
-          <h3 class="text-white text-center">Encara no hi ha cap missatge</h3>
+        <div class="col-12">
+          <div class="d-flex justify-content-around align-items-baseline" *ngIf="canThisUserMakeAQuestion()">
+            <h3 class="text-white text-left">Encara no hi ha cap missatge</h3>
+            <button class="btn add-btn" (click)="addQuestion()">
+              Fer pregunta
+            </button>
+          </div>
         </div>
       </ng-template>
     </div>
