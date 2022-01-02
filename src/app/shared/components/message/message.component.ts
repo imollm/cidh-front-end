@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IMessage } from 'src/app/media/models/message.model';
 
 @Component({
@@ -6,13 +6,11 @@ import { IMessage } from 'src/app/media/models/message.model';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.sass']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent {
 
   @Input() message: IMessage;
+  @Input() eventName: string;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

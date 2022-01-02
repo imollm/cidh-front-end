@@ -6,24 +6,31 @@
     border: 2px solid $white
     border-radius: 15px
     color: $white
-    padding: 1em
     width: 100%
 
     .message
-        padding: .3em 0
+        padding: 1em 0
 
     .message-title
         text-align: center
-        margin-bottom: 10px
 
         span
+            color: $turquoise
             font-style: italic
 
     .message-body
         text-align: justify
+        padding: 2em
 
     .message-answer
     .message-footer
+        display: flex
+        flex-direction: row
+        justify-content: space-evenly
         font-size: 12px
         font-style: italic
         text-align: center
+
+        .event-name
+            color: $turquoise
+            font-weight: bold

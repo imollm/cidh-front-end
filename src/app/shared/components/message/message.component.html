@@ -9,6 +9,11 @@
         {{ message.parentMessageId }}
     </div>
     <div class="message message-footer">
-        {{ message.createdAt | formatDate }}
+        <div class="text-center">
+            {{ message.createdAt | formatDate }}
+        </div>
+        <div class="text-center event-name">
+            {{ eventName }}
+        </div>
     </div>
 </div>
