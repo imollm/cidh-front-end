@@ -29,7 +29,15 @@
           <div class="col-sm-8 offset-sm-2">
             <app-dashboard-table
               [toShow]="adminTableEventsManaged"
-              [actionButtons]="actionButtons"
+              [actionButtons]="{
+                active: true,
+                resource: '/event/dashboard/event',
+                actions: {
+                  view: true,
+                  edit: false,
+                  delete: false
+                }
+              }"
               class="mb-5"
             ></app-dashboard-table>
             <app-dashboard-table

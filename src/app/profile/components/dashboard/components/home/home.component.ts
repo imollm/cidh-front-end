@@ -20,13 +20,7 @@ export class HomeComponent {
   role: string;
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
-    active: true,
-    resource: '/event/dashboard/event',
-    actions: {
-      view: true,
-      edit: false,
-      delete: false
-    }
+    active: false
   } as IActionButtons;
 
   // User tables
