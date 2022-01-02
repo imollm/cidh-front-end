@@ -54,8 +54,16 @@ export class ForumComponent implements OnInit {
   }
 
   private async getEventForum(): Promise<void> {
-    this.forum = await this.forumService.getForum(this.eventId);
-    this.eventName = this.forum.eventName;
+    const eventForum = await this.forumService.getForum(this.eventId);
+    this.forum.messages = [];
+
+    eventForum.messages.forEach(message => {
+      if (message.parentMessageId === null) {
+        let msg = message;
+        msg.eventName = eventForum.eventName;
+        this.forum.messages.push(msg);
+      }
+    });
   }
 
   private async getAllForums(): Promise<void> {
