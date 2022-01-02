@@ -12,11 +12,16 @@
         padding: 1em 0
 
     .message-title
+        display: flex
+        justify-content: space-evenly
+        flex-direction: row
+        align-items: baseline
         text-align: center
 
-        span
-            color: $turquoise
-            font-style: italic
+        .user
+            span
+                color: $turquoise
+                font-style: italic
 
     .message-body
         text-align: center
@@ -39,6 +44,7 @@
             small
                 font-style: italic
                 color: $richBlack
+                text-align: right
 
     .message-footer
         display: flex

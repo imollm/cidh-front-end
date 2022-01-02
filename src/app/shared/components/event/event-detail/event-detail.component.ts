@@ -266,7 +266,6 @@ export class EventDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchParams.category = [];
     this.searchParams.category.push(categoryName);
     this.searchParams.redirect = true;
-    console.log(this.searchParams);
 
     this.messageService.changeMessage(this.searchParams);
 
@@ -280,7 +279,6 @@ export class EventDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchParams.label = [];
     this.searchParams.label.push(labelName);
     this.searchParams.redirect = true;
-    console.log(this.searchParams);
 
     this.messageService.changeMessage(this.searchParams);
 

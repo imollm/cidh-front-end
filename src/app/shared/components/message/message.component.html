@@ -1,12 +1,19 @@
-<div class="message-wrapper">
+<div class="message-wrapper" *ngIf="message.parentMessageId===null">
     <div class="message message-title">
-        <span>Usuari:</span> {{ message.authorFirstName }}
+        <div class="user">
+            <span>Usuari:</span> {{ message.authorFirstName }}
+        </div>
+        <div *ngIf="canBeAnswered()">
+            <button type="button" class="btn btn-sm btn-danger" (click)="answerQuestion()">
+                Respon
+            </button>
+        </div>
     </div>
     <div class="message message-body">
         {{ message.message }}
     </div>
-    <div class="message message-answer-wrapper" *ngIf="answer">
-        <div class="message-answer-body">
+    <div class="message message-answer-wrapper">
+        <div class="message-answer-body" *ngIf="answer">
             <div class="message-answer-title">
                 Resposta:
             </div>

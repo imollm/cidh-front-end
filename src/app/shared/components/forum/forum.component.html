@@ -20,10 +20,13 @@
         <div class="forum-container col-12">
           <div *ngFor="let message of forum.messages | paginate: { itemsPerPage: 6, currentPage: actualPage }"
             class="question-container">
-            <app-message
-              [message]="message"
-              [eventName]="eventName"
-            ></app-message>
+            <div *ngIf="message && message.parentMessageId===null">
+              <app-message
+                [message]="message"
+                [eventName]="eventName"
+                (messageAnswered)="messageAnswered($event)"
+              ></app-message>
+            </div>
           </div>
         </div>
         <div class="paginator">

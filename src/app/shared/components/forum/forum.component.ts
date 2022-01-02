@@ -67,8 +67,10 @@ export class ForumComponent implements OnInit {
 
       if (currentForum.messages.length > 0) {
         currentForum.messages.forEach(msg => {
-          msg.eventName = currentForum.eventName;
-          this.forum.messages.push(msg);
+          if (msg.parentMessageId === null) {
+            msg.eventName = currentForum.eventName;
+            this.forum.messages.push(msg);
+          }
         });
       }
     });
@@ -171,6 +173,12 @@ export class ForumComponent implements OnInit {
     }
 
     return eventsObj;
+  }
+
+  messageAnswered(messageResponded: boolean): void {
+    if (messageResponded) {
+      this.ngOnInit();
+    }
   }
 
 }
