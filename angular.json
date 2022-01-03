@@ -71,6 +71,14 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -83,6 +91,9 @@
             },
             "development": {
               "browserTarget": "cidh-front-end:build:development"
+            },
+            "staging": {
+              "browserTarget": "cidh-front-end:build:staging"
             }
           },
           "defaultConfiguration": "development"
