@@ -1,5 +1,5 @@
 <h1 *ngIf="isLogged()" class="text-center mt-4 mb-4">
-    Detalls de l'event
+    Detalls de l'acte
 </h1>
 
 <section class="event-detail" #eventDetailContainer>
@@ -61,7 +61,7 @@
                     ></app-event-rating>
                 </div>
                 <div class="access-wrapper" *ngIf="isLogged() && isTheDayOfEvent() && event.isUserSubscribed && isUserRole()">
-                    <h4 class="text-center mb-5">Accedeix a l'event</h4>
+                    <h4 class="text-center mb-5">Accedeix a l'acte</h4>
                     <div class="access">
                         <button type="button" class="btn btn-warning" [routerLink]="['/event/dashboard/event/access', event.id]">
                             Accedir
