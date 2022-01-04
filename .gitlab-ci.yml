@@ -1,7 +1,8 @@
 stages:
   - install
-  - test
   - build
+  - backend
+  - test
   - deploy
 
 variables:
@@ -38,11 +39,11 @@ lint:
       - main
       - merge_request
 
-restore:
+backend:
   variables:
     MASTER_SSH_KEY: $MASTER_SSH_KEY
   image: kroniak/ssh-client
-  stage: test
+  stage: backend
   environment:
     name: production
     url: https://culture.indahou.se
@@ -52,7 +53,7 @@ restore:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh -T $MASTER_HOST '/bin/bash chmod 700 -R /root/dev/pdp/cidh-back-end'
+    - ssh -T $MASTER_HOST 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh -T $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
 
 e2e:
