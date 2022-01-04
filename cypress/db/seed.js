@@ -1,8 +1,8 @@
-module.exports = () => {
+module.exports = async () => {
     const { Client } = require('pg')
 
     const client = new Client({
-        user: 'root',
+        user: 'postgres',
         host: '82.223.111.102',
         database: 'postgres',
         password: 'Pass2021!',
@@ -187,7 +187,7 @@ module.exports = () => {
     await client.connect()
 
     Object.keys(queries).every(resource => {
-        resource.forEach(query => {
+        queries[resource].forEach(query => {
             client
                 .query(query)
                 .then(res => console.log(res.rows[0]))
