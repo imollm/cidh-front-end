@@ -73,7 +73,7 @@ build:
   only:
     refs:
       - main
-      - develop
+      - merge_request
 
 deploy:
   variables:
@@ -95,4 +95,4 @@ deploy:
     - ssh $MASTER_HOST 'docker-compose -f /var/www/html/conf/docker-compose.yml up -d'
   only:
     - main
-    - develop
+    - merge_request
