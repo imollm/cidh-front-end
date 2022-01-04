@@ -36,7 +36,7 @@ services:
     environment:
       - VIRTUAL_HOST=culture.indahou.se,www.culture.indahou.se
       - LETSENCRYPT_HOST=culture.indahou.se,www.culture.indahou.se
-      - LETSENCRYPT_EMAIL=pablo@pablokbs.com
+      - LETSENCRYPT_EMAIL=igonzalezgut@uoc.edu
     depends_on:
       - nginx-proxy
       - letsencrypt

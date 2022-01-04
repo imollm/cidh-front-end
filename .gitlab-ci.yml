@@ -38,37 +38,42 @@ cache:
 #       - main
 #       - merge_request
 
-# e2e:
-#   stage: test
-#   image: cypress/browsers:node14.15.0-chrome86-ff82
-#   script:
-#     - echo "Start e2e tests"
-#     - npm ci
-#     - npm run start:ci && npm run e2e
-#   artifacts:
-#     when: always
-#     paths:
-#       - "cypress/videos/**/*.mp4"
-#       - "cypress/screenshots/**/*.png"
-#     expire_in: 1 days
-#   only:
-#     refs:
-#       - main
-#       - merge_request
+e2e:
+  stage: test
+  image: cypress/browsers:node14.15.0-chrome86-ff82
+  script:
+    - echo "Start e2e tests"
+    - npm ci
+    - npm run start:ci && npm run e2e
+  artifacts:
+    when: always
+    paths:
+      - "cypress/videos/**/*.mp4"
+      - "cypress/screenshots/**/*.png"
+    expire_in: 1 days
+  only:
+    refs:
+      - main
+      - merge_request
 
 build:
   stage: build
   image: node:14.15-alpine3.13
   script:
     - echo -e "Start building"
-    - npm run build
-    - cp docker-compose.yml dist
+    - npm run build:ci
+    - mkdir conf
+    - cp docker-compose.yml conf
+    - cp nginx.conf conf
+    - cp Makefile conf
   cache:
     paths:
-      - dist/cidh-front-end
+      - dist/
+      - conf/
   only:
     refs:
       - main
+      - develop
 
 deploy:
   variables:
@@ -79,16 +84,15 @@ deploy:
     name: production
     url: https://culture.indahou.se
   script:
-    - echo "Start deploy"
-    - apk add --no-cache scp openssh
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh $MASTER_HOST docker-compose -f /var/www/html/dist/cidh-front-end/docker-compose.yml down
-    - ssh rm -rf /var/www/html/
-    - scp dist/cidh-front-end $MASTER_HOST:/var/www/html
-    - ssh $MASTER_HOST docker-compose -f /var/www/html/dist/cidh-front-end/docker-compose.yml up -d
+    - scp -r dist/ $MASTER_HOST:/var/www/html
+    - scp -r conf/ $MASTER_HOST:/var/www/html
+    - ssh $MASTER_HOST 'chmod 700 -R /var/www/html/conf'
+    - ssh $MASTER_HOST 'docker-compose -f /var/www/html/conf/docker-compose.yml up -d'
   only:
     - main
+    - develop
