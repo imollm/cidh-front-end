@@ -18,34 +18,34 @@ cache:
     - build
     - deploy
 
-# install:
-#   image: node:14.15.5-alpine3.13
-#   stage: install
-#   script:
-#     - npm ci
+install:
+  image: node:14.15.5-alpine3.13
+  stage: install
+  script:
+    - npm ci
 
-# lint:
-#   stage: test
-#   image: node:14.15-alpine3.13
-#   script:
-#     - echo "Lint project"
-#     - npm run lint
-#   cache:
-#     paths:
-#       - node_modules
-#   only:
-#     refs:
-#       - main
-#       - merge_request
+lint:
+  stage: test
+  image: node:14.15-alpine3.13
+  script:
+    - echo "Lint project"
+    - npm run lint
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - main
+      - merge_request
 
 e2e:
   stage: test
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
     - echo "Start e2e tests"
-    - npm ci
-    - npm run start:ci &
-    - npm run e2e
+    - npm run build:prod
+    - npm run cy:verify
+    - npm run e2e-run:ci
   artifacts:
     when: always
     paths:
