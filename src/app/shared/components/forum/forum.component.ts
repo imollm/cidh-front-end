@@ -13,10 +13,9 @@ import { ForumService } from '../../../media/services/forum.service';
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.sass']
+  styleUrls: ['./forum.component.sass'],
 })
 export class ForumComponent implements OnInit {
-
   private eventId: string;
   private message: string;
   eventName: string;
@@ -30,7 +29,7 @@ export class ForumComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private modalResultService: ModalResultService
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.borderStyle();
@@ -48,7 +47,10 @@ export class ForumComponent implements OnInit {
     if (site.includes('event/view') || site.includes('event-detail')) {
       this.eventId = UtilsService.getResourceIdFromURI(this.router.url);
       this.getEventForum();
-    } else if (site.includes('media/forum') || site.includes('media/dashboard/forum')) {
+    } else if (
+      site.includes('media/forum') ||
+      site.includes('media/dashboard/forum')
+    ) {
       this.getAllForums();
     }
   }
@@ -57,7 +59,7 @@ export class ForumComponent implements OnInit {
     const eventForum = await this.forumService.getForum(this.eventId);
     this.forum.messages = [];
 
-    eventForum.messages.forEach(message => {
+    eventForum.messages.forEach((message) => {
       if (message.parentMessageId === null) {
         let msg = message;
         msg.eventName = eventForum.eventName;
@@ -70,11 +72,11 @@ export class ForumComponent implements OnInit {
     let currentForum: IForum;
     this.forum.messages = [];
 
-    this.events.forEach(async event => {
+    this.events.forEach(async (event) => {
       currentForum = await this.forumService.getForum(event.id);
 
       if (currentForum.messages.length > 0) {
-        currentForum.messages.forEach(msg => {
+        currentForum.messages.forEach((msg) => {
           if (msg.parentMessageId === null) {
             msg.eventName = currentForum.eventName;
             this.forum.messages.push(msg);
@@ -86,21 +88,21 @@ export class ForumComponent implements OnInit {
 
   addQuestion(): void {
     Swal.fire({
-      title: 'Selecciona un event',
+      title: 'Selecciona un acte',
       input: 'select',
       inputOptions: this.setSelectOfEvents(),
-      inputPlaceholder: 'Selecciona un event',
+      inputPlaceholder: 'Selecciona un acte',
       showCancelButton: true,
       confirmButtonColor: '#00adb5',
       cancelButtonColor: '#8ea8c3',
       inputValidator: (eventId) => {
         if (!eventId) {
-          return 'Necessites escollir un event';
+          return 'Necessites escollir un acte';
         } else {
           this.eventId = eventId;
           return null;
         }
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
@@ -117,25 +119,33 @@ export class ForumComponent implements OnInit {
               this.message = message;
               return null;
             }
-          }
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-            if (this.eventId && this.message && this.canThisUserMakeAQuestion()) {
+            if (
+              this.eventId &&
+              this.message &&
+              this.canThisUserMakeAQuestion()
+            ) {
               let newMessage: IMessage = {
                 message: this.message,
-                createdAt: UtilsService.convertDateToEpoch(UtilsService.getFullDate(new Date())),
-                parentMessageId: null
+                createdAt: UtilsService.convertDateToEpoch(
+                  UtilsService.getFullDate(new Date())
+                ),
+                parentMessageId: null,
               };
 
-              this.forumService.askQuestion(this.eventId, newMessage).then(() => {
-                this.modalResultService.successPostComment();
-              })
-              .then(() => this.ngOnInit())
-              .catch(err => {
-                if (err) {
-                  this.modalResultService.errorResultModal();
-                }
-              })
+              this.forumService
+                .askQuestion(this.eventId, newMessage)
+                .then(() => {
+                  this.modalResultService.successPostComment();
+                })
+                .then(() => this.ngOnInit())
+                .catch((err) => {
+                  if (err) {
+                    this.modalResultService.errorResultModal();
+                  }
+                });
             }
           }
         });
@@ -151,8 +161,14 @@ export class ForumComponent implements OnInit {
   private borderStyle(): void {
     const url: string = this.router.url;
 
-    if (url.includes('media/dashboard/forum') || url.includes('event/view') || url.includes('/event-detail/')) {
-      (document.querySelector('section.forum') as HTMLElement).style.borderRadius = '25px';
+    if (
+      url.includes('media/dashboard/forum') ||
+      url.includes('event/view') ||
+      url.includes('/event-detail/')
+    ) {
+      (
+        document.querySelector('section.forum') as HTMLElement
+      ).style.borderRadius = '25px';
     }
   }
 
@@ -169,15 +185,15 @@ export class ForumComponent implements OnInit {
     let eventsObj = {};
 
     if (this.isEventDetail()) {
-      this.events.forEach(event => {
+      this.events.forEach((event) => {
         if (event.id === this.eventId) {
           eventsObj[event.id] = event.name;
         }
-      })
+      });
     } else {
-      this.events.forEach(event => {
+      this.events.forEach((event) => {
         eventsObj[event.id] = event.name;
-      })
+      });
     }
 
     return eventsObj;
@@ -188,5 +204,4 @@ export class ForumComponent implements OnInit {
       this.ngOnInit();
     }
   }
-
 }

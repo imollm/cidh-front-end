@@ -20,7 +20,7 @@ export class HomeComponent {
   role: string;
   dataTable: IDashboardTable = {} as IDashboardTable;
   actionButtons: IActionButtons = {
-    active: false
+    active: false,
   } as IActionButtons;
 
   // User tables
@@ -83,7 +83,7 @@ export class HomeComponent {
       (event) => event.startDate > currentDay
     );
 
-    this.userTableSubscribedEvents.title = 'Últims events subscrits';
+    this.userTableSubscribedEvents.title = 'Últims actes subscrits';
     this.userTableSubscribedEvents.colsName = [
       { colName: 'name', text: 'Nom' },
       { colName: 'description', text: 'Descripció' },
@@ -121,7 +121,7 @@ export class HomeComponent {
       .flat()
       .filter((message) => !answeredIds.includes(message.id));
 
-    this.adminTableEventsManaged.title = 'Events que coordines';
+    this.adminTableEventsManaged.title = 'Actes que coordines';
     this.adminTableEventsManaged.colsName = [
       { colName: 'name', text: 'Nom' },
       { colName: 'description', text: 'Descripció' },

@@ -2,7 +2,7 @@
   <div class="upcoming-events-wrapper container">
     <div class="row">
       <div class="col-12 p-5">
-        <h2 class="upcoming-events-title">Pròxims events</h2>
+        <h2 class="upcoming-events-title">Pròxims actes</h2>
         <div class="row">
           <div *ngFor="let event of upcomingEvents | paginate: { itemsPerPage: 6, currentPage: actualPage }" class="col-md-6 mb-5">
             <app-event-card [event]="event"></app-event-card>

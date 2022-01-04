@@ -45,7 +45,7 @@ export class SubscriptionEventListComponent implements OnInit {
   }
 
   setDataTable(): void {
-    this.dataTable.title = 'Events Subscrits';
+    this.dataTable.title = 'Actes Subscrits';
     this.dataTable.colsName = [
       { colName: 'name', text: 'Nom' },
       { colName: 'startDate', text: 'Comença' },
