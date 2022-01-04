@@ -51,6 +51,7 @@ e2e:
     paths:
       - "cypress/videos/**/*.mp4"
       - "cypress/screenshots/**/*.png"
+      - "dist/"
     expire_in: 1 days
   only:
     refs:
@@ -62,15 +63,14 @@ build:
   image: node:14.15-alpine3.13
   script:
     - echo -e "Start building"
-    - npm run build:ci
     - mkdir conf
     - cp docker-compose.yml conf
     - cp nginx.conf conf
     - cp Makefile conf
   cache:
     paths:
-      - dist/
-      - conf/
+      - "dist/"
+      - "conf/"
   only:
     refs:
       - main
