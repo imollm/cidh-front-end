@@ -1,8 +1,8 @@
 stages:
   - install
+  - restore-db
   - test
   - build
-  - backend
   - deploy
 
 variables:
@@ -15,6 +15,7 @@ cache:
     - .cache/*
     - cache/Cypress
     - node_modules
+    - dist/cidh-front-end
     - test
     - build
     - deploy
@@ -24,6 +25,23 @@ install:
   image: node:14.15.5-alpine3.13
   script:
     - npm ci
+
+restore-db:
+  variables:
+    MASTER_SSH_KEY: $MASTER_SSH_KEY
+  image: kroniak/ssh-client
+  stage: restore-db
+  environment:
+    name: production
+    url: https://culture.indahou.se
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh -T $MASTER_HOST 'chmod 700 -R /root/dev/pdp/cidh-back-end'
+    - ssh -T $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
 
 lint:
   stage: test
@@ -51,30 +69,12 @@ e2e:
     paths:
       - "cypress/videos/**/*.mp4"
       - "cypress/screenshots/**/*.png"
-      - "dist/"
+      - "dist/cidh-front-end"
     expire_in: 1 days
   only:
     refs:
       - main
       - merge_request
-
-backend:
-  variables:
-    MASTER_SSH_KEY: $MASTER_SSH_KEY
-  image: kroniak/ssh-client
-  stage: backend
-  environment:
-    name: production
-    url: https://culture.indahou.se
-  script:
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh -T $MASTER_HOST 'chmod 700 -R /root/dev/pdp/cidh-back-end'
-    - ssh -T $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
-
 # build:
 #   stage: build
 #   image: node:14.15-alpine3.13
