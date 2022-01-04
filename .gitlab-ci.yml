@@ -38,6 +38,23 @@ lint:
       - main
       - merge_request
 
+restore:
+  variables:
+    MASTER_SSH_KEY: $MASTER_SSH_KEY
+  image: kroniak/ssh-client
+  stage: test
+  environment:
+    name: production
+    url: https://culture.indahou.se
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh $MASTER_HOST 'chmod 700 -R /root/dev/pdp/cidh-back-end'
+    - ssh $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+
 e2e:
   stage: test
   image: cypress/browsers:node14.15.0-chrome86-ff82
@@ -58,23 +75,23 @@ e2e:
       - main
       - merge_request
 
-build:
-  stage: build
-  image: node:14.15-alpine3.13
-  script:
-    - echo -e "Start building"
-    - mkdir conf
-    - cp docker-compose.yml conf
-    - cp nginx.conf conf
-    - cp Makefile conf
-  cache:
-    paths:
-      - "dist/"
-      - "conf/"
-  only:
-    refs:
-      - main
-      - merge_request
+# build:
+#   stage: build
+#   image: node:14.15-alpine3.13
+#   script:
+#     - echo -e "Start building"
+#     - mkdir conf
+#     - cp docker-compose.yml conf
+#     - cp nginx.conf conf
+#     - cp Makefile conf
+#   cache:
+#     paths:
+#       - "dist/"
+#       - "conf/"
+#   only:
+#     refs:
+#       - main
+#       - merge_request
 
 deploy:
   variables:
@@ -91,9 +108,10 @@ deploy:
     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - scp -r dist/ $MASTER_HOST:/var/www/html
-    - scp -r conf/ $MASTER_HOST:/var/www/html
+    - scp docker-compose.yml $MASTER_HOST:/var/www/html
+    - scp nginx.conf $MASTER_HOST:/var/www/html
     - ssh $MASTER_HOST 'chmod 700 -R /var/www/html/conf'
-    - ssh $MASTER_HOST 'docker-compose -f /var/www/html/conf/docker-compose.yml up -d'
+    - ssh $MASTER_HOST 'docker-compose -f /var/www/html/docker-compose.yml up -d'
   only:
     - main
     - merge_request
