@@ -52,8 +52,8 @@ restore:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh $MASTER_HOST 'chmod 700 -R /root/dev/pdp/cidh-back-end'
-    - ssh $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+    - ssh -T $MASTER_HOST '/bin/bash chmod 700 -R /root/dev/pdp/cidh-back-end'
+    - ssh -T $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
 
 e2e:
   stage: test
