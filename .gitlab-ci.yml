@@ -44,7 +44,8 @@ e2e:
   script:
     - echo "Start e2e tests"
     - npm ci
-    - npm run start:ci && npm run e2e
+    - npm run start:ci
+    - npm run e2e
   artifacts:
     when: always
     paths:
