@@ -1,8 +1,8 @@
 stages:
   - install
+  - test
   - build
   - backend
-  - test
   - deploy
 
 variables:
@@ -20,8 +20,8 @@ cache:
     - deploy
 
 install:
-  image: node:14.15.5-alpine3.13
   stage: install
+  image: node:14.15.5-alpine3.13
   script:
     - npm ci
 
@@ -29,11 +29,30 @@ lint:
   stage: test
   image: node:14.15-alpine3.13
   script:
-    - echo "Lint project"
     - npm run lint
   cache:
     paths:
       - node_modules
+  only:
+    refs:
+      - main
+      - merge_request
+
+e2e:
+  stage: test
+  image: cypress/browsers:node14.15.0-chrome86-ff82
+  script:
+    - echo "Start e2e tests"
+    - npm run build:prod
+    - npm run cy:verify
+    - npm run e2e-run:ci
+  artifacts:
+    when: always
+    paths:
+      - "cypress/videos/**/*.mp4"
+      - "cypress/screenshots/**/*.png"
+      - "dist/"
+    expire_in: 1 days
   only:
     refs:
       - main
@@ -55,26 +74,6 @@ backend:
     - chmod 600 ~/.ssh/id_rsa
     - ssh -T $MASTER_HOST 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh -T $MASTER_HOST 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
-
-e2e:
-  stage: test
-  image: cypress/browsers:node14.15.0-chrome86-ff82
-  script:
-    - echo "Start e2e tests"
-    - npm run build:prod
-    - npm run cy:verify
-    - npm run e2e-run:ci
-  artifacts:
-    when: always
-    paths:
-      - "cypress/videos/**/*.mp4"
-      - "cypress/screenshots/**/*.png"
-      - "dist/"
-    expire_in: 1 days
-  only:
-    refs:
-      - main
-      - merge_request
 
 # build:
 #   stage: build
