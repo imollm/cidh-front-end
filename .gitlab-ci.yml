@@ -17,6 +17,7 @@ cache:
     - cache/Cypress
     - node_modules
     - dist/cidh-front-end
+    - install
     - lint
     - e2e
     - build
@@ -118,7 +119,8 @@ build:
   script:
     - npm ci
     - npm run build:prod
-  cache:
+  artifacts:
+    when: always
     paths:
       - "dist/cidh-front-end"
   only:
