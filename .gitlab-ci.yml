@@ -28,6 +28,7 @@ stages:
 
 restore-db:
   variables:
+    MASTER_HOST: $MASTER_HOST
     MASTER_SSH_KEY: $MASTER_SSH_KEY
   image: kroniak/ssh-client
   stage: restore-db
