@@ -35,6 +35,7 @@ restore-db:
     name: production
     url: https://culture.indahou.se
   script:
+    - echo $MASTER_HOST
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
