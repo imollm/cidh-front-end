@@ -96,7 +96,6 @@ deploy:
     - scp -r dist/cidh-front-end/ "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - scp docker-compose.yml "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - scp nginx.conf "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
-    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /var/www/html'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml up -d'
   only:
     - main

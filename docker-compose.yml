@@ -32,7 +32,7 @@ services:
     expose:
       - "80"
     volumes:
-      - /var/www/html/dist/cidh-front-end:/usr/share/nginx/html:ro
+      - /var/www/html/cidh-front-end:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=culture.indahou.se,www.culture.indahou.se
       - LETSENCRYPT_HOST=culture.indahou.se,www.culture.indahou.se
