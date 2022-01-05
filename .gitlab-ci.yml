@@ -26,6 +26,9 @@ install:
   script:
     - npm ci
 
+####################################################
+### RESTORE BACKEND DATABASE TO ENSURE E2E TESTS ###
+####################################################
 restore-db:
   image: kroniak/ssh-client
   stage: restore-db
