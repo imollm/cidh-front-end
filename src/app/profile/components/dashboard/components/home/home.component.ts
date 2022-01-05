@@ -80,10 +80,13 @@ export class HomeComponent {
     const eventsSubscribed = events.filter((event) => event.isUserSubscribed);
     const currentDay = Date.now() / 1000;
     const eventSubscribedNotCelebrated = eventsSubscribed.filter(
-      (event) => event.startDate > currentDay
+      (event) => event.endDate > currentDay
     );
+    console.log({currentDay})
+    console.log({eventsSubscribed})
 
-    this.userTableSubscribedEvents.title = 'Últims actes subscrits';
+    
+    this.userTableSubscribedEvents.title = "Total d'actes subscrits";
     this.userTableSubscribedEvents.colsName = [
       { colName: 'name', text: 'Nom' },
       { colName: 'description', text: 'Descripció' },
@@ -92,10 +95,12 @@ export class HomeComponent {
     this.userTableSubscribedEvents.inverse = false;
 
     this.userTableEventsToBeCelebrated.title =
-      'Pròximes subscripcions celebrades';
+      'Pròxims actes als quals estàs subscrit';
     this.userTableEventsToBeCelebrated.colsName = [
       { colName: 'name', text: 'Nom' },
       { colName: 'description', text: 'Descripció' },
+      { colName: 'startDate', text: "Data d'inici" },
+      { colName: 'endDate', text: 'Data final'}
     ];
     this.userTableEventsToBeCelebrated.data = eventSubscribedNotCelebrated;
     this.userTableEventsToBeCelebrated.inverse = false;
