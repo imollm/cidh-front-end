@@ -1,7 +1,8 @@
 stages:
   - install
+  - lint
   - restore-db
-  - test
+  - e2e
   - build
   - deploy
 
@@ -26,9 +27,21 @@ install:
   script:
     - npm ci
 
-###################################################
+lint:
+  stage: lint
+  image: node:14.15-alpine3.13
+  script:
+    - npm run lint
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - merge_request
+
+####################################################
 ### RESTORE BACKEND DATABASE TO ENSURE E2E TESTS ###
-###################################################
+####################################################
 restore-db:
   image: kroniak/ssh-client
   stage: restore-db
@@ -48,20 +61,11 @@ restore-db:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
   only:
     refs:
-      - merge_request
+      - develop
 
-lint:
-  stage: test
-  image: node:14.15-alpine3.13
-  script:
-    - npm run lint
-  cache:
-    paths:
-      - node_modules
-  only:
-    refs:
-      - merge_request
-
+##################################
+### EXECUTE TESTS END TO END  ###
+##################################
 e2e:
   stage: test
   image: cypress/browsers:node14.15.0-chrome86-ff82
@@ -79,8 +83,11 @@ e2e:
     expire_in: 1 days
   only:
     refs:
-      - merge_request
+      - develop
 
+########################
+### DEPLOY PROJECT  ###
+########################
 deploy:
   stage: deploy
   image: kroniak/ssh-client
