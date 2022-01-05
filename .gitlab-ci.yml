@@ -44,6 +44,7 @@ restore-db:
     - ssh "$MASTER_SSH_USER"@"$MASTER_HOST" 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@"$MASTER_HOST" 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
 
+
 # lint:
 #   stage: test
 #   image: node:14.15-alpine3.13
