@@ -3,6 +3,7 @@ stages:
   - lint
   - restore-db
   - e2e
+  - build
   - deploy
 
 variables:
@@ -20,6 +21,9 @@ cache:
     - e2e
     - deploy
 
+####################################
+#### INSTALL NODE DEPENDENCIES  ####
+####################################
 install:
   stage: install
   image: node:14.15.5-alpine3.13
@@ -84,7 +88,6 @@ e2e:
   stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
-    - echo "Start e2e tests"
     - npm run build:prod
     - npm run cy:verify
     - npm run e2e-run:ci
@@ -103,7 +106,23 @@ e2e:
           - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ########################
-#### DEPLOY PROJECT  ####
+#### BUILD PROJECT  ####
+########################
+build:
+  stage: build
+  image: node:14.15-alpine3.13
+  script:
+    - npm ci
+    - npm run build:prod
+  cache:
+    paths:
+      - "dist/cidh-front-end"
+  only:
+    refs:
+      - main
+    
+########################
+#### DEPLOY PROJECT  ###
 ########################
 deploy:
   stage: deploy
