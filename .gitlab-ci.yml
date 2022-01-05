@@ -16,8 +16,8 @@ cache:
     - cache/Cypress
     - node_modules
     - dist/cidh-front-end
-    - test
-    - build
+    - lint
+    - e2e
     - deploy
 
 install:
@@ -28,6 +28,9 @@ install:
   only:
     refs:
       - merge_request
+    variables:
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 lint:
   stage: lint
@@ -40,6 +43,9 @@ lint:
   only:
     refs:
       - merge_request
+    variables:
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ####################################################
 ### RESTORE BACKEND DATABASE TO ENSURE E2E TESTS ###
@@ -62,8 +68,11 @@ restore-db:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
   only:
-    refs:
-      - develop
+      refs:
+        - merge_request
+      variables:
+          - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+          - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ##################################
 ### EXECUTE TESTS END TO END  ###
@@ -84,8 +93,11 @@ e2e:
       - "dist/cidh-front-end"
     expire_in: 1 days
   only:
-    refs:
-      - develop
+      refs:
+        - merge_request
+      variables:
+          - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+          - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ########################
 ### DEPLOY PROJECT  ###
@@ -112,5 +124,5 @@ deploy:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type d -exec chmod 755 {} \+;'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml up -d'
   only:
-    refs:
-      - main
+      refs:
+        - main
