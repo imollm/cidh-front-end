@@ -19,6 +19,7 @@ cache:
     - dist/cidh-front-end
     - lint
     - e2e
+    - build
     - deploy
 
 ####################################
@@ -29,6 +30,9 @@ install:
   image: node:14.15.5-alpine3.13
   script:
     - npm ci
+  cache:
+    paths:
+      - "node_modules"
   only:
     refs:
       - merge_request
@@ -46,7 +50,7 @@ lint:
     - npm run lint
   cache:
     paths:
-      - node_modules
+      - "node_modules"
   only:
     refs:
       - merge_request
@@ -144,6 +148,7 @@ deploy:
     - scp nginx.conf "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type f -exec chmod 644 {} \+;'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type d -exec chmod 755 {} \+;'
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml down'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml up -d'
   only:
       refs:
