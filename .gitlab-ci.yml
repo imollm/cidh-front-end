@@ -1,30 +1,30 @@
 stages:
-  # - install
+  - install
   - restore-db
-  # - test
-  # - build
-  # - deploy
+  - test
+  - build
+  - deploy
 
-# variables:
-#   npm_config_cache: '$CI_PROJECT_DIR/.npm'
-#   CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
+variables:
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
 
-# cache:
-#   key: ${CI_COMMIT_REF_SLUG}
-#   paths:
-#     - .cache/*
-#     - cache/Cypress
-#     - node_modules
-#     - dist/cidh-front-end
-#     - test
-#     - build
-#     - deploy
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .cache/*
+    - cache/Cypress
+    - node_modules
+    - dist/cidh-front-end
+    - test
+    - build
+    - deploy
 
-# install:
-#   stage: install
-#   image: node:14.15.5-alpine3.13
-#   script:
-#     - npm ci
+install:
+  stage: install
+  image: node:14.15.5-alpine3.13
+  script:
+    - npm ci
 
 restore-db:
   image: kroniak/ssh-client
@@ -44,59 +44,60 @@ restore-db:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
 
-# lint:
-#   stage: test
-#   image: node:14.15-alpine3.13
-#   script:
-#     - npm run lint
-#   cache:
-#     paths:
-#       - node_modules
-#   only:
-#     refs:
-#       - main
-#       - merge_request
+lint:
+  stage: test
+  image: node:14.15-alpine3.13
+  script:
+    - npm run lint
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - main
+      - merge_request
 
-# e2e:
-#   stage: test
-#   image: cypress/browsers:node14.15.0-chrome86-ff82
-#   script:
-#     - echo "Start e2e tests"
-#     - npm run build:prod
-#     - npm run cy:verify
-#     - npm run e2e-run:ci
-#   artifacts:
-#     when: always
-#     paths:
-#       - "cypress/videos/**/*.mp4"
-#       - "cypress/screenshots/**/*.png"
-#       - "dist/cidh-front-end"
-#     expire_in: 1 days
-#   only:
-#     refs:
-#       - main
-#       - merge_request
+e2e:
+  stage: test
+  image: cypress/browsers:node14.15.0-chrome86-ff82
+  script:
+    - echo "Start e2e tests"
+    - npm run build:prod
+    - npm run cy:verify
+    - npm run e2e-run:ci
+  artifacts:
+    when: always
+    paths:
+      - "cypress/videos/**/*.mp4"
+      - "cypress/screenshots/**/*.png"
+      - "dist/cidh-front-end"
+    expire_in: 1 days
+  only:
+    refs:
+      - main
+      - merge_request
 
-# deploy:
-#   variables:
-#     MASTER_SSH_KEY: $MASTER_SSH_KEY
-#   image: kroniak/ssh-client
-#   stage: deploy
-#   environment:
-#     name: production
-#     url: https://culture.indahou.se
-#   script:
-#     - mkdir -p ~/.ssh
-#     - chmod 700 ~/.ssh
-#     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-#     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
-#     - chmod 600 ~/.ssh/id_rsa
-#     - ssh $MASTER_HOST 'chmod 700 -R /var/www/html'
-#     - scp -r dist/cidh-front-end/ $MASTER_HOST:/var/www/html
-#     - scp docker-compose.yml $MASTER_HOST:/var/www/html
-#     - scp nginx.conf $MASTER_HOST:/var/www/html
-#     - ssh $MASTER_HOST 'chmod 700 -R /var/www/html/conf'
-#     - ssh $MASTER_HOST 'docker-compose -f /var/www/html/docker-compose.yml up -d'
-#   only:
-#     - main
-#     - merge_request
+deploy:
+  stage: deploy
+  image: kroniak/ssh-client
+  environment:
+    name: production
+    url: https://culture.indahou.se
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$MASTER_SSH_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan culture.indahou.se >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /var/www/html'
+    - scp -r dist/cidh-front-end/ "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
+    - scp docker-compose.yml "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
+    - scp nginx.conf "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /var/www/html/conf'
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml up -d'
+  only:
+    - main
+    - merge_request
