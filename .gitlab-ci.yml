@@ -3,7 +3,6 @@ stages:
   - lint
   - restore-db
   - e2e
-  - build
   - deploy
 
 variables:
@@ -67,7 +66,7 @@ restore-db:
 ### EXECUTE TESTS END TO END  ###
 ##################################
 e2e:
-  stage: test
+  stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
     - echo "Start e2e tests"
