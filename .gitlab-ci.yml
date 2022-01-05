@@ -32,6 +32,9 @@ install:
         - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
         - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
+###################################
+### LINTER STAGE TO CHECK CODE  ###
+###################################
 lint:
   stage: lint
   image: node:14.15-alpine3.13
