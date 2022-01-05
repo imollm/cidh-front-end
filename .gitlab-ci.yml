@@ -75,23 +75,6 @@ e2e:
     refs:
       - main
       - merge_request
-# build:
-#   stage: build
-#   image: node:14.15-alpine3.13
-#   script:
-#     - echo -e "Start building"
-#     - mkdir conf
-#     - cp docker-compose.yml conf
-#     - cp nginx.conf conf
-#     - cp Makefile conf
-#   cache:
-#     paths:
-#       - "dist/"
-#       - "conf/"
-#   only:
-#     refs:
-#       - main
-#       - merge_request
 
 deploy:
   variables:
@@ -107,7 +90,8 @@ deploy:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$MASTER_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - scp -r dist/ $MASTER_HOST:/var/www/html
+    - ssh $MASTER_HOST 'chmod 700 -R /var/www/html'
+    - scp -r dist/cidh-front-end/ $MASTER_HOST:/var/www/html
     - scp docker-compose.yml $MASTER_HOST:/var/www/html
     - scp nginx.conf $MASTER_HOST:/var/www/html
     - ssh $MASTER_HOST 'chmod 700 -R /var/www/html/conf'
