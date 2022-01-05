@@ -46,6 +46,9 @@ restore-db:
   script:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+  only:
+    refs:
+      - merge_request
 
 lint:
   stage: test
@@ -57,7 +60,6 @@ lint:
       - node_modules
   only:
     refs:
-      - main
       - merge_request
 
 e2e:
@@ -77,7 +79,6 @@ e2e:
     expire_in: 1 days
   only:
     refs:
-      - main
       - merge_request
 
 deploy:
@@ -95,11 +96,12 @@ deploy:
     - ssh-keyscan culture.indahou.se >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /var/www/html'
     - scp -r dist/cidh-front-end/ "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - scp docker-compose.yml "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - scp nginx.conf "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type f -exec chmod 644 {} \+;'
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type d -exec chmod 755 {} \+;'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml up -d'
   only:
-    - main
-    - merge_request
+    refs:
+      - main
