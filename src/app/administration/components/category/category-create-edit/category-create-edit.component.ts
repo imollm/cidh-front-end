@@ -40,7 +40,7 @@ export class CategoryCreateEditComponent implements OnInit {
       this.createMode();
     } else if (this.mode && this.mode === 'edit') {
       this.editMode();
-      this.title = 'Edita la empresa';
+      this.title = 'Edita la categoria';
       this.btnText = 'Edita';
     }
   }
