@@ -103,7 +103,7 @@ e2e:
           - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ########################
-### DEPLOY PROJECT  ###
+#### DEPLOY PROJECT  ####
 ########################
 deploy:
   stage: deploy
