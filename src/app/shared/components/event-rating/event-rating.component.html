@@ -1,7 +1,20 @@
-<div class="rating-wrapper">
-    <span>Puntuació:</span>
-    <fa-icon *ngFor="let star of stars" [icon]="faStar"
-        [ngClass]="{'enabled': star === true, 'disabled': star === false}"
-        class="star"
-    ></fa-icon>
+<div class="rating-wrapper" #ratingWrapper>
+    <div class="rating">
+        <fa-icon [icon]="faStar" class="star"></fa-icon>
+        <fa-icon [icon]="faStar" class="star"></fa-icon>
+        <fa-icon [icon]="faStar" class="star"></fa-icon>
+        <fa-icon [icon]="faStar" class="star"></fa-icon>
+        <fa-icon [icon]="faStar" class="star"></fa-icon>
+    </div>
+    <div class="total-ratings">
+        <div>
+            <fa-icon [icon]="faAverage" class="info"></fa-icon>
+            <span>{{ rating.rating + '.0'}}</span>
+        </div>
+        <span class="separator">|</span>
+        <div>
+            <fa-icon [icon]="faUsers" class="info"></fa-icon>
+            <span>{{ rating.ratingsCount }}</span>
+        </div>
+    </div>
 </div>

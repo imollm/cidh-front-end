@@ -83,7 +83,7 @@
       },
       "updateById": {
         "uri": "/event-organizer/%s",
-        "method": "PUT"
+        "method": "POST"
       },
       "getById": {
         "uri": "/event-organizer/%s",
@@ -110,6 +110,30 @@
       "updateById": {
         "uri": "/events/%s",
         "method": "POST"
+      },
+      "subscribe": {
+        "uri": "/events/%s/subscribe",
+        "method": "POST"
+      },
+      "unsubscribe": {
+        "uri": "/events/%s/unsubscribe",
+        "method": "POST"
+      },
+      "getEventsByUser": {
+        "uri": "/events?user=%s",
+        "method": "GET"
+      },
+      "getEventsByAdmin": {
+        "uri": "/events?admin=%s",
+        "method": "GET"
+      },
+      "getAllComments": {
+        "uri": "/events/%s/comments",
+        "method": "GET"
+      },
+      "getForumId": {
+        "uri": "/events/%s/forum",
+        "method": "GET"
       }
     } ,
     "label": {
@@ -135,8 +159,16 @@
       }
     },
     "comment": {
-      "add": {
+      "post": {
         "uri": "/events/%s/post-comment",
+        "method": "POST"
+      },
+      "getAll": {
+        "uri": "/events/%s/comments",
+        "method": "GET"
+      },
+      "rate": {
+        "uri": "/events/%s/rate",
         "method": "POST"
       }
     },
@@ -155,6 +187,16 @@
       },
       "listMyFavs": {
         "uri": "/users/me/favorite-events",
+        "method": "GET"
+      }
+    },
+    "forum": {
+      "post": {
+        "uri": "/events/%s/forum/post-message",
+        "method": "POST"
+      },
+      "get": {
+        "uri": "/events/%s/forum",
         "method": "GET"
       }
     }

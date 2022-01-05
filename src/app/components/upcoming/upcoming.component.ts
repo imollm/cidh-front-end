@@ -11,6 +11,7 @@ export class UpcomingComponent implements OnInit {
 
   upcomingEvents: IEvent[] = [];
   lastEvents: string = '10';
+  actualPage: number = 1;
 
   constructor(private eventService: EventService) 
   { }

@@ -32,6 +32,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
               "src/styles.sass"
             ],
             "scripts": [
@@ -69,6 +71,14 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -81,6 +91,9 @@
             },
             "development": {
               "browserTarget": "cidh-front-end:build:development"
+            },
+            "staging": {
+              "browserTarget": "cidh-front-end:build:staging"
             }
           },
           "defaultConfiguration": "development"
@@ -116,6 +129,43 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "cidh-front-end:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cidh-front-end:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "cidh-front-end:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cidh-front-end:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "cidh-front-end:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cidh-front-end:serve:production"
+            }
           }
         }
       }

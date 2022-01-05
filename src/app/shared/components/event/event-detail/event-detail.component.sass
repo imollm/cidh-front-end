@@ -18,6 +18,7 @@
 
     .event-title-wrapper
       border-bottom: 2px solid $richBlack
+      margin-top: 2em
 
       .event-title
         margin: .3em 0
@@ -27,6 +28,17 @@
       fa-icon
         font-size: 2em
         cursor: pointer
+
+    .date-wrapper
+      display: flex
+      flex-direction: row
+      justify-content: space-evenly
+      align-items: center
+      margin-top: 1em
+
+      @include max-lg()
+        flex-direction: column
+        justify-content: center
 
     .labels-wrapper
       background-color: $richBlack
@@ -57,22 +69,51 @@
       display: flex
       justify-content: center
       align-items: center
-
-    .button
+    
+    .access-wrapper
+      display: flex
+      align-items: center
+      flex-direction: column
       margin-top: 3em
-      background-color: $richBlack
-      border-radius: 5px
-      color: $white
-      padding: 1em 1.5em
+      
+      .access
+        display: flex
+        justify-content: center
+        border: 2px solid $richBlack
+        border-radius: 15px
+        padding: 4em 0
+        width: 300px
+
+    .actions-wrapper
+      margin-top: 3em
+
+      .actions
+        display: flex
+        flex-direction: row
+        justify-content: space-evenly
+        align-items: baseline
+        margin-top: 1em
+        border: 2px solid $richBlack
+        border-radius: 15px
+        padding: 4em 0
+
+        @include max-lg()
+          flex-direction: column
+          align-items: center
+          padding: 1.5em 0
+
+    .comments
       display: flex
       justify-content: center
-      align-items: center
-      cursor: pointer
 
-      &:hover
-        background-color: $white
-        color: $richBlack
-        font-weight: bold
+      .owl-custom
+        background-color: $richBlack
+        color: $white
+        border-radius: 5px
+        padding: 1.5em
+        margin-top: 2em
+        width: 55%
+        border: solid 2px $white
 
     .forum
       margin-top: 3em
@@ -104,3 +145,8 @@
 
 .isNotFavorite
   color: $richBlack
+
+.btn
+  &:hover
+    background-color: $white
+    color: $richBlack

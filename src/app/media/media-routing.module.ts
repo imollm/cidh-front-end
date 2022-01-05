@@ -22,7 +22,8 @@ const routes: Routes = [
         children: [
           { path: 'list', component: FavoriteListComponent }
         ]
-      }
+      },
+      { path: 'forum', component: ForumComponent }
     ]
   }
 ];

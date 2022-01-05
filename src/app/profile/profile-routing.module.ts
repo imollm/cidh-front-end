@@ -9,10 +9,12 @@ import { ProfileComponent } from './profile.component';
 import { HomeComponent as DashboardHomeComponent } from './components/dashboard/components/home/home.component';
 import { ProfileShowComponent } from './components/dashboard/components/profile-show/profile-show.component';
 import { LogoutComponent } from './components/dashboard/components/logout/logout.component';
-import { EventDetailComponent } from '../shared/components/event/event-detail/event-detail.component'; 
+import { EventDetailComponent } from '../shared/components/event/event-detail/event-detail.component';
 
 // Auth Guard
 import { AuthGuard } from '../auth/auth.guard';
+import { EventCreateEditComponent } from './components/event/event-create-edit/event-create-edit.component';
+import { EventListComponent } from './components/event/event-list/event-profile-list.component';
 
 const routes: Routes = [
   { path: '', component: ProfileComponent },
@@ -27,9 +29,11 @@ const routes: Routes = [
       { path: 'userprofile', component: ProfileShowComponent },
       { path: 'logout', component: LogoutComponent },
       {
-        path: 'event',
+        path: 'events',
         children: [
-          { path: 'detail/:id', component: EventDetailComponent }
+          { path: 'create', component: EventCreateEditComponent },
+          { path: 'edit/:id', component: EventCreateEditComponent },
+          { path: 'list', component: EventListComponent },
         ]
       }
     ]

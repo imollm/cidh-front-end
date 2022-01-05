@@ -1,32 +1,49 @@
-<section class="forum" #forumContainer>
+<h1 *ngIf="isDashboard() && !isEventDetail()" class="forum-title">Fòrum</h1>
+
+<section class="forum">
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <div class="forum-header">
-          <h2 class="h4 text-white py-5">
-            Darreres preguntes
-          </h2>
-          <div class="forum-header-add-btn">
-            <button class="forum-header-add btn" (click)="addQuestion()">
+      <div *ngIf="forum && forum.messages && forum.messages.length > 0; then withMsg else withOutMsg"></div>
+      <ng-template #withMsg>
+        <div class="col-12">
+          <div class="forum-header">
+            <h2 class="h4 text-white py-5">
+              Darrers missatges
+            </h2>
+            <div class="forum-header btn add-btn" *ngIf="canThisUserMakeAQuestion()">
+              <button class="forum-header-add btn" (click)="addQuestion()">
+                Fer pregunta
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="forum-container col-12">
+          <div *ngFor="let message of forum.messages | paginate: { itemsPerPage: 6, currentPage: actualPage }"
+            class="question-container">
+            <div *ngIf="message && message.parentMessageId===null">
+              <app-message
+                [message]="message"
+                [eventName]="eventName"
+                (messageAnswered)="messageAnswered($event)"
+              ></app-message>
+            </div>
+          </div>
+        </div>
+        <div class="paginator">
+          <pagination-controls (pageChange)="actualPage = $event" [autoHide]="true" [responsive]="true">
+          </pagination-controls>
+        </div>
+      </ng-template>
+      <ng-template #withOutMsg>
+        <div class="col-12">
+          <div class="d-flex justify-content-around align-items-baseline" *ngIf="canThisUserMakeAQuestion()">
+            <h3 class="text-white text-left">Encara no hi ha cap missatge</h3>
+            <button class="btn add-btn" (click)="addQuestion()">
               Fer pregunta
             </button>
           </div>
         </div>
-      </div>
-      <div class="forum-container col-12">
-        <div *ngFor="let question of lastQuestions | paginate: { itemsPerPage: 6, currentPage: actualPage }" class="question-container">
-          <app-question
-            [question]="question"
-          ></app-question>
-        </div>
-      </div>
-      <div class="paginator">
-        <pagination-controls
-          (pageChange)="actualPage = $event"
-          [autoHide]="true"
-          [responsive]="true"
-        ></pagination-controls>
-      </div>
+      </ng-template>
     </div>
   </div>
 </section>

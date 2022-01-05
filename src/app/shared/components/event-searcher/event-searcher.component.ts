@@ -51,6 +51,7 @@ export class EventSearcherComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit(): void {
     this.subscription = this.messageService.currentMessage.subscribe(message => this.searchParams = message);
+    this.searchParams.redirect ? this.onSubmit() : '';
     this.getLabels();
     this.getCategories();
   }
@@ -83,12 +84,16 @@ export class EventSearcherComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   onSubmit(): void {
-    this.resetSearchParams();
-    this.setSearchParams();
+    if (!this.searchParams.redirect) {
+      this.resetSearchParams();
+      this.setSearchParams();
+    }
+
     this.eventService.findEvents(this.searchParams).then(res => {
       this.searchParams.events = res;
     }).then(() => {
       this.form.reset();
+      this.searchParams.redirect = false;
     }).catch(err => console.log(err));
   }
 

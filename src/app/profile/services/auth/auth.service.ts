@@ -60,7 +60,8 @@ export class AuthService implements IAuthService {
   }
 
   getAccessToken(): string {
-    return this.token = sessionStorage.getItem('ACCESS_TOKEN');
+    return sessionStorage.getItem('ACCESS_TOKEN') 
+      ? this.token = sessionStorage.getItem('ACCESS_TOKEN') : null;
   }
 
   isLogged(): boolean {
@@ -77,10 +78,10 @@ export class AuthService implements IAuthService {
   }
 
   getJWTDecoded(): any {
-    return jwt_decode(this.getAccessToken());
+    return this.getAccessToken() ? jwt_decode(this.getAccessToken()) : null;
   }
 
   getRoleOfAuthUser(): string {
-    return this.getJWTDecoded().authorities;
+    return this.getJWTDecoded() ? this.getJWTDecoded().authorities : null;
   }
 }
