@@ -1,8 +1,8 @@
 stages:
   - install
+  - lint
   - restore-db
-  - test
-  - build
+  - e2e
   - deploy
 
 variables:
@@ -25,10 +25,25 @@ install:
   image: node:14.15.5-alpine3.13
   script:
     - npm ci
+  only:
+    refs:
+      - merge_request
 
-###################################################
+lint:
+  stage: lint
+  image: node:14.15-alpine3.13
+  script:
+    - npm run lint
+  cache:
+    paths:
+      - node_modules
+  only:
+    refs:
+      - merge_request
+
+####################################################
 ### RESTORE BACKEND DATABASE TO ENSURE E2E TESTS ###
-###################################################
+####################################################
 restore-db:
   image: kroniak/ssh-client
   stage: restore-db
@@ -46,22 +61,15 @@ restore-db:
   script:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
-
-lint:
-  stage: test
-  image: node:14.15-alpine3.13
-  script:
-    - npm run lint
-  cache:
-    paths:
-      - node_modules
   only:
     refs:
-      - main
-      - merge_request
+      - develop
 
+##################################
+### EXECUTE TESTS END TO END  ###
+##################################
 e2e:
-  stage: test
+  stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
     - echo "Start e2e tests"
@@ -77,9 +85,11 @@ e2e:
     expire_in: 1 days
   only:
     refs:
-      - main
-      - merge_request
+      - develop
 
+########################
+### DEPLOY PROJECT  ###
+########################
 deploy:
   stage: deploy
   image: kroniak/ssh-client
@@ -95,11 +105,12 @@ deploy:
     - ssh-keyscan culture.indahou.se >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /var/www/html'
     - scp -r dist/cidh-front-end/ "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - scp docker-compose.yml "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
     - scp nginx.conf "$MASTER_SSH_USER"@culture.indahou.se:/var/www/html
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type f -exec chmod 644 {} \+;'
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'find /var/www/html/ -type d -exec chmod 755 {} \+;'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'docker-compose -f /var/www/html/docker-compose.yml up -d'
   only:
-    - main
-    - merge_request
+    refs:
+      - main
