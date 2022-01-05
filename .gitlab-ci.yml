@@ -112,6 +112,7 @@ build:
   stage: build
   image: node:14.15-alpine3.13
   script:
+    - npm ci
     - npm run build:prod
   cache:
     paths:
