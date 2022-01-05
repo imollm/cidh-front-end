@@ -41,8 +41,8 @@ restore-db:
     - ssh-keyscan culture.indahou.se >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh "$MASTER_SSH_USER"@"$MASTER_HOST" 'chmod 700 -R /root/dev/pdp/cidh-back-end'
-    - ssh "$MASTER_SSH_USER"@"$MASTER_HOST" 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
+    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
 
 # lint:
 #   stage: test
