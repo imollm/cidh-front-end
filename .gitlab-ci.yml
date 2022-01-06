@@ -97,6 +97,7 @@ e2e:
   stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
+    - npm ci
     - npm run build:prod
     - npm run cy:verify
     - npm run e2e-run:ci
