@@ -39,12 +39,22 @@ describe('Tests E2E CIDH Front End', () => {
     })
   })
 
-  describe('Categories', () => {
+  describe.skip('Categories', () => {
     it('Should create, read and update categories', () => {
       cy.uiLoginSuperAdmin()
       cy.createNewCategory()
       cy.getCategory()
       cy.updateCategory()
+    })
+  })
+
+  describe('Labels', () => {
+    it('Should create, read, update and delete labels', () => {
+      cy.uiLoginSuperAdmin()
+      cy.createLabel()
+      cy.getLabel()
+      cy.updateLabel()
+      cy.deleteLabel()
     })
   })
 })

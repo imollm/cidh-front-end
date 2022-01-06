@@ -187,11 +187,17 @@ const newCategory = {
     name: 'New category test',
     description: 'Description of new category test'
 }
-Cypress.Commands.add('createNewCategory', () => {
-    cy.visit('/administration/dashboard/category/create')
+Cypress.Commands.add('createCategory', () => {
+    cy.get('li.sidebar-menu-content-items-item:nth-child(3)').click()
 
-    cy.get('#categoryName').type(newCategory.name)
-    cy.get('#categoryDescription').type(newCategory.description)
+    cy.contains('Gestiona les categories')
+
+    cy.get('a.btn.btn-outline-dark').click()
+
+    cy.contains('Crear una nova categoria')
+
+    cy.get('input#categoryName').type(newCategory.name)
+    cy.get('input#categoryDescription').type(newCategory.description)
 
     cy.get('button.form-control').click()
 
@@ -222,12 +228,78 @@ Cypress.Commands.add('updateCategory', () => {
 
     cy.get('button.form-control.btn.btn-dark.text-white').click()
 
-    cy.get('#swal2-title').contains('Editat correctament')
+    cy.get('#swal2-title').contains('Editat correctament!')
     cy.get('button.swal2-confirm.swal2-styled').click()
     cy.url().should('contain', '/administration/dashboard/category/list')
 
     cy.contains(`${newCategory.name} modified`)
     cy.contains(`${newCategory.description} modified`)
+})
+
+// LABELS
+const newLabel = {
+    name: 'New label test',
+    description: 'Description of new label test'
+}
+Cypress.Commands.add('createLabel', () => {
+    cy.get('li.sidebar-menu-content-items-item:nth-child(4)').click()
+
+    cy.contains('Gestiona les etiquetes')
+
+    cy.get('a.btn.btn-outline-dark').click()
+
+    cy.contains('Crear nova etiqueta')
+
+    cy.get('input#labelName').type(newLabel.name)
+    cy.get('input#labelDescription').type(newLabel.description)
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.url().should('contain', '/administration/dashboard/labels/list')
+
+    cy.get('#swal2-title').contains('Creat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+})
+Cypress.Commands.add('getLabel', () => {
+    cy.get('li.sidebar-menu-content-items-item:nth-child(4)').click()
+
+    cy.contains(newLabel.name)
+    cy.contains(newLabel.description)
+})
+Cypress.Commands.add('updateLabel', () => {
+    cy.get('tbody tr:nth-child(7) td:nth-child(4) > div > div:nth-child(1) a').click()
+
+    cy.url().should('contain', '/administration/dashboard/labels/edit')
+
+    cy.get('input#labelName')
+        .should('have.value', newLabel.name)
+        .clear()
+        .type(`${newLabel.name} modified`)
+    cy.get('input#labelDescription')
+        .should('have.value', newLabel.description)
+        .clear()
+        .type(`${newLabel.description} modified`)
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.get('#swal2-title').contains('Editat correctament!')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/administration/dashboard/labels/list')
+
+    cy.contains(`${newLabel.name} modified`)
+    cy.contains(`${newLabel.description} modified`)
+})
+Cypress.Commands.add('deleteLabel', () => {
+    cy.get('tbody tr:nth-child(7) td:nth-child(4) > div > div:nth-child(2) a').click()
+
+    cy.get('#swal2-title').contains('Estas segur de voler eliminar?')
+    cy.get('button.swal2-cancel.swal2-styled.swal2-default-outline').contains('Cancel')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').contains('Si, elimina!').click()
+
+    cy.get('#swal2-title').contains('Eliminat correctament!')
+
+    cy.get('app-dashboard-table').should('not.contain', `${newLabel.name} modified`)
+    cy.get('app-dashboard-table').should('not.contain', `${newLabel.description} modified`)
 })
 
 
