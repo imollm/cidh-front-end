@@ -50,8 +50,9 @@ export class FavoriteListComponent implements OnInit {
           { colName: 'startDate', text: 'Comença' },
           { colName: 'endDate', text: 'Acaba' },
           { colName: 'rating', text: 'Punts' },
-          { colName: 'rating', text: 'Total votacions' },
+          { colName: 'ratingsCount', text: 'Total votacions' },
         ];
+        console.log(this.myFavoriteEvents);
         this.dataTable.data = this.myFavoriteEvents;
         this.dataTable.inverse = false;
       })
