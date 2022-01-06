@@ -66,7 +66,7 @@ export class ProfileShowComponent implements OnInit {
       this.profileService.updateUser(this.form.value).then(res => {
         result = res.hasOwnProperty('id');
       }).then(() => {
-        this.router.navigate(['/profile/dashboard']).then(() => {
+        this.router.navigate(['/event/dashboard/event/search']).then(() => {
           this.modalResultService.editResultModal(result);
           this.spinner.hide();
         });
