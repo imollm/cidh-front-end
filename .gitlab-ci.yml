@@ -19,6 +19,7 @@ cache:
     - dist/cidh-front-end
     - install
     - lint
+    - restore-db
     - e2e
     - build
     - deploy
