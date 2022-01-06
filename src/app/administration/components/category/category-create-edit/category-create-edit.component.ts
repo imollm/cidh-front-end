@@ -41,7 +41,7 @@ export class CategoryCreateEditComponent implements OnInit {
     } else if (this.mode && this.mode === 'edit') {
       this.editMode();
       this.title = 'Edita la categoria';
-      this.btnText = 'Edita';
+      this.btnText = 'Editar';
     }
   }
 
