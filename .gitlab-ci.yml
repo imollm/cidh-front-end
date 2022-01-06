@@ -79,6 +79,9 @@ restore-db:
   script:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+  cache:
+    paths:
+      - "node_modules"
   only:
       refs:
         - merge_request
