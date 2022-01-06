@@ -48,13 +48,22 @@ describe('Tests E2E CIDH Front End', () => {
     })
   })
 
-  describe('Labels', () => {
+  describe.skip('Labels', () => {
     it('Should create, read, update and delete labels', () => {
       cy.uiLoginSuperAdmin()
       cy.createLabel()
       cy.getLabel()
       cy.updateLabel()
       cy.deleteLabel()
+    })
+  })
+
+  describe('Events', () => {
+    it('Should create, read, update events', () => {
+      cy.uiLoginAdmin()
+      cy.createEvent()
+      cy.updateEvent()
+      cy.getEvent()
     })
   })
 })

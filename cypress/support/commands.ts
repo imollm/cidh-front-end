@@ -302,4 +302,90 @@ Cypress.Commands.add('deleteLabel', () => {
     cy.get('app-dashboard-table').should('not.contain', `${newLabel.description} modified`)
 })
 
+// EVENTS
+const newEvent = {
+    name: "New event test",
+    description: "Another Event created via Cypress",
+    headerImage: "https://i.pinimg.com/originals/50/c5/1e/50c51e02a205b44c3449fc128400ff20.jpg",
+    startDate: '2022-01-01',
+    endDate: '2022-01-02',
+    category: "Category 1",
+    eventUrl: "https://youtu.be/embed/JWukx3HGBKI",
+    organizerId: "1: d578fae9-d376-4e37-a5b0-46f9128beb4f",
+}
+Cypress.Commands.add('createEvent', () => {
+    cy.viewport(700, 1700)
+    cy.visit('/profile/dashboard/events/list')
 
+    cy.contains('Gestiona els actes')
+
+    cy.get('a.btn.btn-outline-dark').click({force: true})
+
+    cy.contains('Crea un nou acte')
+
+    cy.get('input#eventName').type(newEvent.name, {force: true})
+    cy.get('input#eventDescription').type(newEvent.description, {force: true})
+    cy.get('input#eventHeaderImage').type(newEvent.headerImage, {force: true})
+    cy.get('input#eventUrl').type(newEvent.eventUrl, {force: true})
+    cy.get('input#eventInitDate').type(newEvent.startDate, {force: true})
+    cy.get('input#eventEndDate').type(newEvent.endDate, {force: true})
+    cy.get('select#eventCategory').select(newEvent.category, {force: true})
+    cy.get('select#eventOrganizerId').select(newEvent.organizerId, {force: true})
+    cy.get('[type="checkbox"]').first().check({force: true})
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.url().should('contain', '/profile/dashboard/events/list')
+
+    cy.get('#swal2-title').contains('Creat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+})
+Cypress.Commands.add('updateEvent', () => {
+    cy.viewport(700, 1700)
+
+    cy.get('#dataTable > tbody > tr:nth-child(1) > td:nth-child(3) > div > div > a').click({force: true})
+
+    cy.contains('Edita l\'acte')
+
+    cy.get('input#eventName')
+        .should('have.value', newEvent.name)
+        .clear()
+        .type(`${newEvent.name} modified`, {force: true})
+    cy.get('input#eventDescription')
+        .should('have.value', newEvent.description)
+        .clear()
+        .type(`${newEvent.description} modified`, {force: true})
+    cy.get('input#eventHeaderImage')
+        .should('have.value', newEvent.headerImage)
+    cy.get('input#eventUrl')
+        .should('have.value', newEvent.eventUrl)
+    cy.get('input#eventInitDate')
+        .should('have.value', newEvent.startDate)
+        .type('2022-01-05', {force: true})
+    cy.get('input#eventEndDate')
+        .should('have.value', newEvent.endDate)
+        .type('2022-01-06', {force: true})
+    cy.get('select#eventCategory')
+        .should('have.value', `1: ${newEvent.category}`)
+        .select('Category 2', {force: true})
+    cy.get('select#eventOrganizerId')
+        .should('have.value', newEvent.organizerId)
+        .select('2: d578fae9-d376-4e37-a5b0-46f9128beb41', {force: true})
+    cy.get('[type="checkbox"][ng-reflect-name="2"]').check({force: true})
+    cy.get('[type="checkbox"][ng-reflect-name="3"]').check({force: true})
+
+    cy.get('button.btn.btn-dark.text-white').click()
+
+    cy.get('#swal2-title').contains('Editat correctament!')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/profile/dashboard/events/list')
+
+    cy.contains(`${newEvent.name} modified`)
+    cy.contains(`${newEvent.description} modified`)
+})
+Cypress.Commands.add('getEvent', () => {
+    cy.visit('/profile/dashboard/home')
+
+    cy.contains(`${newEvent.name} modified`)
+    cy.contains(`${newEvent.description} modified`)
+})
