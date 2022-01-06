@@ -177,7 +177,7 @@ Cypress.Commands.add('modifyPersonalDataAsAUser', () => {
 
     cy.get('#userprofile-page button.btn.btn-dark').click()
 
-    cy.url().should('contain', '/profile/dashboard/home')
+    cy.url().should('contain', '/event/dashboard/event/search')
 
     cy.get('body > div > div > div.swal2-actions > button.swal2-confirm.swal2-styled').click()
 })
