@@ -19,6 +19,7 @@ cache:
     - dist/cidh-front-end
     - install
     - lint
+    - restore-db
     - e2e
     - build
     - deploy
@@ -79,6 +80,9 @@ restore-db:
   script:
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+  cache:
+    paths:
+      - "node_modules"
   only:
       refs:
         - merge_request
@@ -93,6 +97,7 @@ e2e:
   stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
+    - npm ci
     - npm run build:prod
     - npm run cy:verify
     - npm run e2e-run:ci

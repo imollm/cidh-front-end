@@ -14,7 +14,7 @@ run:
 ### Stop container and then remove image ###
 remove:
 	docker stop $(WEBAPP_NAME)
-	docker rmi --force $$(docker images -q)
+	docker rm --force $$(docker ps -aqf name=$(WEBAPP_NAME))
 
 ### To start the frontend container ###
 start:
@@ -27,3 +27,6 @@ stop:
 ### To start a bash session of frontend container ###
 bash:
 	docker exec -it $(WEBAPP_NAME) bash
+
+logs:
+	docker logs $$(docker ps -aqf name=$(WEBAPP_NAME))
