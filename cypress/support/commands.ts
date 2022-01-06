@@ -179,24 +179,55 @@ Cypress.Commands.add('modifyPersonalDataAsAUser', () => {
 
     cy.url().should('contain', '/event/dashboard/event/search')
 
-    cy.get('body > div > div > div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.get('button.swal2-confirm.swal2-styled').click()
 })
 
 // CATEGORIES
+const newCategory = {
+    name: 'New category test',
+    description: 'Description of new category test'
+}
 Cypress.Commands.add('createNewCategory', () => {
     cy.visit('/administration/dashboard/category/create')
 
-    cy.get('#categoryName').type('New category test')
-    cy.get('#categoryDescription').type('Description of new category test')
+    cy.get('#categoryName').type(newCategory.name)
+    cy.get('#categoryDescription').type(newCategory.description)
 
     cy.get('button.form-control').click()
 
     cy.url().should('contain', '/administration/dashboard/category/list')
+
+    cy.get('#swal2-title').contains('Creat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click()
 })
 Cypress.Commands.add('getCategory', () => {
-    
+    cy.get('li.sidebar-menu-content-items-item:nth-child(3)').click()
+
+    cy.contains(newCategory.name)
+    cy.contains(newCategory.description)
 })
+Cypress.Commands.add('updateCategory', () => {
+    cy.get('tbody tr:nth-child(7) td:nth-child(4) > div > div > a').click()
 
+    cy.url().should('contain', '/administration/dashboard/category/edit')
 
+    cy.get('input#categoryName')
+        .should('have.value', newCategory.name)
+        .clear()
+        .type(`${newCategory.name} modified`)
+    cy.get('input#categoryDescription')
+        .should('have.value', newCategory.description)
+        .clear()
+        .type(`${newCategory.description} modified`)
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.get('#swal2-title').contains('Editat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/administration/dashboard/category/list')
+
+    cy.contains(`${newCategory.name} modified`)
+    cy.contains(`${newCategory.description} modified`)
+})
 
 

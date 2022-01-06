@@ -1,12 +1,12 @@
 describe('Tests E2E CIDH Front End', () => {
 
-  describe('Signup page USER', () => {
+  describe.skip('Signup page USER', () => {
     it('Should be successfully signup', () => {
       cy.uiSignupUser()
     })
   })
 
-  describe('Login and logout', () => {
+  describe.skip('Login and logout', () => {
     describe('USER ROLE', () => {
       it('Should be logged in', () => {
         cy.uiLoginUser()
@@ -19,7 +19,7 @@ describe('Tests E2E CIDH Front End', () => {
         cy.uiLogoutUser()
       })
     })
-    describe('ADMIN ROLE', () => {
+    describe.skip('ADMIN ROLE', () => {
       it('Should be logged in', () => {
         cy.uiLoginAdmin()
         cy.checkJWTOnSessionStorage()
@@ -28,7 +28,7 @@ describe('Tests E2E CIDH Front End', () => {
         cy.uiLogoutAdminAndSuperAdmin()
       })
     })
-    describe('SUPERADMIN ROLE', () => {
+    describe.skip('SUPERADMIN ROLE', () => {
       it('Should be logged in', () => {
         cy.uiLoginSuperAdmin()
         cy.checkJWTOnSessionStorage()
@@ -40,12 +40,11 @@ describe('Tests E2E CIDH Front End', () => {
   })
 
   describe('Categories', () => {
-    it('Should create a new category', () => {
+    it('Should create, read and update categories', () => {
       cy.uiLoginSuperAdmin()
       cy.createNewCategory()
-    })
-    it('Should get created category', () => {
-      
+      cy.getCategory()
+      cy.updateCategory()
     })
   })
 })
