@@ -643,7 +643,8 @@ Cypress.Commands.add('searchEventByCategory', (url) => {
 Cypress.Commands.add('addToFavoriteAnEvent', () => {
 
     cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
-    cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').click({force: true})
+    //cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').click({force: true})
+    cy.get('#dashboard-router-outlet > app-event-detail > section > div > div > div > div.d-flex.justify-content-between.align-items-center.event-title-wrapper > fa-icon').click({force: true})
 
     cy.contains('Afegit als favorits')
     cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
@@ -659,7 +660,8 @@ Cypress.Commands.add('showFavoriteEvents', () => {
 Cypress.Commands.add('deleteToFavoriteAnEvent', () => {
 
     cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
-    cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').click({force: true})
+    //cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').click({force: true})
+    cy.get('#dashboard-router-outlet > app-event-detail > section > div > div > div > div.d-flex.justify-content-between.align-items-center.event-title-wrapper > fa-icon').click({force: true})
 
     cy.contains('Eliminat dels favorits')
     cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
