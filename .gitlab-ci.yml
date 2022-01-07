@@ -97,7 +97,7 @@ e2e:
   stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
-    - run apt-get update
+    - apt-get update
     - apt-get -y install build-essential cmake
     - npm ci
     - npm run build:prod
