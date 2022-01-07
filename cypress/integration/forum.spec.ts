@@ -2,6 +2,9 @@ describe('FOURM TESTS', () => {
     it('Should view forum an unregistered user', () => {
         cy.unregisteredUserCanViewForum();
     })
+    it('Should make a question on forum a unregistered user', () => {
+        cy.makeAQuestionOnForumAUnregisteredUser()
+    })
     it('Should view forum a registered user', () => {
         cy.uiLoginUser()
         cy.registeredUserCanViewForum()
@@ -16,9 +19,6 @@ describe('FOURM TESTS', () => {
         cy.uiLoginSuperAdmin()
         cy.superAdminCanViewForumQuestions()
         cy.uiLogoutAdminAndSuperAdmin()
-    })
-    it('Should make a question on forum a unregistered user', () => {
-        cy.makeAQuestionOnForumAUnregisteredUser()
     })
     it('Should make a question on forum a registered user', () => {
         cy.uiLoginUser()
