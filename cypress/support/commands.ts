@@ -365,8 +365,6 @@ Cypress.Commands.add('updateEvent', () => {
     cy.get('select#eventOrganizerId')
         .should('have.value', newEvent.organizerId)
         .select('2: d578fae9-d376-4e37-a5b0-46f9128beb41', {force: true})
-    cy.get('[type="checkbox"][ng-reflect-name="2"]').check({force: true})
-    cy.get('[type="checkbox"][ng-reflect-name="3"]').check({force: true})
 
     cy.get('button.btn.btn-dark.text-white').click()
 
@@ -500,7 +498,7 @@ Cypress.Commands.add('makeAQuestionOnForumARegisteredUser', () => {
     cy.url().should('contain', '/media/dashboard/forum')
 })
 Cypress.Commands.add('answerAQuestionAdminAndSuperAdmin', () => {
-    cy.viewport(1000, 1500)
+    cy.viewport(2000, 2000)
 
     cy.visit('/media/dashboard/forum')
 
