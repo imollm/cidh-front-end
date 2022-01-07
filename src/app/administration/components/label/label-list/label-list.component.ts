@@ -35,12 +35,12 @@ export class LabelListComponent implements OnInit {
     private modalResultService: ModalResultService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     let mode = UtilsService.getMode(this.router.url);
 
     if (mode === 'delete') {
       let labelId = UtilsService.getResourceIdFromURI(this.router.url);
-      this.deleteLabel(labelId);
+      await this.deleteLabel(labelId);
     }
     this.getLabels();
   }
@@ -66,12 +66,13 @@ export class LabelListComponent implements OnInit {
     this.dataTable.data = this.labels;
   }
 
-  deleteLabel(labelId: string): void {
-    this.labelService.removeLabel(labelId).then(res => {})
-    .then(() => this.modalResultService.deleteResultModal(true))
-    .catch(err => {
+  private async deleteLabel(labelId: string): Promise<void> {
+    try {
+      await this.labelService.removeLabel(labelId);
+      this.modalResultService.deleteResultModal(true)
+    } catch (error) {
       this.modalResultService.deleteResultModal(false);
-    });
+    }
   }
 
 }

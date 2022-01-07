@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { IRating } from '../event/models/rating.model';
 
 @Pipe({
-  name: 'ratingCount'
+  name: 'ratingsCount'
 })
 export class RatingCountPipe implements PipeTransform {
 

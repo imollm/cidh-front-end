@@ -97,7 +97,7 @@ export class AdministratorCreateEditComponent implements OnInit {
   }
 
   isPwdEquals(): boolean {
-    if (this.mode === 'create') {
+    if (this.mode === 'create') {
       return this.form.get('password1').value === this.form.get('password2').value;
     }
     return null;
