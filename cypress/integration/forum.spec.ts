@@ -32,7 +32,6 @@ describe('FOURM TESTS', () => {
         cy.uiLogoutAdminAndSuperAdmin()
     })
     it('Should superAdmin answer a question', () => {
-        cy.makeAQuestionOnForumAUnregisteredUser()
         cy.uiLoginSuperAdmin()
         cy.answerAQuestionAdminAndSuperAdmin()
         cy.uiLogoutAdminAndSuperAdmin()
