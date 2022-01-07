@@ -64,6 +64,17 @@ const superAdminUser = {
     email: 'superadmin@indahou.se',
     password: 'SuperAdminPass2021!'
 }
+const newEventOrganizer = {
+    name: 'Empresa Test',
+    description: 'Es una empresa per realitzar test'
+}
+const newAdministrator = {
+    name: 'AdminTest',
+    surname: 'Testing',
+    email: 'adminTest@indahou.se',
+    password: 'AdminTestPass2021!' 
+}
+
 
 // SSH exec CMD
 Cypress.Commands.add('sshExecCmd', (command: string, keyPath: string) => {
@@ -197,6 +208,182 @@ Cypress.Commands.add('getCategory', () => {
     
 })
 
+// EVENT ORGANIZERS
+Cypress.Commands.add('createNewEventOrganizer', () => {
+    cy.visit('/administration/dashboard/event-organizer/create')
+  
+    cy.get('#eventOrganizerName').type(newEventOrganizer.name)
+    cy.get('#eventOrganizerDescription').type(newEventOrganizer.description)
+    cy.get('select').select('Admin Admin')
+  
+    cy.get('div.form-group > button.form-control').click()
+  
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+  
+    cy.url().should('contain', '/administration/dashboard/event-organizer/list')
+    cy.contains(newEventOrganizer.name)
+    cy.contains(newEventOrganizer.description)
+  });
+  
+Cypress.Commands.add('editEventOrganizer', () => {
+    cy.visit('/administration/dashboard/event-organizer/list');
+  
+    cy.get('tbody > tr:nth-last-child(1) > td:nth-last-child(1) > div > div > a').click()
+  
+    cy.get('#eventOrganizerName').clear().type(newEventOrganizer.name + ' modificat')
+    cy.get('#eventOrganizerDescription').clear().type(newEventOrganizer.description + ' modificat')
+  
+    cy.get('div.form-group > button.form-control').click()
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    
+    cy.url().should('contain', '/administration/dashboard/event-organizer/list')
+    cy.contains(newEventOrganizer.name + ' modificat')
+    cy.contains(newEventOrganizer.description + ' modificat')
+});
 
+// ADMINISTRATORS
+Cypress.Commands.add('createNewAdministrator', () => {
+    cy.visit('/administration/dashboard/administrator/create')
+    
+    cy.get('#inputName').type(newAdministrator.name)
+    cy.get('#inputSurname').type(newAdministrator.surname)
+    cy.get('#inputEmail').type(newAdministrator.email)
+    cy.get('#inputPass1').type(newAdministrator.password)
+    cy.get('#inputPass2').type(newAdministrator.password)
+    
+    cy.get('button.btn.btn-dark').click()
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/administration/dashboard/administrator/list')
+    cy.contains(newAdministrator.name)
+    cy.contains(newAdministrator.surname)
+    cy.contains(newAdministrator.email)    
+  })
 
+Cypress.Commands.add('editAdministrator', () => {
+    cy.visit('/administration/dashboard/administrator/list')
 
+    cy.get('tbody > tr:nth-last-child(1) > td:nth-last-child(1) > div > div > a').click()
+
+    cy.get('#inputName').clear().type(newAdministrator.name + ' modificat')
+    cy.get('#inputSurname').clear().type(newAdministrator.surname + ' modificat')
+
+    cy.get('button.btn.btn-dark').click()
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/administration/dashboard/administrator/list')
+    cy.contains(newAdministrator.name + ' modificat')
+    cy.contains(newAdministrator.surname + ' modificat')
+  })
+
+Cypress.Commands.add('associateAdministratorToEventOrganizer', () => {
+      cy.visit('/administration/dashboard/event-organizer/list')
+
+      cy.get('tbody > tr:nth-last-child(1) > td:nth-last-child(1) > div > div > a').click()
+
+      cy.get('select').select(newAdministrator.name + ' modificat ' + newAdministrator.surname + ' modificat')
+  
+      cy.get('div.form-group > button.form-control').click()
+    
+      cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+
+  })
+
+// SEARCHER
+Cypress.Commands.add('searchEventByName', (url) => {
+    cy.visit(url)
+
+    cy.get('#inputName').type('Event 2')
+
+    cy.get('button.btn.btn-dark').click()
+
+    cy.contains('Event 2')
+})
+
+Cypress.Commands.add('searchEventByLabel', (url) => {
+    cy.visit(url)
+
+    cy.get('#selectLabel').select('Label 6')
+
+    cy.get('button.btn.btn-dark').click()
+
+    cy.contains('Event 3')
+    cy.contains('Event 6')
+})
+
+Cypress.Commands.add('searchEventByCategory', (url) => {
+    cy.visit(url)
+
+    cy.get('#selectCategory').select('Category 2')
+
+    cy.get('button.btn.btn-dark').click()
+
+    cy.contains('Event 2')
+})
+
+// FAVORITES
+Cypress.Commands.add('addToFavoriteAnEvent', () => {
+
+    cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
+    cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').click({force: true})
+
+    cy.contains('Afegit als favorits')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').should('have.class', 'isFavorite')
+})
+
+Cypress.Commands.add('showFavoriteEvents', () => {
+    cy.visit('/media/dashboard/favorite/list')
+
+    cy.contains('Event 2')
+})
+
+Cypress.Commands.add('deleteToFavoriteAnEvent', () => {
+
+    cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
+    cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').click({force: true})
+
+    cy.contains('Eliminat dels favorits')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.get('div.event-detail-container > div.event-title-wrapper > fa-icon').should('have.class', 'isNotFavorite')
+})
+
+// SUBSCRIBE
+Cypress.Commands.add('subscribeAnEvent', () => {
+
+    cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
+    cy.get('div.actions > div.ng-star-inserted > button.btn.btn-dark').click()
+    cy.contains('Te has subscrit')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.contains("Dona't de baixa")
+})
+Cypress.Commands.add('unsubscribeAnEvent', () => {
+
+    cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
+    cy.get('div.actions > div.ng-star-inserted > button.btn.btn-danger').click()
+    cy.contains('Te has donat de baixa')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.contains("Subscriu-te")
+})
+
+Cypress.Commands.add('showSubscribedEvents', () => {
+    cy.visit('/event/dashboard/event/subscription-event-list')
+    cy.contains('Event 2')
+})
+
+//VOTE AND SHARE
+Cypress.Commands.add('voteAnEvent', () => {
+    cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
+    cy.get('div.actions > div:nth-child(3) > button.btn.btn-dark').click()
+    cy.get('select.swal2-select').select('5')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.contains('Puntuació enviada')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+})
+
+Cypress.Commands.add('shareAnEvent', () => {
+    cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
+    cy.get('div.actions > div:nth-child(4) > button.btn.btn-dark').click()
+    cy.get('#swal2-input').type('test@indahou.se')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.contains('Enviada correctament')
+    cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+})

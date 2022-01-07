@@ -1,5 +1,4 @@
 describe('Tests E2E CIDH Front End', () => {
-
   describe('Signup page USER', () => {
     it('Should be successfully signup', () => {
       cy.uiSignupUser()
