@@ -337,6 +337,8 @@ Cypress.Commands.add('updateEvent', () => {
 
     cy.get('#dataTable > tbody > tr:nth-child(1) > td:nth-child(3) > div > div > a').click({force: true})
 
+    cy.wait(1000)
+
     cy.contains('Edita l\'acte')
 
     cy.get('input#eventName')
