@@ -491,6 +491,8 @@ Cypress.Commands.add('makeAQuestionOnForumARegisteredUser', () => {
     cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
     cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
 
+    cy.wait(500)
+
     cy.get('button.swal2-confirm.swal2-styled').click({force: true})
 
     cy.contains('Un missatge des de Cypress')
