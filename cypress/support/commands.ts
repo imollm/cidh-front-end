@@ -670,7 +670,7 @@ Cypress.Commands.add('deleteToFavoriteAnEvent', () => {
 Cypress.Commands.add('subscribeAnEvent', () => {
 
     cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
-    cy.get('div.actions > div.ng-star-inserted > button.btn.btn-dark').click()
+    cy.get('div.actions > div:nth-child(1) > button.btn.btn-dark').click({force: true})
     cy.contains('Te has subscrit')
     cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
     cy.contains("Dona't de baixa")
@@ -678,7 +678,7 @@ Cypress.Commands.add('subscribeAnEvent', () => {
 Cypress.Commands.add('unsubscribeAnEvent', () => {
 
     cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
-    cy.get('div.actions > div.ng-star-inserted > button.btn.btn-danger').click()
+    cy.get('div.actions > div:nth-child(1) > button.btn.btn-danger').click({force: true})
     cy.contains('Te has donat de baixa')
     cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
     cy.contains("Subscriu-te")
@@ -702,7 +702,7 @@ Cypress.Commands.add('voteAnEvent', () => {
 
 Cypress.Commands.add('shareAnEvent', () => {
     cy.get('div.results-container.col-12 > div.results-container-wrapper > div.row > div:nth-child(1) > app-event-card > a').click()
-    cy.get('div.actions > div:nth-child(4) > button.btn.btn-dark').click()
+    cy.get('div.actions > div:nth-child(4) > button.btn.btn-dark').click({force: true})
     cy.get('#swal2-input').type('test@indahou.se')
     cy.get('div.swal2-actions > button.swal2-confirm.swal2-styled').click()
     cy.contains('Enviada correctament')
