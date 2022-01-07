@@ -45,8 +45,8 @@
                   <div *ngSwitchCase="'rating'">
                     {{ element[row.colName] | rating }}
                   </div>
-                  <div *ngSwitchCase="'ratingCount'">
-                    {{ element[row.colName] | ratingCount }}
+                  <div *ngSwitchCase="'ratingsCount'">
+                    {{ element['rating'] | ratingsCount }}
                   </div>
                   <div *ngSwitchDefault>
                     {{ element[row.colName] }}

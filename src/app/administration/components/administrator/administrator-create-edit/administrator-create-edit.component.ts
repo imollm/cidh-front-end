@@ -57,18 +57,26 @@ export class AdministratorCreateEditComponent implements OnInit {
 
   editMode(): void {
     this.adminId = UtilsService.getResourceIdFromURI(this.router.url);
-    this.adminId 
-      ? this.getAdministrator()
-      : this.router.navigate(['/administration/dashboard/administrator/list']);
+    if (this.adminId) {
+      this.getAdministrator();
+
+      this.form.get('email').disable();
+      this.form.removeControl('password1');
+      this.form.removeControl('password2');
+      this.form.addControl('preferredLanguage', new FormControl(this.administrator.preferredLanguage));
+
+    } else {
+      this.router.navigate(['/administration/dashboard/administrator/list']);
+    }
   }
 
   onSubmit(): void {
-    if (this.form.valid && this.isPwdEquals()) {
+    if (this.form.valid) {
       this.spinner.show();
 
       this.setPassword();
 
-      if (this.mode && this.mode === 'create') {
+      if (this.mode && this.mode === 'create' && this.isPwdEquals()) {
         let newAdmin = this.form.value;
         newAdmin.role = 'admin';
 
@@ -79,6 +87,7 @@ export class AdministratorCreateEditComponent implements OnInit {
         .catch(err => this.redirectUser(false));
 
       } else if (this.mode && this.mode === 'edit') {
+        this.form.get('email').enable();
         this.adminService.updateAdministrator(this.adminId, this.form.value).then(res => {
           this.administrator = res;
         }).then(() => this.redirectUser(true))
@@ -88,7 +97,10 @@ export class AdministratorCreateEditComponent implements OnInit {
   }
 
   isPwdEquals(): boolean {
-    return this.form.get('password1').value === this.form.get('password2').value;
+    if (this.mode === 'create') {
+      return this.form.get('password1').value === this.form.get('password2').value;
+    }
+    return null;
   }
 
   setPassword(): void {
