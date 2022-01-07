@@ -119,8 +119,6 @@ Cypress.Commands.add('uiLogoutUser', () => {
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > fa-icon').click()
 
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > button > ul > li:nth-child(2) > a').click()
-
-    cy.url().should('contain', '/home')
 })
 Cypress.Commands.add('uiLoginAdmin', () => {
     cy.visit('/profile/login')
@@ -154,8 +152,6 @@ Cypress.Commands.add('uiLogoutAdminAndSuperAdmin', () => {
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > fa-icon').click()
 
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > button > ul > li > a').click()
-
-    cy.url().should('contain', '/home')
 })
 Cypress.Commands.add('checkJWTOnSessionStorage', () => {
     cy.window().then((window) => {
@@ -179,24 +175,346 @@ Cypress.Commands.add('modifyPersonalDataAsAUser', () => {
 
     cy.url().should('contain', '/event/dashboard/event/search')
 
-    cy.get('body > div > div > div.swal2-actions > button.swal2-confirm.swal2-styled').click()
+    cy.get('button.swal2-confirm.swal2-styled').click()
 })
 
 // CATEGORIES
-Cypress.Commands.add('createNewCategory', () => {
-    cy.visit('/administration/dashboard/category/create')
+const newCategory = {
+    name: 'New category test',
+    description: 'Description of new category test'
+}
+Cypress.Commands.add('createCategory', () => {
+    cy.visit('/administration/dashboard/category/list')
 
-    cy.get('#categoryName').type('New category test')
-    cy.get('#categoryDescription').type('Description of new category test')
+    cy.contains('Gestiona les categories')
+
+    cy.get('a.btn.btn-outline-dark').click()
+
+    cy.contains('Crear una nova categoria')
+
+    cy.get('input#categoryName').type(newCategory.name)
+    cy.get('input#categoryDescription').type(newCategory.description)
 
     cy.get('button.form-control').click()
 
     cy.url().should('contain', '/administration/dashboard/category/list')
+
+    cy.get('button.swal2-confirm.swal2-styled').click()
 })
 Cypress.Commands.add('getCategory', () => {
-    
+    cy.visit('/administration/dashboard/category/list')
+
+    cy.contains(newCategory.name)
+    cy.contains(newCategory.description)
+})
+Cypress.Commands.add('updateCategory', () => {
+    cy.get('tbody tr:nth-child(7) td:nth-child(4) > div > div > a').click()
+
+    cy.url().should('contain', '/administration/dashboard/category/edit')
+
+    cy.get('input#categoryName')
+        .should('have.value', newCategory.name)
+        .clear()
+        .type(`${newCategory.name} modified`)
+    cy.get('input#categoryDescription')
+        .should('have.value', newCategory.description)
+        .clear()
+        .type(`${newCategory.description} modified`)
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/administration/dashboard/category/list')
+
+    cy.contains(`${newCategory.name} modified`)
+    cy.contains(`${newCategory.description} modified`)
 })
 
+// LABELS
+const newLabel = {
+    name: 'New label test',
+    description: 'Description of new label test'
+}
+Cypress.Commands.add('createLabel', () => {
+    cy.get('li.sidebar-menu-content-items-item:nth-child(4)').click()
 
+    cy.contains('Gestiona les etiquetes')
 
+    cy.get('a.btn.btn-outline-dark').click()
+
+    cy.contains('Crear nova etiqueta')
+
+    cy.get('input#labelName').type(newLabel.name)
+    cy.get('input#labelDescription').type(newLabel.description)
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.url().should('contain', '/administration/dashboard/labels/list')
+
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+})
+Cypress.Commands.add('getLabel', () => {
+    cy.get('li.sidebar-menu-content-items-item:nth-child(4)').click()
+
+    cy.contains(newLabel.name)
+    cy.contains(newLabel.description)
+})
+Cypress.Commands.add('updateLabel', () => {
+    cy.get('tbody tr:nth-child(7) td:nth-child(4) > div > div:nth-child(1) a').click()
+
+    cy.url().should('contain', '/administration/dashboard/labels/edit')
+
+    cy.get('input#labelName')
+        .should('have.value', newLabel.name)
+        .clear()
+        .type(`${newLabel.name} modified`)
+    cy.get('input#labelDescription')
+        .should('have.value', newLabel.description)
+        .clear()
+        .type(`${newLabel.description} modified`)
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+    cy.url().should('contain', '/administration/dashboard/labels/list')
+
+    cy.contains(`${newLabel.name} modified`)
+    cy.contains(`${newLabel.description} modified`)
+})
+Cypress.Commands.add('deleteLabel', () => {
+    cy.get('tbody tr:nth-child(7) td:nth-child(4) > div > div:nth-child(2) a').click()
+
+    cy.get('#swal2-title').contains('Estas segur de voler eliminar?')
+    cy.get('button.swal2-cancel.swal2-styled.swal2-default-outline').contains('Cancel')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').contains('Si, elimina!').click()
+
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.get('app-dashboard-table').should('not.contain', `${newLabel.name} modified`)
+    cy.get('app-dashboard-table').should('not.contain', `${newLabel.description} modified`)
+})
+
+// EVENTS
+const newEvent = {
+    name: "New event test",
+    description: "Another Event created via Cypress",
+    headerImage: "https://i.pinimg.com/originals/50/c5/1e/50c51e02a205b44c3449fc128400ff20.jpg",
+    startDate: '2022-01-01',
+    endDate: '2022-01-02',
+    category: "Category 1",
+    eventUrl: "https://youtu.be/embed/JWukx3HGBKI",
+    organizerId: "1: d578fae9-d376-4e37-a5b0-46f9128beb4f",
+}
+Cypress.Commands.add('createEvent', () => {
+    cy.viewport(700, 1700)
+    cy.visit('/profile/dashboard/events/list')
+
+    cy.contains('Gestiona els actes')
+
+    cy.get('a.btn.btn-outline-dark').click({force: true})
+
+    cy.contains('Crea un nou acte')
+
+    cy.get('input#eventName').type(newEvent.name, {force: true})
+    cy.get('input#eventDescription').type(newEvent.description, {force: true})
+    cy.get('input#eventHeaderImage').type(newEvent.headerImage, {force: true})
+    cy.get('input#eventUrl').type(newEvent.eventUrl, {force: true})
+    cy.get('input#eventInitDate').type(newEvent.startDate, {force: true})
+    cy.get('input#eventEndDate').type(newEvent.endDate, {force: true})
+    cy.get('select#eventCategory').select(newEvent.category, {force: true})
+    cy.get('select#eventOrganizerId').select(newEvent.organizerId, {force: true})
+    cy.get('[type="checkbox"]').first().check({force: true})
+
+    cy.get('button.form-control.btn.btn-dark.text-white').click()
+
+    cy.url().should('contain', '/profile/dashboard/events/list')
+
+    cy.get('#swal2-title').contains('Creat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+})
+Cypress.Commands.add('updateEvent', () => {
+    cy.viewport(700, 1700)
+
+    cy.get('#dataTable > tbody > tr:nth-child(1) > td:nth-child(3) > div > div > a').click({force: true})
+
+    cy.wait(1000)
+
+    cy.contains('Edita l\'acte')
+
+    cy.get('input#eventName')
+        .should('have.value', newEvent.name)
+        .clear()
+        .type(`${newEvent.name} modified`, {force: true})
+    cy.get('input#eventDescription')
+        .should('have.value', newEvent.description)
+        .clear()
+        .type(`${newEvent.description} modified`, {force: true})
+    cy.get('input#eventHeaderImage')
+        .should('have.value', newEvent.headerImage)
+    cy.get('input#eventUrl')
+        .should('have.value', newEvent.eventUrl)
+    cy.get('input#eventInitDate')
+        .should('have.value', newEvent.startDate)
+        .type('2022-01-05', {force: true})
+    cy.get('input#eventEndDate')
+        .should('have.value', newEvent.endDate)
+        .type('2022-01-06', {force: true})
+    cy.get('select#eventCategory')
+        .should('have.value', `1: ${newEvent.category}`)
+        .select('Category 2', {force: true})
+    cy.get('select#eventOrganizerId')
+        .should('have.value', newEvent.organizerId)
+        .select('2: d578fae9-d376-4e37-a5b0-46f9128beb41', {force: true})
+
+    cy.get('button.btn.btn-dark.text-white').click()
+
+    cy.get('#swal2-title').contains('Editat correctament!')
+    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.url().should('contain', '/profile/dashboard/events/list')
+
+    cy.contains(`${newEvent.name} modified`)
+    cy.contains(`${newEvent.description} modified`)
+})
+Cypress.Commands.add('getEvent', () => {
+    cy.visit('/profile/dashboard/home')
+
+    cy.contains(`${newEvent.name} modified`)
+    cy.contains(`${newEvent.description} modified`)
+})
+Cypress.Commands.add('accessToEventUser', () => {
+    cy.visit('/media/dashboard/favorite/list')
+
+    cy.get('#dataTable > tbody > tr:nth-child(1) > td:nth-child(6) > div > div > a').click({force: true})
+
+    cy.wait(1000)
+
+    cy.get('button.btn.btn-warning').click({force: true})
+
+    cy.url().should('contain', '/event/dashboard/event/access')
+
+    cy.get('iframe').should('have.attr', 'src')
+
+    cy.get('button.btn').contains('Torna al detall').click({force: true})
+})
+
+// FORUM
+Cypress.Commands.add('unregisteredUserCanViewForum', () => {
+    cy.visit('/home')
+    cy.get('div.nav-links > ul > li:nth-child(4) > a').click({force: true})
+
+    cy.contains('FORUM')
+    cy.get('button.forum-header-add.btn').contains('Fer pregunta')
+    cy.contains('Darrers missatges')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('registeredUserCanViewForum', () => {
+    cy.visit('/media/dashboard/forum')
+
+    cy.contains('Fòrum')
+    cy.contains('Darrers missatges')
+    cy.get('button.forum-header-add.btn').contains('Fer pregunta')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('adminCanViewForumQuestions', () => {
+    cy.contains('Anonymous')
+    cy.contains('User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+
+    cy.visit('/media/dashboard/forum')
+
+    cy.contains('Fòrum')
+    cy.contains('Darrers missatges')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('superAdminCanViewForumQuestions', () => {
+    cy.visit('/media/dashboard/forum')
+
+    cy.contains('Fòrum')
+    cy.contains('Darrers missatges')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('makeAQuestionOnForumAUnregisteredUser', () => {
+    const eventId = 'd578fae9-d376-4e37-a5b0-46f9128beb40'
+
+    cy.visit('/media/forum')
+
+    cy.wait(1000)
+
+    cy.get('button.forum-header-add.btn').click({force: true})
+
+    cy.get('select.swal2-select').select(eventId)
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+    cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.contains('Un missatge des de Cypress')
+
+    cy.url().should('contain', '/media/forum')
+})
+Cypress.Commands.add('makeAQuestionOnForumARegisteredUser', () => {
+    const eventId = 'd578fae9-d376-4e37-a5b0-46f9128beb40'
+
+    cy.visit('/media/dashboard/forum')
+
+    cy.get('button.forum-header-add.btn').click({force: true})
+
+    cy.get('select.swal2-select').select(eventId)
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+    cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+
+    cy.wait(500)
+
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.contains('Un missatge des de Cypress')
+
+    cy.url().should('contain', '/media/dashboard/forum')
+})
+Cypress.Commands.add('answerAQuestionAdminAndSuperAdmin', () => {
+    cy.viewport(2000, 2000)
+
+    cy.visit('/media/dashboard/forum')
+
+    cy.wait(1000)
+
+    cy.get('button.btn.btn-sm.btn-danger').first().contains('Respon').click({force: true})
+
+    cy.get('textarea.swal2-textarea').type('Una resposta des de Cypress')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.url().should('contain', '/media/dashboard/forum')
+
+    cy.contains('Una resposta des de Cypress')
+})
 

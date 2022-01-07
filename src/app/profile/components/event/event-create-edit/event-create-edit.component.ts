@@ -212,7 +212,7 @@ export class EventCreateEditComponent implements OnInit, AfterViewChecked {
           })
           .then(() => this.redirectUser())
           .catch((err) => {
-            this.modalResultService.editResultModal(false);
+            this.modalResultService.createResultModal(false);
             this.spinner.hide();
           });
       } else if (this.mode && this.mode === 'edit') {
