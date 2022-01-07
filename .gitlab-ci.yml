@@ -63,32 +63,32 @@ cache:
 ####################################################
 ### RESTORE BACKEND DATABASE TO ENSURE E2E TESTS ###
 ####################################################
-restore-db:
-  image: kroniak/ssh-client
-  stage: restore-db
-  environment:
-    name: production
-    url: https://culture.indahou.se
-  before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
-    - eval $(ssh-agent -s)
-    - echo "$MASTER_SSH_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan culture.indahou.se >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  script:
-    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
-    - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
-  cache:
-    paths:
-      - "node_modules"
-  only:
-      refs:
-        - merge_request
-      variables:
-          - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-          - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+# restore-db:
+#   image: kroniak/ssh-client
+#   stage: restore-db
+#   environment:
+#     name: production
+#     url: https://culture.indahou.se
+#   before_script:
+#     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+#     - eval $(ssh-agent -s)
+#     - echo "$MASTER_SSH_KEY" | tr -d '\r' | ssh-add -
+#     - mkdir -p ~/.ssh
+#     - chmod 700 ~/.ssh
+#     - ssh-keyscan culture.indahou.se >> ~/.ssh/known_hosts
+#     - chmod 644 ~/.ssh/known_hosts
+#   script:
+#     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'chmod 700 -R /root/dev/pdp/cidh-back-end'
+#     - ssh "$MASTER_SSH_USER"@culture.indahou.se 'cd /root/dev/pdp/cidh-back-end && make clean && make init'
+#   cache:
+#     paths:
+#       - "node_modules"
+#   only:
+#       refs:
+#         - merge_request
+#       variables:
+#           - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+#           - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ##################################
 ### EXECUTE TESTS END TO END  ###
@@ -97,8 +97,7 @@ e2e:
   stage: e2e
   image: cypress/browsers:node14.15.0-chrome86-ff82
   script:
-    - apt-get update
-    - apt-get -y install build-essential cmake
+    - apt-get install -y build-essential cmake
     - npm ci
     - npm run build:prod
     - npm run cy:verify
