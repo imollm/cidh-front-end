@@ -119,8 +119,6 @@ Cypress.Commands.add('uiLogoutUser', () => {
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > fa-icon').click()
 
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > button > ul > li:nth-child(2) > a').click()
-
-    cy.url().should('contain', '/home')
 })
 Cypress.Commands.add('uiLoginAdmin', () => {
     cy.visit('/profile/login')
@@ -154,8 +152,6 @@ Cypress.Commands.add('uiLogoutAdminAndSuperAdmin', () => {
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > fa-icon').click()
 
     cy.get('app-dashboard > app-dashboard-header > header > nav > div.dashboard-header-navbar-profile > button > ul > li > a').click()
-
-    cy.url().should('contain', '/home')
 })
 Cypress.Commands.add('checkJWTOnSessionStorage', () => {
     cy.window().then((window) => {
@@ -389,3 +385,146 @@ Cypress.Commands.add('getEvent', () => {
     cy.contains(`${newEvent.name} modified`)
     cy.contains(`${newEvent.description} modified`)
 })
+Cypress.Commands.add('accessToEventUser', () => {
+    cy.visit('/media/dashboard/favorite/list')
+
+    cy.get('#dataTable > tbody > tr:nth-child(1) > td:nth-child(6) > div > div > a').click({force: true})
+
+    cy.wait(1000)
+
+    cy.get('button.btn.btn-warning').click({force: true})
+
+    cy.url().should('contain', '/event/dashboard/event/access')
+
+    cy.get('iframe').should('have.attr', 'src')
+
+    cy.get('button.btn').contains('Torna al detall').click({force: true})
+})
+
+// FORUM
+Cypress.Commands.add('unregisteredUserCanViewForum', () => {
+    cy.visit('/home')
+    cy.get('div.nav-links > ul > li:nth-child(4) > a').click({force: true})
+
+    cy.contains('FORUM')
+    cy.get('button.forum-header-add.btn').contains('Fer pregunta')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: My new name My new surname')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('registeredUserCanViewForum', () => {
+    cy.visit('/media/dashboard/forum')
+
+    cy.contains('Fòrum')
+    cy.contains('Darrers missatges')
+    cy.get('button.forum-header-add.btn').contains('Fer pregunta')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('adminCanViewForumQuestions', () => {
+    cy.contains('Anonymous')
+    cy.contains('User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+
+    cy.visit('/media/dashboard/forum')
+
+    cy.contains('Fòrum')
+    cy.contains('Darrers missatges')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('superAdminCanViewForumQuestions', () => {
+    cy.visit('/media/dashboard/forum')
+
+    cy.contains('Fòrum')
+    cy.contains('Darrers missatges')
+    cy.contains('Darrers missatges')
+    cy.contains('Usuari: Anonymous')
+    cy.contains('Usuari: User User')
+    cy.contains('Missatge de un usuari anonim')
+    cy.contains('Missatge de un usuari registrat')
+    cy.contains('Aqui tens la teva contesta')
+    cy.contains('Resposta:')
+    cy.contains('Event 1')
+})
+Cypress.Commands.add('makeAQuestionOnForumAUnregisteredUser', () => {
+    const eventId = 'd578fae9-d376-4e37-a5b0-46f9128beb40'
+
+    cy.visit('/media/forum')
+
+    cy.wait(1000)
+
+    cy.get('button.forum-header-add.btn').click({force: true})
+
+    cy.get('select.swal2-select').select(eventId)
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+    cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+
+    cy.contains('Gràcies per la teva col·laboració')
+    cy.contains('El comentari s\'ha enviat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.contains('Un missatge des de Cypress')
+
+    cy.url().should('contain', '/media/forum')
+})
+Cypress.Commands.add('makeAQuestionOnForumARegisteredUser', () => {
+    const eventId = 'd578fae9-d376-4e37-a5b0-46f9128beb40'
+
+    cy.visit('/media/dashboard/forum')
+
+    cy.get('button.forum-header-add.btn').click({force: true})
+
+    cy.get('select.swal2-select').select(eventId)
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+    cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+
+    cy.get('#swal2-title').contains('Gràcies per la teva col·laboració')
+    cy.get('#swal2-html-container').contains('El comentari s\'ha enviat correctament')
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.contains('Un missatge des de Cypress')
+
+    cy.url().should('contain', '/media/dashboard/forum')
+})
+Cypress.Commands.add('answerAQuestionAdminAndSuperAdmin', () => {
+    cy.viewport(1000, 1500)
+
+    cy.visit('/media/dashboard/forum')
+
+    cy.wait(1000)
+
+    cy.get('button.btn.btn-sm.btn-danger').first().contains('Respon').click({force: true})
+
+    cy.get('textarea.swal2-textarea').type('Una resposta des de Cypress')
+    cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
+
+    cy.get('#swal2-title').contains('Missatge enviat correctament')
+    cy.get('#swal2-html-container').contains('S\'ha enviat, gràcies per la teva col·laboració')
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
+
+    cy.url().should('contain', '/media/dashboard/forum')
+
+    cy.contains('Una resposta des de Cypress')
+})
+
