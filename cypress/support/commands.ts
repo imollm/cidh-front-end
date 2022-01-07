@@ -184,7 +184,7 @@ const newCategory = {
     description: 'Description of new category test'
 }
 Cypress.Commands.add('createCategory', () => {
-    cy.get('li.sidebar-menu-content-items-item:nth-child(3)').click()
+    cy.visit('/administration/dashboard/category/list')
 
     cy.contains('Gestiona les categories')
 
@@ -199,11 +199,10 @@ Cypress.Commands.add('createCategory', () => {
 
     cy.url().should('contain', '/administration/dashboard/category/list')
 
-    cy.get('#swal2-title').contains('Creat correctament')
     cy.get('button.swal2-confirm.swal2-styled').click()
 })
 Cypress.Commands.add('getCategory', () => {
-    cy.get('li.sidebar-menu-content-items-item:nth-child(3)').click()
+    cy.visit('/administration/dashboard/category/list')
 
     cy.contains(newCategory.name)
     cy.contains(newCategory.description)
@@ -224,7 +223,6 @@ Cypress.Commands.add('updateCategory', () => {
 
     cy.get('button.form-control.btn.btn-dark.text-white').click()
 
-    cy.get('#swal2-title').contains('Editat correctament!')
     cy.get('button.swal2-confirm.swal2-styled').click()
     cy.url().should('contain', '/administration/dashboard/category/list')
 
@@ -253,8 +251,7 @@ Cypress.Commands.add('createLabel', () => {
 
     cy.url().should('contain', '/administration/dashboard/labels/list')
 
-    cy.get('#swal2-title').contains('Creat correctament')
-    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
 })
 Cypress.Commands.add('getLabel', () => {
     cy.get('li.sidebar-menu-content-items-item:nth-child(4)').click()
@@ -278,8 +275,7 @@ Cypress.Commands.add('updateLabel', () => {
 
     cy.get('button.form-control.btn.btn-dark.text-white').click()
 
-    cy.get('#swal2-title').contains('Editat correctament!')
-    cy.get('button.swal2-confirm.swal2-styled').click()
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
     cy.url().should('contain', '/administration/dashboard/labels/list')
 
     cy.contains(`${newLabel.name} modified`)
@@ -292,7 +288,7 @@ Cypress.Commands.add('deleteLabel', () => {
     cy.get('button.swal2-cancel.swal2-styled.swal2-default-outline').contains('Cancel')
     cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').contains('Si, elimina!').click()
 
-    cy.get('#swal2-title').contains('Eliminat correctament!')
+    cy.get('button.swal2-confirm.swal2-styled').click({force: true})
 
     cy.get('app-dashboard-table').should('not.contain', `${newLabel.name} modified`)
     cy.get('app-dashboard-table').should('not.contain', `${newLabel.description} modified`)
@@ -409,8 +405,6 @@ Cypress.Commands.add('unregisteredUserCanViewForum', () => {
     cy.contains('FORUM')
     cy.get('button.forum-header-add.btn').contains('Fer pregunta')
     cy.contains('Darrers missatges')
-    cy.contains('Usuari: Anonymous')
-    cy.contains('Usuari: My new name My new surname')
     cy.contains('Missatge de un usuari anonim')
     cy.contains('Missatge de un usuari registrat')
     cy.contains('Aqui tens la teva contesta')
@@ -479,8 +473,6 @@ Cypress.Commands.add('makeAQuestionOnForumAUnregisteredUser', () => {
     cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
     cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
 
-    cy.contains('Gràcies per la teva col·laboració')
-    cy.contains('El comentari s\'ha enviat correctament')
     cy.get('button.swal2-confirm.swal2-styled').click({force: true})
 
     cy.contains('Un missatge des de Cypress')
@@ -499,8 +491,6 @@ Cypress.Commands.add('makeAQuestionOnForumARegisteredUser', () => {
     cy.get('textarea.swal2-textarea').type('Un missatge des de Cypress')
     cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
 
-    cy.get('#swal2-title').contains('Gràcies per la teva col·laboració')
-    cy.get('#swal2-html-container').contains('El comentari s\'ha enviat correctament')
     cy.get('button.swal2-confirm.swal2-styled').click({force: true})
 
     cy.contains('Un missatge des de Cypress')
@@ -519,8 +509,6 @@ Cypress.Commands.add('answerAQuestionAdminAndSuperAdmin', () => {
     cy.get('textarea.swal2-textarea').type('Una resposta des de Cypress')
     cy.get('button.swal2-confirm.swal2-styled.swal2-default-outline').click({force: true})
 
-    cy.get('#swal2-title').contains('Missatge enviat correctament')
-    cy.get('#swal2-html-container').contains('S\'ha enviat, gràcies per la teva col·laboració')
     cy.get('button.swal2-confirm.swal2-styled').click({force: true})
 
     cy.url().should('contain', '/media/dashboard/forum')
