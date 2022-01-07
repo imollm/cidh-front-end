@@ -27,38 +27,38 @@ cache:
 ####################################
 #### INSTALL NODE DEPENDENCIES  ####
 ####################################
-# install:
-#   stage: install
-#   image: node:14.15.5-alpine3.13
-#   script:
-#     - npm ci
-#   cache:
-#     paths:
-#       - "node_modules"
-#   only:
-#     refs:
-#       - merge_request
-#     variables:
-#         - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-#         - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+install:
+  stage: install
+  image: node:14.15.5-alpine3.13
+  script:
+    - npm ci
+  cache:
+    paths:
+      - "node_modules"
+  only:
+    refs:
+      - merge_request
+    variables:
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 # ###################################
 # ### LINTER STAGE TO CHECK CODE  ###
 # ###################################
-# lint:
-#   stage: lint
-#   image: node:14.15-alpine3.13
-#   script:
-#     - npm run lint
-#   cache:
-#     paths:
-#       - "node_modules"
-#   only:
-#     refs:
-#       - merge_request
-#     variables:
-#         - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
-#         - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+lint:
+  stage: lint
+  image: node:14.15-alpine3.13
+  script:
+    - npm run lint
+  cache:
+    paths:
+      - "node_modules"
+  only:
+    refs:
+      - merge_request
+    variables:
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
 ####################################################
 ### RESTORE BACKEND DATABASE TO ENSURE E2E TESTS ###
