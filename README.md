@@ -11,6 +11,9 @@ This is a UML design for this frontend project.
 There are two princpal parts:
     - Public web: In this part, registered and unregesistered users can do some actions, like write a question on the forum, check all the events, check event details and so on.
     - Backoffice: Only registered users can authenticate on this part, and make the actions related to his role.
+    
+## Backend
+This PWA uses an API to request and post all related data. [Here](https://github.com/imollm/cidh-back-end) you can go to backend repository.
 
 ## Contributors
     - Jorge Gomila (jgomilaa@uoc.edu)
