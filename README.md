@@ -1,6 +1,6 @@
-# Culture In Da House
+# Culture In Da House
 
-## Project description
+## Project description
 This is an educational project from Universitat Oberta de Catalunya. Represents a WebApp to manage events. There are three kind of users [User, Admin, SuperAdmin] they can manage and do actions on the platform, like create an event, category, label and so on.
 
 ## Architecture of the project
