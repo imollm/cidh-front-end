@@ -5,7 +5,7 @@ This is an educational project from Universitat Oberta de Catalunya. Represents 
 
 ## Architecture of the project
 This is a UML design for this frontend project.
-[Architecture]('https://drive.google.com/file/d/1NUf27qlNK1GNLvKjH7ORDrzFaFGGMx_z/view?usp=sharing')
+![Architecture](https://i.imgur.com/5e6OWpg.png)
 
 ## UI/UX
 There are two princpal parts:
